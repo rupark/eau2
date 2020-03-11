@@ -55,7 +55,8 @@ int main(int argc, char** argv) {
     affirm(f != NULL, "File is null pointer");
 
     SOR* reader = new SOR();
-    DataFrame* d = reader->read(f, from, len);
+    reader->read(f, from , len);
+    DataFrame* d = new DataFrame(reader->schema, reader->cols_);
 
     std::cout << d->nrow << std::endl;
     std::cout << d->ncol << std::endl;

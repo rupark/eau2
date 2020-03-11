@@ -20,6 +20,9 @@
 #include "addIntsRower.h"
 #include <iostream>
 #include <thread>
+
+#include "column_icicle.h"
+
 using namespace std;
 
 class DataFrame : public Object {
@@ -47,6 +50,9 @@ public:
         this->schema = *new Schema(schema);
 
         nrow = 0;
+        // set nrow to 0 but if schema comes in with nrow then use that
+        nrow = schema.nrow;
+
         for (size_t i = 0; i < schema.ncol; i++) {
             char type = this->schema.col_type(i);
             switch (type) {
@@ -64,6 +70,36 @@ public:
                     break;
             }
         }
+    }
+
+    DataFrame(Schema& schema, ColumnIce** data) : DataFrame(schema) {
+        // construct df with schema (constructor call)
+
+        // fill data with ColumnIce
+        for (size_t i = 0; i < schema.nrow; i++) {
+            for (size_t j = 0; j < schema.width(); j++) {
+
+                // check column type
+                switch (data[j]->get_type()) {
+                    case type_bool:
+                        columns[j]->push_back((bool*)(data[j]->get(i)));
+                        break;
+                    case type_float:
+                        columns[j]->push_back((float*)(data[j]->get(i)));
+                        break;
+                    case type_int:
+                        columns[j]->push_back((int*)(data[j]->get(i)));
+                        break;
+                    case type_string:
+                        columns[j]->push_back((String*)(data[j]->get(i)));
+                        break;
+                    case type_unknown:
+                        break;
+                }
+            }
+        }
+
+
     }
 
     /** Returns the dataframe's schema. Modifying the schema after a dataframe

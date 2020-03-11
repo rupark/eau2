@@ -8,20 +8,28 @@
 #include "column.h"
 #include "helper.h"
 
+#include "column_icicle.h"
+
+#include "schema.h"
+#include "dataframe.h"
+
 // The maximum length of a line buffer. No lines over 4095 bytes
 static const int buff_len = 4096;
 
 // Reads a file and determines the schema on read
 class SOR : public Object {
 public:
-    Column** cols_;  // owned
+    ColumnIce** cols_;  // owned
+    Schema schema;
     size_t len_;
     size_t cap_;
 
     SOR() {
         len_ = 0;
         cap_ = 16;
-        cols_ = new Column*[cap_];
+        schema = *new Schema();
+
+        cols_ = new ColumnIce*[cap_];
 
         for (size_t i = 0; i < cap_; i++) {
             cols_[i] = nullptr;
@@ -64,15 +72,15 @@ public:
     // Reads in the data from the file starting at the from byte
     // and reading at most len bytes
     void read(FILE* f, size_t from, size_t len) {
-        infer_columns_(f, from, len);
-        parse_(f, from, len);
+        schema = infer_columns_(f, from, len);
+        schema.nrow = parse_(f, from, len); // save nrow;
     }
 
     // reallocates columns array if more space is needed.
     void check_reallocate_() {
         if (len_ >= cap_) {
             cap_*=2;
-            Column **temp = new Column*[cap_];
+            ColumnIce **temp = new ColumnIce*[cap_];
             for (size_t i = 0; i < len_; i++) {
                 temp[i] = cols_[i];
             }
@@ -93,12 +101,15 @@ public:
     }
 
     // infers and creates the column objects
-    void infer_columns_(FILE* f, size_t from, size_t len) {
+    Schema infer_columns_(FILE* f, size_t from, size_t len) {
         seek_(f, from);
         char buf[buff_len];
 
         size_t total_bytes = 0;
         size_t row_count = 0;
+
+        Schema* schema = new Schema();
+
         while (fgets(buf, buff_len, f) != nullptr && row_count < 500) {
             row_count++;
             total_bytes += strlen(buf);
@@ -117,18 +128,23 @@ public:
                 ColumnType inferred_type = infer_type(row[i]);
                 if (inferred_type > cols_[i]->get_type()) {
                     delete cols_[i];
+
                     switch(inferred_type) {
                         case type_bool:
                             cols_[i] = new ColumnBool();
+                            schema->add_column('B', new String(""));
                             break;
                         case type_int:
                             cols_[i] = new ColumnInt();
+                            schema->add_column('I', new String(""));
                             break;
                         case type_float:
                             cols_[i] = new ColumnFloat();
+                            schema->add_column('F', new String(""));
                             break;
                         default:
                             cols_[i] = new ColumnString();
+                            schema->add_column('S', new String(""));
                             break;
                     }
                 }
@@ -136,6 +152,8 @@ public:
             delete[] row;
 
         }
+
+        return *schema;
     }
 
     // Find the start of the field value and null terminate it.
@@ -203,8 +221,10 @@ public:
     }
 
 
+    // returns numRows read.
     // read the rows from the starting byte up to len bytes into Columns.
-    void parse_(FILE* f, size_t from, size_t len) {
+    size_t parse_(FILE* f, size_t from, size_t len) {
+        size_t numRows = 0;
         seek_(f, from);
         char buf[buff_len];
 
@@ -227,7 +247,7 @@ public:
             // we skip the row as soon as we find a field that does not match our schema
             bool skip = false;
             for (size_t i = 0; i < len_; i++) {
-                if (!cols_[i]->can_add(row[i])) {
+                if (!cols_[i]->can_add(row[i])) { // TODO use schema to check type match
                     skip = true;
                     break;
                 }
@@ -236,6 +256,8 @@ public:
                 delete[] row;
                 continue;
             }
+
+            numRows++;
 
             // add all fields in this row to columns
             for (size_t i = 0; i < len_; i++) {
@@ -248,5 +270,7 @@ public:
             delete[] row;
 
         }
+
+        return numRows;
     }
 };
