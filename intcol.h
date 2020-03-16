@@ -133,7 +133,7 @@ public:
     }
 
     /** Return the type of this column as a char: 'S', 'B', 'I' and 'F'. */
-    char get_type() {
+    virtual char get_type() {
         return 'I';
     }
 };

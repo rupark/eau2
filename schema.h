@@ -33,9 +33,7 @@ public:
         this->ncol = from.ncol;
     }
 
-    ~Schema() {
-        delete[] types;
-    }
+
 
     /** Create an empty schema **/
     Schema() {
@@ -45,6 +43,8 @@ public:
         this->ncol = 0;
         this->nrow = 0;
     }
+
+
 
     /** Create a schema from a string of types. A string that contains
       * characters other than those identifying the four type results in
@@ -58,6 +58,10 @@ public:
 
         this->nrow = 0;
         this->ncol = this->types->size();
+    }
+
+    ~Schema() {
+        delete[] types;
     }
 
     /** Add a column of the given type and name (can be nullptr), name

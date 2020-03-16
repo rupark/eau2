@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../dataframe.h"
 #include "parser.h"
-#include "dataframe.h"
 
 /**
  * Enum representing different states of parsing command line arguments.
@@ -136,7 +136,7 @@ void parse_args(int argc, char* argv[], char** file, ssize_t* start, ssize_t* le
  * @param set The ColumnSet to get from
  * @param which The column index to get
  */
-Provider::BaseColumn* getColumnChecked(Provider::ColumnSet* set, size_t which) {
+BaseColumn* getColumnChecked(ColumnSet* set, size_t which) {
     if (which >= set->getLength()) {
         printf("No such column\n");
         exit(-1);
@@ -149,30 +149,12 @@ Provider::BaseColumn* getColumnChecked(Provider::ColumnSet* set, size_t which) {
  * @param col The column
  * @param which The entry index
  */
-void checkColumnEntry(Provider::BaseColumn* col, size_t which) {
+void checkColumnEntry(BaseColumn* col, size_t which) {
     if (which >= col->getLength()) {
         printf("No such entry\n");
         exit(-1);
     }
 }
-
-void printElement(DataFrame* df, size_t col, size_t element) {
-    switch (df->columns[col]->get_type()) {
-        case 'B':
-            printf("%d\n", df->columns[col]->as_bool()->get(element));
-            break;
-        case 'F':
-            printf("%.2f\n", df->columns[col]->as_float()->get(element));
-            break;
-        case 'I':
-            printf("%d\n", df->columns[col]->as_int()->get(element));
-            break;
-        case 'S':
-            printf("\"%s\"\n", df->columns[col]->as_string()->get(element)->cstr_);
-            break;
-    }
-}
-
 
 /**
  * The main function.
@@ -218,27 +200,29 @@ int main(int argc, char* argv[]) {
     }
 
     {
-
         // Run parsing
-        SorParser parser{file, (size_t)start, (size_t)start + len, file_size};
+        SorParser parser{f, (size_t)from, (size_t)from + len, file_size};
         parser.guessSchema();
         parser.parseFile();
-        //Provider::ColumnSet* set = parser.getColumnSet();
         DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
+
         // Print requested query
         if (col_type != -1) {
-            //Provider::ColumnType type = getColumnChecked(set, (size_t)col_type)->getType();
-            printf("%c\n", d->get_schema().col_type((size_t)col_type));
+            // return the column type at id
+            printf("%s\n", d->schema.types[(size_t)col_type]);
         } else if (col_idx_col != -1) {
-//            Provider::BaseColumn* col = getColumnChecked(set, (size_t)col_idx_col);
+            // print entry at col_idx_col, col_idx_off
+
+//            BaseColumn* col = getColumnChecked(set, (size_t)col_idx_col);
 //            checkColumnEntry(col, (size_t)col_idx_off);
-//            col->printEntry((size_t)col_idx_off);
-            printElement(d, (size_t)col_idx_col, (size_t)col_idx_off);
+            col->printEntry((size_t)col_idx_off);
         } else if (missing_idx_col != -1) {
-//            Provider::BaseColumn* col = getColumnChecked(set, (size_t)missing_idx_col);
+            // checks if element is present at missing_idx_col, missing_idx_off
+
+//            BaseColumn* col = getColumnChecked(set, (size_t)missing_idx_col);
 //            checkColumnEntry(col, (size_t)missing_idx_off);
 //            bool present = col->isEntryPresent((size_t)missing_idx_off);
-//            printf("%d\n", !present);
+            printf("%d\n", !present);
         } else {
             printf("Must provide a command line query\n");
         }

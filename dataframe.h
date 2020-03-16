@@ -21,7 +21,7 @@
 #include <iostream>
 #include <thread>
 
-#include "column_icicle.h"
+#include "column_prov.h"
 
 using namespace std;
 
@@ -72,34 +72,120 @@ public:
         }
     }
 
-    DataFrame(Schema& schema, ColumnIce** data) : DataFrame(schema) {
-        // construct df with schema (constructor call)
+//    DataFrame(Schema& schema, ColumnIce** data) : DataFrame(schema) {
+//        // construct df with schema (constructor call)
+//
+//        // fill data with ColumnIce
+//        for (size_t i = 0; i < schema.nrow; i++) {
+//            for (size_t j = 0; j < schema.width(); j++) {
+//
+//                // check column type
+//                switch (data[j]->get_type()) {
+//                    case type_bool:
+//                        columns[j]->push_back((bool*)(data[j]->get(i)));
+//                        break;
+//                    case type_float:
+//                        columns[j]->push_back((float*)(data[j]->get(i)));
+//                        break;
+//                    case type_int:
+//                        columns[j]->push_back((int*)(data[j]->get(i)));
+//                        break;
+//                    case type_string:
+//                        columns[j]->push_back((String*)(data[j]->get(i)));
+//                        break;
+//                    case type_unknown:
+//                        break;
+//                }
+//            }
+//        }
+//
+//
+//    }
 
-        // fill data with ColumnIce
-        for (size_t i = 0; i < schema.nrow; i++) {
-            for (size_t j = 0; j < schema.width(); j++) {
+    // Fill DataFrame from group 4500 sorer adapter
+    DataFrame(Provider::ColumnSet* data, size_t num_columns) {
+        this->columns = new Column*[100*1000*1000];
+        this->schema = *new Schema();
 
-                // check column type
-                switch (data[j]->get_type()) {
-                    case type_bool:
-                        columns[j]->push_back((bool*)(data[j]->get(i)));
+        Column* working_col;
+
+        // create columns and fill this df
+        for (size_t i = 0; i < num_columns; i++) {
+            // determine col type
+            switch(data->getColumn(i)->getType()) {
+                case Provider::ColumnType::BOOL :
+
+                    working_col = new BoolColumn();
+                    break;
+                case Provider::ColumnType::FLOAT :
+
+                    working_col = new FloatColumn();
+                    break;
+                case Provider::ColumnType::INTEGER :
+                    working_col = new IntColumn();
+                    break;
+                case Provider::ColumnType::STRING :
+                    working_col = new StringColumn();
+                    break;
+                case Provider::ColumnType::UNKNOWN :
+                    // TODO? WHAT GOES HERE FOR UNKOWN TYPE.
+                    working_col = new StringColumn();
+                    break;
+            }
+            // fill the specific typed column
+            for (size_t j = 0; j < data->getColumn(i)->getLength(); j++) {
+                switch(data->getColumn(i)->getType()) {
+                    case Provider::ColumnType::BOOL :
+                        if (checkColumnEntry(data->getColumn(i), j)) {
+                            working_col->push_back(
+                                    dynamic_cast<Provider::BoolColumn *>(data->getColumn(i))->getEntry(j));
+                        }
                         break;
-                    case type_float:
-                        columns[j]->push_back((float*)(data[j]->get(i)));
+                    case Provider::ColumnType::FLOAT :
+                        if (checkColumnEntry(data->getColumn(i), j)) {
+                            working_col->push_back(
+                                    dynamic_cast<Provider::FloatColumn *>(data->getColumn(i))->getEntry(j));
+                        }
                         break;
-                    case type_int:
-                        columns[j]->push_back((int*)(data[j]->get(i)));
+                    case Provider::ColumnType::INTEGER :
+                        if (checkColumnEntry(data->getColumn(i), j)) {
+                            working_col->push_back(
+                                    dynamic_cast<Provider::IntegerColumn *>(data->getColumn(i))->getEntry(j));
+                        }
                         break;
-                    case type_string:
-                        columns[j]->push_back((String*)(data[j]->get(i)));
+                    case Provider::ColumnType::STRING :
+                        if (checkColumnEntry(data->getColumn(i), j)) {
+                            if (data->getColumn(i)->isEntryPresent(j)) {
+                                working_col->push_back(new String(
+                                        dynamic_cast<Provider::StringColumn *>(data->getColumn(i))->getEntry(j)));
+                            } else {
+                                working_col->push_back(new String(""));
+                            }
+                        }
                         break;
-                    case type_unknown:
+                    case Provider::ColumnType::UNKNOWN:
+                        // TODO? WHAT GOES HERE FOR UNKOWN TYPE.
                         break;
                 }
             }
+
+            // add this column to this dataframe
+            this->add_column(working_col, nullptr);
         }
 
+    }
 
+
+    /**
+     * Terminates if the given column is not large enough to have the given entry index.
+     * @param col The column
+     * @param which The entry index
+     */
+    bool checkColumnEntry(Provider::BaseColumn* col, size_t which) {
+        if (which >= col->getLength()) {
+            return false;
+        }
+        return true;
     }
 
     /** Returns the dataframe's schema. Modifying the schema after a dataframe
@@ -153,7 +239,7 @@ public:
       * If the column is not  of the right type or the indices are out of
       * bound, the result is undefined. */
     void set(size_t col, size_t row, int val) {
-        columns[col]->as_int()->set(row, &val);
+        columns[col]->as_int()->set(row, &val); // TODO does this just return intcol and set the col without saving?
     }
 
     void set(size_t col, size_t row, bool val) {
