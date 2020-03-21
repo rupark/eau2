@@ -33,17 +33,17 @@ clean:
 test: $(TEST_PROG_NAME) $(PROG_NAME)
 	./$(TEST_PROG_NAME)
 	# Basics tests
-	./test_sor.sh "B" -f "data.sor" -from 0 -len 100 -print_col_type 0
-	./test_sor.sh "S" -f "data.sor" -from 0 -len 100 -print_col_type 2
+	#./test_sor.sh "B" -f "data.sor" -from 0 -len 100 -print_col_type 0
+	#./test_sor.sh "S" -f "data.sor" -from 0 -len 100 -print_col_type 2
 	#./test_sor.sh "0" -f "data.sor" -from 0 -len 100 -is_missing_idx 2 0
 	#./test_sor.sh "1" -f "data.sor" -from 0 -len 100 -is_missing_idx 2 1
 	#./test_sor.sh "1" -f "data.sor" -from 0 -len 100 -is_missing_idx 2 2
-	./test_sor.sh '"hi"' -f "data.sor" -from 0 -len 100 -print_col_idx 2 0
-	./test_sor.sh "12" -f "data.sor" -from 5 -len 100 -print_col_idx 1 0
-#	./test_sor.sh '2.200000' -f "data1.sor" -print_col_idx 2 0
+	#./test_sor.sh '"hi"' -f "data.sor" -from 0 -len 100 -print_col_idx 2 0
+	 ./test_sor.sh "12" -f "data.sor" -from 5 -len 100 -print_col_idx 1 0
+	#./test_sor.sh '2.200000' -f "data1.sor" -print_col_idx 2 0
 	# Error conditions
-	./test_sor.sh 'No such column' -f "data1.sor" -print_col_idx 6 0
-	./test_sor.sh 'No such entry' -f "data1.sor" -print_col_idx 1 999
+	#./test_sor.sh 'No such column' -f "data1.sor" -print_col_idx 6 0
+	#./test_sor.sh 'No such entry' -f "data1.sor" -print_col_idx 1 999
 	# More complicated data
 	./test_sor.sh '1' -f "data1.sor" -is_missing_idx 1 1
 	./test_sor.sh "100" -f "data2.sor" -print_col_idx 2 1

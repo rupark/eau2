@@ -5,6 +5,8 @@
 
 #include "parser.h"
 #include "dataframe.h"
+#include <iostream>
+using namespace std;
 
 /**
  * Enum representing different states of parsing command line arguments.
@@ -233,12 +235,43 @@ int main(int argc, char* argv[]) {
 //            Provider::BaseColumn* col = getColumnChecked(set, (size_t)col_idx_col);
 //            checkColumnEntry(col, (size_t)col_idx_off);
 //            col->printEntry((size_t)col_idx_off);
-            printElement(d, (size_t)col_idx_col, (size_t)col_idx_off);
+            switch (d->schema.col_type((size_t)col_idx_col)) {
+                case 'B':
+                    printf("%d\n", d->columns[col_idx_col]->as_bool()->get((size_t)col_idx_off));
+                    break;
+                case 'F':
+                    printf("%.2f\n", d->columns[col_idx_col]->as_float()->get((size_t)col_idx_off));
+                    break;
+                case 'I':
+                    printf("%d\n", d->columns[col_idx_col]->as_int()->get((size_t)col_idx_off));
+                    break;
+                case 'S':
+                    printf("\"%s\"\n", d->columns[col_idx_col]->as_string()->get((size_t)col_idx_off)->cstr_);
+                    break;
+            }
         } else if (missing_idx_col != -1) {
 //            Provider::BaseColumn* col = getColumnChecked(set, (size_t)missing_idx_col);
 //            checkColumnEntry(col, (size_t)missing_idx_off);
 //            bool present = col->isEntryPresent((size_t)missing_idx_off);
-//            printf("%d\n", !present);
+            switch (d->schema.col_type((size_t)missing_idx_col)) {
+                case 'B':
+                    printf("%d\n", d->columns[(size_t)missing_idx_col]->as_bool()->get((size_t)missing_idx_off) ==
+                            nullptr);
+                    break;
+                case 'S':
+                    printf("%d\n", d->columns[(size_t)missing_idx_col]->as_string()->get((size_t)missing_idx_off) ==
+                            nullptr);
+                    break;
+                case 'F':
+                    printf("%d\n", d->columns[(size_t)missing_idx_col]->as_float()->get((size_t)missing_idx_off) ==
+                            nullptr);
+                    break;
+                case 'I':
+                    printf("%d\n", d->columns[(size_t)missing_idx_col]->as_int()->get((size_t)missing_idx_off) ==
+                            nullptr);
+                    break;
+            }
+
         } else {
             printf("Must provide a command line query\n");
         }

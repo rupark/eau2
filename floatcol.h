@@ -14,33 +14,25 @@ class FloatColumn;
 #include "stringcol.h"
 #include "string.h"
 #include "column.h"
+#include "float.h"
 
 /**
  * Represent a Column of Float SoR Type
  */
 class FloatColumn : public Column {
 public:
-    float* vals_;
+    Float** vals_;
     size_t size_;
     size_t capacity_;
 
     FloatColumn() {
         size_ = 0;
         capacity_ = 1000 * 1000 * 1000;
-        vals_ = new float[capacity_];
+        vals_ = new Float*[capacity_];
     }
 
     ~FloatColumn() {
         delete[] vals_;
-    }
-
-    FloatColumn(int n, ...) {
-        va_list args;
-        va_start(args, n);
-        for(size_t i=0; i<n; i++)
-        {
-            vals_[i] = va_arg(args, float);
-        }
     }
 
     /**
@@ -78,7 +70,7 @@ public:
     /** Returns the float at idx; undefined on invalid idx.*/
     float * get(size_t idx) {
         if (idx >= 0 && idx <= this->size()) {
-            return &vals_[idx];
+            return &vals_[idx]->val;
         } else {
             exit(1);
         }
@@ -87,7 +79,7 @@ public:
     /** Out of bound idx is undefined. */
     void set(size_t idx, float * val) {
         if (idx >= 0 && idx <= this->size()) {
-            vals_[idx] = *val;
+            vals_[idx] = new Float(*val);
             size_++;
         } else {
             exit(1);
@@ -120,7 +112,7 @@ public:
      * Adds the given float to this if it is a FloatColumn
      */
     virtual void push_back(float val) {
-        vals_[size_] = val;
+        vals_[size_] = new Float(val);
         size_++;
     }
 

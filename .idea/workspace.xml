@@ -10,32 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/column_prov.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data.sor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data1.sor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data2.sor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data3.sor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/group4500/object.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myfiles/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myfiles/main.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myfiles/main1.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parser.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_sor.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/boolcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/boolcol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/column.h" beforeDir="false" afterPath="$PROJECT_DIR$/column.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/column_icicle.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_big.sor" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dataframe.h" beforeDir="false" afterPath="$PROJECT_DIR$/dataframe.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/floatcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/floatcol.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/intcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/intcol.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schema.h" beforeDir="false" afterPath="$PROJECT_DIR$/schema.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sorer.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stringcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/stringcol.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +46,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/group4500" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -101,6 +82,7 @@
       <workItem from="1583963909855" duration="5306000" />
       <workItem from="1584300110413" duration="11573000" />
       <workItem from="1584316934948" duration="10342000" />
+      <workItem from="1584743690017" duration="5620000" />
     </task>
     <servers />
   </component>

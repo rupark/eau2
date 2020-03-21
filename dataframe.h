@@ -129,7 +129,7 @@ public:
                     break;
                 case Provider::ColumnType::UNKNOWN :
                     // TODO? WHAT GOES HERE FOR UNKOWN TYPE.
-                    working_col = new StringColumn();
+                    exit(-1);
                     break;
             }
             // fill the specific typed column
@@ -137,20 +137,32 @@ public:
                 switch(data->getColumn(i)->getType()) {
                     case Provider::ColumnType::BOOL :
                         if (checkColumnEntry(data->getColumn(i), j)) {
-                            working_col->push_back(
-                                    dynamic_cast<Provider::BoolColumn *>(data->getColumn(i))->getEntry(j));
+                            if (data->getColumn(i)->isEntryPresent(j)) {
+                                working_col->push_back(
+                                        dynamic_cast<Provider::BoolColumn *>(data->getColumn(i))->getEntry(j));
+                            } else {
+                                working_col->push_back(nullptr);
+                            }
                         }
                         break;
                     case Provider::ColumnType::FLOAT :
                         if (checkColumnEntry(data->getColumn(i), j)) {
-                            working_col->push_back(
-                                    dynamic_cast<Provider::FloatColumn *>(data->getColumn(i))->getEntry(j));
+                            if (data->getColumn(i)->isEntryPresent(j)) {
+                                working_col->push_back(
+                                        dynamic_cast<Provider::FloatColumn *>(data->getColumn(i))->getEntry(j));
+                            } else {
+                                working_col->push_back(nullptr);
+                            }
                         }
                         break;
                     case Provider::ColumnType::INTEGER :
                         if (checkColumnEntry(data->getColumn(i), j)) {
-                            working_col->push_back(
-                                    dynamic_cast<Provider::IntegerColumn *>(data->getColumn(i))->getEntry(j));
+                            if (data->getColumn(i)->isEntryPresent(j)) {
+                                working_col->push_back(
+                                        dynamic_cast<Provider::IntegerColumn *>(data->getColumn(i))->getEntry(j));
+                            } else {
+                                working_col->push_back(nullptr);
+                            }
                         }
                         break;
                     case Provider::ColumnType::STRING :
@@ -159,12 +171,13 @@ public:
                                 working_col->push_back(new String(
                                         dynamic_cast<Provider::StringColumn *>(data->getColumn(i))->getEntry(j)));
                             } else {
-                                working_col->push_back(new String(""));
+                                working_col->push_back(nullptr);
                             }
                         }
                         break;
                     case Provider::ColumnType::UNKNOWN:
                         // TODO? WHAT GOES HERE FOR UNKOWN TYPE.
+                        exit(-1);
                         break;
                 }
             }

@@ -15,6 +15,8 @@ class FloatColumn;
 #include "stringcol.h"
 #include "string.h"
 #include "iostream"
+#include "integer.h"
+
 using namespace std;
 
 /**
@@ -22,27 +24,18 @@ using namespace std;
  */
 class IntColumn : public Column {
 public:
-    int* vals_;
+    Integer** vals_;
     size_t size_;
     size_t capacity_;
 
     IntColumn() {
         size_ = 0;
         capacity_ = 100 * 1000 * 1000;
-        vals_ = new int[capacity_];
+        vals_ = new Integer*[capacity_];
     }
 
     ~IntColumn(){
         delete[] vals_;
-    }
-
-    IntColumn(int n, ...) {
-        va_list args;
-        va_start(args, n);
-        for(size_t i=0; i<n; i++)
-        {
-            vals_[i] = va_arg(args, int);
-        }
     }
 
     /**
@@ -80,7 +73,7 @@ public:
     /** Returns the int at idx; undefined on invalid idx.*/
     int * get(size_t idx) {
         if (idx >= 0 && idx <= this->size()) {
-            return &vals_[idx];
+            return &vals_[idx]->val;
         } else {
             exit(1);
         }
@@ -89,7 +82,7 @@ public:
     /** Out of bound idx is undefined. */
     void set(size_t idx, int * val) {
         if (idx >= 0 && idx <= this->size()) {
-            vals_[idx] = *val;
+            vals_[idx] = new Integer(*val);
             size_++;
         } else {
             exit(1);
@@ -107,7 +100,7 @@ public:
      * Adds the given int to this if it is a IntColumn
      */
     virtual void push_back(int val) {
-        this->vals_[size_] = val;
+        this->vals_[size_] = new Integer(val);
         size_++;
     }
 

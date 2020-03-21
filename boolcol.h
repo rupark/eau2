@@ -14,33 +14,25 @@ class FloatColumn;
 #include "floatcol.h"
 #include "stringcol.h"
 #include "string.h"
+#include "bool.h"
 
 /**
  * Represent a Column of Boolean SoR Type
  */
 class BoolColumn : public Column {
 public:
-    bool* vals_;
+    Bool** vals_;
     size_t size_;
     size_t capacity_;
 
     BoolColumn() {
         size_ = 0;
         capacity_ = 1000 * 1000 * 1000;
-        vals_ = new bool[capacity_];
+        vals_ = new Bool*[capacity_];
     }
 
     ~BoolColumn() {
         delete[] vals_;
-    }
-
-    BoolColumn(int n, ...) {
-        va_list args;
-        va_start(args, n);
-        for(size_t i=0; i<n; i++)
-        {
-            vals_[i] = va_arg(args, bool);
-        }
     }
 
     /**
@@ -78,7 +70,7 @@ public:
     /** Returns the Bool at idx; undefined on invalid idx.*/
     bool * get(size_t idx) {
         if (idx >= 0 && idx <= this->size()) {
-            return &vals_[idx];
+            return &vals_[idx]->val;
         } else {
             exit(1);
         }
@@ -87,7 +79,7 @@ public:
     /** Out of bound idx is undefined. */
     void set(size_t idx, bool * val) {
         if (idx >= 0 && idx <= this->size()) {
-            vals_[idx] = *val;
+            vals_[idx] = new Bool(*val);
             size_++;
         } else {
             exit(1);
@@ -113,7 +105,7 @@ public:
      * Adds the given bool to this if it is a BoolColumn
      */
     virtual void push_back(bool val) {
-        vals_[size_] = val;
+        vals_[size_] = new Bool(val);
         size_++;
     }
 
