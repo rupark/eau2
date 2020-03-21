@@ -12,11 +12,14 @@
     <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a1-part1-test" beforeDir="false" afterPath="$PROJECT_DIR$/a1-part1-test" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/boolcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/boolcol.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataframe.h" beforeDir="false" afterPath="$PROJECT_DIR$/dataframe.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/floatcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/floatcol.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/intcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/intcol.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sorer" beforeDir="false" afterPath="$PROJECT_DIR$/sorer" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_sor.sh" beforeDir="false" afterPath="$PROJECT_DIR$/test_sor.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,10 +105,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583969216068" />
-    <state x="550" y="169" key="FileChooserDialogImpl" timestamp="1584316895664">
+    <state x="550" y="169" key="FileChooserDialogImpl" timestamp="1584830253881">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="550" y="169" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1584316895664" />
+    <state x="550" y="169" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1584830253881" />
     <state x="362" y="147" key="Vcs.Push.Dialog.v2" timestamp="1583969271623">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

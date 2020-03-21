@@ -225,8 +225,12 @@ int main(int argc, char* argv[]) {
         SorParser parser{file, (size_t)start, (size_t)start + len, file_size};
         parser.guessSchema();
         parser.parseFile();
-        //Provider::ColumnSet* set = parser.getColumnSet();
+//        Provider::ColumnSet* set = parser.getColumnSet();
+//        printf("PRINTING 2 1 = ");
+//        set->getColumn(2)->printEntry(1);
+
         DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
+//        DataFrame* d = nullptr;
         // Print requested query
         if (col_type != -1) {
             //Provider::ColumnType type = getColumnChecked(set, (size_t)col_type)->getType();
@@ -237,16 +241,16 @@ int main(int argc, char* argv[]) {
 //            col->printEntry((size_t)col_idx_off);
             switch (d->schema.col_type((size_t)col_idx_col)) {
                 case 'B':
-                    printf("%d\n", d->columns[col_idx_col]->as_bool()->get((size_t)col_idx_off));
+                    cout << *d->columns[(size_t)col_idx_col]->as_bool()->get((size_t)col_idx_off) << endl;
                     break;
                 case 'F':
-                    printf("%.2f\n", d->columns[col_idx_col]->as_float()->get((size_t)col_idx_off));
+                    cout << *d->columns[(size_t)col_idx_col]->as_float()->get((size_t)col_idx_off) << endl;
                     break;
                 case 'I':
-                    printf("%d\n", d->columns[col_idx_col]->as_int()->get((size_t)col_idx_off));
+                    cout << *d->columns[(size_t)col_idx_col]->as_int()->get((size_t)col_idx_off) << endl;
                     break;
                 case 'S':
-                    printf("\"%s\"\n", d->columns[col_idx_col]->as_string()->get((size_t)col_idx_off)->cstr_);
+                    cout << "\"" <<d->columns[(size_t)col_idx_col]->as_string()->get((size_t)col_idx_off)->cstr_ << "\"" << endl;
                     break;
             }
         } else if (missing_idx_col != -1) {

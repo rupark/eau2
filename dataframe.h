@@ -113,6 +113,7 @@ public:
         for (size_t i = 0; i < num_columns; i++) {
             // determine col type
             switch(data->getColumn(i)->getType()) {
+
                 case Provider::ColumnType::BOOL :
 
                     working_col = new BoolColumn();
@@ -128,7 +129,6 @@ public:
                     working_col = new StringColumn();
                     break;
                 case Provider::ColumnType::UNKNOWN :
-                    // TODO? WHAT GOES HERE FOR UNKOWN TYPE.
                     exit(-1);
                     break;
             }
@@ -177,7 +177,6 @@ public:
                         break;
                     case Provider::ColumnType::UNKNOWN:
                         // TODO? WHAT GOES HERE FOR UNKOWN TYPE.
-                        exit(-1);
                         break;
                 }
             }
