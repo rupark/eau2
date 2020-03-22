@@ -10,16 +10,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/key.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kvstore.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m1/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataframe.h" beforeDir="false" afterPath="$PROJECT_DIR$/dataframe.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/float.h" beforeDir="false" afterPath="$PROJECT_DIR$/float.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/floatcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/floatcol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main2.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myfiles/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/myfiles/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myfiles/main1.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/myfiles/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a1-part1-test.dSYM/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/a1-part1-test.dSYM/Contents/Resources/DWARF/a1-part1-test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/addIntsRower.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bool.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/boolcol.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/column.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/column_prov.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.sor" beforeDir="false" afterPath="$PROJECT_DIR$/data/data.sor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data1.sor" beforeDir="false" afterPath="$PROJECT_DIR$/data/data1.sor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data2.sor" beforeDir="false" afterPath="$PROJECT_DIR$/data/data2.sor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data3.sor" beforeDir="false" afterPath="$PROJECT_DIR$/data/data3.sor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataframe.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fielder.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/float.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/floatcol.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/group4500/object.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/group4500/object.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helper.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/intcol.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/integer.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/key.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kvstore.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/list.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main2.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/myfiles/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m1/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myfiles/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m1/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/row.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rower.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/schema.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sorer.dSYM/Contents/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sorer.dSYM/Contents/Resources/DWARF/sorer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/string.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stringcol.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_sor.sh" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m1/test_sor.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,13 +81,16 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/myfiles" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/m1" />
+      <recent name="$PROJECT_DIR$/data" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/myfiles/m2" />
+      <recent name="$PROJECT_DIR$/myfiles/m1" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/myfiles" />
       <recent name="Y:\Classes\cs4500\milestone1\group4500" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="Y:\Classes\cs4500\milestone1" />
-      <recent name="Y:\Classes\cs4500\milestone1\myfiles" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -87,6 +119,7 @@
       <workItem from="1584300110413" duration="11573000" />
       <workItem from="1584316934948" duration="10342000" />
       <workItem from="1584743690017" duration="12541000" />
+      <workItem from="1584903012856" duration="667000" />
     </task>
     <servers />
   </component>
@@ -98,6 +131,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="converted icicle group columns into our df" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="427" y="248" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584903064889">
+      <screen x="0" y="23" width="1440" height="831" />
+    </state>
+    <state x="427" y="248" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.831@0.23.1440.831" timestamp="1584903064889" />
     <state x="500" y="161" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584301170655">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
