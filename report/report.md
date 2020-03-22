@@ -65,10 +65,10 @@ assert(sum==0);
 * Why is delete not working in Milestone 2?
 * What is the purpose of the Architecture section?
 ## Status ##
-| Milestone Number | Status  |
-|:---:|:---:|
-| 1 | ✓ |
-| 2 | ✓ |
-| 3 | ✗ |
-| 4 | ✗ |
-| 5 | ✗ |
+| Milestone Number | Status  | Objective  |
+|:---:|:---:|:---|
+| 1 | ✓ | Be able to build a DataFrame from a SoR file |
+| 2 | ✓ | Implement get, put, and getAndWait on a single-node Key Value Store system |
+| 3 | ✗ | Distribute the key value store; be able to run with multiple KV stores, and thus multiple instances of the application |
+| 4 | ✗ | Complete the distributed key value store implementation including the network layer
+| 5 | ✗ | Complete any missing bits in our implementation and write the distributed application "7 degrees of Linus"
