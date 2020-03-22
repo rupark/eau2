@@ -1,5 +1,5 @@
 clean:
-	rm *.out *.o *.gch.h
+	rm *.out *.o *.h.gch
 
 build: dataframe.h key.h kvstore.h main2.o
 	g++ -std=c++11 dataframe.h key.h kvstore.h main2.o
