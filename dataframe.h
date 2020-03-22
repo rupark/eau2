@@ -20,6 +20,8 @@
 #include "addIntsRower.h"
 #include <iostream>
 #include <thread>
+#include "key.h"
+#include "kvstore.h"
 
 #include "column_prov.h"
 
@@ -38,6 +40,15 @@ public:
         int nrow = df.nrows();
         schema = df.get_schema();
         columns = df.columns;
+    }
+
+    ~DataFrame() {
+        cout << "deleted df" << endl;
+        cout << ncol << endl;
+        for (int i = 0; i < ncol; i++) {
+            delete columns[i];
+        }
+        cout << "finished" << endl;
     }
 
     /** Create a data frame from a schema and columns. All columns are created
@@ -71,36 +82,6 @@ public:
             }
         }
     }
-
-//    DataFrame(Schema& schema, ColumnIce** data) : DataFrame(schema) {
-//        // construct df with schema (constructor call)
-//
-//        // fill data with ColumnIce
-//        for (size_t i = 0; i < schema.nrow; i++) {
-//            for (size_t j = 0; j < schema.width(); j++) {
-//
-//                // check column type
-//                switch (data[j]->get_type()) {
-//                    case type_bool:
-//                        columns[j]->push_back((bool*)(data[j]->get(i)));
-//                        break;
-//                    case type_float:
-//                        columns[j]->push_back((float*)(data[j]->get(i)));
-//                        break;
-//                    case type_int:
-//                        columns[j]->push_back((int*)(data[j]->get(i)));
-//                        break;
-//                    case type_string:
-//                        columns[j]->push_back((String*)(data[j]->get(i)));
-//                        break;
-//                    case type_unknown:
-//                        break;
-//                }
-//            }
-//        }
-//
-//
-//    }
 
     // Fill DataFrame from group 4500 sorer adapter
     DataFrame(Provider::ColumnSet* data, size_t num_columns) {
@@ -402,6 +383,24 @@ public:
             }
             cout << endl;
         }
+    }
+
+    static DataFrame* fromArray(Key* key, KVStore* kv, size_t sz, double* vals) {
+        cout << "fromArray" << endl;
+        char* f = "F";
+        DataFrame* df = new DataFrame(*new Schema(f));
+        cout << "made df" << endl;
+        for (int i = 0; i < sz; i++) {
+            df->columns[0]->push_back((float)vals[i]);
+        }
+        cout << "added vals" << endl;
+        kv->put(key, df);
+        cout << "put" << endl;
+        return df;
+    }
+
+    float get_double(int col, int row) {
+        return *this->columns[col]->as_float()->get(row);
     }
 
 };

@@ -15,6 +15,9 @@ class FloatColumn;
 #include "string.h"
 #include "column.h"
 #include "float.h"
+#include <iostream>
+
+using namespace std;
 
 /**
  * Represent a Column of Float SoR Type
@@ -32,7 +35,16 @@ public:
     }
 
     ~FloatColumn() {
-        delete[] vals_;
+        cout << "here" << endl;
+        cout << size_ << endl;
+        for (int i = 0; i < size_; i++) {
+            if (vals_[i] != nullptr) {
+                //printf("%d\n", i);
+                delete vals_[i];
+            }
+        }
+        delete vals_;
+        cout << "finished" << endl;
     }
 
     /**

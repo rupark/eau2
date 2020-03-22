@@ -23,8 +23,8 @@ public:
      * @param  N/A
      * @return N/A
      */
-    virtual ~Float() {
-
+     ~Float() {
+         cout << "here" << endl;
     }
 
     /**
