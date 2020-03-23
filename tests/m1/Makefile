@@ -2,7 +2,7 @@
 
 PROG_NAME             = sorer
 TEST_PROG_NAME        = a1-part1-test
-HEADERS               = ../src/object.h ../src/column_prov.h ../src/parser.h ../src/dataframe.h
+HEADERS               = milestone1/src/object.h milestone1/src/column_prov.h milestone/src/parser.h milestone/src/dataframe.h
 SRC                   = main.cpp
 TEST                  = test.cpp
 
