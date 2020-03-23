@@ -385,6 +385,9 @@ public:
         }
     }
 
+    /**
+     * Contructs a DataFrame from the given array of doubles and associates the given Key with the DataFrame in the given KVStore
+     */
     static DataFrame* fromArray(Key* key, KVStore* kv, size_t sz, double* vals) {
         cout << "fromArray" << endl;
         char* f = "F";
@@ -399,6 +402,9 @@ public:
         return df;
     }
 
+    /**
+     * Returns the double at the given column and row in this DataFrame
+     */
     float get_double(int col, int row) {
         return *this->columns[col]->as_float()->get(row);
     }

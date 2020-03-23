@@ -8,6 +8,8 @@
 #include <iostream>
 using namespace std;
 
+//USING TEAM 4500NE's CODE
+
 /**
  * Enum representing different states of parsing command line arguments.
  */
@@ -225,20 +227,11 @@ int main(int argc, char* argv[]) {
         SorParser parser{file, (size_t)start, (size_t)start + len, file_size};
         parser.guessSchema();
         parser.parseFile();
-//        Provider::ColumnSet* set = parser.getColumnSet();
-//        printf("PRINTING 2 1 = ");
-//        set->getColumn(2)->printEntry(1);
 
         DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
-//        DataFrame* d = nullptr;
-        // Print requested query
         if (col_type != -1) {
-            //Provider::ColumnType type = getColumnChecked(set, (size_t)col_type)->getType();
             printf("%c\n", d->get_schema().col_type((size_t)col_type));
         } else if (col_idx_col != -1) {
-//            Provider::BaseColumn* col = getColumnChecked(set, (size_t)col_idx_col);
-//            checkColumnEntry(col, (size_t)col_idx_off);
-//            col->printEntry((size_t)col_idx_off);
             switch (d->schema.col_type((size_t)col_idx_col)) {
                 case 'B':
                     cout << *d->columns[(size_t)col_idx_col]->as_bool()->get((size_t)col_idx_off) << endl;
@@ -254,9 +247,6 @@ int main(int argc, char* argv[]) {
                     break;
             }
         } else if (missing_idx_col != -1) {
-//            Provider::BaseColumn* col = getColumnChecked(set, (size_t)missing_idx_col);
-//            checkColumnEntry(col, (size_t)missing_idx_off);
-//            bool present = col->isEntryPresent((size_t)missing_idx_off);
             switch (d->schema.col_type((size_t)missing_idx_col)) {
                 case 'B':
                     printf("%d\n", d->columns[(size_t)missing_idx_col]->as_bool()->get((size_t)missing_idx_off) ==

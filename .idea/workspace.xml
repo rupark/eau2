@@ -11,7 +11,9 @@
   <component name="ChangeListManager">
     <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/m1/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m1/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataframe.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataframe.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/key.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/key.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kvstore.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/kvstore.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/m1/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m1/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

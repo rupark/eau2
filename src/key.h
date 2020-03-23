@@ -5,6 +5,10 @@
 #pragma once
 #include "string.h"
 
+/**
+ * Represents a String, home Node association
+ * To be used in a Key Value Store
+ */
 class Key : public Object {
 public:
         String* name;
@@ -15,6 +19,9 @@ public:
             this->homeNode = homeNode;
         }
 
+        /**
+         * Returns true if this Key equals the given object
+         */
         bool equals(Object* other) {
             if (other == this) return true;
             Key* x = dynamic_cast<Key *>(other);

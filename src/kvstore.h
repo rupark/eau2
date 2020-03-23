@@ -10,6 +10,9 @@ using namespace std;
 
 class DataFrame;
 
+/**
+ * Represents a Key Value Store
+ */
 class KVStore {
 public:
     Key** keys;
@@ -22,12 +25,18 @@ public:
         this->dfs = new DataFrame*[100*100*100];
     }
 
+    /**
+     * Adds the given Key and DataFrame to this KVStore
+     */
     void put(Key* key, DataFrame* df) {
         this->keys[size] = key;
         this->dfs[size] = df;
         size++;
     }
 
+    /**
+     * Returns the DataFrame associated in this KVStore with the given Key
+     */
     DataFrame* get(Key key) {
         for (int i = 0; i < size; i++) {
             if (keys[i]->equals(&key)) {
@@ -37,6 +46,7 @@ public:
         cout << "key not found" << endl;
         exit(-1);
     }
+
 
     //TODO
     DataFrame* getAndWait(Key key) {
