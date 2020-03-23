@@ -2,9 +2,9 @@
 
 PROG_NAME             = sorer
 TEST_PROG_NAME        = a1-part1-test
-HEADERS               = object.h column_prov.h parser.h dataframe.h
-SRC                   = main.cpp
-TEST                  = test.cpp
+HEADERS               = ../src/object.h ../src/column_prov.h ../src/parser.h ../src/dataframe.h
+SRC                   = ../src/main.cpp
+TEST                  = ../src/test.cpp
 
 CXXFLAGS = -std=gnu++11 -g -Wall -Wextra -O3
 
