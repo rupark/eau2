@@ -19,6 +19,10 @@ public:
             this->homeNode = homeNode;
         }
 
+        ~Key(){
+            delete name;
+        }
+
         /**
          * Returns true if this Key equals the given object
          */

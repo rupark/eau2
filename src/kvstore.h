@@ -19,6 +19,7 @@ public:
     DataFrame** dfs;
     int size;
 
+
     KVStore() {
         this->size = 0;
         this->keys = new Key*[100*100*100];
@@ -38,6 +39,9 @@ public:
      * Returns the DataFrame associated in this KVStore with the given Key
      */
     DataFrame* get(Key key) {
+        // check home node
+        if (key.homeNode == )
+
         for (int i = 0; i < size; i++) {
             if (keys[i]->equals(&key)) {
                 return dfs[i];
@@ -48,7 +52,7 @@ public:
     }
 
 
-    //TODO
+    // Wait until we find the key (TIMEOUT?)
     DataFrame* getAndWait(Key key) {
         this->get(key);
     }

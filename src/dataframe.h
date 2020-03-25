@@ -409,4 +409,19 @@ public:
         return *this->columns[col]->as_float()->get(row);
     }
 
+    /**
+     * Contructs a DataFrame from the size_t and associates the given Key with the DataFrame in the given KVStore
+     */
+    static DataFrame* fromScalar(Key* key, KVStore* kv, size_t scalar) {
+        cout << "fromScalar" << endl;
+        char* I = "I";
+        DataFrame* df = new DataFrame(*new Schema(I));
+        cout << "made df" << endl;
+        df->columns[0]->push_back((int)scalar);
+        cout << "added scalar" << endl;
+        kv->put(key, df);
+        cout << "put" << endl;
+        return df;
+    }
+
 };

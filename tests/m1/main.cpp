@@ -229,6 +229,7 @@ int main(int argc, char* argv[]) {
         parser.parseFile();
 
         DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
+
         if (col_type != -1) {
             printf("%c\n", d->get_schema().col_type((size_t)col_type));
         } else if (col_idx_col != -1) {
