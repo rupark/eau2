@@ -37,6 +37,14 @@ public:
         close(sock_);
     }
 
+    NetworkIP(bool isServer) {
+        if (isServer) {
+            server_init(0, 8080);
+        } else {
+            client_init();
+        }
+    }
+
     /**
      * Returns this node's index.
      */
@@ -47,7 +55,7 @@ public:
     /**
      * Initialize node 0.
      */
-   void server_int(unsigned idx, unsigned port) {
+   void server_init(unsigned idx, unsigned port) {
        this_node_ = idx;
        assert(idx==0 && "Server must be 0");
        init_sock_(port);
@@ -64,11 +72,11 @@ public:
        String** addresses = new String*[arg.num_nodes - 1];
        for (size_t i = 0; i < arg.num_nodes = 1; i++) {
            ports[i] = ntohs(nodes_[i + 1].address.sin_port);
-           addresses[i] = new String(et_ntoa(nodes_[i + 1].address.sin_addr));
+           addresses[i] = new String(inet_ntoa(nodes_[i + 1].address.sin_addr));
        }
 
        Directory ipd(ports, addresses);
-       ipd.log();
+       //ipd.log();
        for (size_t i = 1; i < arg.num_nodes; i++) {
            ipd.target_ = i;
            send_m(&ipd);

@@ -18,12 +18,16 @@ public:
     Key** keys;
     DataFrame** dfs;
     int size;
-
+    static bool createdServer = false;
 
     KVStore() {
         this->size = 0;
         this->keys = new Key*[100*100*100];
         this->dfs = new DataFrame*[100*100*100];
+        if (!createdServer) {
+            //make server
+        }
+        //make client
     }
 
     /**
@@ -48,12 +52,17 @@ public:
             }
         }
         cout << "key not found" << endl;
-        exit(-1);
+        return nullptr;
     }
 
-
+    //Client facing
     // Wait until we find the key (TIMEOUT?)
     DataFrame* getAndWait(Key key) {
+        while (get(key) == nullptr) {
+            //send a message requesting
+            key.homeNode;
+            wait(1000);
+        }
         this->get(key);
     }
 
