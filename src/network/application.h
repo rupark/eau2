@@ -18,4 +18,12 @@ public:
         return idx_;
     }
 
+
+    //one dataframe split across three n0des
+    //key value stores cant talk to eachother
+    //connect app to demo in a main that sets up server so everyone can reach
+    //app has a key value store, extend networkip
+    //need new message type with can send a dataframe- repurpose status\
+
+
 };

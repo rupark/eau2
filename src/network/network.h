@@ -37,12 +37,8 @@ public:
         close(sock_);
     }
 
-    NetworkIP(bool isServer) {
-        if (isServer) {
-            server_init(0, 8080);
-        } else {
-            client_init();
-        }
+    NetworkIP() {
+
     }
 
     /**
