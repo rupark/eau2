@@ -55,25 +55,25 @@ public:
        this_node_ = idx;
        assert(idx==0 && "Server must be 0");
        init_sock_(port);
-       nodes_ = new NodeInfo[arg.num_nodes];
+       nodes_ = new NodeInfo[2];
 
-       for (size_t i =0; i < arg.num_nodes; i++) {
+       for (size_t i =0; i < 2; i++) {
            Register* msg = dynamic_cast<Register*>(recv_m());
-           nodes_[msg->sender()].id = msg->sender();
-           nodes_[msg->sender()].address.sin_family = AF_INET;
-           nodes_[msg->sender()].address.sin_addr = msg->client.sin_addr;
-           nodes_[msg->sender()].address.sin_port = htons(msg->port);
+           nodes_[msg->sender_].id = msg->sender_;
+           nodes_[msg->sender_].address.sin_family = AF_INET;
+           nodes_[msg->sender_].address.sin_addr = msg->client.sin_addr;
+           nodes_[msg->sender_].address.sin_port = htons(msg->port);
        }
-       size_t* ports = new size_t[arg.num_nodes-1];
-       String** addresses = new String*[arg.num_nodes - 1];
-       for (size_t i = 0; i < arg.num_nodes = 1; i++) {
+       size_t* ports = new size_t[2-1];
+       String** addresses = new String*[2 - 1];
+       for (size_t i = 0; i < 2 = 1; i++) {
            ports[i] = ntohs(nodes_[i + 1].address.sin_port);
            addresses[i] = new String(inet_ntoa(nodes_[i + 1].address.sin_addr));
        }
 
        Directory ipd(ports, addresses);
        //ipd.log();
-       for (size_t i = 1; i < arg.num_nodes; i++) {
+       for (size_t i = 1; i < 2; i++) {
            ipd.target_ = i;
            send_m(&ipd);
        }
@@ -84,7 +84,7 @@ public:
            unsigned server_port) {
        this_node_ = idx;
        init_sock_(port);
-       nodes_ new NodeInfo[1];
+       nodes_ = new NodeInfo[1];
        nodes_[0].id = 0;
        nodes_[0].address.sin_family = AF_INET;
        nodes_[0].address.sin_port = htons(server_port);
@@ -94,8 +94,7 @@ public:
        Register msg(idx, port);
        send_m(&msg);
        Directory* ipd = dynamic_cast<Directory*>(recv_m());
-       ipd->log();
-       NodeInfo* nodes = new NodeInfo[arg.num_nodes];
+       NodeInfo* nodes = new NodeInfo[2];
        nodes[0] = nodes_[0];
        for (size_t i = 0; i < ipd->clients; i++) {
            nodes[i+1].id = i+1;
