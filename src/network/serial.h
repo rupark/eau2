@@ -1,5 +1,5 @@
-#include "../src/tring.h"
-#include "../group4500/object.h"
+#include "../string.h"
+#include "../object.h"
 #include <stdio.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
