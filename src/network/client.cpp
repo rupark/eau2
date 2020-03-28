@@ -5,7 +5,7 @@
 
 int main(int argc, char* argv[]) {
 
-    NetworkIP client = new NetworkIP();
-    client.client_init(1, 8080, "127.0.0.1", 8080)
+    NetworkIP* client = new NetworkIP();
+    client.client_init(1, 8080, "127.0.0.1", 8080);
 
 }

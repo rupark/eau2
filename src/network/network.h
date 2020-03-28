@@ -9,6 +9,8 @@
 #include <arpa/inet.h>
 #include "serial.h"
 #include "../string.h"
+#include <iostream>
+using namespace std;
 
 /**
  * NodeInfo: each node is identified
@@ -57,7 +59,7 @@ public:
        init_sock_(port);
        nodes_ = new NodeInfo[2];
 
-       for (size_t i = 0; i < 2; ++i) nodes_[i] = 0;
+       for (size_t i = 0; i < 2; ++i) nodes_[i].id = 0;
        nodes_[0].address = ip_;
        nodes_[0].id = 0;
        for (size_t i =0; i < 2; i++) {
@@ -105,7 +107,7 @@ public:
            nodes[i+1].address.sin_port = htons(ipd->ports[i]);
            if (inet_pton(AF_INET, ipd->addresses[i]->c_str(),
                    &nodes[i+1].address.sin_addr) <= 0) {
-               FATAL_ERROR("Invalid IP direcotry-addr. for node " << (i+1));
+               cout << "Invalid IP direcotry-addr" << endl;
            }
        }
        delete[] nodes_;
@@ -151,7 +153,7 @@ public:
        int req = accept(sock_, (sockaddr*) &sender, &addrlen);
        size_t size = 0;
        if (read(req, &size, sizeof(size_t))  == 0) {
-           FATAL_ERROR("failed to read");
+           cout << "failed to read" << endl;
        }
        char* buf = new char[size];
        int rd = 0;
