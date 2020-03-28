@@ -114,6 +114,7 @@ public:
 class Register : public Message {
 public:
 
+    sockaddr_in client;
     size_t port;
     String* address;
 

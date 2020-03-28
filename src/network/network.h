@@ -57,6 +57,9 @@ public:
        init_sock_(port);
        nodes_ = new NodeInfo[2];
 
+       for (size_t i = 0; i < 2; ++i) nodes_[i] = 0;
+       nodes_[0].address = ip_;
+       nodes_[0].id = 0;
        for (size_t i =0; i < 2; i++) {
            Register* msg = dynamic_cast<Register*>(recv_m());
            nodes_[msg->sender_].id = msg->sender_;
@@ -66,7 +69,7 @@ public:
        }
        size_t* ports = new size_t[2-1];
        String** addresses = new String*[2 - 1];
-       for (size_t i = 0; i < 2 = 1; i++) {
+       for (size_t i = 0; i < 2; i++) {
            ports[i] = ntohs(nodes_[i + 1].address.sin_port);
            addresses[i] = new String(inet_ntoa(nodes_[i + 1].address.sin_addr));
        }
