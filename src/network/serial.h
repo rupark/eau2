@@ -18,7 +18,7 @@ class Message : public Object {
         MsgKind kind_;  // the message kind
         size_t sender_; // the index of the sender node
         size_t target_; // the index of the receiver node
-        //size_t id_;     // an id t unique within the node
+        size_t id_;     // an id t unique within the node
         virtual String* serialize() {
             return nullptr;
         }
@@ -116,14 +116,13 @@ public:
 
     sockaddr_in client;
     size_t port;
-    String* address;
 
-    Register(int sender, int target, size_t port, String* address) {
+    Register(unsigned client, size_t port) {
         this->kind_ = MsgKind::Register;
-        this->sender_ = sender;
-        this->target_ = target;
+        this->sender_ = 0;
+        this->target_ = 0;
+        this->client = client;
         this->port = port;
-        this->address = address;
     }
 
     Register(char* buffer) {
@@ -140,7 +139,11 @@ public:
         this->sender_ = atoi(args[1]);
         this->target_ = atoi(args[2]);
         this->port = atoi(args[3]);
-        this->address = new String(args[4]);
+        struct sockaddr_in myaddr;
+        myaddr.sin_family = args[4];
+        myaddr.sin_port = args[5];
+        inet_aton(args[6], &myaddr.sin_addr.s_addr);
+        this->client = myaddr;
     }
 
     String* serialize() {
@@ -155,7 +158,11 @@ public:
         s->c(str);
         snprintf(str, sizeof str, "%zu?", port);
         s->c(str);
-        snprintf(str, sizeof str, "%s", this->address->cstr_);
+        snprintf(str, sizeof str, "%h?", this->client.sin_family);
+        s->c(str);
+        snprintf(str, sizeof str, "%h?", this->client.sin_port);
+        s->c(str);
+        snprintf(str, sizeof str, "%l", this->client.sin_addr.s_addr);
         s->c(str);
         return s->get();
     }
@@ -168,11 +175,11 @@ public:
     size_t * ports;  // owned
     String ** addresses;  // owned; strings owned
 
-    Directory(int sender, int target, size_t nodes, size_t * ports, String ** addresses) {
+    Directory(size_t * ports, String ** addresses) {
         this->kind_ = MsgKind::Directory;
-        this->sender_ = sender;
-        this->target_ = target;
-        this->nodes = nodes;
+        this->sender_ = 0;
+        this->target_ = 0;
+        this->nodes = sizeof(ports)/sizeof(ports[0]);
         this->ports = ports;
         this->addresses = addresses;
     }
