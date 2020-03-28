@@ -13,7 +13,7 @@ run: build
 valgrind: 
 	valgrind --leak-check=full -v ./a.out
 
-build_client_server: client.o server.o
+build_client_server: client.o server.o src/object.h
 	g++ -std=c++11 src/network/network.h client.o -o client
 	g++ -std=c++11 src/network/network.h server.o -o server
 
