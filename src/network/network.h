@@ -96,12 +96,13 @@ public:
        if (inet_pton(AF_INET, server_adr, &nodes_[0].address.sin_addr) <= 0) {
            assert(false && "Imvalid server IP address format");
        }
+       //TODO how to convert idx to sock_addr_in?????
        Register msg(idx, port);
        send_m(&msg);
        Directory* ipd = dynamic_cast<Directory*>(recv_m());
        NodeInfo* nodes = new NodeInfo[2];
        nodes[0] = nodes_[0];
-       for (size_t i = 0; i < ipd->clients; i++) {
+       for (size_t i = 0; i < ipd->nodes; i++) {
            nodes[i+1].id = i+1;
            nodes[i+1].address.sin_family = AF_INET;
            nodes[i+1].address.sin_port = htons(ipd->ports[i]);
@@ -125,18 +126,18 @@ public:
        ip_.sin_family = AF_INET;
        ip_.sin_addr.s_addr = INADDR_ANY;
        ip_.sin_port = htons(port);
-       assert(bind(sock_, (sockaddr*) &ip, sizeof(ip_)) >= 0);
+       assert(bind(sock_, (sockaddr*) &ip_, sizeof(ip_)) >= 0);
        assert(listen(sock_, 100) >= 0);
    }
 
    /** Based on the message target, creates new connection to the appropriate
     * server and then serializes the message on the connection fd. **/
    void send_m(Message* msg) {
-       NodeInfo & tgt = nodes_[msg->target()];
+       NodeInfo & tgt = nodes_[msg->target_];
        int conn = socket(AF_INET, SOCK_STREAM, 0);
        assert(conn >= 0 && "Unable to create client socket");
        if (connect(conn, (sockaddr*)&tgt.address, sizeof(tgt.address)) < 0) {
-           FATAL_ERROR("Unable to connect to remote node");
+           cout << "Unable to connect to remote node" << endl;
        }
        String* msg_ser =  msg->serialize();
        char* buf = msg_ser->c_str();

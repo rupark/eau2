@@ -140,8 +140,8 @@ public:
         this->target_ = atoi(args[2]);
         this->port = atoi(args[3]);
         struct sockaddr_in myaddr;
-        myaddr.sin_family = args[4];
-        myaddr.sin_port = args[5];
+        myaddr.sin_family = atoi(args[4]);
+        myaddr.sin_port = atoi(args[5]);
         inet_aton(args[6], &myaddr.sin_addr.s_addr);
         this->client = myaddr;
     }
