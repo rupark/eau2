@@ -144,7 +144,7 @@ public:
         struct sockaddr_in myaddr;
         myaddr.sin_family = atoi(args[4]);
         myaddr.sin_port = atoi(args[5]);
-        inet_aton(args[6], &myaddr.sin_addr.s_addr);
+        inet_aton(args[6], *(struct in_addr *)&myaddr.sin_addr.s_addr);
         this->client = myaddr;
         this->port = atoi(args[7]);
     }
