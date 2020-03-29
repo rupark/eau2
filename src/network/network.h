@@ -62,7 +62,7 @@ public:
        for (size_t i = 0; i < 2; ++i) nodes_[i].id = 0;
        nodes_[0].address = ip_;
        nodes_[0].id = 0;
-       cout << nodes_[0].address << endl;
+       cout << nodes_[0].address.sin_addr.s_addr << endl;
        for (size_t i =0; i < 2; i++) {
            Register* msg = dynamic_cast<Register*>(recv_m());
            nodes_[msg->sender_].id = msg->sender_;
