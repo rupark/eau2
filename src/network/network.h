@@ -22,7 +22,6 @@ public:
     sockaddr_in address;
 };
 
-
 /**
  * IP based network communications layer. Each node has an index
  * between 0 and num_nodes-1. nodes directory is ordered by node
@@ -44,6 +43,7 @@ public:
     }
 
     /**
+     *
      * Returns this node's index.
      */
     size_t index() {
