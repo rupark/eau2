@@ -97,7 +97,7 @@ public:
            assert(false && "Imvalid server IP address format");
        }
        //TODO how to convert idx to sock_addr_in?????
-       Register msg(idx, port);
+       Register msg(idx, port, ip_);
        send_m(&msg);
        Directory* ipd = dynamic_cast<Directory*>(recv_m());
        NodeInfo* nodes = new NodeInfo[2];

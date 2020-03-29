@@ -115,14 +115,15 @@ class Register : public Message {
 public:
 
     size_t idx;
-    //sockaddr_in client;
+    sockaddr_in client;
     size_t port;
 
-    Register(unsigned idx, size_t port) {
+    Register(unsigned idx, size_t port, sockaddr_in ip_) {
         this->kind_ = MsgKind::Register;
         this->sender_ = 0;
         this->target_ = 0;
         this->idx = idx;
+        this->client = ip_;
         this->port = (size_t)port;
     }
 
@@ -140,12 +141,12 @@ public:
         this->sender_ = atoi(args[1]);
         this->target_ = atoi(args[2]);
         this->idx = atoi(args[3]);
-        this->port = atoi(args[4]);
-//        struct sockaddr_in myaddr;
-//        myaddr.sin_family = atoi(args[4]);
-//        myaddr.sin_port = atoi(args[5]);
-//        inet_aton(args[6], &myaddr.sin_addr.s_addr);
-//        this->client = myaddr;
+        struct sockaddr_in myaddr;
+        myaddr.sin_family = atoi(args[4]);
+        myaddr.sin_port = atoi(args[5]);
+        inet_aton(args[6], &myaddr.sin_addr.s_addr);
+        this->client = myaddr;
+        this->port = atoi(args[7]);
     }
 
     String* serialize() {
@@ -160,14 +161,14 @@ public:
         s->c(str);
         snprintf(str, sizeof str, "%zu", this->idx);
         s->c(str);
+        snprintf(str, sizeof str, "%h?", this->client.sin_family);
+        s->c(str);
+        snprintf(str, sizeof str, "%h?", this->client.sin_port);
+        s->c(str);
+        snprintf(str, sizeof str, "%l", this->client.sin_addr.s_addr);
+        s->c(str);
         snprintf(str, sizeof str, "%zu", this->port);
         s->c(str);
-//        snprintf(str, sizeof str, "%h?", this->client.sin_family);
-//        s->c(str);
-//        snprintf(str, sizeof str, "%h?", this->client.sin_port);
-//        s->c(str);
-//        snprintf(str, sizeof str, "%l", this->client.sin_addr.s_addr);
-//        s->c(str);
         return s->get();
     }
 
