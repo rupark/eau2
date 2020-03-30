@@ -85,7 +85,7 @@ public:
        size_t* ports = new size_t[3];
        String** addresses = new String*[3];
         cout << "created addresses ports arrays" << endl;
-       for (size_t i = 0; i < 3; i++) {
+       for (size_t i = 0; i < 2; i++) {
            ports[i] = ntohs(nodes_[i + 1].address.sin_port);
            addresses[i] = new String(inet_ntoa(nodes_[i + 1].address.sin_addr));
            cout << i << " " << addresses[i]->cstr_ << endl;
@@ -195,6 +195,7 @@ public:
        }
        cout << "connected" << inet_ntoa(tgt.address.sin_addr) << endl;
        String* msg_ser =  msg->serialize();
+       cout << msg_ser->cstr_ << endl;
        char* buf = msg_ser->c_str();
        size_t size = msg_ser->size();
        send(conn, &size, sizeof(size_t), 0);
