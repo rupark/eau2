@@ -136,4 +136,16 @@ public:
     virtual char get_type() {
         return 'I';
     }
+
+    virtual String* serialize() {
+        StrBuff* s = new StrBuff();
+        result->c("I}");
+        for (int i = 0; i < this->size_; i++) {
+            char str[256] = ""; /* In fact not necessary as snprintf() adds the 0-terminator. */
+            snprintf(str, sizeof str, "%d}", this->vals_[i]->val);
+            s->c(str);
+        }
+        result->c("!");
+        return result->get();
+    }
 };

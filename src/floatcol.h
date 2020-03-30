@@ -148,13 +148,14 @@ public:
     }
 
     virtual String* serialize() {
-        StrBuff* result = new StrBuff();
-        result->c(new String("F}"));
+        StrBuff* s = new StrBuff();
+        result->c("F}");
         for (int i = 0; i < this->size_; i++) {
-            result->c(new String(to_string(*this->vals_[i])));
-            result->c(new String("}"));
+            char str[256] = ""; /* In fact not necessary as snprintf() adds the 0-terminator. */
+            snprintf(str, sizeof str, "%f}", this->vals_[i]->val);
+            s->c(str);
         }
-        result->c(new String("!"));
+        result->c("!");
         return result->get();
     }
 };
