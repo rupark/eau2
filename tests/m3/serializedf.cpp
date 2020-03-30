@@ -27,10 +27,11 @@ int main(int argc, char* argv[]) {
     cout << "Push 7" << endl;
     Status* s = new Status(0, 0, d);
     cout << "STATUS CREATED" << endl;
-    cout << s->serialize()->cstr_ << endl;
+    char* serialized = ->serialize()->cstr_;
+    cout << serialized << endl;
 
-    Status* s2 = new Status(s->serialize()->cstr_);
-    for (int i = 0; i < s->msg_->ncol; i++) {
+    Status* s2 = new Status(serialized);
+    for (int i = 0; i < s2->msg_->ncol; i++) {
         for (int j = 0; j < s2->msg_->columns[i]->size(); j++) {
             switch (s2->msg_->columns[i]->get_type()) {
                 case 'F':

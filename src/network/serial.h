@@ -85,6 +85,7 @@ public:
             i++;
             token = strtok (NULL, "?");
         }
+        cout << "broke up tokens" << endl;
         this->kind_ = MsgKind::Status;
         this->sender_ = atoi(args[1]);
         this->target_ = atoi(args[2]);
@@ -99,6 +100,7 @@ public:
             columns_size++;
             token = strtok (NULL, "!");
         }
+        cout << "broke up into columns" << endl;
 
         DataFrame* d = new DataFrame(*new Schema());
         for (int i = 0; i < columns_size; i++) {
@@ -107,6 +109,7 @@ public:
             token = strtok(column,"}");
             switch (token[0]) {
                 case 'F':
+                    cout << "float col" << endl;
                     token = strtok(column,"}");
                     c = new FloatColumn();
                     while (token != NULL)
@@ -117,6 +120,7 @@ public:
                     }
                     break;
                 case 'S':
+                    cout << "str col" << endl;
                     token = strtok(column,"}");
                     c = new StringColumn();
                     while (token != NULL)
@@ -127,6 +131,7 @@ public:
                     }
                     break;
                 case 'B':
+                    cout << "bool col" << endl;
                     token = strtok(column,"}");
                     c = new BoolColumn();
                     while (token != NULL)
@@ -137,6 +142,7 @@ public:
                     }
                     break;
                 case 'I':
+                    cout << "int col" << endl;
                     token = strtok(column,"}");
                     c = new IntColumn();
                     while (token != NULL)
@@ -149,6 +155,8 @@ public:
             }
             d->add_column(c, new String(""));
         }
+
+        cout << "populated columns" << endl;
 
         this->msg_ = d;
 
