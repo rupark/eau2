@@ -122,7 +122,7 @@ public:
                     while (token != NULL)
                     {
                         c->push_back((float)atof(token));
-                        columns_size++;
+                        //columns_size++;
                         token = strtok (NULL, "}");
                     }
                     break;
@@ -133,7 +133,7 @@ public:
                     while (token != NULL)
                     {
                         c->push_back(new String(token));
-                        columns_size++;
+                        //columns_size++;
                         token = strtok (NULL, "}");
                     }
                     break;
@@ -144,7 +144,7 @@ public:
                     while (token != NULL)
                     {
                         c->push_back((bool)atoi(token));
-                        columns_size++;
+                        //columns_size++;
                         token = strtok (NULL, "}");
                     }
                     break;
@@ -155,7 +155,7 @@ public:
                     while (token != NULL)
                     {
                         c->push_back((int)atoi(token));
-                        columns_size++;
+                        //columns_size++;
                         token = strtok (NULL, "}");
                     }
                     break;
