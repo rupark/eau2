@@ -57,15 +57,15 @@ public:
        this_node_ = idx;
        assert(idx==0 && "Server must be 0");
        init_sock_(port);
-       nodes_ = new NodeInfo[1];
+       nodes_ = new NodeInfo[2];
 
-       for (size_t i = 0; i < 1; ++i) nodes_[i].id = 0;
+       for (size_t i = 0; i < 2; ++i) nodes_[i].id = 0;
 
        nodes_[0].address = ip_;
        nodes_[0].id = 0;
 
        cout << nodes_[0].address.sin_addr.s_addr << endl;
-       for (size_t i =0; i < 1; i++) {
+       for (size_t i =0; i < 2; i++) {
            Register* msg = dynamic_cast<Register*>(recv_m());
            nodes_[msg->sender_].id = msg->sender_;
            nodes_[msg->sender_].address.sin_family = AF_INET;
@@ -76,10 +76,10 @@ public:
            nodes_[msg->sender_].address.sin_port = htons(msg->port);
        }
        cout << "finished for loop nodes" << endl;
-       size_t* ports = new size_t[2 - 1];
-       String** addresses = new String*[2 - 1];
+       size_t* ports = new size_t[2];
+       String** addresses = new String*[2];
         cout << "created addresses ports arrays" << endl;
-       for (size_t i = 0; i < 1; i++) {
+       for (size_t i = 0; i < 2; i++) {
            ports[i] = ntohs(nodes_[i + 1].address.sin_port);
            addresses[i] = new String(inet_ntoa(nodes_[i + 1].address.sin_addr));
        }
@@ -87,7 +87,7 @@ public:
 
        Directory ipd(ports, addresses);
        //ipd.log();
-       for (size_t i = 1; i < 2; i++) {
+       for (size_t i = 1; i < 3; i++) {
            ipd.target_ = i;
            cout << "Server sending directory" << endl;
            sleep(3);
