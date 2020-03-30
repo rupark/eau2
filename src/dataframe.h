@@ -390,8 +390,7 @@ public:
      */
     static DataFrame* fromArray(Key* key, KVStore* kv, size_t sz, double* vals) {
         cout << "fromArray" << endl;
-        char* f = 'F';
-        DataFrame* df = new DataFrame(*new Schema(f));
+        DataFrame* df = new DataFrame(*new Schema("F"));
         cout << "made df" << endl;
         for (int i = 0; i < sz; i++) {
             df->columns[0]->push_back((float)vals[i]);
@@ -414,8 +413,7 @@ public:
      */
     static DataFrame* fromScalar(Key* key, KVStore* kv, size_t scalar) {
         cout << "fromScalar" << endl;
-        char* I = 'I';
-        DataFrame* df = new DataFrame(*new Schema(I));
+        DataFrame* df = new DataFrame(*new Schema("I"));
         cout << "made df" << endl;
         df->columns[0]->push_back((int)scalar);
         cout << "added scalar" << endl;
