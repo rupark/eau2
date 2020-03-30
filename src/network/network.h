@@ -130,7 +130,7 @@ public:
         for (int i = 0; i < ipd->nodes; i++) {
             cout << "port: " << ipd->ports[i] << " add: " << ipd->addresses[i]->cstr_ << endl;
         }
-       NodeInfo* nodes = new NodeInfo[2];
+       NodeInfo* nodes = new NodeInfo[ipd->nodes + 1];
        nodes[0] = nodes_[0];
        for (size_t i = 0; i < ipd->nodes; i++) {
            nodes[i+1].id = i+1;
@@ -141,6 +141,12 @@ public:
                cout << "Invalid IP direcotry-addr" << endl;
            }
        }
+
+       cout << "server add: " << inet_ntoa(nodes[0].address) << endl;
+       cout << "server id: " << nodes[0].id << endl;
+       cout << "client add: " << inet_ntoa(nodes[1].address) << endl;
+       cout << "client id: " << nodes[1].id << endl;
+
        delete[] nodes_;
        nodes_ = nodes;
        delete ipd;
