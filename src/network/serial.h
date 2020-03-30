@@ -100,7 +100,7 @@ public:
             token = strtok (NULL, "!");
         }
 
-        DataFrame d = new DataFrame(new Schema());
+        DataFrame* d = new DataFrame(*new Schema());
         for (int i = 0; i < columns_size; i++) {
             Column* c;
             char* column = columns[i];
@@ -111,7 +111,7 @@ public:
                     c = new FloatColumn();
                     while (token != NULL)
                     {
-                        c->push_back(atof(token));
+                        c->push_back((float)atof(token));
                         columns_size++;
                         token = strtok (NULL, "}");
                     }
