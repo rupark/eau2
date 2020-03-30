@@ -142,9 +142,9 @@ public:
            }
        }
 
-       cout << "server add: " << inet_ntoa(nodes[0].address) << endl;
+       cout << "server add: " << inet_ntoa(nodes[0].address.sin_addr) << endl;
        cout << "server id: " << nodes[0].id << endl;
-       cout << "client add: " << inet_ntoa(nodes[1].address) << endl;
+       cout << "client add: " << inet_ntoa(nodes[1].address.sin_addr) << endl;
        cout << "client id: " << nodes[1].id << endl;
 
        delete[] nodes_;
