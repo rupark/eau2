@@ -19,6 +19,8 @@ class FloatColumn;
 #include "intcol.h"
 #include <iostream>
 
+using namespace std;
+
 /**
  * Represent a Int of Float SoR Type
  */

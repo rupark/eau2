@@ -17,6 +17,9 @@ class FloatColumn;
 #include "bool.h"
 #include <iostream>
 
+using namespace std;
+
+
 /**
  * Represent a Column of Boolean SoR Type
  */
