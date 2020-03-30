@@ -169,6 +169,7 @@ public:
         snprintf(str, sizeof str, "?");
         s->c(str);
         for (int i = 0; i < msg_->ncol; i++) {
+            cout << msg_->ncol << endl;
             snprintf(str, sizeof str, "%s", msg_->columns[i]->serialize()->cstr_);
         }
         s->c(str);
