@@ -80,7 +80,7 @@ public:
        size_t* ports = new size_t[2];
        String** addresses = new String*[2];
         cout << "created addresses ports arrays" << endl;
-       for (size_t i = 0; i < 3; i++) {
+       for (size_t i = 0; i < 2; i++) {
            ports[i] = ntohs(nodes_[i + 1].address.sin_port);
            addresses[i] = new String(inet_ntoa(nodes_[i + 1].address.sin_addr));
        }
