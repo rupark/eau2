@@ -126,6 +126,7 @@ public:
        Register msg(idx, port, ip_);
        send_m(&msg);
        Directory* ipd = dynamic_cast<Directory*>(recv_m());
+       cout << ipd->nodes << endl;
         for (int i = 0; i < ipd->nodes; i++) {
             cout << "port: " << ipd->ports[i] << " add: " << ipd->addresses[i]->cstr_ << endl;
         }
