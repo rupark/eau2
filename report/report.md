@@ -7,9 +7,9 @@ In the following sections we will discuss these features in more technical detai
 describe the future work involved. 
 ## Architecture ##
 _In the following diagrams, we describe the various mechanics and pieces of eau2 at a high-level._
-![Picture of eau2 levels](imgs/Screen Shot 2020-03-30 at 4.53.41 PM.png "The Three Parts of the System")
+![Picture of eau2 levels](imgs/2.png "The Three Parts of the System")
 
-![Picture of Distributed System Mechanics](imgs/Screen Shot 2020-03-30 at 4.53.35 PM.png "The Distributed System Mechanics")
+![Picture of Distributed System Mechanics](imgs/1.png "The Distributed System Mechanics")
 ## Implementation ##
 In this section, we describe how the system is built. Currently the functionality for each milestone is available, but not connected.
 ### Team 4500NE's Sorer
