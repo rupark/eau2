@@ -158,18 +158,18 @@ public:
         StrBuff* s = new StrBuff();
         char str[10000] = ""; /* In fact not necessary as snprintf() adds the
                          0-terminator. */
-        snprintf(str, sizeof str, "3?", this->sender_);
+        snprintf(str, sizeof str, "3?");
         s->c(str);
         snprintf(str, sizeof this->sender_, "%zu", this->sender_);
         s->c(str);
-        snprintf(str, sizeof str, "?", this->sender_);
+        snprintf(str, sizeof str, "?");
         s->c(str);
         snprintf(str, sizeof this->target_, "%zu", this->target_);
         s->c(str);
-        snprintf(str, sizeof str, "?", this->sender_);
+        snprintf(str, sizeof str, "?");
         s->c(str);
         for (int i = 0; i < msg_->ncol; i++) {
-            snprintf(str, sizeof str, "%s", msg_->columns[i]->serialize());
+            snprintf(str, sizeof str, "%s", msg_->columns[i]->serialize()->cstr_);
         }
         s->c(str);
         return s->get();
