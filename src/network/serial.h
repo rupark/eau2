@@ -76,7 +76,6 @@ public:
     }
 
     Status(char* buffer) {
-        cout << "here" << endl;
         char** args = new char*[1000];
         char *token = strtok(buffer,"?");
         int k = 0;
@@ -86,7 +85,6 @@ public:
             k++;
             token = strtok (NULL, "?");
         }
-        cout << "broke up tokens" << endl;
         this->kind_ = MsgKind::Status;
         this->sender_ = atoi(args[1]);
         this->target_ = atoi(args[2]);
@@ -99,69 +97,51 @@ public:
         token = strtok(recieved,"!");
         while (token != NULL)
         {
-            cout << token << endl;
             columns[p] = token;
             columns_size++;
             p++;
             token = strtok (NULL, "!");
         }
-        cout << "broke up into columns" << endl;
 
         DataFrame* d = new DataFrame(*new Schema());
-        cout << columns_size << endl;
         for (int i = 0; i < columns_size; i++) {
-            cout << "in for loop" << endl;
             Column* c;
             char* column = columns[i];
-            cout << column << endl;
             token = strtok(column,"}");
-            cout << token << endl;
             switch (token[0]) {
                 case 'F':
-                    cout << "float col" << endl;
                     token = strtok(NULL,"}");
                     c = new FloatColumn();
                     while (token != NULL)
                     {
-                        cout << token << endl;
                         c->push_back((float)atof(token));
-                        //columns_size++;
                         token = strtok (NULL, "}");
                     }
                     break;
                 case 'S':
-                    cout << "str col" << endl;
                     token = strtok(NULL,"}");
                     c = new StringColumn();
                     while (token != NULL)
                     {
-                        cout << token << endl;
                         c->push_back(new String(token));
-                        //columns_size++;
                         token = strtok (NULL, "}");
                     }
                     break;
                 case 'B':
-                    cout << "bool col" << endl;
                     token = strtok(NULL,"}");
                     c = new BoolColumn();
                     while (token != NULL)
                     {
-                        cout << token << endl;
                         c->push_back((bool)atoi(token));
-                        //columns_size++;
                         token = strtok (NULL, "}");
                     }
                     break;
                 case 'I':
-                    cout << "int col" << endl;
                     token = strtok(NULL,"}");
                     c = new IntColumn();
                     while (token != NULL)
                     {
-                        cout << token << endl;
                         c->push_back((int)atoi(token));
-                        //columns_size++;
                         token = strtok (NULL, "}");
                     }
                     break;
@@ -169,40 +149,28 @@ public:
             d->add_column(c, new String(""));
         }
 
-        cout << "populated columns" << endl;
-
         this->msg_ = d;
 
     }
 
     String* serialize() {
-        cout << "making strbuff" << endl;
         StrBuff* s = new StrBuff();
-        cout << "making str" << endl;
         char str[10000] = ""; /* In fact not necessary as snprintf() adds the
                          0-terminator. */
-        cout << "adding index" << endl;
         snprintf(str, sizeof str, "3?");
         s->c(str);
-        cout << "adding sender" << endl;
         snprintf(str, sizeof this->sender_, "%zu", this->sender_);
         s->c(str);
-        cout << "adding ?" << endl;
         snprintf(str, sizeof str, "?");
         s->c(str);
-        cout << "adding target" << endl;
         snprintf(str, sizeof this->target_, "%zu", this->target_);
         s->c(str);
-        cout << "adding ?" << endl;
         snprintf(str, sizeof str, "?");
         s->c(str);
-        cout << "adding id" << endl;
         snprintf(str, sizeof this->target_, "%zu", this->id_);
         s->c(str);
-        cout << "adding ?" << endl;
         snprintf(str, sizeof str, "?");
         s->c(str);
-        cout << msg_->ncol << endl;
         for (int i = 0; i < msg_->ncol; i++) {
             snprintf(str, sizeof str, "%s", msg_->columns[i]->serialize()->cstr_);
             s->c(str);
@@ -238,28 +206,16 @@ public:
             i++;
             token = strtok (NULL, "?");
         }
-        cout << "tokenized register" << endl;
         this->kind_ = MsgKind::Register;
         this->sender_ = atoi(args[1]);
-        cout << "args[1] done" << endl;
         this->target_ = atoi(args[2]);
-        cout << "args[2] done" << endl;
         this->idx = atoi(args[3]);
-        cout << "args[3] done" << endl;
         struct sockaddr_in myaddr;
-        cout << "args[4] = " << atoi(args[4]) << endl;
         myaddr.sin_family = atoi(args[4]);
-        cout << "args[4] done" << endl;
         myaddr.sin_port = atoi(args[5]);
-        cout << "args[5] done" << endl;
         inet_aton(args[6], (struct in_addr *)&myaddr.sin_addr.s_addr);
-//        myaddr.sin_addr.s_addr = (in_addr_t) atol(args[6]);
-//        inet_aton(args[6], &myaddr.sin_addr.s_addr);
-        cout << "args[6]" << args[6] << endl;
-        cout << "args[6] done" << endl;
         this->client = myaddr;
         this->port = atoi(args[7]);
-        cout << "args[7] done" << endl;
     }
 
     String* serialize() {
@@ -300,7 +256,6 @@ public:
         this->nodes = nodes;
         this->ports = ports;
         this->addresses = addresses;
-        cout << "finished creating dir" << endl;
     }
 
     Directory(char* buffer) {
