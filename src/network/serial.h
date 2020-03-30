@@ -178,8 +178,8 @@ public:
         cout << msg_->ncol << endl;
         for (int i = 0; i < msg_->ncol; i++) {
             snprintf(str, sizeof str, "%s", msg_->columns[i]->serialize()->cstr_);
+            s->c(str);
         }
-        s->c(str);
         return s->get();
     }
 

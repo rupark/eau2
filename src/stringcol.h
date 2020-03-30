@@ -138,6 +138,8 @@ public:
     virtual String* serialize() {
         StrBuff* s = new StrBuff();
         s->c("S}");
+        cout << "in string" << endl;
+        cout << this->size_ << endl;
         for (int i = 0; i < this->size_; i++) {
             char str[256] = ""; /* In fact not necessary as snprintf() adds the 0-terminator. */
             snprintf(str, sizeof str, "%s}", this->vals_[i]->c_str());
