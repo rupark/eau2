@@ -6,9 +6,10 @@ of columnar SoR files. The system is also contains a Key Value Store which is a 
 In the following sections we will discuss these features in more technical detail as well as
 describe the future work involved. 
 ## Architecture ##
-_In this section, we describe the various part of eau2 at a high-level._
+_In the following diagrams, we describe the various mechanics and pieces of eau2 at a high-level._
+![Picture of eau2 levels](imgs/Screen Shot 2020-03-30 at 4.53.41 PM.png "The Three Parts of the System")
 
-TODO
+![Picture of Distributed System Mechanics](imgs/Screen Shot 2020-03-30 at 4.53.35 PM.png "The Distributed System Mechanics")
 ## Implementation ##
 In this section, we describe how the system is built. Currently the functionality for each milestone is available, but not connected.
 ### Team 4500NE's Sorer
@@ -63,12 +64,12 @@ assert(sum==0);
 ## Open questions ##
 * What is the objective of getAndWait (what are we waiting for)?
 * Why is delete not working in Milestone 2?
-* What is the purpose of the Architecture section?
+* How do we incorporate NetworkIP into KVStore?
 ## Status ##
 | Milestone Number | Status  | Objective  |
 |:---:|:---:|:---|
 | 1 | ✓ | Be able to build a DataFrame from a SoR file |
 | 2 | ✓ | Implement get, put, and getAndWait on a single-node Key Value Store system |
-| 3 | ✗ | Distribute the key value store; be able to run with multiple KV stores, and thus multiple instances of the application |
-| 4 | ✗ | Complete the distributed key value store implementation including the network layer
+| 3 | IP  | Distribute the key value store; be able to run with multiple KV stores, and thus multiple instances of the application |
+| 4 | IP | Incorporate the network layer
 | 5 | ✗ | Complete any missing bits in our implementation and write the distributed application "7 degrees of Linus"

@@ -10,25 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/report/imgs/Screen Shot 2020-03-30 at 4.53.35 PM.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/report/imgs/Screen Shot 2020-03-30 at 4.53.41 PM.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bool.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/bool.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/boolcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/boolcol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/column.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/column.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/column_prov.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/column_prov.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataframe.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataframe.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fielder.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/fielder.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/float.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/float.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/floatcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/floatcol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/intcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/intcol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/integer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/integer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/key.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/key.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kvstore.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/kvstore.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/list.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/report.md" beforeDir="false" afterPath="$PROJECT_DIR$/report/report.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/network/server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/server.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parser.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/row.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/row.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schema.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stringcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/stringcol.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/tests.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m3/tests.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,16 +48,16 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/myfiles" />
-      <recent name="Y:\Classes\cs4500\milestone1\group4500" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/report/imgs" />
+      <recent name="$PROJECT_DIR$/tests/m3" />
       <recent name="$PROJECT_DIR$/tests/m1" />
       <recent name="$PROJECT_DIR$/data" />
       <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/myfiles/m2" />
-      <recent name="$PROJECT_DIR$/myfiles/m1" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/myfiles" />
+      <recent name="Y:\Classes\cs4500\milestone1\group4500" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -107,13 +94,6 @@
       <workItem from="1585529077998" duration="321000" />
       <workItem from="1585529833370" duration="8525000" />
       <workItem from="1585579726027" duration="4382000" />
-    </task>
-    <task id="LOCAL-00020" summary="changes">
-      <created>1585542099143</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1585542099143</updated>
     </task>
     <task id="LOCAL-00021" summary="changes">
       <created>1585542309026</created>
@@ -451,7 +431,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585598820489</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="comments">
+      <created>1585599771654</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1585599771654</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -473,19 +460,19 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="500" y="161" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1584301170655" />
-    <state x="368" y="10" key="CommitChangelistDialog2" timestamp="1585598820386">
+    <state x="368" y="10" key="CommitChangelistDialog2" timestamp="1585599771368">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="368" y="10" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1585598820386" />
+    <state x="368" y="10" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1585599771368" />
     <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583969216068" />
     <state x="550" y="169" key="FileChooserDialogImpl" timestamp="1584977836701">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="550" y="169" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1584977836701" />
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1585598826203">
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1585599774396">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1585598826203" />
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1585599774396" />
     <state x="362" y="147" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583969271623" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1585579726970">
       <screen x="0" y="0" width="1536" height="824" />
