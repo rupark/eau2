@@ -71,6 +71,7 @@ public:
         this->kind_ = MsgKind::Status;
         this->sender_ = sender;
         this->target_ = target;
+        this->id_ = 0;
         this->msg_ = msg;
     }
 
@@ -89,8 +90,9 @@ public:
         this->kind_ = MsgKind::Status;
         this->sender_ = atoi(args[1]);
         this->target_ = atoi(args[2]);
+        this->id_ = atoi(args[3]);
 
-        char* recieved = args[3];
+        char* recieved = args[4];
         char** columns = new char*[1000];
         size_t columns_size = 0;
         int p = 0;
@@ -190,6 +192,12 @@ public:
         s->c(str);
         cout << "adding target" << endl;
         snprintf(str, sizeof this->target_, "%zu", this->target_);
+        s->c(str);
+        cout << "adding ?" << endl;
+        snprintf(str, sizeof str, "?");
+        s->c(str);
+        cout << "adding id" << endl;
+        snprintf(str, sizeof this->target_, "%zu", this->id_);
         s->c(str);
         cout << "adding ?" << endl;
         snprintf(str, sizeof str, "?");

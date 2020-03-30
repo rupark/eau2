@@ -31,6 +31,9 @@ int main(int argc, char* argv[]) {
     cout << serialized << endl;
 
     Status* s2 = new Status(serialized);
+    cout << s2->sender_ << endl;
+    cout << s2->target_ << endl;
+    cout << s2->id_ << endl;
     for (int i = 0; i < s2->msg_->ncol; i++) {
         for (int j = 0; j < s2->msg_->columns[i]->size(); j++) {
             switch (s2->msg_->columns[i]->get_type()) {
