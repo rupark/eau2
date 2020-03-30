@@ -106,8 +106,10 @@ public:
         DataFrame* d = new DataFrame(*new Schema());
         cout << columns_size << endl;
         for (int i = 0; i < columns_size; i++) {
+            cout << "in for loop" << endl;
             Column* c;
             char* column = columns[i];
+            cout << column << endl;
             token = strtok(column,"}");
             cout << token << endl;
             switch (token[0]) {
