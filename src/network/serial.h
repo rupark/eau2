@@ -96,6 +96,7 @@ public:
         token = strtok(recieved,"!");
         while (token != NULL)
         {
+            cout << token << endl;
             columns[i] = token;
             columns_size++;
             token = strtok (NULL, "!");
