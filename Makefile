@@ -1,5 +1,5 @@
 clean:
-	rm src/*.out src/*.o src/*.h.gch
+	rm src/*.out src/*.o src/*.h.gch client server *.o
 
 build: main2.o
 	g++ -std=c++11 src/dataframe.h src/key.h src/kvstore.h main2.o
