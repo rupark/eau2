@@ -27,6 +27,7 @@
 
 using namespace std;
 
+/** Represents a set of data */
 class DataFrame : public Object {
 public:
     Schema schema;
@@ -48,8 +49,7 @@ public:
         }
     }
 
-    /** Create a data frame from a schema and columns. All columns are created
-      * empty. */
+    /** Create a data frame from a schema. All columns are created empty. */
     DataFrame(Schema& schema) {
         this->columns = new Column*[100*1000*1000];
 
@@ -80,7 +80,7 @@ public:
         }
     }
 
-    // Fill DataFrame from group 4500 sorer adapter
+    /** Fill DataFrame from group 4500NE's sorer adapter */
     DataFrame(Provider::ColumnSet* data, size_t num_columns) {
         this->columns = new Column*[100*1000*1000];
         this->schema = *new Schema();

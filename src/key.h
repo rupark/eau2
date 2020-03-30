@@ -7,7 +7,7 @@
 
 /**
  * Represents a String, home Node association
- * To be used in a Key Value Store
+ * To be used in a KVStore
  */
 class Key : public Object {
 public:

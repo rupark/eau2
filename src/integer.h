@@ -3,8 +3,7 @@
 #include <stdio.h>
 #include "object.h"
 
-/* Base Integer wrapper class. Represents the basis for all Integers.
-   Only contains two basic features, equals and hash. */
+/** Base Integer wrapper class. Represents the basis for all Integers. */
 class Integer : public Object {
 public:
     int val;

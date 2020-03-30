@@ -37,5 +37,6 @@ public:
     /** Return the type of this column as a char: 'S', 'B', 'I' and 'F'. */
     virtual char get_type() {}
 
+    /** Return the serialization of this Column as a String */
     virtual String* serialize() {}
 };

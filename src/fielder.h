@@ -7,6 +7,7 @@
 #include "string.h"
 #include "object.h"
 
+/** Used for iterating over a DataFrame row */
 class Fielder : public Object {
 public:
 

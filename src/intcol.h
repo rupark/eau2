@@ -1,9 +1,3 @@
-/*************************************************************************
- * intColumn::
- * Holds int pointers. The ints are external.  Nullptr is a valid
- * value.
- */
-//class Column;
 class StringColumn;
 class BoolColumn;
 class FloatColumn;
@@ -21,7 +15,7 @@ class FloatColumn;
 using namespace std;
 
 /**
- * Represent a Int of Float SoR Type
+ * Represent a Column of Integer
  */
 class IntColumn : public Column {
 public:

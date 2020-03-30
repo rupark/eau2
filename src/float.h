@@ -3,8 +3,7 @@
 #include <stdio.h>
 #include "object.h"
 
-/* Base Float wrapper class. Represents the basis for all Floats.
-   Only contains two basic features, equals and hash. */
+/** Base Float wrapper class. Represents the basis for all Floats.*/
 class Float : public Object {
 public:
     float val;
@@ -24,7 +23,7 @@ public:
      * @return N/A
      */
      ~Float() {
-         cout << "here" << endl;
+
     }
 
     /**

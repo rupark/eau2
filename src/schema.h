@@ -4,8 +4,6 @@
  * knows the number of columns and number of rows, the type of each column,
  * optionally columns and rows can be named by strings.
  * The valid types are represented by the chars 'S', 'B', 'I' and 'F'.
- *
- * SBI
  */
 
 #pragma once
@@ -33,8 +31,6 @@ public:
         this->ncol = from.ncol;
     }
 
-
-
     /** Create an empty schema **/
     Schema() {
         this->types = new String("");
@@ -43,8 +39,6 @@ public:
         this->ncol = 0;
         this->nrow = 0;
     }
-
-
 
     /** Create a schema from a string of types. A string that contains
       * characters other than those identifying the four type results in
@@ -129,6 +123,7 @@ public:
         return nrow;
     }
 
+    /** Appends the given char to this Schema's types String */
     void append(char s) {
         int newsize = 1 + this->types->size();
         char* newArr = new char[newsize];

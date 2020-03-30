@@ -1,9 +1,3 @@
-/*************************************************************************
- * floatColumn::
- * Holds float pointers. The floats are external.  Nullptr is a valid
- * value.
- */
-//class Column;
 class IntColumn;
 class BoolColumn;
 class FloatColumn;
@@ -21,7 +15,7 @@ class FloatColumn;
 using namespace std;
 
 /**
- * Represent a Column of Float SoR Type
+ * Represent a Column of Float
  */
 class FloatColumn : public Column {
 public:
@@ -36,16 +30,12 @@ public:
     }
 
     ~FloatColumn() {
-        cout << "here" << endl;
-        cout << size_ << endl;
         for (int i = 0; i < size_; i++) {
             if (vals_[i] != nullptr) {
-                //printf("%d\n", i);
                 delete vals_[i];
             }
         }
         delete vals_;
-        cout << "finished" << endl;
     }
 
     /**

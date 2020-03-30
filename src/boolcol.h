@@ -1,9 +1,3 @@
-/*************************************************************************
- * BoolColumn::
- * Holds Bool pointers. The Bools are external.  Nullptr is a valid
- * value.
- */
-//class Column;
 class StringColumn;
 class IntColumn;
 class FloatColumn;
@@ -19,9 +13,8 @@ class FloatColumn;
 
 using namespace std;
 
-
 /**
- * Represent a Column of Boolean SoR Type
+ * Represent a Column of Bool
  */
 class BoolColumn : public Column {
 public:

@@ -25,7 +25,6 @@ public:
         this->size = 0;
         this->keys = new Key*[100*100*100];
         this->dfs = new DataFrame*[100*100*100];
-        //make client
     }
 
     /**
@@ -41,9 +40,6 @@ public:
      * Returns the DataFrame associated in this KVStore with the given Key
      */
     DataFrame* get(Key key) {
-//        // check home node
-//        if (key.homeNode == 0)
-
         for (int i = 0; i < size; i++) {
             if (keys[i]->equals(&key)) {
                 return dfs[i];

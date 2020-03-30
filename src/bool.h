@@ -3,8 +3,7 @@
 #include <stdio.h>
 #include "object.h"
 
-/* Base Bool wrapper class. Represents the basis for all Bools.
-   Only contains two basic features, equals and hash. */
+/* Base Bool wrapper class. Represents the basis for all Bools. */
 class Bool : public Object {
 public:
     bool val;

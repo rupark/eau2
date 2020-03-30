@@ -6,6 +6,7 @@
  * read/write complete rows. Internally a dataframe hold data in columns.
  * Rows have pointer equality.
  */
+
 #pragma once
 
 #include "float.h"

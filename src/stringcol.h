@@ -3,7 +3,7 @@
  * Holds string pointers. The strings are external.  Nullptr is a valid
  * value.
  */
-//class Column;
+
 class IntColumn;
 class BoolColumn;
 class FloatColumn;
@@ -138,6 +138,7 @@ public:
         return 'S';
     }
 
+    /** Returns the serialization of this StringColumn as a String */
     virtual String* serialize() {
         StrBuff* s = new StrBuff();
         s->c("S}");
