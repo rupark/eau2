@@ -35,6 +35,8 @@ we assume that DataFrame's will not need to be modified once constructed.
 
 Another important method on DataFrame is the fromArray method. This method constructs a DataFrame from a given array of doubles and 
 adds it to the given KVStore under the given Key. It then returns the constructed DataFrame.
+### NetworkIP ###
+The NetworkIP class 
 ## Use cases ##
 ```
 //Creating a new KVStore

@@ -14,8 +14,8 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <fstream>
-#include "network.h"
-#include "../string.h"
+#include "../../src/network/network.h"
+#include "../../src/string.h"
 using namespace std;
 //Client side
 int main(int argc, char *argv[])
