@@ -2,7 +2,9 @@
 ## Introduction ##
 In this document we will describe the architecture and implementation of the eau2 system.
 Thus far, the eau2 system is able to read in SoR files and construct DataFrames, our system's internal representation
-of columnar SoR files. The system is also contains a Key Value Store which is a hash-map like structure which can associate Keys with DataFrames.
+of columnar SoR files. The system also contains a Key Value Store which is a hash-map like structure which can associate Keys with DataFrames.
+We have also created the ability to create client and server nodes which can pass Messages containing information
+about other nodes and data stored in DataFrames. 
 In the following sections we will discuss these features in more technical detail as well as
 describe the future work involved. 
 ## Architecture ##
@@ -36,7 +38,12 @@ we assume that DataFrame's will not need to be modified once constructed.
 Another important method on DataFrame is the fromArray method. This method constructs a DataFrame from a given array of doubles and 
 adds it to the given KVStore under the given Key. It then returns the constructed DataFrame.
 ### NetworkIP ###
-The NetworkIP class 
+The NetworkIP class allows us to utilize socket programming to send Messages between nodes. There are two main methods in
+NetworkIP, server_init and client_init. There are four types of Messages: Ack which acknowledges the receipt of a Message, Status which we use to send DataFrames, 
+Register which a client sends to a server upon coming online, and Directory which a server sends to a client after receiving a Register 
+Message. server_init sets up a NetworkIP to act as a server, which means it sends waits to receive Register Messages from
+every client and then send them all Directory Messages. client_init sets up a NetworkIP to act as a client, which means it
+sends the server a Register method and waits to receive a Directory Message in response. 
 ## Use cases ##
 ```
 //Creating a new KVStore
@@ -62,6 +69,15 @@ DataFrame* df2 = kv.get(key);
 for (size_t i = 0; i < SZ; ++i) sum -= df2->get_double(0,i);
 //The values in df2 are the same as df
 assert(sum==0);
+
+//Initializing a client with index 1 and an IP address of 127.0.0.2 who's server is at IP address 127.0.0.1
+//In this example, the client and the client's server are both on port 8080
+NetworkIP* client = new NetworkIP();
+client->client_init(1, 8080, "127.0.0.1", 8080, "127.0.0.2");
+
+//Initializing a server on port 8080 with an index of 0 (since it is the server)
+NetworkIP* server = new NetworkIP();
+server->server_init(0, 8080);
 ```
 ## Open questions ##
 * What is the objective of getAndWait (what are we waiting for)?
