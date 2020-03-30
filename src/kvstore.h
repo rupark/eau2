@@ -18,15 +18,11 @@ public:
     Key** keys;
     DataFrame** dfs;
     int size;
-    static bool createdServer = false;
 
     KVStore() {
         this->size = 0;
         this->keys = new Key*[100*100*100];
         this->dfs = new DataFrame*[100*100*100];
-        if (!createdServer) {
-            //make server
-        }
         //make client
     }
 
@@ -43,8 +39,8 @@ public:
      * Returns the DataFrame associated in this KVStore with the given Key
      */
     DataFrame* get(Key key) {
-        // check home node
-        if (key.homeNode == )
+//        // check home node
+//        if (key.homeNode == 0)
 
         for (int i = 0; i < size; i++) {
             if (keys[i]->equals(&key)) {
@@ -61,7 +57,7 @@ public:
         while (get(key) == nullptr) {
             //send a message requesting
             key.homeNode;
-            wait(1000);
+            sleep(3);
         }
         this->get(key);
     }

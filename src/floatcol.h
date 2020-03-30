@@ -155,7 +155,7 @@ public:
             snprintf(str, sizeof str, "%f}", this->vals_[i]->val);
             s->c(str);
         }
-        result->c("!");
-        return result->get();
+        s->c("!");
+        return s->get();
     }
 };

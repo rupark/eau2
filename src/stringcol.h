@@ -143,7 +143,7 @@ public:
             snprintf(str, sizeof str, "%s}", this->vals_[i]->c_str());
             s->c(str);
         }
-        result->c("!");
-        return result->get();
+        s->c("!");
+        return s->get();
     }
 };
