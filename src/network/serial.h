@@ -158,14 +158,19 @@ public:
         StrBuff* s = new StrBuff();
         char str[10000] = ""; /* In fact not necessary as snprintf() adds the
                          0-terminator. */
+        cout << "adding index" << endl;
         snprintf(str, sizeof str, "3?");
         s->c(str);
+        cout << "adding sender" << endl;
         snprintf(str, sizeof this->sender_, "%zu", this->sender_);
         s->c(str);
+        cout << "adding ?" << endl;
         snprintf(str, sizeof str, "?");
         s->c(str);
+        cout << "adding target" << endl;
         snprintf(str, sizeof this->target_, "%zu", this->target_);
         s->c(str);
+        cout << "adding ?" << endl;
         snprintf(str, sizeof str, "?");
         s->c(str);
         cout << msg_->ncol << endl;
