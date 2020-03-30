@@ -104,10 +104,12 @@ public:
         cout << "broke up into columns" << endl;
 
         DataFrame* d = new DataFrame(*new Schema());
+        cout << columns_size << endl;
         for (int i = 0; i < columns_size; i++) {
             Column* c;
             char* column = columns[i];
             token = strtok(column,"}");
+            cout << token << endl;
             switch (token[0]) {
                 case 'F':
                     cout << "float col" << endl;
