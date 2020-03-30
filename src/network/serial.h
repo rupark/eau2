@@ -105,7 +105,7 @@ public:
             Column* c;
             char* column = columns[i];
             token = strtok(column,"}");
-            switch (token) {
+            switch (token[0]) {
                 case 'F':
                     token = strtok(column,"}");
                     c = new FloatColumn();
@@ -147,7 +147,7 @@ public:
                     }
                     break;
             }
-            d.add_column(c, new String(""));
+            d->add_column(c, new String(""));
         }
 
         this->msg_ = d;
@@ -169,7 +169,7 @@ public:
         snprintf(str, sizeof str, "?", this->sender_);
         s->c(str);
         for (int i = 0; i < msg_->ncol; i++) {
-            snprintf(str, sizeof str, "%s", msg_->columns[i].serialize());
+            snprintf(str, sizeof str, "%s", msg_->columns[i]->serialize());
         }
         s->c(str);
         return s->get();
