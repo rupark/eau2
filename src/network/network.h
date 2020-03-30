@@ -64,41 +64,24 @@ public:
        nodes_[0].address = ip_;
        nodes_[0].id = 0;
 
-       //cout << nodes_[0].address.sin_addr.s_addr << endl;
        for (size_t i =1; i < 3; i++) {
            Register* msg = dynamic_cast<Register*>(recv_m());
            nodes_[msg->sender_].id = msg->sender_;
            nodes_[msg->sender_].address.sin_family = AF_INET;
-//           nodes_[i].id = i;
-//           nodes_[i].address.sin_family = AF_INET;
            nodes_[msg->sender_].address.sin_addr = msg->client.sin_addr;
-//           cout << "sender:" << msg->sender_ << endl;
-//           if (i == 1 && inet_pton(AF_INET, "127.0.0.2", &nodes_[i].address.sin_addr) <= 0) {
-//               assert(false && "Invalid server IP address format");
-//           }
-//           if (i == 2 && inet_pton(AF_INET, "127.0.0.3", &nodes_[i].address.sin_addr) <= 0) {
-//               assert(false && "Invalid server IP address format");
-//           }
            nodes_[i].address.sin_port = htons(msg->port);
        }
-//       cout << "finished for loop nodes" << endl;
        size_t* ports = new size_t[3];
        String** addresses = new String*[3];
-//        cout << "created addresses ports arrays" << endl;
        for (size_t i = 0; i < 2; i++) {
            ports[i] = ntohs(nodes_[i + 1].address.sin_port);
            addresses[i] = new String(inet_ntoa(nodes_[i + 1].address.sin_addr));
-//           cout << i << " " << addresses[i]->cstr_ << endl;
        }
-//
-//       for (int i = 0 ; i < 3; i++) {
-//           cout << inet_ntoa(nodes_[i].address.sin_addr) << endl;
-//       };
+
        Directory ipd(ports, addresses, 2);
 
        cout << ipd.nodes << endl;
-       //ipd.log();
-       // start at 1 to avoid sending directory to server at idx = 0
+
        for (size_t i = 1; i < 3; i++) {
            ipd.target_ = i;
            cout << "Server sending directory" << endl;
@@ -114,20 +97,6 @@ public:
        this_node_ = idx;
        init_sock_(port, client_adr);
 
-//       inet_aton(client_adr, (struct in_addr *)&ip_.sin_addr.s_addr);
-//       assert((sock_ = socket(AF_INET, SOCK_STREAM, 0)) >= 0);
-//       int opt = 1;
-//       assert(setsockopt(sock_,
-//                         SOL_SOCKET, SO_REUSEADDR,
-//                         &opt, sizeof(opt)) == 0);
-//       ip_.sin_family = AF_INET;
-//       //ip_.sin_addr.s_addr = INADDR_ANY;
-//       cout << "From Init Sock: " << endl;
-//       ip_.sin_port = htons(port);
-//       assert(bind(sock_, (sockaddr*) &ip_, sizeof(ip_)) >= 0);
-//       cout << inet_ntoa(ip_.sin_addr) << endl;
-//       assert(listen(sock_, 100) >= 0);
-
        nodes_ = new NodeInfo[1];
        nodes_[0].id = 0;
        nodes_[0].address.sin_family = AF_INET;
@@ -139,10 +108,7 @@ public:
        Register msg(idx, port, ip_);
        send_m(&msg);
        Directory* ipd = dynamic_cast<Directory*>(recv_m());
-//       cout << "ipd_nodes" << ipd->nodes << endl;
-//        for (int i = 0; i < ipd->nodes; i++) {
-//            cout << "port: " << ipd->ports[i] << " add: " << ipd->addresses[i]->cstr_ << endl;
-//        }
+
        NodeInfo* nodes = new NodeInfo[ipd->nodes + 1];
        nodes[0] = nodes_[0];
        for (size_t i = 0; i < ipd->nodes; i++) {
@@ -154,11 +120,6 @@ public:
                cout << "Invalid IP direcotry-addr" << endl;
            }
        }
-
-//       cout << "server add: " << inet_ntoa(nodes[0].address.sin_addr) << endl;
-//       cout << "server id: " << nodes[0].id << endl;
-//       cout << "client add: " << inet_ntoa(nodes[1].address.sin_addr) << endl;
-//       cout << "client id: " << nodes[1].id << endl;
 
        delete[] nodes_;
        nodes_ = nodes;
@@ -173,29 +134,23 @@ public:
                SOL_SOCKET, SO_REUSEADDR,
                &opt, sizeof(opt)) == 0);
        ip_.sin_family = AF_INET;
-       // ip_.sin_addr.s_addr = INADDR_ANY;
        inet_aton(client_adr, (struct in_addr *)&ip_.sin_addr.s_addr);
 
-//       cout << "From Init Sock: " << endl;
        ip_.sin_port = htons(port);
        assert(bind(sock_, (sockaddr*) &ip_, sizeof(ip_)) >= 0);
-//       cout << inet_ntoa(ip_.sin_addr) << endl;
        assert(listen(sock_, 100) >= 0);
    }
 
    /** Based on the message target, creates new connection to the appropriate
     * server and then serializes the message on the connection fd. **/
    void send_m(Message* msg) {
-//       cout << "in send_m" << endl;
        NodeInfo & tgt = nodes_[msg->target_];
        cout << "Sending Message to " << inet_ntoa(tgt.address.sin_addr) << endl;
        int conn = socket(AF_INET, SOCK_STREAM, 0);
        assert(conn >= 0 && "Unable to create client socket");
-//       cout << "socket created" << endl;
        if (connect(conn, (sockaddr*)&tgt.address, sizeof(tgt.address)) < 0) {
            cout << "Unable to connect to remote node" << endl;
        }
-//       cout << "connected" << inet_ntoa(tgt.address.sin_addr) << endl;
        String* msg_ser =  msg->serialize();
        cout << "Message: " << msg_ser->cstr_ << endl;
        char* buf = msg_ser->c_str();
@@ -208,30 +163,25 @@ public:
    /** Listens on the server socket. When a message becomes available, reads
     * its data, deserialize it and return object. */
    Message* recv_m() {
-//       cout << "in recv_m()" << endl;
        sockaddr_in sender;
        socklen_t addrlen = sizeof(sender);
-//       cout << "sock = " << sock_ << endl;
        int req = accept(sock_, (sockaddr*) &sender, &addrlen);
        cout << "accepted connection" << endl;
        size_t size = 0;
        if (read(req, &size, sizeof(size_t))  == 0) {
            cout << "failed to read" << endl;
        }
-//       cout << "reading size " << size << endl;
        char* buf = new char[size];
        int rd = 0;
        while(rd != size) {
            rd+= read(req, buf + rd, size - rd);
        }
-//       cout << "finished reading" << endl;
        Message* msg;
 
        cout << "Received: " << buf << endl;
        // SWITCH STATEMENT
        switch(buf[0]) {
            case '1': // Register
-//                cout << "receiving register" << endl;
                msg = new Register(buf);
                break;
            case '2': // ACK

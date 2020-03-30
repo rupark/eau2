@@ -20,6 +20,10 @@ class Message : public Object {
         size_t sender_; // the index of the sender node
         size_t target_; // the index of the receiver node
         size_t id_;     // an id t unique within the node
+
+        /**
+         * Serializes this message to a String
+         */
         virtual String* serialize() {
             return nullptr;
         }
@@ -34,6 +38,7 @@ public:
         this->target_ = target;
     }
 
+    //Deserializing from a char*
     Ack(char* buffer) {
         char** args = new char*[1000];
         char *token = strtok(buffer,"?");
@@ -49,6 +54,7 @@ public:
         this->target_ = atoi(args[2]);
     }
 
+    //Serializes this Ack
     String* serialize() {
         StrBuff* s = new StrBuff();
         char str[256] = ""; /* In fact not necessary as snprintf() adds the
@@ -75,6 +81,7 @@ public:
         this->msg_ = msg;
     }
 
+    //Deserializing from a char*
     Status(char* buffer) {
         char** args = new char*[1000];
         char *token = strtok(buffer,"?");
@@ -153,6 +160,9 @@ public:
 
     }
 
+    /**
+     * Serializes this Status to a String
+     */
     String* serialize() {
         StrBuff* s = new StrBuff();
         char str[10000] = ""; /* In fact not necessary as snprintf() adds the
@@ -196,6 +206,7 @@ public:
         this->port = (size_t)port;
     }
 
+    //Deserializes from a char*
     Register(char* buffer) {
         char** args = new char*[1000];
         char *token = strtok(buffer,"?");
@@ -218,6 +229,7 @@ public:
         this->port = atoi(args[7]);
     }
 
+    //Serializes this Register
     String* serialize() {
         StrBuff* s = new StrBuff();
         char str[1024] = ""; /* In fact not necessary as snprintf() adds the
@@ -258,6 +270,7 @@ public:
         this->addresses = addresses;
     }
 
+    //Deserializes from a char*
     Directory(char* buffer) {
         char** args = new char*[1000];
         char *token = strtok(buffer,"?");
@@ -282,6 +295,7 @@ public:
         }
     }
 
+    //Serializes this Directory
     String* serialize() {
         StrBuff* s = new StrBuff();
         char str[256] = ""; /* In fact not necessary as snprintf() adds the

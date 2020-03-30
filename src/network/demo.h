@@ -1,3 +1,6 @@
+/**
+ * Goal for M3: instance of Application class
+ */
 class Demo : public Application {
 public:
     Key main("main",0);
