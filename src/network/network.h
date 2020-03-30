@@ -71,10 +71,13 @@ public:
            nodes_[msg->sender_].address.sin_family = AF_INET;
            nodes_[msg->sender_].address.sin_addr = msg->client.sin_addr;
            cout << "sender:" << msg->sender_ << endl;
-//           if (inet_pton(AF_INET, "127.0.0.2", &nodes_[msg->sender_].address.sin_addr) <= 0) {
-//               assert(false && "Invalid server IP address format");
-//           }
-           nodes_[msg->sender_].address.sin_port = htons(msg->port);
+           if (i == 1 && inet_pton(AF_INET, "127.0.0.2", &nodes_[msg->sender_].address.sin_addr) <= 0) {
+               assert(false && "Invalid server IP address format");
+           }
+           if (i == 2 && inet_pton(AF_INET, "127.0.0.3", &nodes_[msg->sender_].address.sin_addr) <= 0) {
+               assert(false && "Invalid server IP address format");
+           }
+           //nodes_[msg->sender_].address.sin_port = htons(msg->port);
        }
        cout << "finished for loop nodes" << endl;
        size_t* ports = new size_t[2];
@@ -94,6 +97,7 @@ public:
            sleep(3);
            send_m(&ipd);
        }
+
    }
 
    /** Intializes a client node */
