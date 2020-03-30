@@ -17,6 +17,7 @@ class FloatColumn;
 #include "floatcol.h"
 #include "stringcol.h"
 #include "intcol.h"
+#include <iostream>
 
 /**
  * Represent a Int of Float SoR Type

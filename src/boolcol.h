@@ -15,6 +15,7 @@ class FloatColumn;
 #include "stringcol.h"
 #include "string.h"
 #include "bool.h"
+#include <iostream>
 
 /**
  * Represent a Column of Boolean SoR Type
