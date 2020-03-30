@@ -69,10 +69,11 @@ public:
            Register* msg = dynamic_cast<Register*>(recv_m());
            nodes_[msg->sender_].id = msg->sender_;
            nodes_[msg->sender_].address.sin_family = AF_INET;
-//           nodes_[msg->sender_].address.sin_addr = msg->client.sin_addr;
-           if (inet_pton(AF_INET, "127.0.0.2", &nodes_[msg->sender_].address.sin_addr) <= 0) {
-               assert(false && "Invalid server IP address format");
-           }
+           nodes_[msg->sender_].address.sin_addr = msg->client.sin_addr;
+           cout << "sender:" << msg->sender_ << endl;
+//           if (inet_pton(AF_INET, "127.0.0.2", &nodes_[msg->sender_].address.sin_addr) <= 0) {
+//               assert(false && "Invalid server IP address format");
+//           }
            nodes_[msg->sender_].address.sin_port = htons(msg->port);
        }
        cout << "finished for loop nodes" << endl;
