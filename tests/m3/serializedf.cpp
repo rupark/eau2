@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
     cout << "Push 7" << endl;
     Status* s = new Status(0, 0, d);
     cout << "STATUS CREATED" << endl;
-    char* serialized = ->serialize()->cstr_;
+    char* serialized = s->serialize()->cstr_;
     cout << serialized << endl;
 
     Status* s2 = new Status(serialized);
