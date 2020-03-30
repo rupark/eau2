@@ -71,10 +71,10 @@ public:
            nodes_[msg->sender_].address.sin_family = AF_INET;
            nodes_[msg->sender_].address.sin_addr = msg->client.sin_addr;
            cout << "sender:" << msg->sender_ << endl;
-           if (i == 1 && inet_pton(AF_INET, "127.0.0.2", &nodes_[msg->sender_].address.sin_addr) <= 0) {
+           if (inet_pton(AF_INET, "127.0.0.2", &nodes_[msg->sender_].address.sin_addr) <= 0) {
                assert(false && "Invalid server IP address format");
            }
-           if (i == 2 && inet_pton(AF_INET, "127.0.0.3", &nodes_[msg->sender_].address.sin_addr) <= 0) {
+           if (inet_pton(AF_INET, "127.0.0.3", &nodes_[msg->sender_].address.sin_addr) <= 0) {
                assert(false && "Invalid server IP address format");
            }
            //nodes_[msg->sender_].address.sin_port = htons(msg->port);
@@ -89,7 +89,11 @@ public:
        }
        cout << "finished addresses ports arrays loop" << endl;
 
+       for (int i = 0 ; i < 3; i++) {
+           cout << inet_ntoa(nodes_[0].address.sin_addr) << endl;
+       };
        Directory ipd(ports, addresses);
+       cout << ipd.nodes << endl;
        //ipd.log();
        for (size_t i = 0; i < 2; i++) {
            ipd.target_ = i;
