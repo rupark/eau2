@@ -1,5 +1,5 @@
 clean: cleancs
-	rm src/*.out src/*.o src/*.h.gch src/network/*.gch.h client server *.o
+	rm src/*.out src/*.o src/*.h.gch src/network/*.h.gch client server *.o
 
 cleancs:
 	rm *.o client server client2
