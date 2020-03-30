@@ -192,11 +192,11 @@ public:
     size_t * ports;  // owned
     String ** addresses;  // owned; strings owned
 
-    Directory(size_t * ports, String ** addresses) {
+    Directory(size_t * ports, String ** addresses, size_t nodes) {
         this->kind_ = MsgKind::Directory;
         this->sender_ = 0;
         this->target_ = 0;
-        this->nodes = sizeof(ports)/sizeof(ports[0]);
+        this->nodes = nodes;
         this->ports = ports;
         this->addresses = addresses;
         cout << "finished creating dir" << endl;

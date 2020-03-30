@@ -95,7 +95,7 @@ public:
        for (int i = 0 ; i < 3; i++) {
            cout << inet_ntoa(nodes_[0].address.sin_addr) << endl;
        };
-       Directory ipd(ports, addresses);
+       Directory ipd(ports, addresses, 2);
 
        cout << ipd.nodes << endl;
        //ipd.log();
