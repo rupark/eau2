@@ -53,10 +53,10 @@ public:
     /**
      * Initialize node 0.
      */
-   void server_init(unsigned idx, unsigned port) {
+   void server_init(unsigned idx, unsigned port, char* server_adr) {
        this_node_ = idx;
        assert(idx==0 && "Server must be 0");
-       init_sock_(port);
+       init_sock_(port, server_adr);
        nodes_ = new NodeInfo[3];
 
        for (size_t i = 0; i < 3; ++i) nodes_[i].id = 0;
@@ -81,25 +81,25 @@ public:
 //           }
            nodes_[i].address.sin_port = htons(msg->port);
        }
-       cout << "finished for loop nodes" << endl;
+//       cout << "finished for loop nodes" << endl;
        size_t* ports = new size_t[3];
        String** addresses = new String*[3];
-        cout << "created addresses ports arrays" << endl;
+//        cout << "created addresses ports arrays" << endl;
        for (size_t i = 0; i < 2; i++) {
            ports[i] = ntohs(nodes_[i + 1].address.sin_port);
            addresses[i] = new String(inet_ntoa(nodes_[i + 1].address.sin_addr));
-           cout << i << " " << addresses[i]->cstr_ << endl;
+//           cout << i << " " << addresses[i]->cstr_ << endl;
        }
-       cout << "finished addresses ports arrays loop" << endl;
-
-       for (int i = 0 ; i < 3; i++) {
-           cout << inet_ntoa(nodes_[i].address.sin_addr) << endl;
-       };
+//
+//       for (int i = 0 ; i < 3; i++) {
+//           cout << inet_ntoa(nodes_[i].address.sin_addr) << endl;
+//       };
        Directory ipd(ports, addresses, 2);
 
        cout << ipd.nodes << endl;
        //ipd.log();
-       for (size_t i = 0; i < 3; i++) {
+       // start at 1 to avoid sending directory to server at idx = 0
+       for (size_t i = 1; i < 3; i++) {
            ipd.target_ = i;
            cout << "Server sending directory" << endl;
            sleep(3);
@@ -112,21 +112,21 @@ public:
    void client_init(unsigned idx, unsigned port, char* server_adr,
            unsigned server_port, char* client_adr) {
        this_node_ = idx;
-//       init_sock_(port);
+       init_sock_(port, client_adr);
 
-       inet_aton(client_adr, (struct in_addr *)&ip_.sin_addr.s_addr);
-       assert((sock_ = socket(AF_INET, SOCK_STREAM, 0)) >= 0);
-       int opt = 1;
-       assert(setsockopt(sock_,
-                         SOL_SOCKET, SO_REUSEADDR,
-                         &opt, sizeof(opt)) == 0);
-       ip_.sin_family = AF_INET;
-       //ip_.sin_addr.s_addr = INADDR_ANY;
-       cout << "From Init Sock: " << endl;
-       ip_.sin_port = htons(port);
-       assert(bind(sock_, (sockaddr*) &ip_, sizeof(ip_)) >= 0);
-       cout << inet_ntoa(ip_.sin_addr) << endl;
-       assert(listen(sock_, 100) >= 0);
+//       inet_aton(client_adr, (struct in_addr *)&ip_.sin_addr.s_addr);
+//       assert((sock_ = socket(AF_INET, SOCK_STREAM, 0)) >= 0);
+//       int opt = 1;
+//       assert(setsockopt(sock_,
+//                         SOL_SOCKET, SO_REUSEADDR,
+//                         &opt, sizeof(opt)) == 0);
+//       ip_.sin_family = AF_INET;
+//       //ip_.sin_addr.s_addr = INADDR_ANY;
+//       cout << "From Init Sock: " << endl;
+//       ip_.sin_port = htons(port);
+//       assert(bind(sock_, (sockaddr*) &ip_, sizeof(ip_)) >= 0);
+//       cout << inet_ntoa(ip_.sin_addr) << endl;
+//       assert(listen(sock_, 100) >= 0);
 
        nodes_ = new NodeInfo[1];
        nodes_[0].id = 0;
@@ -135,14 +135,14 @@ public:
        if (inet_pton(AF_INET, server_adr, &nodes_[0].address.sin_addr) <= 0) {
            assert(false && "Invalid server IP address format");
        }
-       //TODO how to convert idx to sock_addr_in?????
+
        Register msg(idx, port, ip_);
        send_m(&msg);
        Directory* ipd = dynamic_cast<Directory*>(recv_m());
-       cout << "ipd_nodes" << ipd->nodes << endl;
-        for (int i = 0; i < ipd->nodes; i++) {
-            cout << "port: " << ipd->ports[i] << " add: " << ipd->addresses[i]->cstr_ << endl;
-        }
+//       cout << "ipd_nodes" << ipd->nodes << endl;
+//        for (int i = 0; i < ipd->nodes; i++) {
+//            cout << "port: " << ipd->ports[i] << " add: " << ipd->addresses[i]->cstr_ << endl;
+//        }
        NodeInfo* nodes = new NodeInfo[ipd->nodes + 1];
        nodes[0] = nodes_[0];
        for (size_t i = 0; i < ipd->nodes; i++) {
@@ -155,10 +155,10 @@ public:
            }
        }
 
-       cout << "server add: " << inet_ntoa(nodes[0].address.sin_addr) << endl;
-       cout << "server id: " << nodes[0].id << endl;
-       cout << "client add: " << inet_ntoa(nodes[1].address.sin_addr) << endl;
-       cout << "client id: " << nodes[1].id << endl;
+//       cout << "server add: " << inet_ntoa(nodes[0].address.sin_addr) << endl;
+//       cout << "server id: " << nodes[0].id << endl;
+//       cout << "client add: " << inet_ntoa(nodes[1].address.sin_addr) << endl;
+//       cout << "client id: " << nodes[1].id << endl;
 
        delete[] nodes_;
        nodes_ = nodes;
@@ -166,70 +166,72 @@ public:
    }
 
    /** Create a socket and bind it. */
-   void init_sock_(unsigned port) {
+   void init_sock_(unsigned port, char* client_adr) {
        assert((sock_ = socket(AF_INET, SOCK_STREAM, 0)) >= 0);
        int opt = 1;
        assert(setsockopt(sock_,
                SOL_SOCKET, SO_REUSEADDR,
                &opt, sizeof(opt)) == 0);
        ip_.sin_family = AF_INET;
-       ip_.sin_addr.s_addr = INADDR_ANY;
-       cout << "From Init Sock: " << endl;
+       // ip_.sin_addr.s_addr = INADDR_ANY;
+       inet_aton(client_adr, (struct in_addr *)&ip_.sin_addr.s_addr);
+
+//       cout << "From Init Sock: " << endl;
        ip_.sin_port = htons(port);
        assert(bind(sock_, (sockaddr*) &ip_, sizeof(ip_)) >= 0);
-       cout << inet_ntoa(ip_.sin_addr) << endl;
+//       cout << inet_ntoa(ip_.sin_addr) << endl;
        assert(listen(sock_, 100) >= 0);
    }
 
    /** Based on the message target, creates new connection to the appropriate
     * server and then serializes the message on the connection fd. **/
    void send_m(Message* msg) {
-       cout << "in send_m" << endl;
+//       cout << "in send_m" << endl;
        NodeInfo & tgt = nodes_[msg->target_];
-       cout << "found tgt = " << inet_ntoa(tgt.address.sin_addr) << endl;
+       cout << "Sending Message to " << inet_ntoa(tgt.address.sin_addr) << endl;
        int conn = socket(AF_INET, SOCK_STREAM, 0);
        assert(conn >= 0 && "Unable to create client socket");
-       cout << "socket created" << endl;
+//       cout << "socket created" << endl;
        if (connect(conn, (sockaddr*)&tgt.address, sizeof(tgt.address)) < 0) {
            cout << "Unable to connect to remote node" << endl;
        }
-       cout << "connected" << inet_ntoa(tgt.address.sin_addr) << endl;
+//       cout << "connected" << inet_ntoa(tgt.address.sin_addr) << endl;
        String* msg_ser =  msg->serialize();
-       cout << msg_ser->cstr_ << endl;
+       cout << "Message: " << msg_ser->cstr_ << endl;
        char* buf = msg_ser->c_str();
        size_t size = msg_ser->size();
        send(conn, &size, sizeof(size_t), 0);
        send(conn, buf, size, 0);
-       cout << "finished sending msg" << endl;
+       cout << "Sent Successful" << endl;
    }
 
    /** Listens on the server socket. When a message becomes available, reads
     * its data, deserialize it and return object. */
    Message* recv_m() {
-       cout << "in recv_m()" << endl;
+//       cout << "in recv_m()" << endl;
        sockaddr_in sender;
        socklen_t addrlen = sizeof(sender);
-       cout << "sock = " << sock_ << endl;
+//       cout << "sock = " << sock_ << endl;
        int req = accept(sock_, (sockaddr*) &sender, &addrlen);
        cout << "accepted connection" << endl;
        size_t size = 0;
        if (read(req, &size, sizeof(size_t))  == 0) {
            cout << "failed to read" << endl;
        }
-       cout << "reading size " << size << endl;
+//       cout << "reading size " << size << endl;
        char* buf = new char[size];
        int rd = 0;
        while(rd != size) {
            rd+= read(req, buf + rd, size - rd);
        }
-       cout << "finished reading" << endl;
+//       cout << "finished reading" << endl;
        Message* msg;
 
-       cout << "buf: " << buf << endl;
+       cout << "Received: " << buf << endl;
        // SWITCH STATEMENT
        switch(buf[0]) {
            case '1': // Register
-                cout << "receiving register" << endl;
+//                cout << "receiving register" << endl;
                msg = new Register(buf);
                break;
            case '2': // ACK
