@@ -1,6 +1,9 @@
 clean:
 	rm src/*.out src/*.o src/*.h.gch client server *.o
 
+cleancs:
+	rm *o client server
+
 build: main2.o
 	g++ -std=c++11 src/dataframe.h src/key.h src/kvstore.h main2.o
 
@@ -13,7 +16,7 @@ run: build
 valgrind: 
 	valgrind --leak-check=full -v ./a.out
 
-build_client_server: client.o server.o src/object.h
+buildcs: client.o server.o src/object.h
 	g++ -std=c++11 src/network/network.h client.o -o client
 	g++ -std=c++11 src/network/network.h server.o -o server
 

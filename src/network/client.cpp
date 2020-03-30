@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 {
     NetworkIP* client = new NetworkIP();
     client->client_init(1, 8080, "127.0.0.1", 8080);
+    cout << "CLIENT DONE!" << endl;
 
 //    //we need 2 things: ip address and port number, in that order
 //    if(argc != 3)

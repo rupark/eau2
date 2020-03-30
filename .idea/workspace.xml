@@ -11,7 +11,10 @@
   <component name="ChangeListManager">
     <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/network/client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/client.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/network.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/network.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/serial.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/serial.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/network/server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/server.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,6 +92,7 @@
       <workItem from="1585427719472" duration="8564000" />
       <workItem from="1585524007184" duration="1958000" />
       <workItem from="1585529077998" duration="321000" />
+      <workItem from="1585529833370" duration="8525000" />
     </task>
     <task id="LOCAL-00001" summary="changes">
       <created>1585431183853</created>
@@ -232,6 +236,10 @@
     </state>
     <state x="468" y="225" key="git4idea.merge.GitPullDialog/0.0.1440.900@0.0.1440.900" timestamp="1585521833889" />
     <state x="499" y="206" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1584977417013" />
+    <state x="426" y="188" key="run.anything.popup" timestamp="1585536641656">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="426" y="188" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1585536641656" />
     <state x="431" y="144" width="672" height="678" key="search.everywhere.popup" timestamp="1585149537253">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

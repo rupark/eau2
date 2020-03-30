@@ -120,7 +120,7 @@ public:
 
     Register(unsigned idx, size_t port, sockaddr_in ip_) {
         this->kind_ = MsgKind::Register;
-        this->sender_ = 0;
+        this->sender_ = idx;
         this->target_ = 0;
         this->idx = idx;
         this->client = ip_;
@@ -137,21 +137,33 @@ public:
             i++;
             token = strtok (NULL, "?");
         }
+        cout << "tokenized register" << endl;
         this->kind_ = MsgKind::Register;
         this->sender_ = atoi(args[1]);
+        cout << "args[1] done" << endl;
         this->target_ = atoi(args[2]);
+        cout << "args[2] done" << endl;
         this->idx = atoi(args[3]);
+        cout << "args[3] done" << endl;
         struct sockaddr_in myaddr;
+        cout << "args[4] = " << atoi(args[4]) << endl;
         myaddr.sin_family = atoi(args[4]);
+        cout << "args[4] done" << endl;
         myaddr.sin_port = atoi(args[5]);
+        cout << "args[5] done" << endl;
         inet_aton(args[6], (struct in_addr *)&myaddr.sin_addr.s_addr);
+//        myaddr.sin_addr.s_addr = (in_addr_t) atol(args[6]);
+//        inet_aton(args[6], &myaddr.sin_addr.s_addr);
+        cout << "args[6]" << args[6] << endl;
+        cout << "args[6] done" << endl;
         this->client = myaddr;
         this->port = atoi(args[7]);
+        cout << "args[7] done" << endl;
     }
 
     String* serialize() {
         StrBuff* s = new StrBuff();
-        char str[256] = ""; /* In fact not necessary as snprintf() adds the
+        char str[1024] = ""; /* In fact not necessary as snprintf() adds the
                          0-terminator. */
         snprintf(str, sizeof str, "1?");
         s->c(str);
@@ -159,13 +171,13 @@ public:
         s->c(str);
         snprintf(str, sizeof str, "%zu?", this->target_);
         s->c(str);
-        snprintf(str, sizeof str, "%zu", this->idx);
+        snprintf(str, sizeof str, "%zu?", this->idx);
         s->c(str);
-        snprintf(str, sizeof str, "%h?", this->client.sin_family);
+        snprintf(str, sizeof str, "%d?", this->client.sin_family);
         s->c(str);
-        snprintf(str, sizeof str, "%h?", this->client.sin_port);
+        snprintf(str, sizeof str, "%d?", this->client.sin_port);
         s->c(str);
-        snprintf(str, sizeof str, "%l", this->client.sin_addr.s_addr);
+        snprintf(str, sizeof str, "%s?", inet_ntoa(client.sin_addr));
         s->c(str);
         snprintf(str, sizeof str, "%zu", this->port);
         s->c(str);
@@ -187,6 +199,7 @@ public:
         this->nodes = sizeof(ports)/sizeof(ports[0]);
         this->ports = ports;
         this->addresses = addresses;
+        cout << "finished creating dir" << endl;
     }
 
     Directory(char* buffer) {

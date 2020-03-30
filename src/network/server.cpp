@@ -19,8 +19,11 @@ using namespace std;
 //Server side
 int main(int argc, char *argv[])
 {
+    cout << "AF_INET" << AF_INET << endl;
     NetworkIP* server = new NetworkIP();
     server->server_init(0, 8080);
+    cout << "SERVER DONE" << endl;
+
 
 //    //for the server, we only need to specify a port number
 //    if(argc != 2)
