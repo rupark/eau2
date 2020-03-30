@@ -43,12 +43,9 @@ public:
     }
 
     ~DataFrame() {
-        cout << "deleted df" << endl;
-        cout << ncol << endl;
         for (int i = 0; i < ncol; i++) {
             delete columns[i];
         }
-        cout << "finished" << endl;
     }
 
     /** Create a data frame from a schema and columns. All columns are created
@@ -389,15 +386,11 @@ public:
      * Contructs a DataFrame from the given array of doubles and associates the given Key with the DataFrame in the given KVStore
      */
     static DataFrame* fromArray(Key* key, KVStore* kv, size_t sz, double* vals) {
-        cout << "fromArray" << endl;
         DataFrame* df = new DataFrame(*new Schema("F"));
-        cout << "made df" << endl;
         for (int i = 0; i < sz; i++) {
             df->columns[0]->push_back((float)vals[i]);
         }
-        cout << "added vals" << endl;
         kv->put(key, df);
-        cout << "put" << endl;
         return df;
     }
 
@@ -412,13 +405,9 @@ public:
      * Contructs a DataFrame from the size_t and associates the given Key with the DataFrame in the given KVStore
      */
     static DataFrame* fromScalar(Key* key, KVStore* kv, size_t scalar) {
-        cout << "fromScalar" << endl;
         DataFrame* df = new DataFrame(*new Schema("I"));
-        cout << "made df" << endl;
         df->columns[0]->push_back((int)scalar);
-        cout << "added scalar" << endl;
         kv->put(key, df);
-        cout << "put" << endl;
         return df;
     }
 
