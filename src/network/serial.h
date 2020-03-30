@@ -121,6 +121,7 @@ public:
                     c = new FloatColumn();
                     while (token != NULL)
                     {
+                        cout << token << endl;
                         c->push_back((float)atof(token));
                         //columns_size++;
                         token = strtok (NULL, "}");
@@ -132,6 +133,7 @@ public:
                     c = new StringColumn();
                     while (token != NULL)
                     {
+                        cout << token << endl;
                         c->push_back(new String(token));
                         //columns_size++;
                         token = strtok (NULL, "}");
@@ -143,6 +145,7 @@ public:
                     c = new BoolColumn();
                     while (token != NULL)
                     {
+                        cout << token << endl;
                         c->push_back((bool)atoi(token));
                         //columns_size++;
                         token = strtok (NULL, "}");
@@ -154,6 +157,7 @@ public:
                     c = new IntColumn();
                     while (token != NULL)
                     {
+                        cout << token << endl;
                         c->push_back((int)atoi(token));
                         //columns_size++;
                         token = strtok (NULL, "}");
