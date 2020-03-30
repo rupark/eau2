@@ -29,4 +29,23 @@ int main(int argc, char* argv[]) {
     cout << "STATUS CREATED" << endl;
     cout << s->serialize()->cstr_ << endl;
 
-}
+    Status* s = new Status(s.serialize()->cstr_);
+    for (int i = 0; i < s->msg_->ncol; i++) {
+        for (int j = 0; j < s->msg_->columns[i]->size(); j++) {
+            switch (s->msg_->columns[i]->get_type()) {
+                case 'F':
+                    cout << s->msg_->columns[i]->as_float()->get(j);
+                    break;
+                case 'S':
+                    cout << s->msg_->columns[i]->as_string()->get(j)->cstr_;
+                    break;
+                case 'B':
+                    cout << s->msg_->columns[i]->as_bool()->get(j);
+                    break;
+                case 'I':
+                    cout << s->msg_->columns[i]->as_int()->get(j);
+                    break;
+            }
+        }
+    }
+};
