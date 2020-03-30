@@ -97,11 +97,11 @@ public:
 
    /** Intializes a client node */
    void client_init(unsigned idx, unsigned port, char* server_adr,
-           unsigned server_port) {
+           unsigned server_port, char* client_adr) {
        this_node_ = idx;
 //       init_sock_(port);
 
-       inet_aton("127.0.0.2", (struct in_addr *)&ip_.sin_addr.s_addr);
+       inet_aton(client_adr, (struct in_addr *)&ip_.sin_addr.s_addr);
        assert((sock_ = socket(AF_INET, SOCK_STREAM, 0)) >= 0);
        int opt = 1;
        assert(setsockopt(sock_,
