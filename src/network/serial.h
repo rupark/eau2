@@ -155,7 +155,9 @@ public:
     }
 
     String* serialize() {
+        cout << "making strbuff" << endl;
         StrBuff* s = new StrBuff();
+        cout << "making str" << endl;
         char str[10000] = ""; /* In fact not necessary as snprintf() adds the
                          0-terminator. */
         cout << "adding index" << endl;
