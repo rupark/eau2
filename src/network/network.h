@@ -126,9 +126,9 @@ public:
        Register msg(idx, port, ip_);
        send_m(&msg);
        Directory* ipd = dynamic_cast<Directory*>(recv_m());
-       if (inet_pton(AF_INET, server_adr, &nodes_[0].address.sin_addr) <= 0) {
-           assert(false && "Imvalid server IP address format");
-       }
+        for (int i = 0; i < ipd->nodes; i++) {
+            cout << "port: " << ipd->ports[i] << " add: " << ipd->addresses[i]->cstr_ << endl;
+        }
        NodeInfo* nodes = new NodeInfo[2];
        nodes[0] = nodes_[0];
        for (size_t i = 0; i < ipd->nodes; i++) {
