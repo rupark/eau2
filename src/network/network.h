@@ -88,6 +88,7 @@ public:
        for (size_t i = 0; i < 3; i++) {
            ports[i] = ntohs(nodes_[i + 1].address.sin_port);
            addresses[i] = new String(inet_ntoa(nodes_[i + 1].address.sin_addr));
+           cout << i << " " << addresses[i]->cstr_ << endl;
        }
        cout << "finished addresses ports arrays loop" << endl;
 
@@ -95,6 +96,7 @@ public:
            cout << inet_ntoa(nodes_[0].address.sin_addr) << endl;
        };
        Directory ipd(ports, addresses);
+
        cout << ipd.nodes << endl;
        //ipd.log();
        for (size_t i = 0; i < 3; i++) {
