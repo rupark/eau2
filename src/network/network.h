@@ -97,7 +97,7 @@ public:
        Directory ipd(ports, addresses);
        cout << ipd.nodes << endl;
        //ipd.log();
-       for (size_t i = 0; i < 2; i++) {
+       for (size_t i = 0; i < 3; i++) {
            ipd.target_ = i;
            cout << "Server sending directory" << endl;
            sleep(3);
