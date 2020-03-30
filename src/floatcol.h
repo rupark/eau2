@@ -16,6 +16,7 @@ class FloatColumn;
 #include "column.h"
 #include "float.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -144,5 +145,16 @@ public:
     /** Return the type of this column as a char: 'S', 'B', 'I' and 'F'. */
     virtual char get_type() {
         return 'F';
+    }
+
+    virtual String* serialize() {
+        StrBuff* result = new StrBuff();
+        result->c(new String("F}"));
+        for (int i = 0; i < this->size_; i++) {
+            result->c(new String(to_string(*this->vals_[i])));
+            result->c(new String("}"));
+        }
+        result->c(new String("!"));
+        return result->get();
     }
 };

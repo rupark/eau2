@@ -10,11 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/m3/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/m3/serializedf.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/network/client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/client.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/network/client2.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/client2.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/network/network.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/network.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/network/server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/server.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/column.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/column.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/floatcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/floatcol.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/serial.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/serial.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -337,10 +338,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="changes" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="427" y="244" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584905475446">
+    <state x="427" y="244" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585587542837">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="427" y="244" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1584905475446" />
+    <state x="427" y="244" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1585587542837" />
     <state x="427" y="248" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.831@0.23.1440.831" timestamp="1584903064889" />
     <state x="500" y="161" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584301170655">
       <screen x="0" y="0" width="1536" height="824" />

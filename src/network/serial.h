@@ -4,6 +4,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include "../dataframe.h"
 #pragma once
 
 #include <iostream>
@@ -64,9 +65,9 @@ public:
 
 class Status : public Message {
 public:
-    String* msg_; // owned
+    DataFrame* msg_; // owned
 
-    Status(int sender, int target, String* msg) {
+    Status(int sender, int target, DataFrame* msg) {
         this->kind_ = MsgKind::Status;
         this->sender_ = sender;
         this->target_ = target;
@@ -87,7 +88,70 @@ public:
         this->kind_ = MsgKind::Status;
         this->sender_ = atoi(args[1]);
         this->target_ = atoi(args[2]);
-        this->msg_ = new String(args[3]);
+
+        char* recieved = args[3];
+        char** columns = new char*[1000];
+        size_t columns_size = 0;
+        token = strtok(recieved,"!");
+        while (token != NULL)
+        {
+            columns[i] = token;
+            columns_size++;
+            token = strtok (NULL, "!");
+        }
+
+        DataFrame d = new DataFrame(new Schema());
+        for (int i = 0; i < columns_size; i++) {
+            Column* c;
+            char* column = columns[i];
+            token = strtok(column,"}");
+            switch (token) {
+                case 'F':
+                    token = strtok(column,"}");
+                    c = new FloatColumn();
+                    while (token != NULL)
+                    {
+                        c->push_back(atof(token));
+                        columns_size++;
+                        token = strtok (NULL, "}");
+                    }
+                    break;
+                case 'S':
+                    token = strtok(column,"}");
+                    c = new StringColumn();
+                    while (token != NULL)
+                    {
+                        c->push_back(new String(token));
+                        columns_size++;
+                        token = strtok (NULL, "}");
+                    }
+                    break;
+                case 'B':
+                    token = strtok(column,"}");
+                    c = new BoolColumn();
+                    while (token != NULL)
+                    {
+                        c->push_back((bool)atoi(token));
+                        columns_size++;
+                        token = strtok (NULL, "}");
+                    }
+                    break;
+                case 'I':
+                    token = strtok(column,"}");
+                    c = new IntColumn();
+                    while (token != NULL)
+                    {
+                        c->push_back((int)atoi(token));
+                        columns_size++;
+                        token = strtok (NULL, "}");
+                    }
+                    break;
+            }
+            d.add_column(c, new String(""));
+        }
+
+        this->msg_ = d;
+
     }
 
     String* serialize() {
@@ -104,7 +168,9 @@ public:
         s->c(str);
         snprintf(str, sizeof str, "?", this->sender_);
         s->c(str);
-        snprintf(str, sizeof msg_, "%s", msg_->cstr_);
+        for (int i = 0; i < msg_->ncol; i++) {
+            snprintf(str, sizeof str, "%s", msg_->columns[i].serialize());
+        }
         s->c(str);
         return s->get();
     }
