@@ -5,6 +5,7 @@
 #pragma once
 #include "key.h"
 #include <iostream>
+#include <unistd.h>
 
 using namespace std;
 
