@@ -117,7 +117,7 @@ public:
             switch (token[0]) {
                 case 'F':
                     cout << "float col" << endl;
-                    token = strtok(column,"}");
+                    token = strtok(NULL,"}");
                     c = new FloatColumn();
                     while (token != NULL)
                     {
@@ -129,7 +129,7 @@ public:
                     break;
                 case 'S':
                     cout << "str col" << endl;
-                    token = strtok(column,"}");
+                    token = strtok(NULL,"}");
                     c = new StringColumn();
                     while (token != NULL)
                     {
@@ -141,7 +141,7 @@ public:
                     break;
                 case 'B':
                     cout << "bool col" << endl;
-                    token = strtok(column,"}");
+                    token = strtok(NULL,"}");
                     c = new BoolColumn();
                     while (token != NULL)
                     {
@@ -153,7 +153,7 @@ public:
                     break;
                 case 'I':
                     cout << "int col" << endl;
-                    token = strtok(column,"}");
+                    token = strtok(NULL,"}");
                     c = new IntColumn();
                     while (token != NULL)
                     {
