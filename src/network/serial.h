@@ -78,11 +78,11 @@ public:
         cout << "here" << endl;
         char** args = new char*[1000];
         char *token = strtok(buffer,"?");
-        int i = 0;
+        int k = 0;
         while (token != NULL)
         {
-            args[i] = token;
-            i++;
+            args[k] = token;
+            k++;
             token = strtok (NULL, "?");
         }
         cout << "broke up tokens" << endl;
@@ -93,12 +93,14 @@ public:
         char* recieved = args[3];
         char** columns = new char*[1000];
         size_t columns_size = 0;
+        int p = 0;
         token = strtok(recieved,"!");
         while (token != NULL)
         {
             cout << token << endl;
-            columns[i] = token;
+            columns[p] = token;
             columns_size++;
+            p++;
             token = strtok (NULL, "!");
         }
         cout << "broke up into columns" << endl;
