@@ -21,6 +21,57 @@ public:
     Num(size_t v) : v(v) {}
 };
 
+/**  Item_ are entries in a Map, they are not exposed, are immutable, own
+ *   they key, but the value is external.  author: jv */
+class Items_ {
+public:
+    Array keys_;
+    Array vals_;
+
+    Items_() : keys_(8), vals_(8) {}
+
+    Items_(Object *k, Object * v) : keys_(8), vals_(8) {
+        keys_.push_back(k);
+        vals_.push_back(v);
+    }
+
+    bool contains_(Object& k) {
+        for (int i = 0; i < keys_.size(); i++)
+            if (k.equals(keys_.get_(i)))
+                return true;
+        return false;
+    }
+
+    Object* get_(Object& k) {
+        for (int i = 0; i < keys_.size(); i++)
+            if (k.equals(keys_.get_(i)))
+                return vals_.get_(i);
+        return nullptr;
+    }
+
+    size_t set_(Object& k, Object* v) {
+        for (int i = 0; i < keys_.size(); i++)
+            if (k.equals(keys_.get_(i))) {
+                vals_.put(i,v);
+                return 0;
+            }
+        // The keys are owned, but the key is received as a reference, i.e. not owned so we must make a copy of it.
+        keys_.push_back(k.clone());
+        vals_.push_back(v);
+        return 1;
+    }
+
+    size_t erase_(Object& k) {
+        for (int i = 0; i < keys_.size(); i++)
+            if (k.equals(keys_.get_(i))) {
+                keys_.erase_(i);
+                vals_.erase_(i);
+                return 1;
+            }
+        return 0;
+    }
+};
+
 /** A generic map class from Object to Object. Subclasses are responsibly of
  * making the types more specific.  author: jv */
 class Map : public Object {
@@ -250,57 +301,6 @@ public:
     }
 
     bool done() {return seen == map_.size(); }
-};
-
-/**  Item_ are entries in a Map, they are not exposed, are immutable, own
- *   they key, but the value is external.  author: jv */
-class Items_ {
-public:
-    Array keys_;
-    Array vals_;
-
-    Items_() : keys_(8), vals_(8) {}
-
-    Items_(Object *k, Object * v) : keys_(8), vals_(8) {
-        keys_.push_back(k);
-        vals_.push_back(v);
-    }
-
-    bool contains_(Object& k) {
-        for (int i = 0; i < keys_.size(); i++)
-            if (k.equals(keys_.get_(i)))
-                return true;
-        return false;
-    }
-
-    Object* get_(Object& k) {
-        for (int i = 0; i < keys_.size(); i++)
-            if (k.equals(keys_.get_(i)))
-                return vals_.get_(i);
-        return nullptr;
-    }
-
-    size_t set_(Object& k, Object* v) {
-        for (int i = 0; i < keys_.size(); i++)
-            if (k.equals(keys_.get_(i))) {
-                vals_.put(i,v);
-                return 0;
-            }
-        // The keys are owned, but the key is received as a reference, i.e. not owned so we must make a copy of it.
-        keys_.push_back(k.clone());
-        vals_.push_back(v);
-        return 1;
-    }
-
-    size_t erase_(Object& k) {
-        for (int i = 0; i < keys_.size(); i++)
-            if (k.equals(keys_.get_(i))) {
-                keys_.erase_(i);
-                vals_.erase_(i);
-                return 1;
-            }
-        return 0;
-    }
 };
 
 class MutableString : public String {
