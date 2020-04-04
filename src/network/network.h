@@ -130,9 +130,9 @@ public:
    void init_sock_(unsigned port, char* client_adr) {
        assert((sock_ = socket(AF_INET, SOCK_STREAM, 0)) >= 0);
        int opt = 1;
-       assert(setsockopt(sock_,
-               SOL_SOCKET, SO_REUSEADDR,
-               &opt, sizeof(opt)) == 0);
+       if (setsockopt(sock_, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(int)) < 0) {
+       	cout << "error" << endl;
+       }
        ip_.sin_family = AF_INET;
        inet_aton(client_adr, (struct in_addr *)&ip_.sin_addr.s_addr);
 
