@@ -1,4 +1,12 @@
+#pragma once
 #include "application.h"
+#include "../dataframe.h"
+#include "../row.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "../string.h"
+#include "../key.h"
+#include "../kvstore.h"
 
 class FileReader : public Writer {
 public:
