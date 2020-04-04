@@ -10,19 +10,19 @@
  */
 class Application {
 public:
-    KVStore* kv_;
+    KVStore* kv;
     size_t idx_;
     NetworkIP* net;
 
     Application (size_t idx, NetworkIP net) {
         kv = new KVStore();
         idx_ = idx;
-        this.net = net;
+        this->net = net;
     }
 
     size_t this_node() {
         return idx_;
     }
 
-    virtual run_() {}
+    virtual void run_() {}
 };
