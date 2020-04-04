@@ -14,7 +14,7 @@ public:
     size_t idx_;
     NetworkIP* net;
 
-    Application (size_t idx, NetworkIP net) {
+    Application (size_t idx, NetworkIP* net) {
         kv = new KVStore();
         idx_ = idx;
         this->net = net;
