@@ -8,6 +8,25 @@
 #include "../key.h"
 #include "../kvstore.h"
 #include "../helper.h"
+#include <iostream>
+using namespace std;
+
+/***************************************************************************
+ *
+ **********************************************************author:jvitek */
+class Num : public Object {
+public:
+    size_t v = 0;
+    Num() {}
+    Num(size_t v) : v(v) {}
+};
+
+class SIMap : public Map {
+public:
+    SIMap () {}
+    Num* get(String& key) { return dynamic_cast<Num*>(get_(key)); }
+    void set(String& k, Num* v) { assert(v); Map::set(k, v); }
+}; // KVMap
 
 class Writer {
 public:
@@ -58,7 +77,7 @@ public:
     /** Creates the reader and opens the file for reading.  */
     FileReader() {
         file_ = fopen("../data/data2.sor", "r");
-        if (file_ == nullptr) FATAL_ERROR("Cannot open file " << arg.file);
+        if (file_ == nullptr) cout << "Cannot open file " << "../data/data2.sor"<< endl;
         buf_ = new char[BUFSIZE + 1]; //  null terminator
         fillBuffer_();
         skipWhitespace_();
@@ -295,22 +314,6 @@ public:
 };
 
 
-/***************************************************************************
- *
- **********************************************************author:jvitek */
-class Num : public Object {
-public:
-    size_t v = 0;
-    Num() {}
-    Num(size_t v) : v(v) {}
-};
-
-class SIMap : public Map {
-public:
-    SIMap () {}
-    Num* get(String& key) { return dynamic_cast<Num*>(get_(key)); }
-    void set(String& k, Num* v) { assert(v); Map::set(k, v); }
-}; // KVMap
 
 /****************************************************************************
  * Calculate a word count for given file:
