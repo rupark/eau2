@@ -8,6 +8,13 @@
 #include "../key.h"
 #include "../kvstore.h"
 
+class Writer {
+public:
+    Writer() {
+
+    }
+};
+
 class FileReader : public Writer {
 public:
     /** Reads next word and stores it in the row. Actually read the word.
