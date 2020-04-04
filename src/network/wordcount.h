@@ -7,10 +7,20 @@
 #include "../string.h"
 #include "../key.h"
 #include "../kvstore.h"
+#include "../helper.h"
 
 class Writer {
 public:
     Writer() {
+
+    }
+    virtual void visit(Row&) {}
+    virtual bool done() {}
+};
+
+class Reader {
+public:
+    Reader() {
 
     }
 };
@@ -20,7 +30,7 @@ public:
     /** Reads next word and stores it in the row. Actually read the word.
         While reading the word, we may have to re-fill the buffer  */
     void visit(Row & r) override {
-        ssert(i_ < end_);
+        assert(i_ < end_);
         assert(! isspace(buf_[i_]));
         size_t wStart = i_;
         while (true) {
@@ -35,7 +45,7 @@ public:
         }
         buf_[i_] = 0;
         String word(buf_ + wStart, i_ - wStart);
-        r.set(0, word);
+        r.set(0, &word);
         ++i_;
         skipWhitespace_();
     }
@@ -47,7 +57,7 @@ public:
 
     /** Creates the reader and opens the file for reading.  */
     FileReader() {
-        file_ = fopen(arg.file, "r");
+        file_ = fopen("../data/data2.sor", "r");
         if (file_ == nullptr) FATAL_ERROR("Cannot open file " << arg.file);
         buf_ = new char[BUFSIZE + 1]; //  null terminator
         fillBuffer_();
