@@ -1,7 +1,7 @@
 //
 // Created by kramt on 3/25/2020.
 //
-
+#pragma once
 #include "../kvstore.h"
 
 /**

@@ -1,3 +1,5 @@
+#pragma once 
+
 /**
  * Goal for M3: instance of Application class
  */

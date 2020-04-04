@@ -20,7 +20,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     NetworkIP* server = new NetworkIP();
-    server->server_init(0, 8080);
+    server->server_init(0, 8080, "127.0.0.4");
 
     String* exp_s0 = new String("127.0.0.1");
     String* exp_c1 = new String("127.0.0.2");

@@ -1,3 +1,4 @@
+#pragma once
 #include "../string.h"
 #include "../object.h"
 #include <stdio.h>
@@ -5,7 +6,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "../dataframe.h"
-#pragma once
 
 #include <iostream>
 using namespace std;
