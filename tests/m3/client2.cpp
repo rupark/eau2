@@ -21,7 +21,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     NetworkIP* client = new NetworkIP();
-    client->client_init(2, 8080, "127.0.0.1", 8080, "127.0.0.3");
+    client->client_init(2, 8080, "127.0.0.4", 8080, "127.0.0.6");
 
     String* exp_s0 = new String("127.0.0.1");
     String* exp_c1 = new String("127.0.0.2");
