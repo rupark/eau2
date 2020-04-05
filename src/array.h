@@ -102,7 +102,7 @@ public:
         return true;
     }
 
-    void erase(int idx) {
+    void erase_(int idx) {
         this->set(idx, nullptr);
     }
 
