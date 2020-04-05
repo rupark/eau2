@@ -12,11 +12,11 @@
 class Key : public Object {
 public:
         String* name;
-        size_t homeNode;
+        size_t home;
 
-        Key(char* name, size_t homeNode) {
+        Key(char* name, size_t home) {
             this->name = new String(name);
-            this->homeNode = homeNode;
+            this->home = home;
         }
 
         ~Key(){
@@ -30,7 +30,7 @@ public:
             if (other == this) return true;
             Key* x = dynamic_cast<Key *>(other);
             if (x == nullptr) return false;
-            return name->equals(x->name) && homeNode == x->homeNode;
+            return name->equals(x->name) && home == x->home;
         }
 
 };

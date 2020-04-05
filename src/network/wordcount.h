@@ -348,7 +348,7 @@ public:
     KeyBuff kbuf;
     SIMap all;
 
-    WordCount(size_t idx, NetworkIfc & net):
+    WordCount(size_t idx, NetworkIP & net):
             Application(idx, net), in("data"), kbuf(new Key("wc-map-",0)) { }
 
     /** The master nodes reads the input, then all of the nodes count. */
