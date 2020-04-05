@@ -51,7 +51,7 @@ public:
 
     //Client facing
     // Wait until we find the key (TIMEOUT?)
-    DataFrame* getAndWait(Key key) {
+    DataFrame* waitAndGet(Key key) {
         while (get(key) == nullptr) {
             //send a message requesting
             key.home;

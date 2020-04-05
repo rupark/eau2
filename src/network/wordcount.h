@@ -320,7 +320,9 @@ public:
     Key* orig_; // external
     StrBuff buf_;
 
-    KeyBuff(Key* orig) : orig_(orig), buf_(orig->name->cstr_) {}
+    KeyBuff(Key* orig) : orig_(orig), buf_() {
+        buf_.c(*orig->name);
+    }
 
     KeyBuff& c(String &s) { buf_.c(s); return *this;  }
     KeyBuff& c(size_t v) { buf_.c(v); return *this; }
@@ -365,26 +367,29 @@ public:
      *  which then joins them one by one. */
     Key* mk_key(size_t idx) {
         Key * k = kbuf.c(idx).get();
-        LOG("Created key " << k->c_str());
+        //LOG("Created key " << k->c_str());
+        cout << "Created key " << k->c_str() << endl;
         return k;
     }
 
     /** Compute word counts on the local node and build a data frame. */
     void local_count() {
         DataFrame* words = (kv.waitAndGet(in));
-        p("Node ").p(index).pln(": starting local count...");
+        //p("Node ").p(index).pln(": starting local count...");
+        cout << "Node " << this_node() << ": starting local count..." << endl;
         SIMap map;
         Adder add(map);
         words->local_map(add);
         delete words;
         Summer cnt(map);
-        delete DataFrame::fromVisitor(mk_key(index), &kv, "SI", cnt);
+        delete DataFrame::fromVisitor(mk_key(this_node()), &kv, "SI", cnt);
     }
 
     /** Merge the data frames of all nodes */
     void reduce() {
-        if (index != 0) return;
-        pln("Node 0: reducing counts...");
+        if (this_node() != 0) return;
+//        pln("Node 0: reducing counts...");
+        cout << "Node 0: reducing counts..." << endl;
         SIMap map;
         Key* own = mk_key(0);
         merge(kv.get(*own), map);
@@ -393,7 +398,9 @@ public:
             merge(kv.waitAndGet(*ok), map);
             delete ok;
         }
-        p("Different words: ").pln(map.size());
+//        p("Different words: ").pln(map.size());
+        cout << "Different words: " << map.size();
+
         delete own;
     }
 

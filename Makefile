@@ -1,5 +1,5 @@
 clean:
-	rm *.o client server client2
+	rm *.o client server client2 *.out
 
 run: build
 	./server && ./client && ./client2
@@ -21,3 +21,5 @@ client2.o:
 server.o:
 	g++ -std=c++11 -c tests/m3/server.cpp -o server.o
 
+buildWC:
+	g++ -std=c++11 src/network/wordcount.h

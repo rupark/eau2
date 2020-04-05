@@ -330,6 +330,30 @@ public:
         }
     }
 
+    /** Visits the rows in order on THIS node */
+    void local_map(Reader& r) {
+        for (size_t i = 0; i < this->nrows(); i++) {
+            Row* row = new Row(this->schema);
+            for (size_t j = 0; j < this->ncols(); j++) {
+                switch (row->col_type(j)) {
+                    case 'I':
+                        row->set(j, this->columns[j]->as_int()->get(i));
+                        break;
+                    case 'B':
+                        row->set(j, this->columns[j]->as_bool()->get(i));
+                        break;
+                    case 'S':
+                        row->set(j, this->columns[j]->as_string()->get(i));
+                        break;
+                    case 'F':
+                        row->set(j, this->columns[j]->as_float()->get(i));
+                        break;
+                }
+            }
+            r.visit(*row);
+        }
+    }
+
     /** Create a new dataframe, constructed from rows for which the given Rower
       * returned true from its accept method. */
     DataFrame* filter(Rower& r) {

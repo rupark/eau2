@@ -19,6 +19,12 @@ public:
             this->home = home;
         }
 
+        // If no homenode passed in, default 0.
+        Key (char* name) {
+            this->name = new String(name);
+            this->home = 0;
+        }
+
         ~Key(){
             delete name;
         }

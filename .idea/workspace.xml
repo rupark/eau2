@@ -10,8 +10,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/args.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/network/thread.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client2.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataframe.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataframe.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/key.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/key.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kvstore.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/kvstore.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/application.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/application.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/wordcount.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/wordcount.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/string.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/string.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +105,7 @@
       <workItem from="1585529833370" duration="8525000" />
       <workItem from="1585579726027" duration="4382000" />
       <workItem from="1586041857641" duration="4497000" />
+      <workItem from="1586124589852" duration="4543000" />
     </task>
     <task id="LOCAL-00048" summary="changes">
       <created>1585592312521</created>
@@ -466,6 +481,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="550" y="169" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1584977836701" />
+    <state x="279" y="57" key="SettingsEditor" timestamp="1586127415655">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="279" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586127415655" />
     <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1586046992183">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
