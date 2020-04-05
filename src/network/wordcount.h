@@ -329,7 +329,7 @@ public:
     Key* get() {
         String* s = buf_.get();
         buf_.c(orig_->c_str());
-        Key* k = new Key(s->steal(), orig_->home());
+        Key* k = new Key(s->steal(), orig_->home);
         delete s;
         return k;
     }
@@ -353,7 +353,7 @@ public:
 
     /** The master nodes reads the input, then all of the nodes count. */
     void run_() override {
-        if (index == 0) {
+        if (idx_ == 0) {
             FileReader fr;
             delete DataFrame::fromVisitor(&in, &kv, "S", fr);
         }

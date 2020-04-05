@@ -54,7 +54,7 @@ public:
     DataFrame* getAndWait(Key key) {
         while (get(key) == nullptr) {
             //send a message requesting
-            key.homeNode;
+            key.home;
             sleep(3);
         }
         this->get(key);
