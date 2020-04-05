@@ -12,7 +12,7 @@
 #include <iostream>
 using namespace std;
 
-/***************************************************************************
+/***********************************************x****************************
  *
  **********************************************************author:jvitek */
 class Num : public Object {
@@ -20,6 +20,15 @@ public:
     size_t v = 0;
     Num() {}
     Num(size_t v) : v(v) {}
+};
+
+
+class Reader {
+public:
+    Reader() {
+
+    }
+    virtual bool visit(Row&) {}
 };
 
 /**  Item_ are entries in a Map, they are not exposed, are immutable, own
@@ -155,13 +164,6 @@ public:
     virtual bool done() {}
 };
 
-class Reader {
-public:
-    Reader() {
-
-    }
-    virtual bool visit(Row&) {}
-};
 
 class FileReader : public Writer {
 public:
