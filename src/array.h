@@ -41,7 +41,7 @@ public:
     }
 
     // Returns the element at index
-    Object*  get(size_t index) {
+    Object*  get_(size_t index) {
         if (index >= 0 && index < size_) {
             if (arr_[index] == nullptr) {
                 exit(-1); // null pointer at spot
@@ -74,7 +74,7 @@ public:
     // Inserts all of elements in c into this list at i
     void add_all(size_t i, Array* c) {
         for (size_t j = 0; j < c->size(); j++) {
-            add(i+j,c->get(j));
+            add(i+j,c->get_(j));
         }
     }
 
@@ -95,11 +95,15 @@ public:
         // check for equality of elements
         for (size_t i = 0; i < size_; i++) {
             // if equality not found return false
-            if (!arr_[i]->equals(other->get(i))) {
+            if (!arr_[i]->equals(other->get_(i))) {
                 return false;
             }
         }
         return true;
+    }
+
+    void erase(int idx) {
+        this->set(idx, nullptr);
     }
 
     // Returns the index of the first occurrence of o, or -1 if not there
@@ -128,6 +132,10 @@ public:
         Object* returnVal = arr_[i];
         arr_[i] = e;
         return returnVal;
+    }
+
+    void put(int idx, Object* obj){
+        this->set(idx, obj);
     }
 
     // grows capacity by doubling

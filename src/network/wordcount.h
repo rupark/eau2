@@ -160,6 +160,7 @@ public:
     Reader() {
 
     }
+    virtual bool visit(Row&) {}
 };
 
 class FileReader : public Writer {
