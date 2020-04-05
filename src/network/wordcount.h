@@ -182,8 +182,8 @@ public:
             ++i_;
         }
         buf_[i_] = 0;
-        String word(buf_ + wStart, i_ - wStart);
-        r.set(0, word*);
+        String* word = new String(buf_ + wStart, i_ - wStart);
+        r.set(0, word);
         ++i_;
         skipWhitespace_();
     }
@@ -295,9 +295,9 @@ public:
 
     void visit(Row& r) {
         if (!k()) next();
-        String & key = *k();
+        String* key = k();
         size_t value = v();
-        r.set(0, key*);
+        r.set(0, key);
         r.set(1, (int) value);
         next();
     }
