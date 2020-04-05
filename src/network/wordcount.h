@@ -320,7 +320,7 @@ public:
     Key* orig_; // external
     StrBuff buf_;
 
-    KeyBuff(Key* orig) : orig_(orig), buf_(orig->name->cstr_) {}
+    KeyBuff(Key* orig) : orig_(orig), buf_(*orig->name->cstr_) {}
 
     KeyBuff& c(String &s) { buf_.c(s); return *this;  }
     KeyBuff& c(size_t v) { buf_.c(v); return *this; }
