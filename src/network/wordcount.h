@@ -8,6 +8,7 @@
 #include "../key.h"
 #include "../kvstore.h"
 #include "../helper.h"
+#include "../array.h"
 #include <iostream>
 using namespace std;
 
