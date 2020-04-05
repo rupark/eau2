@@ -21,9 +21,9 @@ public:
     size_t hash_;
     size_t capacity_; // amount of memory allocated
 
-    Array () {
+    Array (int capacity) {
         size_ = 0;
-        capacity_ = 2;
+        capacity_ = capacity;
         arr_ = new Object*[capacity_];
         hash_ = hash_me();
     }
@@ -63,7 +63,7 @@ public:
     size_t hash() {
         size_t hash_calc = 0;
         for (size_t i = 0; i < size_; i++) {
-            hash_calc = hash_calc + arr_[i]->get_hash();
+            hash_calc = hash_calc + arr_[i]->hash();
         }
 //            if (hash_ == 0) {
 //                hash_ = hash_me(); // use Object class to calculate hash
@@ -176,7 +176,7 @@ public:
         if (size_ >= capacity_) {
             grow();
             std::cout << "Growing Array: Capacity New - " << capacity_ << endl;
-            print_list();
+            //print_list();
         }
 
         Object** temp = new Object*[capacity_];
@@ -235,11 +235,7 @@ public:
         return returnVal;
     }
 
-    void print_list() {
-        for (size_t i = 0; i < size_; i++) {
-            arr_[i]->print();
-        }
-    }
+
 
 
 };
