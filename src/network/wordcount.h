@@ -315,7 +315,25 @@ public:
     }
 };
 
+class KeyBuff : public Object {
+public:
+    Key* orig_; // external
+    StrBuff buf_;
 
+    KeyBuff(Key* orig) : orig_(orig), buf_(*orig) {}
+
+    KeyBuff& c(String &s) { buf_.c(s); return *this;  }
+    KeyBuff& c(size_t v) { buf_.c(v); return *this; }
+    KeyBuff& c(const char* v) { buf_.c(v); return *this; }
+
+    Key* get() {
+        String* s = buf_.get();
+        buf_.c(orig_->c_str());
+        Key* k = new Key(s->steal(), orig_->home());
+        delete s;
+        return k;
+    }
+}; // KeyBuff
 
 /****************************************************************************
  * Calculate a word count for given file:
