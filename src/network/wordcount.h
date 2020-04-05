@@ -183,7 +183,7 @@ public:
         }
         buf_[i_] = 0;
         String word(buf_ + wStart, i_ - wStart);
-        r.set(0, word);
+        r.set(0, word*);
         ++i_;
         skipWhitespace_();
     }
