@@ -11,7 +11,7 @@ public:
     bool pseudo = false;
     size_t num_nodes = 0;
     size_t rows_per_chunk = 10*1000; // how many rows per chunk
-    size_t index = 0;
+    size_t index = 0; //which node is this
     size_t port = 0;
     char* master_ip;
     size_t master_port;
