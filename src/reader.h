@@ -25,7 +25,8 @@ public:
 
     /** Reads from the given Row and adds elements to map **/
     bool visit(Row &r) override {
-        r.printRow();
+        // Good Debug Below.
+        //r.printRow();
         String *word = r.get_string(0);
         assert(word != nullptr);
         Num *num = map_.contains(*word) ? map_.get(*word) : new Num();

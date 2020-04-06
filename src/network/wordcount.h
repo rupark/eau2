@@ -170,13 +170,12 @@ public:
             merge(kv.waitAndGet(*ok), map);
             delete ok;
         }
-        cout << "Different words: " << map.size() << endl;
-
-        map.items_->vals_.print();
+        //cout << "Different words: " << map.size() << endl;
 
         //delete own;
     }
 
+    /** Adds map values into dataframe */
     void merge(DataFrame *df, SIMap &m) {
         Adder add(m);
         df->map(add);
