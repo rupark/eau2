@@ -457,7 +457,7 @@ public:
     /**
      * Contructs a DataFrame from the given args
      */
-    static DataFrame* fromVisitor(Key* key, KVStore* kv, char* schema, Writer w) {
+    static DataFrame* fromVisitor(Key* key, KVStore* kv, char* schema, Summer w) {
         cout <<"making df"<<endl;
         DataFrame* df = new DataFrame(*new Schema(schema));
         while (!w.done()) {
