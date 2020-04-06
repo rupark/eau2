@@ -234,7 +234,7 @@ public:
 
     KeyBuff(Key* orig) {
         orig_ = new Key(orig);
-        buf_ = *new StrBuff(orig->c_str());
+        buf_ = *new StrBuff();
     }
 
     KeyBuff& c(String &s) { buf_.c(s); return *this;  }
