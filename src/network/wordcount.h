@@ -138,6 +138,7 @@ public:
         SIMap map;
         kbuf = new Key("wc-map-",0);
         Key* own = mk_key(0);
+        cout << own->name << endl;
         merge(kv.get(*own), map);
         for (size_t i = 1; i < arg.num_nodes; ++i) { // merge other nodes
             Key* ok = mk_key(i);
