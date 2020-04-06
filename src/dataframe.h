@@ -287,7 +287,7 @@ public:
                 case 'B':
                     cout << "bool" << endl;
                     columns[i]->push_back(row.get_bool(i));
-                    break''
+                    break;
                 case 'I':
                     cout << "int" << endl;
                     columns[i]->push_back(row.get_int(i));
