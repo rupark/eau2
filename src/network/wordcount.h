@@ -133,11 +133,11 @@ public:
             merge(kv.waitAndGet(*ok), map);
             delete ok;
         }
-        cout << "Different words: " << map.size() << "!!" << endl;
+//        cout << "Different words: " << map.size() << "!!" << endl;
 
         //cout << own->name->cstr_ << endl;
 
-        cout << kv.size << endl;
+        //cout << kv.size << endl;
 
         //kv.get(*own)->print();
 
