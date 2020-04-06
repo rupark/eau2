@@ -129,8 +129,8 @@ public:
     }
 
     String* k() {
-        cout << "keys size: " << map_.items_[i].keys_.capacity_ << endl;
-        if (i==map_.capacity_ || j == map_.items_[i].keys_.capacity_) return nullptr;
+        cout << "keys size: " << map_.items_[i].keys_.size() << endl;
+        if (i==map_.capacity_ || j == map_.items_[i].keys_.size()) return nullptr;
         return (String*) (map_.items_[i].keys_.get_(j));
     }
 
