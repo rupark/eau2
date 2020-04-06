@@ -10,6 +10,7 @@
 #include "serial.h"
 #include "../string.h"
 #include <iostream>
+#include "../args.h"
 using namespace std;
 
 /**
@@ -90,6 +91,11 @@ public:
        }
 
    }
+
+//    void server_init(unsigned idx, unsigned port) {
+//       server_init(idx,port,arg.master_ip)
+//   }
+
 
    /** Intializes a client node */
    void client_init(unsigned idx, unsigned port, char* server_adr,

@@ -22,4 +22,5 @@ server.o:
 	g++ -std=c++11 -c tests/m3/server.cpp -o server.o
 
 buildWC:
-	g++ -std=c++11 src/network/wordcount.h
+	g++ -std=c++11 -c tests/m4/main.cpp -o main.o
+	g++ -std=c++11 src/network/wordcount.h main.o -o wordcount

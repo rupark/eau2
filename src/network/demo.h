@@ -1,13 +1,19 @@
 #pragma once 
 
+#include "../key.h"
+#include "application.h"
+#include "../dataframe.h"
+#include "../kvstore.h"
+
+
 /**
  * Goal for M3: instance of Application class
  */
 class Demo : public Application {
 public:
-    Key main("main",0);
-    Key verify("verif",0);
-    Key check("ck",0);
+    Key main = *new Key("main",0);
+    Key verify = *new Key("verif",0);
+    Key check = *new Key("ck",0);
 
     Demo(size_t idx): Application(idx) {}
 

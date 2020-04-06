@@ -355,6 +355,10 @@ public:
         }
     }
 
+    void map(Reader& r) {
+        local_map(r);
+    }
+
     /** Create a new dataframe, constructed from rows for which the given Rower
       * returned true from its accept method. */
     DataFrame* filter(Rower& r) {
@@ -429,6 +433,7 @@ public:
             w.visit(*r);
             df->add_row(*r);
         }
+        kv->put(key, df);
         return df;
     }
 

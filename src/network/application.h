@@ -20,6 +20,12 @@ public:
         this->net = net;
     }
 
+    Application (size_t idx) {
+        kv = *new KVStore();
+        this->idx_ = idx;
+
+    }
+
     size_t this_node() {
         return idx_;
     }

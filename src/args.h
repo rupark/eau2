@@ -2,6 +2,7 @@
 #include "object.h"
 #include <string>
 #include <iostream>
+#include <assert.h>
 using namespace std;
 
 class Args : public Object {
