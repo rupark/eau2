@@ -404,6 +404,9 @@ public:
 
     /** Print the dataframe in SoR format to standard output. */
     void print() {
+        cout << "in print" << endl;
+        cout << this->nrow << endl;
+        cout << this->ncol << endl;
         for (size_t i = 0; i < nrow; i++) {
             for (size_t j = 0; j < ncol; j++) {
                 cout << columns[j]->get_type() << endl;
