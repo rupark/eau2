@@ -406,7 +406,7 @@ public:
     void print() {
         for (size_t i = 0; i < nrow; i++) {
             for (size_t j = 0; j < ncol; j++) {
-                switch (columns[i]->get_type()) {
+                switch (columns[j]->get_type()) {
                     case 'F':
                         cout << "<" << columns[j]->as_float()->get(i) << ">";
                         break;
