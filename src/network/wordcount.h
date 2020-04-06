@@ -136,7 +136,7 @@ public:
 //        pln("Node 0: reducing counts...");
         cout << "Node 0: reducing counts..." << endl;
         SIMap map;
-        kbuf(new Key("wc-map-",0));
+        kbuf = new Key("wc-map-",0);
         Key* own = mk_key(0);
         merge(kv.get(*own), map);
         for (size_t i = 1; i < arg.num_nodes; ++i) { // merge other nodes
