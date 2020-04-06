@@ -9,8 +9,11 @@
 #include "../kvstore.h"
 #include "../helper.h"
 #include "../array.h"
+#include "../args.h"
 #include <iostream>
 using namespace std;
+
+Args arg;
 
 /***********************************************x****************************
  *
@@ -146,15 +149,6 @@ public:
     void set(String& k, Num* v) { assert(v); Map::set(k, v); }
 }; // KVMap
 
-class Writer {
-public:
-    Writer() {
-
-    }
-    virtual void visit(Row&) {}
-    virtual bool done() {}
-};
-
 
 class FileReader : public Writer {
 public:
@@ -188,8 +182,8 @@ public:
 
     /** Creates the reader and opens the file for reading.  */
     FileReader() {
-        file_ = fopen("../data/data2.sor", "r");
-        if (file_ == nullptr) cout << "Cannot open file " << "../data/data2.sor"<< endl;
+        file_ = fopen(arg.file, "r");
+        if (file_ == nullptr) cout << "Cannot open file " << arg.file << endl;
         buf_ = new char[BUFSIZE + 1]; //  null terminator
         fillBuffer_();
         skipWhitespace_();

@@ -24,6 +24,7 @@
 #include "kvstore.h"
 #include "reader.h"
 #include "column_prov.h"
+#include "writer.h"
 
 using namespace std;
 
@@ -419,6 +420,19 @@ public:
     }
 
     /**
+     * Contructs a DataFrame from the given args
+     */
+    static DataFrame* fromVisitor(Key* key, KVStore* kv, char* schema, Writer w) {
+        DataFrame* df = new DataFrame(*new Schema(schema));
+        while (!w.done()) {
+            Row* r = new Row;
+            w.visit(*r);
+            df->add_row(*);
+        }
+        return df;
+    }
+
+    /**
      * Returns the double at the given column and row in this DataFrame
      */
     float get_double(int col, int row) {
@@ -434,5 +448,7 @@ public:
         kv->put(key, df);
         return df;
     }
+
+
 
 };
