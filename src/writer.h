@@ -142,7 +142,7 @@ public:
 
     void visit(Row& r) override {
         cout << "visiting" <<endl;
-        cout << k() <<endl;
+        cout << k()->c_str() <<endl;
         if (!k()) next();
         String* key = k();
         size_t value = v();
