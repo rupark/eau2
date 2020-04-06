@@ -155,6 +155,8 @@ public:
     /** Reads next word and stores it in the row. Actually read the word.
         While reading the word, we may have to re-fill the buffer  */
     void visit(Row & r) override {
+        cout << "I:" << this->i_ << endl;
+        cout << "end:" << this->end_ << endl;
         assert(i_ < end_);
         assert(! isspace(buf_[i_]));
         size_t wStart = i_;
@@ -169,7 +171,9 @@ public:
             ++i_;
         }
         buf_[i_] = 0;
+        cout << "finished loop" << endl;
         String* word = new String(buf_ + wStart, i_ - wStart);
+        cout <<word->cstr_ << endl;
         r.set(0, word);
         ++i_;
         skipWhitespace_();
