@@ -279,14 +279,23 @@ public:
 
         cout << ncol << endl;
         for (size_t i = 0; i < ncol; i++) {
-            if (dynamic_cast<IntColumn*>(columns[i])) {
-                columns[i]->push_back(row.get_int(i));
-            } else if (dynamic_cast<BoolColumn*>(columns[i])) {
-                columns[i]->push_back(row.get_bool(i));
-            } else if (dynamic_cast<StringColumn*>(columns[i])) {
-                columns[i]->push_back(row.get_string(i));
-            } else {
-                columns[i]->push_back(row.get_float(i));
+            switch (columns[i]->get_type()) {
+                case 'F':
+                    cout << "float" << endl;
+                    columns[i]->push_back(row.get_float(i));
+                    break;
+                case 'B':
+                    cout << "bool" << endl;
+                    columns[i]->push_back(row.get_bool(i));
+                    break''
+                case 'I':
+                    cout << "int" << endl;
+                    columns[i]->push_back(row.get_int(i));
+                    break;
+                case 'S':
+                    cout << "str" << endl;
+                    columns[i]->push_back(row.get_string(i));
+                    break;
             }
         }
 

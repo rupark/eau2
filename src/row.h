@@ -122,7 +122,9 @@ public:
     }
 
     String* get_string(size_t col) {
+        cout << "in get" << endl;
         String* v = dynamic_cast<String*>(elements[col]);
+        cout << "cast" << endl;
         return v;
     }
 
