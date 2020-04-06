@@ -7,6 +7,7 @@
 
 #endif //MILESTONE1_WRITER_H
 
+#pragma once
 #include "row.h"
 #include "args.h"
 
