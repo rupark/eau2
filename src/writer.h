@@ -129,13 +129,13 @@ public:
     }
 
     String* k() {
-        cout << "keys size: " << map_.items_[i].keys_.capacity_() << endl;
-        if (i==map_.capacity_ || j == map_.items_[i].keys_.capacity_()) return nullptr;
+        cout << "keys size: " << map_.items_[i].keys_.capacity_ << endl;
+        if (i==map_.capacity_ || j == map_.items_[i].keys_.capacity_) return nullptr;
         return (String*) (map_.items_[i].keys_.get_(j));
     }
 
     size_t v() {
-        if (i == map_.capacity_ || j == map_.items_[i].keys_.capacity_()) {
+        if (i == map_.capacity_ || j == map_.items_[i].keys_.capacity_) {
             assert(false); return 0;
         }
         return ((Num*)(map_.items_[i].vals_.get_(j)))->v;
