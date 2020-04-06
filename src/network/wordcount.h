@@ -135,7 +135,9 @@ public:
         }
         cout << "Different words: " << map.size() << "!!" << endl;
 
-        cout << own->name->cstr_ << endl;
+        //cout << own->name->cstr_ << endl;
+
+        cout << kv.size << endl;
 
         kv.get(*own)->print();
 
