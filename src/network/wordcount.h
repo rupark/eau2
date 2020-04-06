@@ -141,7 +141,7 @@ public:
 
         //kv.get(*own)->print();
 
-        //map.items_->vals_.print();
+        map.items_->vals_.print();
 
 //        cout << map.contains(*new String("welcome"));
 //        cout << map.contains(*new String("to"));
