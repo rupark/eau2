@@ -135,7 +135,14 @@ public:
         }
         cout << "Different words: " << map.size() << "!!" << endl;
 
+        cout << own->name->cstr_ << endl;
+
         kv.get(*own)->print();
+
+//        for (int i =0; i < map.size(); i++) {
+//            cout << map.items_->vals_[i];
+//            cout << map.items_->vals_[i];
+//        }
 
         cout << "done printing" << endl;
         //delete own;

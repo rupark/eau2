@@ -21,7 +21,8 @@ NetworkIP * initialize() {
     if (arg.index == 0) {
         res->server_init(arg.index, arg.port, arg.master_ip);
 
-//        //Constructing DataFrame from file
+// TODO: Incorporate SoR parser??
+//        Constructing DataFrame from file
 //        FILE* file = fopen(arg.file, "r");
 //        size_t file_size = ftell(file);
 //
