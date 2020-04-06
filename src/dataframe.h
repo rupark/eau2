@@ -292,6 +292,7 @@ public:
                     break;
                 case 'I':
                     cout << "int" << endl;
+                    cout <<i << endl;
                     columns[i]->push_back(row.get_int(i));
                     break;
                 case 'S':
