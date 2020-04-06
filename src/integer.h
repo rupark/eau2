@@ -2,6 +2,8 @@
 #pragma once
 #include <stdio.h>
 #include "object.h"
+#include <iostream>
+using namespace std;
 
 /** Base Integer wrapper class. Represents the basis for all Integers. */
 class Integer : public Object {

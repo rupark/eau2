@@ -2,6 +2,8 @@
 #pragma once
 #include <stdio.h>
 #include "object.h"
+#include <iostream>
+using namespace std;
 
 /* Base Bool wrapper class. Represents the basis for all Bools. */
 class Bool : public Object {

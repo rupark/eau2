@@ -4,6 +4,8 @@
 #include <string>
 #include <cassert>
 #include "object.h"
+#include <iostream>
+using namespace std;
 
 /** An immutable string class that wraps a character array.
  * The character array is zero terminated. The size() of the
