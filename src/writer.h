@@ -135,7 +135,7 @@ public:
     }
 
     size_t v() {
-        if (i == map_.capacity_ || j == map_.items_[i].keys_.capacity_) {
+        if (i == map_.capacity_ || j == map_.items_[i].keys_.size()) {
             assert(false); return 0;
         }
         return ((Num*)(map_.items_[i].vals_.get_(j)))->v;
