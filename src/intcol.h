@@ -95,6 +95,7 @@ public:
      * Adds the given int to this if it is a IntColumn
      */
     virtual void push_back(int val) {
+        cout << "in push_back"<<endl;
         this->vals_[size_] = new Integer(val);
         size_++;
     }
