@@ -61,14 +61,6 @@ public:
         } else {
             cout << "ERROR: NOT WORKING WAIT AND GET NETWORK" << endl;
         }
-
-//        cout << "wait and get" << endl;
-//        while (get(key) == nullptr) {
-//            //send a message requesting
-//            key.home;
-//            sleep(3);
-//        }
-//        this->get(key);
     }
 
 };

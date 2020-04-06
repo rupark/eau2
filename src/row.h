@@ -105,9 +105,7 @@ public:
     /** Getters: get the value at the given column. If the column is not
       * of the requested type, the result is undefined. */
     int get_int(size_t col) {
-        cout << "in get" << endl;
         Integer *v = dynamic_cast<Integer *>(elements[col]);
-        cout << "cast" << endl;
         return v->val;
     }
 

@@ -146,7 +146,7 @@ public:
 
     /** Compute word counts on the local node and build a data frame. */
     void local_count() {
-//        DataFrame* words = kv.waitAndGet(in);
+//      DataFrame* words = kv.waitAndGet(in);
         DataFrame *words = kv.get(in);
         cout << "Node " << this_node() << ": starting local count..." << endl;
         SIMap map;
