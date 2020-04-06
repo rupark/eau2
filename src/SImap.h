@@ -138,10 +138,7 @@ public:
 
 class SIMap : public Map {
 public:
-    SIMap () {
-        capacity_ = 10;
-        items_ = new Items_[10];
-    }
+    SIMap () : Map() {}
     Num* get(String& key) { return dynamic_cast<Num*>(get_(key)); }
     void set(String& k, Num* v) { assert(v); Map::set(k, v); }
 }; // KVMap
