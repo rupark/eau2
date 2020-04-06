@@ -129,6 +129,7 @@ public:
     }
 
     String* k() {
+        cout << "keys size: " << map_.items_[i].keys_.size() << endl;
         if (i==map_.capacity_ || j == map_.items_[i].keys_.size()) return nullptr;
         return (String*) (map_.items_[i].keys_.get_(j));
     }
@@ -142,7 +143,7 @@ public:
 
     void visit(Row& r) override {
         cout << "visiting" <<endl;
-        cout << k()->c_str() <<endl;
+        //cout << k()->c_str() <<endl;
         if (!k()) next();
         String* key = k();
         size_t value = v();
