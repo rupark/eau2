@@ -135,6 +135,9 @@ public:
     }
 
     void merge(DataFrame* df, SIMap& m) {
+        cout << df->ncol << endl;
+        cout << df->columns[0]->as_string()->get(0)->cstr_ << endl;
+        cout << df->columns[0]->as_string()->get(1)->cstr_ << endl;
         cout <<"in merge" << endl;
         cout << df->nrow << endl;
         Adder add(m);
