@@ -429,7 +429,7 @@ public:
     static DataFrame* fromVisitor(Key* key, KVStore* kv, char* schema, Writer w) {
         DataFrame* df = new DataFrame(*new Schema(schema));
         int i = 0;
-        while (i < 4) {
+        while (i < 3) {
             cout << "building row" << endl;
             Row* r = new Row(*new Schema(schema));
             w.visit(*r);
