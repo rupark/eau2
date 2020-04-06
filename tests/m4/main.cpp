@@ -67,7 +67,9 @@ NetworkIP * initialize() {
 
 Application* pick(size_t i, NetworkIP& net) {
 //    if (strcmp(arg.app, "demo") == 0) return new Demo(i, net);
-    if (strcmp(arg.app, "wc") == 0) return new WordCount(i, net);
+//cout << e
+//    if (strcmp(arg.app, "wc") == 0)
+    return new WordCount(i, net);
 }
 
 int main (int argc, char* argv[]) {
@@ -77,6 +79,7 @@ int main (int argc, char* argv[]) {
     assert(arg.num_nodes != 0 && "cannot have empty cloud");
     try{
         Application* app = pick(network->index(), *network);
+        cout << "app set" << endl;
         app->run_();
 //        app->startKVStore();
 //        app->start();

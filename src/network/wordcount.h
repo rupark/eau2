@@ -343,6 +343,7 @@ public:
     /** The master nodes reads the input, then all of the nodes count. */
     void run_() override {
         if (idx_ == 0) {
+            cout << "In server run" << endl;
             FileReader fr;
             delete DataFrame::fromVisitor(&in, &kv, "S", fr);
         }
