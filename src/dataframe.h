@@ -277,6 +277,8 @@ public:
         this->nrow++;
         //nrow++;
 
+        cout <<row.size<< endl;
+
         cout << ncol << endl;
         for (size_t i = 0; i < ncol; i++) {
             switch (columns[i]->get_type()) {
