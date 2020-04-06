@@ -139,12 +139,12 @@ public:
 
         cout << kv.size << endl;
 
-        kv.get(*own)->print();
+        //kv.get(*own)->print();
 
-//        for (int i =0; i < map.size(); i++) {
-//            cout << map.items_->vals_[i];
-//            cout << map.items_->vals_[i];
-//        }
+        for (int i =0; i < map.size(); i++) {
+            cout << map.items_->vals_.print();
+            cout << map.items_->vals_.print();
+        }
 
         cout << "done printing" << endl;
         //delete own;

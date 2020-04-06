@@ -128,4 +128,6 @@ public:
         val_ = nullptr; // val_ was consumed above
         return res;
     }
+
+    void print() override { cout << this->c_str() << endl; }
 };

@@ -65,4 +65,6 @@ public:
     virtual size_t hash() {
         return val;
     }
+
+    void print() override { cout << this->val << endl; }
 };

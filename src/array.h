@@ -244,6 +244,11 @@ public:
     }
 
 
+    void print() override {
+        for (int i = 0; i < this->size(); ++i) {
+            arr_[i]->print();
+        }
+    }
 
 
 };
