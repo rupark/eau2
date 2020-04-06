@@ -7,21 +7,31 @@
 #include "../../src/network/thread.h"
 #include "../../src/network/application.h"
 #include "../../src/network/wordcount.h"
-//#include "../../src/network/demo.h"
 #include <iostream>
 #include <stdio.h>
+#include "../../src/parser.h"
+#include "../../src/dataframe.h"
 
 using namespace std;
 
 //Args arg;
 
-//TODO ?????
-//Data* Data::
-
 NetworkIP * initialize() {
     NetworkIP* res = new NetworkIP();
     if (arg.index == 0) {
-        res->server_init(arg.index, arg.port, arg.master_ip)
+        res->server_init(arg.index, arg.port, arg.master_ip);
+
+//        //Constructing DataFrame from file
+//        FILE* file = fopen(arg.file, "r");
+//        size_t file_size = ftell(file);
+//
+//        SorParser parser{arg.file, 0, file_size, file_size};
+//        parser.guessSchema();
+//        parser.parseFile();
+//        DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
+
+
+
         //we are going to pass a filewriter pointing to arg.file into fromVisitor method-> dataFrame
         //break up into i rows into frames and send them to the nodes
         //nodes are listening
@@ -33,6 +43,7 @@ NetworkIP * initialize() {
         client_adr->c("127.0.0.");
         client_adr->c(arg.index+1);
         res->client_init(arg.index, arg.port, arg.master_ip, arg.master_port, client_adr->get()->c_str());
+
         //call a listening for data method
         //recieve our chunks
         //local_map -> DataFrame
@@ -61,10 +72,12 @@ Application* pick(size_t i, NetworkIP& net) {
 
 int main (int argc, char* argv[]) {
     arg.parse(argc,argv);
+
     NetworkIP* network = initialize();
     assert(arg.num_nodes != 0 && "cannot have empty cloud");
     try{
         Application* app = pick(network->index(), *network);
+        app->run_();
 //        app->startKVStore();
 //        app->start();
     } catch (std::exception const & e) {
