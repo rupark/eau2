@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <cstdlib>
 
+
 using namespace std;
 
 class DataFrame;
@@ -31,6 +32,7 @@ public:
      * Adds the given Key and DataFrame to this KVStore
      */
     void put(Key* key, DataFrame* df) {
+        cout << "put" << endl;
         this->keys[size] = key;
         this->dfs[size] = df;
         size++;

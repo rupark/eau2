@@ -434,6 +434,7 @@ public:
             w.visit(*r);
             df->add_row(*r);
         }
+        cout << "done building" << endl;
         kv->put(key, df);
         cout << "from visited" << endl;
         return df;
