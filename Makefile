@@ -26,4 +26,4 @@ buildWC:
 	g++ -std=c++11 src/network/wordcount.h main.o -o wordcount
 
 runWCserver:
-    ./wordcount -index 0 -file data/WCData.txt -node 1 -port 8080 -masterip "127.0.0.1" -app "wc"
+	./wordcount -index 0 -file data/WCData.txt -node 1 -port 8080 -masterip "127.0.0.1" -app "wc"
