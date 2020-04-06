@@ -456,7 +456,7 @@ public:
         DataFrame *df = new DataFrame(*new Schema(schema));
         while (!w.done()) {
             Row *r = new Row(*new Schema(schema));
-            w.visit(*r)
+            w.visit(*r);
             df->add_row(*r);
         }
         kv->put(key, df);
