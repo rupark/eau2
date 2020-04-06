@@ -178,7 +178,7 @@ public:
     /** Returns true when there are no more words to read.  There is nothing
        more to read if we are at the end of the buffer and the file has
        all been read.     */
-    bool done() { return (i_ >= end_) && feof(file_);  }
+    bool done() { return (i_ >= end_) || feof(file_);  }
 
     /** Creates the reader and opens the file for reading.  */
     FileReader() {

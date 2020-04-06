@@ -429,14 +429,11 @@ public:
     static DataFrame* fromVisitor(Key* key, KVStore* kv, char* schema, Writer w) {
         cout <<"making df"<<endl;
         DataFrame* df = new DataFrame(*new Schema(schema));
-        cout <<"done making df"<<endl;
-        int i = 0;
-        while (i < 3) {
+        while (!w.done()) {
             cout << "building row" << endl;
             Row* r = new Row(*new Schema(schema));
             w.visit(*r);
             df->add_row(*r);
-            i++;
         }
         cout << "done building" << endl;
         kv->put(key, df);
