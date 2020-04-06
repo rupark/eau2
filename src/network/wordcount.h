@@ -152,6 +152,8 @@ public:
     }
 
     void merge(DataFrame* df, SIMap& m) {
+        cout <<"in merge" << endl;
+        cout << df->nrow << endl;
         Adder add(m);
         df->map(add);
         delete df;
