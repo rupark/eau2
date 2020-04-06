@@ -293,7 +293,6 @@ public:
                 case 'I':
                     cout << "int" << endl;
                     cout <<i << endl;
-
                     this->columns[i]->push_back(row.get_int(i));
                     cout << "pushed" << endl;
                     break;
@@ -303,8 +302,9 @@ public:
                     break;
             }
         }
+        cout << columns[0]->as_string()->get(nrow) << endl;
+        cout << columns[1]->as_int()->get(nrow) << endl;
         cout <<"done pushing" <<endl;
-
     }
 
     /** The number of rows in the dataframe. */
