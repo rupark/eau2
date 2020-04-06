@@ -20,6 +20,14 @@ of already being written in CwC which ours was not. Team 4500NE had their own de
 column_prov.h. In our application, we use their sorer to parse a given SoR file into their definition of Column. We then translate
 those columns into our definition of DataFrame. By executing the program in this way, we preserve the sanctity of Team 4500NE's
 code, and do not have to retest their already tested functionality.  
+### Application ###
+The Application class is an interface which can be extended by the different applications. An
+application essentially is the desired program the user wants to execute. For example,
+WordCount is one such Application. The Application class contains a KVStore, an index which
+is the index of the node the Application is being run on, and a NetworkIP which communicates
+with the other nodes. An Application is run on every node. The Application's run method
+produces the desired functionality. In our design, the run method also is used for interacting with
+other nodes to send and receive DataFrames.
 ### KVStore
 The KVStore class found in kvstore.h represents a Key Value Store. KVStore contains an array of Key* and DataFrame*, as well as a size. 
 The KVStore contains three methods: get, put, and getAndWait. get takes in a Key and returns the DataFrame associated with that Key in the store.
@@ -44,6 +52,8 @@ Register which a client sends to a server upon coming online, and Directory whic
 Message. server_init sets up a NetworkIP to act as a server, which means it sends waits to receive Register Messages from
 every client and then send them all Directory Messages. client_init sets up a NetworkIP to act as a client, which means it
 sends the server a Register method and waits to receive a Directory Message in response. 
+### Readers and Writers ###
+Readers are used to read DataFrames. Writers are used to construct/modify DataFrames. 
 ## Use cases ##
 ```
 //Creating a new KVStore
@@ -63,6 +73,14 @@ Key key("triv",0);
 DataFrame* df = DataFrame::fromArray(&key, &kv, SZ, vals);
 //Checking to see if the DataFrame was set with the correct values from vals
 assert(df->get_double(0,1) == 1);
+//The fromVisitor is the same idea but takes in a Writer instead of doubles
+
+//A String-Integer Map
+SIMap map;
+//A Reader
+Adder add(map);
+// Visits the rows in the DataFrame and adds them to the Reader's Map
+df->local_map(add);
 
 //Retrieving the DataFrame associated with key from the KVStore
 DataFrame* df2 = kv.get(key);
@@ -78,11 +96,17 @@ client->client_init(1, 8080, "127.0.0.1", 8080, "127.0.0.2");
 //Initializing a server on port 8080 with an index of 0 (since it is the server)
 NetworkIP* server = new NetworkIP();
 server->server_init(0, 8080);
+
+//Creating a WordCount Application on a server (index of servers is 0)
+WordCount* wc = new WordCount(0, server);
+//Calling WordCount's run method which executes its functionality
+wc.run();
 ```
 ## Open questions ##
-* What is the objective of getAndWait (what are we waiting for)?
-* Why is delete not working in Milestone 2?
-* How do we incorporate NetworkIP into KVStore?
+* Should NetworkIP be in Application or KVStore?
+* Is the main flow of this program that each node receives chunks of Data which
+perform an operation on the chunk and return a DataFrame? Where does that DataFrame go?
+* How are Key names formatted/created?
 ## Status ##
 | Milestone Number | Status  | Objective  |
 |:---:|:---:|:---|
