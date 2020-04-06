@@ -147,8 +147,8 @@ public:
         cout << map.contains(*new String("to"));
         cout << map.contains(*new String("the")) << endl;
 
-        cout << map.get(*new String("welcome"));
-        cout << map.get(*new String("the")) << endl;
+        cout << map.get(*new String("welcome"))->v;
+        cout << map.get(*new String("the"))->v << endl;
         //cout << map.contains("welcome");
 
         cout << "done printing" << endl;
