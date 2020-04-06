@@ -7,7 +7,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <cstdlib>
-
+#include "dataframe.h"
 
 using namespace std;
 
@@ -48,6 +48,7 @@ public:
         for (int i = 0; i < size; i++) {
             if (key.equals(keys[i])) {
                 cout << "key found: " << i << endl;
+                cout << dfs[i]->ncol << endl;
                 if (dfs[i] != nullptr) {
                     return dfs[i];
                 } else {
