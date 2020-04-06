@@ -45,9 +45,9 @@ public:
     DataFrame* get(Key key) {
         cout << "size: " << size << endl;
         for (int i = 0; i < size; i++) {
-            cout << keys[i]->name->cstr_ << endl;
-            if (key.equals(this->keys[i])) {
+            if (key.equals(keys[i])) {
                 cout << "key found: " << i << endl;
+                cout << dfs[i]->ncol << endl;
                 if (dfs[i] != nullptr) {
                     return dfs[i];
                 } else {
