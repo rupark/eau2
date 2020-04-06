@@ -25,6 +25,7 @@
 #include "reader.h"
 #include "column_prov.h"
 #include "writer.h"
+#include "reader.h"
 
 using namespace std;
 
