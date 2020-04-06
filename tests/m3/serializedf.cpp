@@ -38,19 +38,15 @@ int main(int argc, char* argv[]) {
         for (int j = 0; j < s2->msg_->columns[i]->size(); j++) {
             switch (s2->msg_->columns[i]->get_type()) {
                 case 'F':
-                    cout << "f" << endl;
                     cout << *s2->msg_->columns[i]->as_float()->get(j);
                     break;
                 case 'S':
-                    cout << "s" << endl;
                     cout << *s2->msg_->columns[i]->as_string()->get(j)->cstr_;
                     break;
                 case 'B':
-                    cout << "b" << endl;
                     cout << *s2->msg_->columns[i]->as_bool()->get(j);
                     break;
                 case 'I':
-                    cout << "i" << endl;
                     cout << *s2->msg_->columns[i]->as_int()->get(j);
                     break;
             }
