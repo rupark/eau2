@@ -205,7 +205,7 @@ public:
         return ((Num*)(map_.items_[i].vals_.get_(j)))->v;
     }
 
-    void visit override (Row& r) {
+    void visit(Row& r) override {
         if (!k()) next();
         String* key = k();
         size_t value = v();
@@ -214,7 +214,7 @@ public:
         next();
     }
 
-    bool done() {return seen == map_.size(); }
+    bool done() override {return seen == map_.size(); }
 };
 
 class MutableString : public String {
