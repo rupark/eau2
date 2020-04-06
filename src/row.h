@@ -31,7 +31,8 @@ public:
 
     /** Build a row following a schema. */
     Row(Schema& scm) {
-        this->elements = new Object*[100*1000*1000];
+        //cout << "copy schema" << endl;
+        this->elements = new Object*[100*1000];
         index = 0;
         size = scm.ncol;
         for (size_t i = 0; i < scm.ncol; i++) {
@@ -51,6 +52,7 @@ public:
                     break;
             }
         }
+       // cout << "schema constructed" << endl;
     }
 
     ~Row(){

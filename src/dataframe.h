@@ -426,13 +426,36 @@ public:
     /**
      * Contructs a DataFrame from the given args
      */
-    static DataFrame* fromVisitor(Key* key, KVStore* kv, char* schema, Writer w) {
-        cout <<"making df"<<endl;
+    static DataFrame* fromVisitor(Key* key, KVStore* kv, char* schema, FileReader w) {
+        //cout <<"making df"<<endl;
         DataFrame* df = new DataFrame(*new Schema(schema));
         while (!w.done()) {
-            cout << "building row" << endl;
+            //cout << "filling a row" << endl;
             Row* r = new Row(*new Schema(schema));
+//            cout << "Trying to visit" << endl;
             w.visit(*r);
+//            cout << "visit complete/adding row2df" << endl;
+            df->add_row(*r);
+            cout << "ROW: " << r->get_string(0)->c_str() << endl;
+        }
+        cout << "done building" << endl;
+        kv->put(key, df);
+        cout << "from visited" << endl;
+        return df;
+    }
+
+    /**
+     * Contructs a DataFrame from the given args
+     */
+    static DataFrame* fromVisitor(Key* key, KVStore* kv, char* schema, Writer w) {
+        //cout <<"making df"<<endl;
+        DataFrame* df = new DataFrame(*new Schema(schema));
+        while (!w.done()) {
+            //cout << "filling a row" << endl;
+            Row* r = new Row(*new Schema(schema));
+//            cout << "Trying to visit" << endl;
+            w.visit(*r);
+//            cout << "visit complete/adding row2df" << endl;
             df->add_row(*r);
         }
         cout << "done building" << endl;
@@ -440,6 +463,7 @@ public:
         cout << "from visited" << endl;
         return df;
     }
+
 
     /**
      * Returns the double at the given column and row in this DataFrame

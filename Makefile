@@ -1,5 +1,5 @@
 clean:
-	rm *.o client server client2 *.out
+	rm *.o client server client2 *.out wordcount *.h.gch src/*.h.gch src/network/*.h.gch
 
 run: build
 	./server && ./client && ./client2
@@ -26,4 +26,4 @@ buildWC:
 	g++ -std=c++11 src/network/wordcount.h main.o -o wordcount
 
 runWCserver:
-	./wordcount -index 0 -file data/WCData.txt -node 1 -port 8080 -masterip "127.0.0.1" -app "wc"
+	./wordcount -index 0 -file data/WCData.txt -node 1 -port 8080 -masterip "127.0.0.4" -app "wc"

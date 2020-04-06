@@ -42,8 +42,10 @@ public:
      * Returns the DataFrame associated in this KVStore with the given Key
      */
     DataFrame* get(Key key) {
+        cout << "size: " << size << endl;
         for (int i = 0; i < size; i++) {
-            if (keys[i]->equals(&key)) {
+            if (key.equals(keys[i])) {
+                cout << "key found" << endl;
                 return dfs[i];
             }
         }
@@ -54,13 +56,19 @@ public:
     //Client facing
     // Wait until we find the key (TIMEOUT?)
     DataFrame* waitAndGet(Key key) {
-        cout << "wait and get" << endl;
-        while (get(key) == nullptr) {
-            //send a message requesting
-            key.home;
-            sleep(3);
+        if (key.home==0) {
+            return get(key);
+        } else {
+            cout << "ERROR: NOT WORKING WAIT AND GET NETWORK" << endl;
         }
-        this->get(key);
+//
+//        cout << "wait and get" << endl;
+//        while (get(key) == nullptr) {
+//            //send a message requesting
+//            key.home;
+//            sleep(3);
+//        }
+//        this->get(key);
     }
 
 };
