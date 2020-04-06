@@ -275,7 +275,7 @@ public:
         row.set_idx(nrow);
         cout <<"set idx" <<endl;
         this->nrow++;
-        //nrow++;
+        schema.nrow++;
 
         cout <<row.size<< endl;
 
