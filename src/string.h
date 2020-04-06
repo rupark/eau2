@@ -97,6 +97,10 @@ public:
         size_ = 0;
     }
 
+    StrBuff(char* init) : StrBuff() {
+        c(init);
+    }
+
     void grow_by_(size_t step) {
         if (step + size_ < capacity_) return;
         capacity_ *= 2;

@@ -32,9 +32,11 @@ public:
      * Adds the given Key and DataFrame to this KVStore
      */
     void put(Key* key, DataFrame* df) {
-        cout << "put" << endl;
+        cout << "put " << size << endl;
         this->keys[size] = key;
+        cout << "df null: " << (df == nullptr) << endl;
         this->dfs[size] = df;
+
         size++;
     }
 
@@ -45,8 +47,12 @@ public:
         cout << "size: " << size << endl;
         for (int i = 0; i < size; i++) {
             if (key.equals(keys[i])) {
-                cout << "key found" << endl;
-                return dfs[i];
+                cout << "key found: " << i << endl;
+                if (dfs[i] != nullptr) {
+                    return dfs[i];
+                } else {
+                    cout << "asked for nullptr df" << endl;
+                }
             }
         }
         cout << "key not found" << endl;
@@ -57,6 +63,7 @@ public:
     // Wait until we find the key (TIMEOUT?)
     DataFrame* waitAndGet(Key key) {
         if (key.home==0) {
+            cout << "wait triggering get" << endl;
             return get(key);
         } else {
             cout << "ERROR: NOT WORKING WAIT AND GET NETWORK" << endl;

@@ -232,8 +232,9 @@ public:
     Key* orig_; // external
     StrBuff buf_;
 
-    KeyBuff(Key* orig) : orig_(orig), buf_() {
-        buf_.c(*orig->name);
+    KeyBuff(Key* orig) {
+        orig_ = new Key(orig);
+        buf_ = *new StrBuff(orig->c_str());
     }
 
     KeyBuff& c(String &s) { buf_.c(s); return *this;  }
@@ -280,6 +281,7 @@ public:
     /** Returns a key for given node.  These keys are homed on master node
      *  which then joins them one by one. */
     Key* mk_key(size_t idx) {
+        cout << "called mk_key idx = " << idx << endl;
         Key * k = kbuf.c(idx).get();
         //LOG("Created key " << k->c_str());
         cout << "Created key " << k->c_str() << endl;
@@ -289,15 +291,22 @@ public:
     /** Compute word counts on the local node and build a data frame. */
     void local_count() {
         cout <<"in local count" << endl;
-        DataFrame* words = (kv.waitAndGet(in));
+//        DataFrame* words = kv.waitAndGet(in);
+        DataFrame* words = kv.get(in);
+        cout << "got words" << endl;
         //p("Node ").p(index).pln(": starting local count...");
         cout << "Node " << this_node() << ": starting local count..." << endl;
         SIMap map;
         Adder add(map);
+        cout << "adder created" << endl;
         words->local_map(add);
-        delete words;
+        cout << "local mapped adder" << endl;
+        //delete words;
+        //cout << "delete words" << endl;
         Summer cnt(map);
+        cout << "created summer" << endl;
         delete DataFrame::fromVisitor(mk_key(this_node()), &kv, "SI", cnt);
+        cout << "from visitor summer done" << endl;
     }
 
     /** Merge the data frames of all nodes */

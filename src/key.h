@@ -27,6 +27,11 @@ public:
             this->home = 0;
         }
 
+        Key (Key* orig) {
+            this->name = orig->name;
+            this->home = orig->home;
+        }
+
         ~Key(){
             delete name;
         }
@@ -39,6 +44,15 @@ public:
             Key* x = dynamic_cast<Key *>(other);
             if (x == nullptr) return false;
             return name->equals(x->name) && home == x->home;
+        }
+
+        char* c_str() override {
+            StrBuff* a = new StrBuff();
+            a->c(this->name->c_str());
+            a->c((size_t)this->home);
+            char* ret = a->get()->c_str();
+            delete a;
+            return ret;
         }
 
 };

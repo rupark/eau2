@@ -448,7 +448,7 @@ public:
      * Contructs a DataFrame from the given args
      */
     static DataFrame* fromVisitor(Key* key, KVStore* kv, char* schema, Writer w) {
-        //cout <<"making df"<<endl;
+        cout <<"making df"<<endl;
         DataFrame* df = new DataFrame(*new Schema(schema));
         while (!w.done()) {
             //cout << "filling a row" << endl;
