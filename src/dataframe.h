@@ -451,11 +451,11 @@ public:
         cout <<"making df"<<endl;
         DataFrame* df = new DataFrame(*new Schema(schema));
         while (!w.done()) {
-            //cout << "filling a row" << endl;
+            cout << "filling a row" << endl;
             Row* r = new Row(*new Schema(schema));
-//            cout << "Trying to visit" << endl;
+            cout << "Trying to visit" << endl;
             w.visit(*r);
-//            cout << "visit complete/adding row2df" << endl;
+            cout << "visit complete/adding row2df" << endl;
             df->add_row(*r);
         }
         cout << "done building" << endl;
