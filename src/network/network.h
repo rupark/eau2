@@ -79,9 +79,11 @@ public:
            addresses[i] = new String(inet_ntoa(nodes_[i + 1].address.sin_addr));
        }
 
+
+
        Directory ipd(ports, addresses,  arg.num_nodes - 1);
 
-       cout << ipd.nodes << endl;
+       cout << "nodes:" << ipd.nodes << endl;
 
        for (size_t i = 1; i < arg.num_nodes; i++) {
            ipd.target_ = i;

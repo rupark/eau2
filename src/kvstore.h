@@ -52,6 +52,7 @@ public:
     //Client facing
     // Wait until we find the key (TIMEOUT?)
     DataFrame* waitAndGet(Key key) {
+        cout << "wait and get" << endl;
         while (get(key) == nullptr) {
             //send a message requesting
             key.home;
