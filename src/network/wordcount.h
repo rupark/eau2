@@ -22,15 +22,6 @@ public:
     Num(size_t v) : v(v) {}
 };
 
-
-class Reader {
-public:
-    Reader() {
-
-    }
-    virtual bool visit(Row&) {}
-};
-
 /**  Item_ are entries in a Map, they are not exposed, are immutable, own
  *   they key, but the value is external.  author: jv */
 class Items_ {

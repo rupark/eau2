@@ -22,7 +22,7 @@
 #include <thread>
 #include "key.h"
 #include "kvstore.h"
-
+#include "reader.h"
 #include "column_prov.h"
 
 using namespace std;

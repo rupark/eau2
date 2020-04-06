@@ -1,4 +1,5 @@
-
+#pragma once
+#include "object.h"
 
 class Args : public Object {
 public:
@@ -45,3 +46,5 @@ public:
     }
 
 };
+
+extern Args arg;
