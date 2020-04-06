@@ -33,6 +33,10 @@ public:
         vals_.push_back(v);
     }
 
+    ~Items_(){
+
+    }
+
     bool contains_(Object& k) {
         for (int i = 0; i < keys_.size(); i++)
             if (k.equals(keys_.get_(i)))
@@ -85,7 +89,9 @@ public:
         items_ = new Items_[capacity_];
     }
 
-    ~Map() { delete[] items_; }
+    ~Map() {
+        //delete[] items_;
+    }
 
     /** True if the key is in the map. */
     bool contains(Object& key)  { return items_[off_(key)].contains_(key); }
