@@ -4,7 +4,7 @@ In this document we will describe the architecture and implementation of the eau
 Thus far, the eau2 system is able to read in SoR files and construct DataFrames, our system's internal representation
 of columnar SoR files. The system also contains a Key Value Store which is a hash-map like structure which can associate Keys with DataFrames.
 We have also created the ability to create client and server nodes which can pass Messages containing information
-about other nodes and data stored in DataFrames. 
+about other nodes and data stored in DataFrames. Users can also select Applications to be run on the eau2 system.
 In the following sections we will discuss these features in more technical detail as well as
 describe the future work involved. 
 ## Architecture ##
