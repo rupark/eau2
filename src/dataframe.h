@@ -427,7 +427,9 @@ public:
      * Contructs a DataFrame from the given args
      */
     static DataFrame* fromVisitor(Key* key, KVStore* kv, char* schema, Writer w) {
+        cout <<"making df"<<endl;
         DataFrame* df = new DataFrame(*new Schema(schema));
+        cout <<"done making df"<<endl;
         int i = 0;
         while (i < 3) {
             cout << "building row" << endl;
