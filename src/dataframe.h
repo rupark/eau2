@@ -427,7 +427,7 @@ public:
         while (!w.done()) {
             Row* r = new Row;
             w.visit(*r);
-            df->add_row(*);
+            df->add_row(*r);
         }
         return df;
     }

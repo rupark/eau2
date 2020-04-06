@@ -1,5 +1,8 @@
 #pragma once
 #include "object.h"
+#include <string>
+#include <iostream>
+using namespace std;
 
 class Args : public Object {
 public:
@@ -16,7 +19,7 @@ public:
     Args() {}
 
     void parse(int argc, char** argv) {
-        for (int i=1; i < argv; i++) {
+        for (int i=1; i < argc; i++) {
             char* a = argv[i++];
             assert(i < argc);
             char* n = argv[i];
@@ -24,7 +27,7 @@ public:
             if (strcmp(a, "-file") == 0) {
                 file = n;
             } else if (strcmp(a, "-pseudo") == 0) {
-                pseudo = strcmp(n, "true")==0);
+                pseudo = (strcmp(n, "true")==0);
             } else if (strcmp(a, "-node")==0) {
                 num_nodes = atol(n);
             } else if (strcmp(a, "-index")==0) {
@@ -40,7 +43,7 @@ public:
             } else if (strcmp(a, "rowsperchunk")==0) {
                 rows_per_chunk = atol(n);
             } else {
-                FATAL_ERROR("Unkown command line: " << a << " " << n);
+                cout << "Unknown command line: " << a << " " << n << endl;
             }
         }
     }
