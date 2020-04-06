@@ -206,6 +206,7 @@ public:
     }
 
     void visit(Row& r) override {
+        cout << "visiting" <<endl;
         if (!k()) next();
         String* key = k();
         size_t value = v();
