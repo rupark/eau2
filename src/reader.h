@@ -22,13 +22,20 @@ public:
     Adder(SIMap& map) : map_(map)  {}
 
     bool visit(Row& r) override {
+        cout << "ROW RECV: ";
+        r.printRow();
+        cout << " " << endl;
+
         cout << "in adder visit" << endl;
         String* word = r.get_string(0);
-        assert(word != nullptr);
+//        assert(word != nullptr);
+        cout << "working with word = " << word->c_str() << endl;
         Num* num = map_.contains(*word) ? map_.get(*word) : new Num();
         assert(num != nullptr);
+        cout << "num != nullptr" << endl;
         num->v++;
         map_.set(*word, num);
+
         return false;
     }
 };

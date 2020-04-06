@@ -137,9 +137,18 @@ public:
 
     void merge(DataFrame* df, SIMap& m) {
         cout << df->ncol << endl;
-        cout <<"in merge" << endl;
+        cout <<"MERGING\n\n\n\n" << endl;
         cout << df->nrow << endl;
+        cout << "schema: " << endl;
+        cout << "string (0,0): " << df->get_string(0,0)->c_str() << endl;
+        cout << "string (0,1): " << df->get_string(0,1)->c_str() << endl;
+        cout << "string (1,0): " << df->get_int(1,0)<< endl;
+        cout << "string (1,1): " << df->get_int(1,1) << endl;
+        cout << "SI MAP size: " << m.size() << endl;
+
+        cout << "welcome map: " << (m.get(*new String("the")) == nullptr) << endl;
         Adder add(m);
+        cout << "adder created" << endl;
         df->map(add);
         delete df;
     }

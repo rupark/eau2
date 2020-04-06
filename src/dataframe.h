@@ -346,6 +346,7 @@ public:
         cout << "num rows:" << this->nrow << endl;
         for (size_t i = 0; i < this->nrows(); i++) {
             Row* row = new Row(this->schema);
+            cout << "schema: " << schema.types->c_str() << endl;
             for (size_t j = 0; j < this->ncols(); j++) {
                 switch (row->col_type(j)) {
                     case 'I':

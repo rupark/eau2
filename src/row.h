@@ -124,9 +124,15 @@ public:
     }
 
     String* get_string(size_t col) {
-        cout << "in get" << endl;
-        String* v = dynamic_cast<String*>(elements[col]);
-        cout << "cast" << endl;
+//        cout << "in get" << endl;
+//        cout << "num col: " << size << endl;
+//        cout << "col 0 type " << col_type(0) << endl;
+//        cout << "col 1 type " << col_type(1) << endl;
+//        cout << "col0 before cast: " << (elements[col] == nullptr) << endl;
+//        String* v = dynamic_cast<String*>(elements[col]);
+        String* v = (String*) elements[col];
+//        cout << "cast = " << (v == nullptr) << endl;
+//        cout << "v = " << v->c_str() << endl;
         return v;
     }
 
@@ -169,6 +175,28 @@ public:
                     break;
             }
         }
+    }
+
+    void printRow() {
+        for (int i =0; i < this->size; i++) {
+//            cout << "size=" << size << endl;
+            char type = col_type(i);
+            switch (type) {
+                case 'F':
+                    cout << this->get_float(i) << " ";
+                    break;
+                case 'B':
+                    cout << this->get_bool(i) << " ";
+                    break;
+                case 'I':
+                    cout << this->get_int(i) << " ";
+                    break;
+                case 'S':
+                    cout << this->get_string(i)->c_str() << " ";
+                    break;
+            }
+        }
+        cout << " |" << endl;
     }
 
 };
