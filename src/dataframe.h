@@ -271,10 +271,12 @@ public:
     /** Add a row at the end of this dataframe. The row is expected to have
      *  the right schema and be filled with values, otherwise undedined.  */
     void add_row(Row& row) {
+        cout << "in add row" << endl;
         row.set_idx(nrow);
-        this->schema.nrow++;
-        nrow++;
+        this->nrow++;
+        //nrow++;
 
+        cout << ncol << endl;
         for (size_t i = 0; i < ncol; i++) {
             if (dynamic_cast<IntColumn*>(columns[i])) {
                 IntColumn* c =  columns[i]->as_int();
