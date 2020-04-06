@@ -6,11 +6,15 @@
  * equality. */
 
 class StringColumn;
+
 class BoolColumn;
+
 class FloatColumn;
+
 class IntColumn;
 
 #pragma once
+
 #include "object.h"
 #include "string.h"
 
@@ -19,17 +23,23 @@ public:
 
     /** Type converters: Return same column under its actual type, or
      *  nullptr if of the wrong type.  */
-    virtual IntColumn* as_int() {}
-    virtual BoolColumn*  as_bool() {}
-    virtual FloatColumn* as_float() {}
-    virtual StringColumn* as_string() {}
+    virtual IntColumn *as_int() {}
+
+    virtual BoolColumn *as_bool() {}
+
+    virtual FloatColumn *as_float() {}
+
+    virtual StringColumn *as_string() {}
 
     /** Type appropriate push_back methods. Calling the wrong method is
       * undefined behavior. **/
     virtual void push_back(int val) {}
+
     virtual void push_back(bool val) {}
+
     virtual void push_back(float val) {}
-    virtual void push_back(String* val){}
+
+    virtual void push_back(String *val) {}
 
     /** Returns the number of elements in the column. */
     virtual size_t size() {}
@@ -38,5 +48,5 @@ public:
     virtual char get_type() {}
 
     /** Return the serialization of this Column as a String */
-    virtual String* serialize() {}
+    virtual String *serialize() {}
 };

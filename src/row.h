@@ -25,14 +25,13 @@
 
 class Row : public Object {
 public:
-    Object** elements;
+    Object **elements;
     size_t size;
     size_t index;
 
     /** Build a row following a schema. */
-    Row(Schema& scm) {
-        //cout << "copy schema" << endl;
-        this->elements = new Object*[100*1000];
+    Row(Schema &scm) {
+        this->elements = new Object *[100 * 1000];
         index = 0;
         size = scm.ncol;
         for (size_t i = 0; i < scm.ncol; i++) {
@@ -52,10 +51,9 @@ public:
                     break;
             }
         }
-       // cout << "schema constructed" << endl;
     }
 
-    ~Row(){
+    ~Row() {
         delete[] elements;
     }
 
@@ -86,7 +84,7 @@ public:
     }
 
     /** The string is external. */
-    void set(size_t col, String* val) {
+    void set(size_t col, String *val) {
         if (col < size && col >= 0) {
             elements[col] = val;
         } else {
@@ -108,31 +106,23 @@ public:
       * of the requested type, the result is undefined. */
     int get_int(size_t col) {
         cout << "in get" << endl;
-        Integer* v = dynamic_cast<Integer*>(elements[col]);
+        Integer *v = dynamic_cast<Integer *>(elements[col]);
         cout << "cast" << endl;
         return v->val;
     }
 
     bool get_bool(size_t col) {
-        bool v = dynamic_cast<Bool*>(elements[col])->val;
+        bool v = dynamic_cast<Bool *>(elements[col])->val;
         return v;
     }
 
     float get_float(size_t col) {
-        float v = dynamic_cast<Float*>(elements[col])->val;
+        float v = dynamic_cast<Float *>(elements[col])->val;
         return v;
     }
 
-    String* get_string(size_t col) {
-//        cout << "in get" << endl;
-//        cout << "num col: " << size << endl;
-//        cout << "col 0 type " << col_type(0) << endl;
-//        cout << "col 1 type " << col_type(1) << endl;
-//        cout << "col0 before cast: " << (elements[col] == nullptr) << endl;
-//        String* v = dynamic_cast<String*>(elements[col]);
-        String* v = (String*) elements[col];
-//        cout << "cast = " << (v == nullptr) << endl;
-//        cout << "v = " << v->c_str() << endl;
+    String *get_string(size_t col) {
+        String *v = (String *) elements[col];
         return v;
     }
 
@@ -143,11 +133,11 @@ public:
 
     /** Type of the field at the given position. An idx >= width is  undefined. */
     char col_type(size_t idx) {
-        if (dynamic_cast<Integer*>(this->elements[idx])) {
+        if (dynamic_cast<Integer *>(this->elements[idx])) {
             return 'I';
-        } else if (dynamic_cast<Bool*>(this->elements[idx])) {
+        } else if (dynamic_cast<Bool *>(this->elements[idx])) {
             return 'B';
-        } else if (dynamic_cast<Float*>(this->elements[idx])) {
+        } else if (dynamic_cast<Float *>(this->elements[idx])) {
             return 'F';
         } else {
             return 'S';
@@ -157,7 +147,7 @@ public:
     /** Given a Fielder, visit every field of this row. The first argument is
       * index of the row in the dataframe.
       * Calling this method before the row's fields have been set is undefined. */
-    void visit(size_t idx, Fielder& f) {
+    void visit(size_t idx, Fielder &f) {
         for (size_t i = 0; i < this->width(); i++) {
             char type = col_type(i);
             switch (type) {
@@ -177,9 +167,9 @@ public:
         }
     }
 
+    /** Prints this Row **/
     void printRow() {
-        for (int i =0; i < this->size; i++) {
-//            cout << "size=" << size << endl;
+        for (int i = 0; i < this->size; i++) {
             char type = col_type(i);
             switch (type) {
                 case 'F':

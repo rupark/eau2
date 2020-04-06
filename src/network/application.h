@@ -2,6 +2,7 @@
 // Created by kramt on 3/25/2020.
 //
 #pragma once
+
 #include "../kvstore.h"
 #include "network.h"
 
@@ -14,13 +15,13 @@ public:
     size_t idx_;
     NetworkIP net;
 
-    Application (size_t idx, NetworkIP net) {
+    Application(size_t idx, NetworkIP net) {
         kv = *new KVStore();
         idx_ = idx;
         this->net = net;
     }
 
-    Application (size_t idx) {
+    Application(size_t idx) {
         kv = *new KVStore();
         this->idx_ = idx;
 

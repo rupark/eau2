@@ -1,8 +1,10 @@
 //lang CwC
 #pragma once
+
 #include <stdio.h>
 #include "object.h"
 #include <iostream>
+
 using namespace std;
 
 /** Base Float wrapper class. Represents the basis for all Floats.*/
@@ -24,7 +26,7 @@ public:
      * @param  N/A
      * @return N/A
      */
-     ~Float() {
+    ~Float() {
 
     }
 
@@ -35,10 +37,10 @@ public:
      * @return bool indicating if the this and other are equal
      */
     bool equals(Object *other) {
-        if ( other == nullptr) {
+        if (other == nullptr) {
             return false;
         }
-        Float *s = dynamic_cast<Float*>(other);
+        Float *s = dynamic_cast<Float *>(other);
         if (s == nullptr) {
             return false;
         }
@@ -68,5 +70,6 @@ public:
         return val;
     }
 
+    /** Prints this Float **/
     void print() override { cout << this->val << endl; }
 };

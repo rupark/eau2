@@ -1,8 +1,11 @@
 class StringColumn;
+
 class BoolColumn;
+
 class FloatColumn;
 
 #pragma once
+
 #include "column.h"
 #include "boolcol.h"
 #include "floatcol.h"
@@ -19,17 +22,17 @@ using namespace std;
  */
 class IntColumn : public Column {
 public:
-    Integer** vals_;
+    Integer **vals_;
     size_t size_;
     size_t capacity_;
 
     IntColumn() {
         size_ = 0;
         capacity_ = 100 * 1000 * 1000;
-        vals_ = new Integer*[capacity_];
+        vals_ = new Integer *[capacity_];
     }
 
-    ~IntColumn(){
+    ~IntColumn() {
         delete[] vals_;
     }
 
@@ -37,7 +40,7 @@ public:
      * Returns this if it is a StringColumn
      * @return
      */
-    StringColumn* as_string() {
+    StringColumn *as_string() {
         return nullptr;
     }
 
@@ -45,7 +48,7 @@ public:
      * Returns this if it is a IntColumn
      * @return
      */
-    IntColumn* as_int() {
+    IntColumn *as_int() {
         return this;
     }
 
@@ -53,7 +56,7 @@ public:
      * Returns this if it is a BoolColumn
      * @return
      */
-    BoolColumn* as_bool() {
+    BoolColumn *as_bool() {
         return nullptr;
     }
 
@@ -61,12 +64,12 @@ public:
      * Returns this if it is a FloatColumn
      * @return
      */
-    FloatColumn* as_float() {
+    FloatColumn *as_float() {
         return nullptr;
     }
 
     /** Returns the int at idx; undefined on invalid idx.*/
-    int * get(size_t idx) {
+    int *get(size_t idx) {
         if (idx >= 0 && idx <= this->size()) {
             return &vals_[idx]->val;
         } else {
@@ -75,7 +78,7 @@ public:
     }
 
     /** Out of bound idx is undefined. */
-    void set(size_t idx, int * val) {
+    void set(size_t idx, int *val) {
         if (idx >= 0 && idx <= this->size()) {
             vals_[idx] = new Integer(*val);
             size_++;
@@ -95,7 +98,6 @@ public:
      * Adds the given int to this if it is a IntColumn
      */
     virtual void push_back(int val) {
-        cout << "in push_back"<<endl;
         this->vals_[size_] = new Integer(val);
         size_++;
     }
@@ -117,15 +119,9 @@ public:
     /**
      * Adds the given String to this if it is a StringColumn
      */
-    virtual void push_back(String* val) {
+    virtual void push_back(String *val) {
         // if passing nullptr from <MISSING> in sor then save to array as nullptr calls this method.
-        cout << "in push_back"<<endl;
-//        if (val == nullptr) {
-//            this->vals_[size_] = nullptr;
-//            size_++;
-//        } else {
-            exit(1);
-//        }
+        exit(1);
     }
 
     /** Return the type of this column as a char: 'S', 'B', 'I' and 'F'. */
@@ -133,8 +129,9 @@ public:
         return 'I';
     }
 
-    virtual String* serialize() {
-        StrBuff* s = new StrBuff();
+    /** Serializes this intcol **/
+    virtual String *serialize() {
+        StrBuff *s = new StrBuff();
         s->c("I}");
 
         for (int i = 0; i < this->size_; i++) {

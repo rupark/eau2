@@ -25,17 +25,18 @@ constexpr const size_t MAX_STRING = 255;
  * regular c-style-strings.
  */
 class StrSlice : public Object {
-   public:
+public:
     size_t _start;
     size_t _end;
-    const char* _str;
+    const char *_str;
+
     /**
      * Creates a new StrSlice.
      * @param str The C-style-string to slice from. Must be valid during the lifetime of this slice
      * @param start The starting index
      * @param end The ending index
      */
-    StrSlice(const char* str, size_t start, size_t end) : Object() {
+    StrSlice(const char *str, size_t start, size_t end) : Object() {
         _start = start;
         _end = end;
         _str = str;
@@ -45,10 +46,12 @@ class StrSlice : public Object {
      * @return The length of this slice
      */
     virtual size_t getLength() { return _end - _start; }
+
     /**
      * @return A non-null-terminated pointer to the chars in this slice.
      */
-    virtual const char* getChars() { return &_str[_start]; }
+    virtual const char *getChars() { return &_str[_start]; }
+
     /**
      * Gets the char at the given index.
      * @param which The index. Must be < getLength()
@@ -77,9 +80,9 @@ class StrSlice : public Object {
      * Allocates a new null terminated string and copies the contents of this slice to it.
      * @return The new string. Caller must free
      */
-    virtual char* toCString() {
+    virtual char *toCString() {
         size_t length = _end - _start;
-        char* sliceCopy = new char[length + 1];
+        char *sliceCopy = new char[length + 1];
         memcpy(sliceCopy, getChars(), length);
         sliceCopy[length] = '\0';
         return sliceCopy;
@@ -117,7 +120,7 @@ class StrSlice : public Object {
     virtual float toFloat() {
         // It's hard to roll a float parsing function by hand, so bite the bullet and allocate a
         // null-terminated string for atof.
-        char* cstr = toCString();
+        char *cstr = toCString();
         float result = atof(cstr);
         delete[] cstr;
         return result;
@@ -130,20 +133,20 @@ class StrSlice : public Object {
  * discard the first and last (possibly partial) lines in this case.
  */
 class LineReader : public Object {
-   public:
+public:
     /** Temporary buffer for file contents */
     char _buf[4096];
     size_t _buf_length;
     /** Current position in buffer */
     size_t _pos;
     /** The file we're reading from */
-    FILE* _file;
+    FILE *_file;
     /** Byte indices for start, end, and total file size */
     size_t _file_start;
     size_t _file_end;
     size_t _file_size;
     /** Heap-allocated current line being built by readLine() */
-    char* _current_line;
+    char *_current_line;
     size_t _current_line_size;
     /** Total number of bytes read so far */
     size_t _read_size;
@@ -155,7 +158,7 @@ class LineReader : public Object {
      * @param file_end The ending index
      * @param file_size The total size of the file (as obtained by e.g. ftell)
      */
-    LineReader(FILE* file, size_t file_start, size_t file_end, size_t file_size) : Object() {
+    LineReader(FILE *file, size_t file_start, size_t file_end, size_t file_size) : Object() {
         _file = file;
         _file_start = file_start;
         _file_end = file_end;
@@ -182,12 +185,12 @@ class LineReader : public Object {
      * member to null. Ownership of the line is transferred to the caller.
      * @return A new null terminated string for the completed line
      */
-    virtual char* _get_current_line() {
+    virtual char *_get_current_line() {
         if (_current_line == nullptr) {
             return nullptr;
         }
 
-        char* line = _current_line;
+        char *line = _current_line;
         line[_current_line_size] = '\0';
         _current_line_size = 0;
         _current_line = nullptr;
@@ -200,8 +203,8 @@ class LineReader : public Object {
      * @param start The starting index in the string to copy from
      * @param end The ending index in the string to copy up to
      */
-    virtual void _append_current_line(const char* src, size_t start, size_t end) {
-        char* new_line;
+    virtual void _append_current_line(const char *src, size_t start, size_t end) {
+        char *new_line;
         size_t copy_pos;
         if (_current_line == nullptr) {
             // Allocated a new heap buffer for the line
@@ -227,7 +230,7 @@ class LineReader : public Object {
      * lines respectively are skipped.
      * @return The next line, or nullptr if we are out of lines
      */
-    virtual char* readLine() {
+    virtual char *readLine() {
         bool skip_line = _read_size == 0 && _file_start != 0;
 
         while (true) {
@@ -235,7 +238,7 @@ class LineReader : public Object {
             if (_pos >= _buf_length) {
                 // If the file is over, we're done
                 if (_read_size >= _file_end - _file_start || feof(_file) || ferror(_file)) {
-                    char* line = _get_current_line();
+                    char *line = _get_current_line();
                     // If a -len was provided that is less than the file size, skip the last line
                     if (_file_end != _file_size) {
                         if (line != nullptr) {
@@ -312,18 +315,18 @@ class LineReader : public Object {
  */
 enum class ParserMode {
     /** We're trying to find the number of columns in the schema */
-    DETECT_NUM_COLUMNS,
+            DETECT_NUM_COLUMNS,
     /** We're guessing the column types */
-    DETECT_SCHEMA,
+            DETECT_SCHEMA,
     /** Parsing the whole file */
-    PARSE_FILE
+            PARSE_FILE
 };
 
 /**
  * Parses a given file into a ColumnSet with BaseColumns representing the sor data in the file.
  */
 class SorParser : public Object {
-   public:
+public:
     // Char constants for parsing
     static const size_t GUESS_SCHEMA_LINES = 500;
     static const char FIELD_BEGIN = '<';
@@ -342,11 +345,11 @@ class SorParser : public Object {
     }
 
     /** LineReader we're using */
-    LineReader* _reader;
+    LineReader *_reader;
     /** ColumnSet for data we will ultimately parse */
-    Provider::ColumnSet* _columns;
+    Provider::ColumnSet *_columns;
     /** Array of guesses for the types of each column in the schema */
-    Provider::ColumnType* _typeGuesses;
+    Provider::ColumnType *_typeGuesses;
     /** The number of columns we have detected */
     size_t _num_columns;
 
@@ -357,7 +360,7 @@ class SorParser : public Object {
      * @param file_end The ending index
      * @param file_size The total size of the file (as obtained by e.g. ftell)
      */
-    SorParser(FILE* file, size_t file_start, size_t file_end, size_t file_size) : Object() {
+    SorParser(FILE *file, size_t file_start, size_t file_end, size_t file_size) : Object() {
         _reader = new LineReader(file, file_start, file_end, file_size);
         _columns = nullptr;
         _typeGuesses = nullptr;
@@ -384,10 +387,10 @@ class SorParser : public Object {
      * @param field_num The column index
      * @param columns The ColumnSet to add the data to
      */
-    virtual void _appendField(StrSlice slice, size_t field_num, Provider::ColumnSet* columns) {
+    virtual void _appendField(StrSlice slice, size_t field_num, Provider::ColumnSet *columns) {
         slice.trim(SPACE);
 
-        Provider::BaseColumn* column = columns->getColumn(field_num);
+        Provider::BaseColumn *column = columns->getColumn(field_num);
 
         if (slice.getLength() == 0) {
             column->appendMissing();
@@ -398,16 +401,16 @@ class SorParser : public Object {
             case Provider::ColumnType::STRING:
                 slice.trim(STRING_QUOTE);
                 assert(slice.getLength() <= MAX_STRING);
-                dynamic_cast<Provider::StringColumn*>(column)->append(slice.toCString());
+                dynamic_cast<Provider::StringColumn *>(column)->append(slice.toCString());
                 break;
             case Provider::ColumnType::INTEGER:
-                dynamic_cast<Provider::IntegerColumn*>(column)->append(slice.toInt());
+                dynamic_cast<Provider::IntegerColumn *>(column)->append(slice.toInt());
                 break;
             case Provider::ColumnType::FLOAT:
-                dynamic_cast<Provider::FloatColumn*>(column)->append(slice.toFloat());
+                dynamic_cast<Provider::FloatColumn *>(column)->append(slice.toFloat());
                 break;
             case Provider::ColumnType::BOOL:
-                dynamic_cast<Provider::BoolColumn*>(column)->append(slice.toInt() == 1);
+                dynamic_cast<Provider::BoolColumn *>(column)->append(slice.toInt() == 1);
                 break;
             default:
                 assert(false);
@@ -473,7 +476,7 @@ class SorParser : public Object {
      * @param mode The mode to use
      * @param columns The data representation to update
      */
-    virtual size_t _scanLine(const char* line, ParserMode mode, Provider::ColumnSet* columns) {
+    virtual size_t _scanLine(const char *line, ParserMode mode, Provider::ColumnSet *columns) {
         size_t num_fields = 0;
         size_t this_field_start = 0;
         bool in_field = false;
@@ -518,7 +521,7 @@ class SorParser : public Object {
         // Detect the row with the most fields in the first 500 lines
         size_t max_columns = 0;
         for (size_t i = 0; i < GUESS_SCHEMA_LINES; i++) {
-            char* next_line = _reader->readLine();
+            char *next_line = _reader->readLine();
             if (next_line == nullptr) {
                 break;
             }
@@ -540,7 +543,7 @@ class SorParser : public Object {
         }
 
         for (size_t i = 0; i < GUESS_SCHEMA_LINES; i++) {
-            char* next_line = _reader->readLine();
+            char *next_line = _reader->readLine();
             if (next_line == nullptr) {
                 break;
             }
@@ -566,7 +569,7 @@ class SorParser : public Object {
 
         _reader->reset();
 
-        char* line;
+        char *line;
         while (true) {
             line = _reader->readLine();
             if (line == nullptr) {
@@ -584,7 +587,7 @@ class SorParser : public Object {
      * Gets the in-memory representation for the sor data.
      * guessSchema() and parseFile() must be called before this function.
      */
-    virtual Provider::ColumnSet* getColumnSet() {
+    virtual Provider::ColumnSet *getColumnSet() {
         assert(_columns != nullptr);
 
         return _columns;

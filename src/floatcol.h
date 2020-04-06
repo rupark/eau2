@@ -1,8 +1,11 @@
 class IntColumn;
+
 class BoolColumn;
+
 class FloatColumn;
 
 #pragma once
+
 #include "intcol.h"
 #include "boolcol.h"
 #include "stringcol.h"
@@ -19,14 +22,14 @@ using namespace std;
  */
 class FloatColumn : public Column {
 public:
-    Float** vals_;
+    Float **vals_;
     size_t size_;
     size_t capacity_;
 
     FloatColumn() {
         size_ = 0;
         capacity_ = 1000 * 1000 * 1000;
-        vals_ = new Float*[capacity_];
+        vals_ = new Float *[capacity_];
     }
 
     ~FloatColumn() {
@@ -42,7 +45,7 @@ public:
      * Returns this if it is a StringColumn
      * @return
      */
-    StringColumn* as_string() {
+    StringColumn *as_string() {
         return nullptr;
     }
 
@@ -50,7 +53,7 @@ public:
      * Returns this if it is a IntColumn
      * @return
      */
-    IntColumn* as_int() {
+    IntColumn *as_int() {
         return nullptr;
     }
 
@@ -58,7 +61,7 @@ public:
      * Returns this if it is a BoolColumn
      * @return
      */
-    BoolColumn* as_bool() {
+    BoolColumn *as_bool() {
         return nullptr;
     }
 
@@ -66,12 +69,12 @@ public:
      * Returns this if it is a FloatColumn
      * @return
      */
-    FloatColumn* as_float() {
+    FloatColumn *as_float() {
         return this;
     }
 
     /** Returns the float at idx; undefined on invalid idx.*/
-    float * get(size_t idx) {
+    float *get(size_t idx) {
         if (idx >= 0 && idx <= this->size()) {
             return &vals_[idx]->val;
         } else {
@@ -80,7 +83,7 @@ public:
     }
 
     /** Out of bound idx is undefined. */
-    void set(size_t idx, float * val) {
+    void set(size_t idx, float *val) {
         if (idx >= 0 && idx <= this->size()) {
             vals_[idx] = new Float(*val);
             size_++;
@@ -122,7 +125,7 @@ public:
     /**
      * Adds the given String to this if it is a StringColumn
      */
-    virtual void push_back(String* val) {
+    virtual void push_back(String *val) {
         // if passing nullptr from <MISSING> in sor then save to array as nullptr calls this method.
         if (val == nullptr) {
             this->vals_[size_] = nullptr;
@@ -137,8 +140,9 @@ public:
         return 'F';
     }
 
-    virtual String* serialize() {
-        StrBuff* s = new StrBuff();
+    /** Serializes this FloatColumn **/
+    virtual String *serialize() {
+        StrBuff *s = new StrBuff();
         s->c("F}");
 
         for (int i = 0; i < this->size_; i++) {

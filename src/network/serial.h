@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../string.h"
 #include "../object.h"
 #include <stdio.h>
@@ -8,25 +9,28 @@
 #include "../dataframe.h"
 
 #include <iostream>
+
 using namespace std;
 
-enum class MsgKind { Ack, Nack, Put,
-    Reply,  Get, WaitAndGet, Status,
-    Kill,   Register,  Directory };
+enum class MsgKind {
+    Ack, Nack, Put,
+    Reply, Get, WaitAndGet, Status,
+    Kill, Register, Directory
+};
 
 class Message : public Object {
-    public:
-        MsgKind kind_;  // the message kind
-        size_t sender_; // the index of the sender node
-        size_t target_; // the index of the receiver node
-        size_t id_;     // an id t unique within the node
+public:
+    MsgKind kind_;  // the message kind
+    size_t sender_; // the index of the sender node
+    size_t target_; // the index of the receiver node
+    size_t id_;     // an id t unique within the node
 
-        /**
-         * Serializes this message to a String
-         */
-        virtual String* serialize() {
-            return nullptr;
-        }
+    /**
+     * Serializes this message to a String
+     */
+    virtual String *serialize() {
+        return nullptr;
+    }
 };
 
 class Ack : public Message {
@@ -39,15 +43,14 @@ public:
     }
 
     //Deserializing from a char*
-    Ack(char* buffer) {
-        char** args = new char*[1000];
-        char *token = strtok(buffer,"?");
+    Ack(char *buffer) {
+        char **args = new char *[1000];
+        char *token = strtok(buffer, "?");
         int i = 0;
-        while (token != NULL)
-        {
+        while (token != NULL) {
             args[i] = token;
             i++;
-            token = strtok (NULL, "?");
+            token = strtok(NULL, "?");
         }
         this->kind_ = MsgKind::Ack;
         this->sender_ = atoi(args[1]);
@@ -55,8 +58,8 @@ public:
     }
 
     //Serializes this Ack
-    String* serialize() {
-        StrBuff* s = new StrBuff();
+    String *serialize() {
+        StrBuff *s = new StrBuff();
         char str[256] = ""; /* In fact not necessary as snprintf() adds the
                          0-terminator. */
         s->c("2?");
@@ -71,9 +74,9 @@ public:
 
 class Status : public Message {
 public:
-    DataFrame* msg_; // owned
+    DataFrame *msg_; // owned
 
-    Status(int sender, int target, DataFrame* msg) {
+    Status(int sender, int target, DataFrame *msg) {
         this->kind_ = MsgKind::Status;
         this->sender_ = sender;
         this->target_ = target;
@@ -82,74 +85,68 @@ public:
     }
 
     //Deserializing from a char*
-    Status(char* buffer) {
-        char** args = new char*[1000];
-        char *token = strtok(buffer,"?");
+    Status(char *buffer) {
+        char **args = new char *[1000];
+        char *token = strtok(buffer, "?");
         int k = 0;
-        while (token != NULL)
-        {
+        while (token != NULL) {
             args[k] = token;
             k++;
-            token = strtok (NULL, "?");
+            token = strtok(NULL, "?");
         }
         this->kind_ = MsgKind::Status;
         this->sender_ = atoi(args[1]);
         this->target_ = atoi(args[2]);
         this->id_ = atoi(args[3]);
 
-        char* recieved = args[4];
-        char** columns = new char*[1000];
+        char *recieved = args[4];
+        char **columns = new char *[1000];
         size_t columns_size = 0;
         int p = 0;
-        token = strtok(recieved,"!");
-        while (token != NULL)
-        {
+        token = strtok(recieved, "!");
+        while (token != NULL) {
             columns[p] = token;
             columns_size++;
             p++;
-            token = strtok (NULL, "!");
+            token = strtok(NULL, "!");
         }
 
-        DataFrame* d = new DataFrame(*new Schema());
+        DataFrame *d = new DataFrame(*new Schema());
         for (int i = 0; i < columns_size; i++) {
-            Column* c;
-            char* column = columns[i];
-            token = strtok(column,"}");
+            Column *c;
+            char *column = columns[i];
+            token = strtok(column, "}");
             switch (token[0]) {
                 case 'F':
-                    token = strtok(NULL,"}");
+                    token = strtok(NULL, "}");
                     c = new FloatColumn();
-                    while (token != NULL)
-                    {
-                        c->push_back((float)atof(token));
-                        token = strtok (NULL, "}");
+                    while (token != NULL) {
+                        c->push_back((float) atof(token));
+                        token = strtok(NULL, "}");
                     }
                     break;
                 case 'S':
-                    token = strtok(NULL,"}");
+                    token = strtok(NULL, "}");
                     c = new StringColumn();
-                    while (token != NULL)
-                    {
+                    while (token != NULL) {
                         c->push_back(new String(token));
-                        token = strtok (NULL, "}");
+                        token = strtok(NULL, "}");
                     }
                     break;
                 case 'B':
-                    token = strtok(NULL,"}");
+                    token = strtok(NULL, "}");
                     c = new BoolColumn();
-                    while (token != NULL)
-                    {
-                        c->push_back((bool)atoi(token));
-                        token = strtok (NULL, "}");
+                    while (token != NULL) {
+                        c->push_back((bool) atoi(token));
+                        token = strtok(NULL, "}");
                     }
                     break;
                 case 'I':
-                    token = strtok(NULL,"}");
+                    token = strtok(NULL, "}");
                     c = new IntColumn();
-                    while (token != NULL)
-                    {
-                        c->push_back((int)atoi(token));
-                        token = strtok (NULL, "}");
+                    while (token != NULL) {
+                        c->push_back((int) atoi(token));
+                        token = strtok(NULL, "}");
                     }
                     break;
             }
@@ -163,8 +160,8 @@ public:
     /**
      * Serializes this Status to a String
      */
-    String* serialize() {
-        StrBuff* s = new StrBuff();
+    String *serialize() {
+        StrBuff *s = new StrBuff();
         char str[10000] = ""; /* In fact not necessary as snprintf() adds the
                          0-terminator. */
         snprintf(str, sizeof str, "3?");
@@ -203,19 +200,18 @@ public:
         this->target_ = 0;
         this->idx = idx;
         this->client = ip_;
-        this->port = (size_t)port;
+        this->port = (size_t) port;
     }
 
     //Deserializes from a char*
-    Register(char* buffer) {
-        char** args = new char*[1000];
-        char *token = strtok(buffer,"?");
+    Register(char *buffer) {
+        char **args = new char *[1000];
+        char *token = strtok(buffer, "?");
         int i = 0;
-        while (token != NULL)
-        {
+        while (token != NULL) {
             args[i] = token;
             i++;
-            token = strtok (NULL, "?");
+            token = strtok(NULL, "?");
         }
         this->kind_ = MsgKind::Register;
         this->sender_ = atoi(args[1]);
@@ -224,14 +220,14 @@ public:
         struct sockaddr_in myaddr;
         myaddr.sin_family = atoi(args[4]);
         myaddr.sin_port = atoi(args[5]);
-        inet_aton(args[6], (struct in_addr *)&myaddr.sin_addr.s_addr);
+        inet_aton(args[6], (struct in_addr *) &myaddr.sin_addr.s_addr);
         this->client = myaddr;
         this->port = atoi(args[7]);
     }
 
     //Serializes this Register
-    String* serialize() {
-        StrBuff* s = new StrBuff();
+    String *serialize() {
+        StrBuff *s = new StrBuff();
         char str[1024] = ""; /* In fact not necessary as snprintf() adds the
                          0-terminator. */
         snprintf(str, sizeof str, "1?");
@@ -258,10 +254,10 @@ public:
 class Directory : public Message {
 public:
     size_t nodes;
-    size_t * ports;  // owned
-    String ** addresses;  // owned; strings owned
+    size_t *ports;  // owned
+    String **addresses;  // owned; strings owned
 
-    Directory(size_t * ports, String ** addresses, size_t nodes) {
+    Directory(size_t *ports, String **addresses, size_t nodes) {
         this->kind_ = MsgKind::Directory;
         this->sender_ = 0;
         this->target_ = 0;
@@ -271,22 +267,21 @@ public:
     }
 
     //Deserializes from a char*
-    Directory(char* buffer) {
-        char** args = new char*[1000];
-        char *token = strtok(buffer,"?");
+    Directory(char *buffer) {
+        char **args = new char *[1000];
+        char *token = strtok(buffer, "?");
         int i = 0;
-        while (token != NULL)
-        {
+        while (token != NULL) {
             args[i] = token;
             i++;
-            token = strtok (NULL, "?");
+            token = strtok(NULL, "?");
         }
         this->kind_ = MsgKind::Directory;
         this->sender_ = atoi(args[1]);
         this->target_ = atoi(args[2]);
         this->nodes = atoi(args[3]);
         this->ports = new size_t[1000];
-        this->addresses = new String*[1000];
+        this->addresses = new String *[1000];
         for (int i = 4; i < 4 + nodes; i++) {
             this->ports[i - 4] = atoi(args[i]);
         }
@@ -296,8 +291,8 @@ public:
     }
 
     //Serializes this Directory
-    String* serialize() {
-        StrBuff* s = new StrBuff();
+    String *serialize() {
+        StrBuff *s = new StrBuff();
         char str[256] = ""; /* In fact not necessary as snprintf() adds the
                          0-terminator. */
 

@@ -1,8 +1,10 @@
 //lang CwC
 #pragma once
+
 #include <stdio.h>
 #include "object.h"
 #include <iostream>
+
 using namespace std;
 
 /* Base Bool wrapper class. Represents the basis for all Bools. */
@@ -33,10 +35,10 @@ public:
      * @return bool indicating if the this and other are equal
      */
     bool equals(Object *other) {
-        if ( other == nullptr) {
+        if (other == nullptr) {
             return false;
         }
-        Bool *s = dynamic_cast<Bool*>(other);
+        Bool *s = dynamic_cast<Bool *>(other);
         if (s == nullptr) {
             return false;
         }
@@ -66,5 +68,6 @@ public:
 
     }
 
+    /** Prints this Bool **/
     void print() override { cout << this->val << endl; }
 };

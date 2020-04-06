@@ -3,6 +3,7 @@
 //
 
 #pragma once
+
 #include "row.h"
 #include "SImap.h"
 
@@ -11,31 +12,26 @@ public:
     Reader() {
 
     }
-    virtual bool visit(Row&) {}
+
+    /** Reads from the given Row **/
+    virtual bool visit(Row &) {}
 };
 
-/****************************************************************************/
 class Adder : public Reader {
 public:
-    SIMap& map_;  // String to Num map;  Num holds an int
+    SIMap &map_;  // String to Num map;  Num holds an int
 
-    Adder(SIMap& map) : map_(map)  {}
+    Adder(SIMap &map) : map_(map) {}
 
-    bool visit(Row& r) override {
-        cout << "ROW RECV: ";
+    /** Reads from the given Row and adds elements to map **/
+    bool visit(Row &r) override {
         r.printRow();
-        cout << " " << endl;
-
-        cout << "in adder visit" << endl;
-        String* word = r.get_string(0);
+        String *word = r.get_string(0);
         assert(word != nullptr);
-        cout << "working with word = " << word->c_str() << endl;
-        Num* num = map_.contains(*word) ? map_.get(*word) : new Num();
+        Num *num = map_.contains(*word) ? map_.get(*word) : new Num();
         assert(num != nullptr);
-        cout << "num != nullptr" << endl;
         num->v++;
         map_.set(*word, num);
-        cout << "done with visit" << endl;
         return false;
     }
 };

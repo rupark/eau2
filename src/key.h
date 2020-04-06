@@ -13,46 +13,47 @@
  */
 class Key : public Object {
 public:
-        String* name;
-        size_t home;
+    String *name;
+    size_t home;
 
-        Key(char* name, size_t home) {
-            this->name = new String(name);
-            this->home = home;
-        }
+    Key(char *name, size_t home) {
+        this->name = new String(name);
+        this->home = home;
+    }
 
-        // If no homenode passed in, default 0.
-        Key (char* name) {
-            this->name = new String(name);
-            this->home = 0;
-        }
+    // If no homenode passed in, default 0.
+    Key(char *name) {
+        this->name = new String(name);
+        this->home = 0;
+    }
 
-        Key (Key* orig) {
-            this->name = orig->name;
-            this->home = orig->home;
-        }
+    Key(Key *orig) {
+        this->name = orig->name;
+        this->home = orig->home;
+    }
 
-        ~Key(){
-            delete name;
-        }
+    ~Key() {
+        delete name;
+    }
 
-        /**
-         * Returns true if this Key equals the given object
-         */
-        bool equals(Object* other) {
-            if (other == this) return true;
-            Key* x = dynamic_cast<Key *>(other);
-            if (x == nullptr) return false;
-            return name->equals(x->name) && home == x->home;
-        }
+    /**
+     * Returns true if this Key equals the given object
+     */
+    bool equals(Object *other) {
+        if (other == this) return true;
+        Key *x = dynamic_cast<Key *>(other);
+        if (x == nullptr) return false;
+        return name->equals(x->name) && home == x->home;
+    }
 
-        char* c_str() override {
-            StrBuff* a = new StrBuff();
-            a->c(this->name->c_str());
-            a->c((size_t)this->home);
-            char* ret = a->get()->c_str();
-            delete a;
-            return ret;
-        }
+    char *c_str() override {
+        StrBuff *a = new StrBuff();
+        a->c(this->name->c_str());
+        a->c((size_t)
+        this->home);
+        char *ret = a->get()->c_str();
+        delete a;
+        return ret;
+    }
 
 };

@@ -17,7 +17,7 @@ public:
     std::thread thread_;
 
     /** Starts running the thread, invoked the run() method. */
-    void start() { thread_ = std::thread([this]{ this->run(); }); }
+    void start() { thread_ = std::thread([this] { this->run(); }); }
 
     /** Wait on this thread to terminate. */
     void join() { thread_.join(); }
@@ -35,7 +35,7 @@ public:
 
     // there's a better way to get an CwC value out of a threadid, but this'll do for now
     /** Return the id of the current thread */
-    static String * thread_id() {
+    static String *thread_id() {
         std::stringstream buf;
         buf << std::this_thread::get_id();
         std::string buffer(buf.str());
@@ -73,7 +73,7 @@ public:
 /** A simple thread-safe counter. */
 class Counter : public Object {
 public:
-    std::atomic<size_t> next_;
+    std::atomic <size_t> next_;
 
     Counter() { next_ = 0; }
 
@@ -81,10 +81,11 @@ public:
         size_t r = next_++;
         return r;
     }
+
     size_t prev() {
         size_t r = next_--;
         return r;
     }
 
-    size_t current() { return next_;  }
+    size_t current() { return next_; }
 };

@@ -33,12 +33,12 @@ using namespace std;
 class DataFrame : public Object {
 public:
     Schema schema;
-    Column** columns;
+    Column **columns;
     int nrow;
     int ncol;
 
     /** Create a data frame with the same columns as the given df but with no rows or rownmaes */
-    DataFrame(DataFrame& df) {
+    DataFrame(DataFrame &df) {
         int ncol = df.ncols();
         int nrow = df.nrows();
         schema = df.get_schema();
@@ -52,8 +52,8 @@ public:
     }
 
     /** Create a data frame from a schema. All columns are created empty. */
-    DataFrame(Schema& schema) {
-        this->columns = new Column*[100*1000*1000];
+    DataFrame(Schema &schema) {
+        this->columns = new Column *[100 * 1000 * 1000];
 
         ncol = schema.width();
 
@@ -83,16 +83,16 @@ public:
     }
 
     /** Fill DataFrame from group 4500NE's sorer adapter */
-    DataFrame(Provider::ColumnSet* data, size_t num_columns) {
-        this->columns = new Column*[100*1000*1000];
+    DataFrame(Provider::ColumnSet *data, size_t num_columns) {
+        this->columns = new Column *[100 * 1000 * 1000];
         this->schema = *new Schema();
 
-        Column* working_col;
+        Column *working_col;
 
         // create columns and fill this df
         for (size_t i = 0; i < num_columns; i++) {
             // determine col type
-            switch(data->getColumn(i)->getType()) {
+            switch (data->getColumn(i)->getType()) {
 
                 case Provider::ColumnType::BOOL :
 
@@ -114,7 +114,7 @@ public:
             }
             // fill the specific typed column
             for (size_t j = 0; j < data->getColumn(i)->getLength(); j++) {
-                switch(data->getColumn(i)->getType()) {
+                switch (data->getColumn(i)->getType()) {
                     case Provider::ColumnType::BOOL :
                         if (checkColumnEntry(data->getColumn(i), j)) {
                             if (data->getColumn(i)->isEntryPresent(j)) {
@@ -156,7 +156,7 @@ public:
                         }
                         break;
                     case Provider::ColumnType::UNKNOWN:
-                        // TODO? WHAT GOES HERE FOR UNKOWN TYPE.
+
                         break;
                 }
             }
@@ -173,7 +173,7 @@ public:
      * @param col The column
      * @param which The entry index
      */
-    bool checkColumnEntry(Provider::BaseColumn* col, size_t which) {
+    bool checkColumnEntry(Provider::BaseColumn *col, size_t which) {
         if (which >= col->getLength()) {
             return false;
         }
@@ -182,14 +182,14 @@ public:
 
     /** Returns the dataframe's schema. Modifying the schema after a dataframe
       * has been created in undefined. */
-    Schema& get_schema() {
+    Schema &get_schema() {
         return schema;
     }
 
     /** Adds a column this dataframe, updates the schema, the new column
       * is external, and appears as the last column of the dataframe, the
       * name is optional and external. A nullptr colum is undefined. */
-    void add_column(Column* col, String* name) {
+    void add_column(Column *col, String *name) {
         if (col == nullptr) {
             exit(1);
         } else {
@@ -213,17 +213,17 @@ public:
         return *columns[col]->as_float()->get(row);
     }
 
-    String*  get_string(size_t col, size_t row) {
+    String *get_string(size_t col, size_t row) {
         return columns[col]->as_string()->get(row);
     }
 
     /** Return the offset of the given column name or -1 if no such col. */
-    int get_col(String& col) {
+    int get_col(String &col) {
         return schema.col_idx(col.c_str());
     }
 
     /** Return the offset of the given row name or -1 if no such row. */
-    int get_row(String& col) {
+    int get_row(String &col) {
         return schema.row_idx(col.c_str());
     }
 
@@ -231,7 +231,7 @@ public:
       * If the column is not  of the right type or the indices are out of
       * bound, the result is undefined. */
     void set(size_t col, size_t row, int val) {
-        columns[col]->as_int()->set(row, &val); // TODO does this just return intcol and set the col without saving?
+        columns[col]->as_int()->set(row, &val);
     }
 
     void set(size_t col, size_t row, bool val) {
@@ -242,7 +242,7 @@ public:
         columns[col]->as_float()->set(row, &val);
     }
 
-    void set(size_t col, size_t row, String* val) {
+    void set(size_t col, size_t row, String *val) {
         columns[col]->as_string()->set(row, val);
     }
 
@@ -250,7 +250,7 @@ public:
       * the given offset.  If the row is not form the same schema as the
       * dataframe, results are undefined.
       */
-    void fill_row(size_t idx, Row& row) {
+    void fill_row(size_t idx, Row &row) {
         for (size_t i = 0; i < ncol; i++) {
             switch (columns[i]->get_type()) {
                 case 'F':
@@ -271,40 +271,26 @@ public:
 
     /** Add a row at the end of this dataframe. The row is expected to have
      *  the right schema and be filled with values, otherwise undedined.  */
-    void add_row(Row& row) {
-        cout << "in add row" << endl;
+    void add_row(Row &row) {
         row.set_idx(nrow);
-        cout <<"set idx" <<endl;
         this->nrow++;
         schema.nrow++;
-
-        cout <<row.size<< endl;
-
-        cout << ncol << endl;
         for (size_t i = 0; i < ncol; i++) {
             switch (columns[i]->get_type()) {
                 case 'F':
-                    cout << "float" << endl;
                     columns[i]->push_back(row.get_float(i));
                     break;
                 case 'B':
-                    cout << "bool" << endl;
                     columns[i]->push_back(row.get_bool(i));
                     break;
                 case 'I':
-                    cout << "int" << endl;
-                    cout <<i << endl;
                     this->columns[i]->push_back(row.get_int(i));
-                    cout << "pushed" << endl;
                     break;
                 case 'S':
-                    cout << "str" << endl;
                     columns[i]->push_back(row.get_string(i));
                     break;
             }
         }
-
-        cout <<"done pushing" <<endl;
     }
 
     /** The number of rows in the dataframe. */
@@ -318,9 +304,9 @@ public:
     }
 
     /** Visit rows in order */
-    void map(Rower& r) {
+    void map(Rower &r) {
         for (size_t i = 0; i < this->nrows(); i++) {
-            Row* row = new Row(this->schema);
+            Row *row = new Row(this->schema);
             for (size_t j = 0; j < this->ncols(); j++) {
                 switch (row->col_type(j)) {
                     case 'I':
@@ -342,11 +328,9 @@ public:
     }
 
     /** Visits the rows in order on THIS node */
-    void local_map(Adder& r) {
-        cout << "num rows:" << this->nrow << endl;
+    void local_map(Adder &r) {
         for (size_t i = 0; i < this->nrows(); i++) {
-            Row* row = new Row(this->schema);
-            cout << "schema: " << schema.types->c_str() << endl;
+            Row *row = new Row(this->schema);
             for (size_t j = 0; j < this->ncols(); j++) {
                 switch (row->col_type(j)) {
                     case 'I':
@@ -365,20 +349,19 @@ public:
             }
             r.visit(*row);
         }
-        cout << "done with local map" << endl;
     }
 
-    void map(Adder& r) {
+    /** Applies the given Adder to each Row in this DataFrame **/
+    void map(Adder &r) {
         local_map(r);
-        cout << "done with map" << endl;
     }
 
     /** Create a new dataframe, constructed from rows for which the given Rower
       * returned true from its accept method. */
-    DataFrame* filter(Rower& r) {
-        DataFrame* d = new DataFrame(this->get_schema());
+    DataFrame *filter(Rower &r) {
+        DataFrame *d = new DataFrame(this->get_schema());
         for (size_t i = 0; i < this->nrows(); i++) {
-            Row* row = new Row(this->schema);
+            Row *row = new Row(this->schema);
             for (size_t j = 0; j < this->ncols(); j++) {
                 switch (row->col_type(j)) {
                     case 'I':
@@ -404,12 +387,8 @@ public:
 
     /** Print the dataframe in SoR format to standard output. */
     void print() {
-        cout << "in print" << endl;
-        cout << this->nrow << endl;
-        cout << this->ncol << endl;
         for (size_t i = 0; i < nrow; i++) {
             for (size_t j = 0; j < ncol; j++) {
-                cout << columns[j]->get_type() << endl;
                 switch (columns[j]->get_type()) {
                     case 'F':
                         cout << "<" << columns[j]->as_float()->get(i) << ">";
@@ -432,44 +411,39 @@ public:
     /**
      * Contructs a DataFrame from the given array of doubles and associates the given Key with the DataFrame in the given KVStore
      */
-    static DataFrame* fromArray(Key* key, KVStore* kv, size_t sz, double* vals) {
-        DataFrame* df = new DataFrame(*new Schema("F"));
+    static DataFrame *fromArray(Key *key, KVStore *kv, size_t sz, double *vals) {
+        DataFrame *df = new DataFrame(*new Schema("F"));
         for (int i = 0; i < sz; i++) {
-            df->columns[0]->push_back((float)vals[i]);
+            df->columns[0]->push_back((float) vals[i]);
         }
         kv->put(key, df);
         return df;
     }
 
     /**
-     * Contructs a DataFrame from the given args
+     * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
-    static DataFrame* fromVisitor(Key* key, KVStore* kv, char* schema, FileReader w) {
-        //cout <<"making df"<<endl;
-        DataFrame* df = new DataFrame(*new Schema(schema));
+    static DataFrame *fromVisitor(Key *key, KVStore *kv, char *schema, FileReader w) {
+        DataFrame *df = new DataFrame(*new Schema(schema));
         while (!w.done()) {
-            //cout << "filling a row" << endl;
-            Row* r = new Row(*new Schema(schema));
-//            cout << "Trying to visit" << endl;
+            Row *r = new Row(*new Schema(schema));
             w.visit(*r);
-//            cout << "visit complete/adding row2df" << endl;
             df->add_row(*r);
             cout << "ROW: " << r->get_string(0)->c_str() << endl;
         }
-        cout << "done building" << endl;
         kv->put(key, df);
-        cout << "from visited" << endl;
         return df;
     }
 
-    DataFrame* chunk(size_t chunk) {
+    /** Returns a section of this DataFrame as a new DataFrame **/
+    DataFrame *chunk(size_t chunk) {
         int start_row = chunk * arg.rows_per_chunk;
-        DataFrame* df = new DataFrame(this->schema);
+        DataFrame *df = new DataFrame(this->schema);
         for (int i = start_row; start_row < start_row + arg.rows_per_chunk; i++) {
             if (i >= nrow) {
                 return df;
             } else {
-                Row* r = new Row(this->schema);
+                Row *r = new Row(this->schema);
                 this->fill_row(i, r);
             }
         }
@@ -477,27 +451,18 @@ public:
     };
 
     /**
-     * Contructs a DataFrame from the given args
+     * Contructs a DataFrame of the given schema from the given Summer and puts it in the KVStore at the given Key
      */
-    static DataFrame* fromVisitor(Key* key, KVStore* kv, char* schema, Summer w) {
-        cout <<"making df"<<endl;
-        DataFrame* df = new DataFrame(*new Schema(schema));
+    static DataFrame *fromVisitor(Key *key, KVStore *kv, char *schema, Summer w) {
+        DataFrame *df = new DataFrame(*new Schema(schema));
         while (!w.done()) {
-            cout << "filling a row" << endl;
-            Row* r = new Row(*new Schema(schema));
-            cout << "Trying to visit" << endl;
-            w.visit(*r);
-            cout << "visit complete/adding row2df" << endl;
+            Row *r = new Row(*new Schema(schema));
+            w.visit(*r)
             df->add_row(*r);
-            cout << "ROW: " << r->get_string(0)->c_str() << endl;
-            cout << "ROW: " << r->get_int(1) << endl;
         }
-        cout << "done building" << endl;
         kv->put(key, df);
-        cout << "from visited" << endl;
         return df;
     }
-
 
     /**
      * Returns the double at the given column and row in this DataFrame
@@ -509,13 +474,12 @@ public:
     /**
      * Contructs a DataFrame from the size_t and associates the given Key with the DataFrame in the given KVStore
      */
-    static DataFrame* fromScalar(Key* key, KVStore* kv, size_t scalar) {
-        DataFrame* df = new DataFrame(*new Schema("I"));
-        df->columns[0]->push_back((int)scalar);
+    static DataFrame *fromScalar(Key *key, KVStore *kv, size_t scalar) {
+        DataFrame *df = new DataFrame(*new Schema("I"));
+        df->columns[0]->push_back((int) scalar);
         kv->put(key, df);
         return df;
     }
-
 
 
 };

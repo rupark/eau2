@@ -11,6 +11,39 @@
   <component name="ChangeListManager">
     <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SImap.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/SImap.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/addIntsRower.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/args.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/args.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/array.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/array.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bool.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/bool.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/boolcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/boolcol.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/column.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/column.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataframe.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataframe.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fielder.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/fielder.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/float.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/float.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/floatcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/floatcol.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/intcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/intcol.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/integer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/integer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/key.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/key.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kvstore.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/kvstore.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/application.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/application.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/demo.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/demo.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/network.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/network.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/serial.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/serial.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/thread.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/thread.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/wordcount.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/wordcount.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/object.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/object.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parser.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/reader.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/row.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/row.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rower.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/rower.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/schema.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/schema.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/string.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/string.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stringcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/stringcol.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test_sor.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/writer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/writer.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -472,9 +505,10 @@
     </state>
     <state x="427" y="244" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1585587542837" />
     <state x="427" y="248" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.831@0.23.1440.831" timestamp="1584903064889" />
-    <state x="500" y="161" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584301170655">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="469" y="176" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586205154167">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="469" y="176" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1586205154167" />
     <state x="500" y="161" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1584301170655" />
     <state x="368" y="10" key="CommitChangelistDialog2" timestamp="1586198248326">
       <screen x="0" y="0" width="1440" height="900" />

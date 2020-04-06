@@ -5,7 +5,9 @@
  */
 
 class IntColumn;
+
 class BoolColumn;
+
 class FloatColumn;
 
 #pragma once
@@ -26,26 +28,25 @@ using namespace std;
  */
 class StringColumn : public Column {
 public:
-    String** vals_;
+    String **vals_;
     size_t size_;
     size_t capacity_;
 
     StringColumn() {
         size_ = 0;
         capacity_ = 1000 * 1000 * 1000;
-        vals_ = new String*[capacity_];
+        vals_ = new String *[capacity_];
     }
 
-    ~StringColumn(){
+    ~StringColumn() {
         delete[] vals_;
     }
 
     StringColumn(int n, ...) {
         va_list args;
         va_start(args, n);
-        for(size_t i=0; i<n; i++)
-        {
-            vals_[i] = new String(va_arg(args, char*));
+        for (size_t i = 0; i < n; i++) {
+            vals_[i] = new String(va_arg(args, char * ));
         }
     }
 
@@ -53,7 +54,7 @@ public:
      * Returns this if it is a StringColumn
      * @return
      */
-    StringColumn* as_string() {
+    StringColumn *as_string() {
         return this;
     }
 
@@ -61,7 +62,7 @@ public:
      * Returns this if it is a IntColumn
      * @return
      */
-    virtual IntColumn* as_int() {
+    virtual IntColumn *as_int() {
         return nullptr;
     }
 
@@ -69,7 +70,7 @@ public:
      * Returns this if it is a BoolColumn
      * @return
      */
-    virtual BoolColumn*  as_bool() {
+    virtual BoolColumn *as_bool() {
         return nullptr;
     }
 
@@ -77,18 +78,18 @@ public:
      * Returns this if it is a FloatColumn
      * @return
      */
-    virtual FloatColumn* as_float() {
+    virtual FloatColumn *as_float() {
         return nullptr;
     }
 
     /** Returns the string at idx; undefined on invalid idx.*/
-    String* get(size_t idx) {
+    String *get(size_t idx) {
 
         return vals_[idx];
     }
 
     /** Out of bound idx is undefined. */
-    void set(size_t idx, String* val) {
+    void set(size_t idx, String *val) {
         if (idx >= 0 && idx <= this->size()) {
             vals_[idx] = val;
             size_++;
@@ -128,9 +129,9 @@ public:
     /**
      * Adds the given String to this if it is a StringColumn
      */
-    virtual void push_back(String* val) {
-       vals_[size_] = val;
-       size_++;
+    virtual void push_back(String *val) {
+        vals_[size_] = val;
+        size_++;
     }
 
     /** Return the type of this column as a char: 'S', 'B', 'I' and 'F'. */
@@ -139,8 +140,8 @@ public:
     }
 
     /** Returns the serialization of this StringColumn as a String */
-    virtual String* serialize() {
-        StrBuff* s = new StrBuff();
+    virtual String *serialize() {
+        StrBuff *s = new StrBuff();
         s->c("S}");
 
         for (int i = 0; i < this->size_; i++) {
