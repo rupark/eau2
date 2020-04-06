@@ -302,8 +302,8 @@ public:
                     break;
             }
         }
-        cout << columns[0]->as_string()->get(nrow) << endl;
-        cout << columns[1]->as_int()->get(nrow) << endl;
+        cout << columns[0]->as_string()->get(nrow-1) << endl;
+        cout << columns[1]->as_int()->get(nrow-1) << endl;
         cout <<"done pushing" <<endl;
     }
 
