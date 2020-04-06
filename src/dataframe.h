@@ -425,7 +425,7 @@ public:
     static DataFrame* fromVisitor(Key* key, KVStore* kv, char* schema, Writer w) {
         DataFrame* df = new DataFrame(*new Schema(schema));
         while (!w.done()) {
-            Row* r = new Row;
+            Row* r = new Row(*new Schema(schema));
             w.visit(*r);
             df->add_row(*r);
         }
