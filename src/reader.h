@@ -22,6 +22,7 @@ public:
     Adder(SIMap& map) : map_(map)  {}
 
     bool visit(Row& r) override {
+        cout << "in adder visit" << endl;
         String* word = r.get_string(0);
         assert(word != nullptr);
         Num* num = map_.contains(*word) ? map_.get(*word) : new Num();
