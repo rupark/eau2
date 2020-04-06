@@ -10,6 +10,7 @@
 #include "../helper.h"
 #include "../array.h"
 #include "../args.h"
+#include "../writer.h"
 #include <iostream>
 using namespace std;
 
