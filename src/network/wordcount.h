@@ -234,7 +234,7 @@ public:
 
     KeyBuff(Key* orig) {
         orig_ = new Key(orig);
-        buf_ = *new StrBuff();
+        buf_ = *new StrBuff(orig->c_str());
     }
 
     KeyBuff& c(String &s) { buf_.c(s); return *this;  }
@@ -242,7 +242,7 @@ public:
     KeyBuff& c(const char* v) { buf_.c(v); return *this; }
 
     Key* get() {
-        cout << "key buff get" << endl;
+        cout << "key buff get";
         //buf_.c(orig_->c_str());
         String* s = buf_.get();
         Key* k = new Key(s->steal(), orig_->home);
@@ -283,7 +283,7 @@ public:
      *  which then joins them one by one. */
     Key* mk_key(size_t idx) {
         cout << "called mk_key idx = " << idx << endl;
-        Key * k = kbuf.get();
+        Key * k = kbuf.c(idx).get();
         //LOG("Created key " << k->c_str());
         cout << "Created key " << k->c_str() << endl;
         return k;
