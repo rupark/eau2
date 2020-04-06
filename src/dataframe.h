@@ -302,8 +302,7 @@ public:
                     break;
             }
         }
-        cout << columns[0]->as_string()->get(nrow-1) << endl;
-        cout << columns[1]->as_int()->get(nrow-1) << endl;
+
         cout <<"done pushing" <<endl;
     }
 
@@ -467,6 +466,8 @@ public:
             w.visit(*r);
             cout << "visit complete/adding row2df" << endl;
             df->add_row(*r);
+            cout << columns[0]->as_string()->get(nrow-1)->cstr_ << endl;
+            cout << columns[1]->as_int()->get(nrow-1) << endl;
         }
         cout << "done building" << endl;
         kv->put(key, df);
