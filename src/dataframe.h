@@ -273,27 +273,20 @@ public:
     void add_row(Row& row) {
         cout << "in add row" << endl;
         row.set_idx(nrow);
+        cout <<"set idx" <<endl;
         this->nrow++;
         //nrow++;
 
         cout << ncol << endl;
         for (size_t i = 0; i < ncol; i++) {
             if (dynamic_cast<IntColumn*>(columns[i])) {
-                IntColumn* c =  columns[i]->as_int();
-                c->push_back(row.get_int(i));
-                columns[i] = c;
+                columns[i]->push_back(row.get_int(i));
             } else if (dynamic_cast<BoolColumn*>(columns[i])) {
-                BoolColumn* c =  columns[i]->as_bool();
-                c->push_back(row.get_bool(i));
-                columns[i] = c;
+                columns[i]->push_back(row.get_bool(i));
             } else if (dynamic_cast<StringColumn*>(columns[i])) {
-                StringColumn* c =  columns[i]->as_string();
-                c->push_back(row.get_string(i));
-                columns[i] = c;
+                columns[i]->push_back(row.get_string(i));
             } else {
-                FloatColumn* c =  columns[i]->as_float();
-                c->push_back(row.get_float(i));
-                columns[i] = c;
+                columns[i]->push_back(row.get_float(i));
             }
         }
 
