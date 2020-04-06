@@ -1,5 +1,7 @@
 #pragma once
 #include "helper.h"
+#include <iostream>
+using namespace std;
 // LANGUAGE: CwC
 
 /** Base class for all objects in the system.
