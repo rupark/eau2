@@ -341,7 +341,7 @@ public:
     }
 
     /** Visits the rows in order on THIS node */
-    void local_map(Reader& r) {
+    void local_map(Adder& r) {
         for (size_t i = 0; i < this->nrows(); i++) {
             Row* row = new Row(this->schema);
             for (size_t j = 0; j < this->ncols(); j++) {
@@ -364,7 +364,7 @@ public:
         }
     }
 
-    void map(Reader& r) {
+    void map(Adder& r) {
         local_map(r);
     }
 
