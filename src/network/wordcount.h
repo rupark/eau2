@@ -205,7 +205,7 @@ public:
         return ((Num*)(map_.items_[i].vals_.get_(j)))->v;
     }
 
-    void visit(Row& r) {
+    void visit override (Row& r) {
         if (!k()) next();
         String* key = k();
         size_t value = v();
@@ -306,7 +306,7 @@ public:
         //cout << "delete words" << endl;
         Summer cnt(map);
         cout << "created summer" << endl;
-        delete DataFrame::fromVisitor(mk_key(this_node()), &kv, "SI", cnt);
+        DataFrame::fromVisitor(mk_key(this_node()), &kv, "SI", cnt);
         cout << "from visitor summer done" << endl;
     }
 
