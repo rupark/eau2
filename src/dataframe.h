@@ -294,7 +294,7 @@ public:
                     cout << "int" << endl;
                     cout <<i << endl;
 
-                    columns[i]->push_back(row.get_int(i));
+                    this->columns[i]->push_back(row.get_int(i));
                     cout << "pushed" << endl;
                     break;
                 case 'S':

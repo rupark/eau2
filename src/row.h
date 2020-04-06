@@ -39,16 +39,16 @@ public:
             char type = scm.types->at(i);
             switch (type) {
                 case 'F':
-                    elements[size] = nullptr;
+                    elements[i] = new Float(0);
                     break;
                 case 'B':
-                    elements[size] = nullptr;
+                    elements[i] = new Bool(0);
                     break;
                 case 'I':
-                    elements[size] = nullptr;
+                    elements[i] = new Integer(0);
                     break;
                 case 'S':
-                    elements[size] = nullptr;
+                    elements[i] = new String("");
                     break;
             }
         }
