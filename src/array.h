@@ -246,6 +246,7 @@ public:
 
     void print() override {
         for (int i = 0; i < this->size(); ++i) {
+            cout << i << endl;
             arr_[i]->print();
         }
     }

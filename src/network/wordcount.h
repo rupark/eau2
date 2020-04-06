@@ -141,10 +141,7 @@ public:
 
         //kv.get(*own)->print();
 
-        for (int i =0; i < map.size(); i++) {
-            map.items_->vals_.print();
-            map.items_->vals_.print();
-        }
+        map.items_->vals_.print();
 
         cout << "done printing" << endl;
         //delete own;
