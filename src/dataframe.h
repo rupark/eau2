@@ -17,7 +17,6 @@
 #include "schema.h"
 #include "row.h"
 #include "rower.h"
-#include "addIntsRower.h"
 #include <iostream>
 #include <thread>
 #include "key.h"
