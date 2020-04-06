@@ -2,6 +2,7 @@
 // Created by Kate Rupar on 4/5/20.
 //
 
+#pragma once
 #include "row.h"
 #include "SImap.h"
 
@@ -12,7 +13,6 @@ public:
     }
     virtual bool visit(Row&) {}
 };
-
 
 /****************************************************************************/
 class Adder : public Reader {

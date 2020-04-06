@@ -1,5 +1,6 @@
 #pragma once
 #include "application.h"
+#include "../reader.h"
 #include "../dataframe.h"
 #include "../row.h"
 #include <stdio.h>
@@ -12,7 +13,6 @@
 #include "../args.h"
 #include "../writer.h"
 #include "../SImap.h"
-#include "../reader.h"
 #include <iostream>
 using namespace std;
 
