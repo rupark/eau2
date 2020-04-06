@@ -242,8 +242,8 @@ public:
     KeyBuff& c(const char* v) { buf_.c(v); return *this; }
 
     Key* get() {
+        //buf_.c(orig_->c_str());
         String* s = buf_.get();
-        buf_.c(orig_->c_str());
         Key* k = new Key(s->steal(), orig_->home);
         delete s;
         return k;
