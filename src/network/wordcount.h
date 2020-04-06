@@ -70,6 +70,49 @@ public:
     WordCount(size_t idx, NetworkIP & net):
             Application(idx, net), in("data"), kbuf(new Key("wc-map-",0)) { }
 
+
+//    /** The master nodes reads the input, then all of the nodes count. */
+//    void run_() override {
+//        if (idx_ == 0) {
+//            cout << "In server run" << endl;
+//            FileReader fr = *new FileReader();
+//
+//            DataFrame *df = DataFrame::fromVisitor(&in, &kv, "S", fr);
+//
+//            int num_chunks = ceil(df->nrow / arg.rows_per_chunk);
+//            int selectedNode = 1;
+//            for (int j = 0; j < num_chunks; j++) {
+//                DataFrame *chunk = df.chunk(j);
+//                Status chunkMsg(selectedNode, 0, chunk);
+//                cout << "Server sending chunk" << endl;
+//                sleep(3);
+//                send_m(&chunkMsg);
+//                selectedNode++;
+//                if (selectedNode == arg.num_nodes) {
+//                    selectedNode = 1;
+//                }
+//            }
+//
+//            //HERE IS WHERE WE RECIEVE EVERYONE AND ADD THEIR DFs to the KV TODO
+//            for (size_t i = 1; i < arg.num_nodes; i++) {
+//                Status *msg = dynamic_cast<Status *>(n.recv_m());
+//                this->kv.put(mk_key(this->idx_), msg->msg_);
+//            }
+//
+//            //Theoretically everyone should now be in the store to reduce
+//            reduce();
+//            cout << "finished reduce" << endl;
+//
+//        } else {
+//            Status *ipd = dynamic_cast<Status *>(recv_m()); // Put this in Kv?
+//            local_count();
+//            Status msg(this->idx_, 0, kv.get(mk_key(this->idx_)));
+//            send_m(&msg);
+//            cout << "DONE" << endl;
+//        }
+//    }
+
+
     /** The master nodes reads the input, then all of the nodes count. */
     void run_() override {
         if (idx_ == 0) {

@@ -85,6 +85,7 @@ public:
 
     Map() : Map(10) {}
     Map(size_t cap) {
+        cout << "created map cap=" << cap << endl;
         capacity_ = cap;
         items_ = new Items_[capacity_];
     }

@@ -113,7 +113,15 @@ public:
     size_t j = 0;
     size_t seen = 0;
 
-    Summer(SIMap& map) : map_(map) {}
+    Summer(SIMap& map) : map_(map) {
+        cout << "map size from constructor = " << map_.size() << endl;
+        cout << "welcome ===========" << map_.get(*new String("welcome"))->v << endl;
+        cout << "to ===========" << map_.get(*new String("to"))->v << endl;
+        cout << "the ===========" << map_.get(*new String("the"))->v << endl;
+        cout << "mark ===========" << map_.get(*new String("mark"))->v << endl;
+        cout << "kate ===========" << map_.get(*new String("kate"))->v << endl;
+
+    }
 
     void next() {
         if (i == map_.capacity_ ) return;
@@ -124,29 +132,38 @@ public:
             ++i;
             j = 0;
             while( i < map_.capacity_ && map_.items_[i].keys_.size() == 0 )  i++;
+            cout << 2;
             if (k()) ++seen;
         }
     }
 
     String* k() {
-        cout << "keys size: " << map_.items_[i].keys_.size() << endl;
+        cout << "i = " << i << " map_.capactiy = " << map_.capacity_ << endl;
+        cout << "j = " << j << " keys size: " << map_.items_[i].keys_.size() << endl;
         if (i==map_.capacity_ || j == map_.items_[i].keys_.size()) return nullptr;
         return (String*) (map_.items_[i].keys_.get_(j));
     }
 
     size_t v() {
         if (i == map_.capacity_ || j == map_.items_[i].keys_.size()) {
-            assert(false); return 0;
+            assert(false);
+            return 0;
         }
         return ((Num*)(map_.items_[i].vals_.get_(j)))->v;
     }
 
     void visit(Row& r) override {
         cout << "visiting" <<endl;
-        //cout << k()->c_str() <<endl;
-        if (!k()) next();
+        cout << 1;
+        if (!k()) {
+            cout << "k returns false" << endl;
+            next();
+        }
+        cout << 3;
         String* key = k();
         size_t value = v();
+        cout << "r 0 | k=" << key->c_str() << endl;
+        cout << "r 1 | v=" << value << endl;
         r.set(0, key);
         r.set(1, (int) value);
         next();

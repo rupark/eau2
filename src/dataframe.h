@@ -462,6 +462,20 @@ public:
         return df;
     }
 
+    DataFrame* chunk(size_t chunk) {
+        int start_row = chunk * arg.rows_per_chunk;
+        DataFrame* df = new DataFrame(this->schema);
+        for (int i = start_row; start_row < start_row + arg.rows_per_chunk; i++) {
+            if (i >= nrow) {
+                return df;
+            } else {
+                Row* r = new Row(this->schema);
+                this->fill_row(i, r);
+            }
+        }
+        return df;
+    };
+
     /**
      * Contructs a DataFrame from the given args
      */
