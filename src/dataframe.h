@@ -417,7 +417,7 @@ public:
                         cout << "<" << columns[j]->as_int()->get(i) << ">";
                         break;
                     case 'S':
-                        cout << "<" << columns[j]->as_string()->get(i) << ">";
+                        cout << "<" << columns[j]->as_string()->get(i)->cstr_ << ">";
                         break;
                 }
             }
