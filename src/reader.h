@@ -28,14 +28,14 @@ public:
 
         cout << "in adder visit" << endl;
         String* word = r.get_string(0);
-//        assert(word != nullptr);
+        assert(word != nullptr);
         cout << "working with word = " << word->c_str() << endl;
         Num* num = map_.contains(*word) ? map_.get(*word) : new Num();
         assert(num != nullptr);
         cout << "num != nullptr" << endl;
         num->v++;
         map_.set(*word, num);
-
+        cout << "done with visit" << endl;
         return false;
     }
 };

@@ -80,6 +80,7 @@ public:
         }
         local_count();
         reduce();
+        cout << "finished reduce" << endl;
     }
 
     /** Returns a key for given node.  These keys are homed on master node
@@ -124,15 +125,19 @@ public:
         Key* own = mk_key(0);
         cout << own->name << endl;
         merge(kv.get(*own), map);
+        cout << "merge finish...map size=" << map.size() << endl;
+        cout << "starting loop w/ num nodes=" << arg.num_nodes << endl;
         for (size_t i = 1; i < arg.num_nodes; ++i) { // merge other nodes
+            cout << "in loop" << endl;
             Key* ok = mk_key(i);
             merge(kv.waitAndGet(*ok), map);
             delete ok;
         }
-//        p("Different words: ").pln(map.size());
-        cout << "Different words: " << map.size();
 
-        delete own;
+        cout << "Different words: " << map.size() << "!!" << endl;
+
+        //delete own;
+        //cout << "deleted own" << endl;
     }
 
     void merge(DataFrame* df, SIMap& m) {
@@ -150,7 +155,9 @@ public:
         Adder add(m);
         cout << "adder created" << endl;
         df->map(add);
-        delete df;
+
+        cout << "MAP SIZE: " << m.size() << endl;
+        //delete df;
     }
 
 }; // WordcountDemo

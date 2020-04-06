@@ -81,11 +81,12 @@ int main (int argc, char* argv[]) {
         Application* app = pick(network->index(), *network);
         cout << "app set" << endl;
         app->run_();
+        cout << "finised running app" << endl;
 //        app->startKVStore();
 //        app->start();
     } catch (std::exception const & e) {
         cout << "error: " << e.what() << endl;
     }
-    delete network;
+    //delete network;
 }
 

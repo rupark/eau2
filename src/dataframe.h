@@ -365,10 +365,12 @@ public:
             }
             r.visit(*row);
         }
+        cout << "done with local map" << endl;
     }
 
     void map(Adder& r) {
         local_map(r);
+        cout << "done with map" << endl;
     }
 
     /** Create a new dataframe, constructed from rows for which the given Rower
