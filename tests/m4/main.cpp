@@ -55,15 +55,15 @@ NetworkIP * initialize() {
     return res;
 }
 
-class ApplicationThread: public Thread {
-    Application* app = nullptr;
-    ApplicationThread() {}
-    ~ApplicationThread() {}
-    void run() {
-        app->startKVStore();
-        app->start();
-    }
-};
+//class ApplicationThread: public Thread {
+//    Application* app = nullptr;
+//    ApplicationThread() {}
+//    ~ApplicationThread() {}
+//    void run() {
+//        app->startKVStore();
+//        app->start();
+//    }
+//};
 
 Application* pick(size_t i, NetworkIP& net) {
 //    if (strcmp(arg.app, "demo") == 0) return new Demo(i, net);
