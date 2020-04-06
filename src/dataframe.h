@@ -343,6 +343,7 @@ public:
 
     /** Visits the rows in order on THIS node */
     void local_map(Adder& r) {
+        cout << "num rows:" << this->nrow << endl;
         for (size_t i = 0; i < this->nrows(); i++) {
             Row* row = new Row(this->schema);
             for (size_t j = 0; j < this->ncols(); j++) {
