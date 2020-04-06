@@ -362,6 +362,7 @@ public:
 
     /** Compute word counts on the local node and build a data frame. */
     void local_count() {
+        cout <<"in local count" << endl;
         DataFrame* words = (kv.waitAndGet(in));
         //p("Node ").p(index).pln(": starting local count...");
         cout << "Node " << this_node() << ": starting local count..." << endl;
