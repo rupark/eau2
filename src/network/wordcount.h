@@ -283,7 +283,7 @@ public:
      *  which then joins them one by one. */
     Key* mk_key(size_t idx) {
         cout << "called mk_key idx = " << idx << endl;
-        Key * k = kbuf.c(idx).get();
+        Key * k = kbuf.get();
         //LOG("Created key " << k->c_str());
         cout << "Created key " << k->c_str() << endl;
         return k;
