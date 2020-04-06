@@ -120,6 +120,7 @@ public:
         cout << "Node 0: reducing counts..." << endl;
         SIMap map;
         kbuf = new Key("wc-map-",0);
+        cout << map.capacity_ << endl;
         Key* own = mk_key(0);
         cout << own->name << endl;
         merge(kv.get(*own), map);
@@ -136,8 +137,6 @@ public:
 
     void merge(DataFrame* df, SIMap& m) {
         cout << df->ncol << endl;
-        cout << df->columns[0]->as_string()->get(0)->cstr_ << endl;
-        cout << df->columns[0]->as_string()->get(1)->cstr_ << endl;
         cout <<"in merge" << endl;
         cout << df->nrow << endl;
         Adder add(m);
