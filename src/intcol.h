@@ -119,12 +119,13 @@ public:
      */
     virtual void push_back(String* val) {
         // if passing nullptr from <MISSING> in sor then save to array as nullptr calls this method.
-        if (val == nullptr) {
-            this->vals_[size_] = nullptr;
-            size_++;
-        } else {
+        cout << "in push_back"<<endl;
+//        if (val == nullptr) {
+//            this->vals_[size_] = nullptr;
+//            size_++;
+//        } else {
             exit(1);
-        }
+//        }
     }
 
     /** Return the type of this column as a char: 'S', 'B', 'I' and 'F'. */
