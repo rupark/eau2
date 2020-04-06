@@ -133,7 +133,7 @@ public:
             merge(kv.waitAndGet(*ok), map);
             delete ok;
         }
-//        cout << "Different words: " << map.size() << "!!" << endl;
+        cout << "Different words: " << map.size() << "!!" << endl;
 
         //cout << own->name->cstr_ << endl;
 
@@ -143,9 +143,9 @@ public:
 
         //map.items_->vals_.print();
 
-        cout << map.contains(*new String("welcome"));
-        cout << map.contains(*new String("to"));
-        cout << map.contains(*new String("the"));
+//        cout << map.contains(*new String("welcome"));
+//        cout << map.contains(*new String("to"));
+//        cout << map.contains(*new String("the"));
         //cout << map.contains("welcome");
 
         cout << "done printing" << endl;
