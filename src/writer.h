@@ -108,63 +108,101 @@ public:
     FILE *file_;
 };
 
+//cout << "map size from constructor = " << map_.size() << endl;
+//cout << "welcome ===========" << map_.get(*new String("welcome"))->v << endl;
+//cout << "to ===========" << map_.get(*new String("to"))->v << endl;
+//cout << "the ===========" << map_.get(*new String("the"))->v << endl;
+//cout << "mark ===========" << map_.get(*new String("mark"))->v << endl;
+//cout << "kate ===========" << map_.get(*new String("kate"))->v << endl;
+
+//class Summer : public Writer {
+//public:
+//    SIMap& map_;
+//    size_t i = 0;
+//    size_t j = 0;
+//    size_t seen = 0;
+//
+//    Summer(SIMap& map) : map_(map) {}
+//
+//    void next() {
+//        if (i == map_.capacity_ ) return;
+//        if ( j < map_.items_[i].keys_.size() ) {
+//            j++;
+//            ++seen;
+//        } else {
+//            ++i;
+//            j = 0;
+//            while( i < map_.capacity_ && map_.items_[i].keys_.size() == 0 )  i++;
+//            if (k()) ++seen;
+//        }
+//    }
+//
+//    String* k() {
+//        if (i==map_.capacity_ || j == map_.items_[i].keys_.size()) return nullptr;
+//        return (String*) (map_.items_[i].keys_.get_(j));
+//    }
+//
+//    size_t v() {
+//        if (i == map_.capacity_ || j == map_.items_[i].keys_.size()) {
+//            assert(false); return 0;
+//        }
+//        return ((Num*)(map_.items_[i].vals_.get_(j)))->v;
+//    }
+//
+//    void visit(Row& r) {
+//        if (!k()) next();
+//        String & key = *k();
+//        size_t value = v();
+//        r.set(0, key);
+//        r.set(1, (int) value);
+//        next();
+//    }
+//
+//    bool done() {return seen == map_.size(); }
+//};
+
 class Summer : public Writer {
 public:
-    SIMap &map_;
+    SIMap& map_;
     size_t i = 0;
     size_t j = 0;
     size_t seen = 0;
 
-    Summer(SIMap &map) : map_(map) {
-        cout << "map size from constructor = " << map_.size() << endl;
-        cout << "welcome ===========" << map_.get(*new String("welcome"))->v << endl;
-        cout << "to ===========" << map_.get(*new String("to"))->v << endl;
-        cout << "the ===========" << map_.get(*new String("the"))->v << endl;
-        cout << "mark ===========" << map_.get(*new String("mark"))->v << endl;
-        cout << "kate ===========" << map_.get(*new String("kate"))->v << endl;
-    }
+    Summer(SIMap& map) : map_(map) {}
 
-    /** Progresses the file **/
     void next() {
-        if (i == map_.capacity_) return;
-        if (j < map_.items_[i].keys_.size()) {
+        if (i == map_.capacity_ ) return;
+        if ( j < map_.items_[i].keys_.size() ) {
             j++;
             ++seen;
         } else {
             ++i;
             j = 0;
-            while (i < map_.capacity_ && map_.items_[i].keys_.size() == 0) i++;
+            while( i < map_.capacity_ && map_.items_[i].keys_.size() == 0 )  i++;
             if (k()) ++seen;
         }
     }
 
-    /** Returns a Key name from the SIMap at the current i and j **/
-    String *k() {
-        if (i == map_.capacity_ || j == map_.items_[i].keys_.size()) return nullptr;
-        return (String *) (map_.items_[i].keys_.get_(j));
+    String* k() {
+        if (i==map_.capacity_ || j == map_.items_[i].keys_.size()) return nullptr;
+        return (String*) (map_.items_[i].keys_.get_(j));
     }
 
-    /** Returns a value from the SIMap at the current i and j **/
     size_t v() {
         if (i == map_.capacity_ || j == map_.items_[i].keys_.size()) {
-            assert(false);
-            return 0;
+            assert(false); return 0;
         }
-        return ((Num *) (map_.items_[i].vals_.get_(j)))->v;
+        return ((Num*)(map_.items_[i].vals_.get_(j)))->v;
     }
 
-    /** Gets a String, Num pair from SIMap and stores them in the given Row */
-    void visit(Row &r) override {
-        if (!k()) {
-            next();
-        }
-        String *key = k();
+    void visit(Row& r) {
+        if (!k()) next();
+        String & key = *k();
         size_t value = v();
         r.set(0, key);
         r.set(1, (int) value);
         next();
     }
 
-    /** Returns true when there are no more words String, Num pairs in SIMap */
-    bool done() override { return seen == map_.size(); }
+    bool done() {return seen == map_.size(); }
 };
