@@ -11,7 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/WCData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/WCData.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,14 +107,7 @@
       <workItem from="1586041857641" duration="4497000" />
       <workItem from="1586124589852" duration="4543000" />
       <workItem from="1586129767104" duration="3432000" />
-      <workItem from="1586385794425" duration="805000" />
-    </task>
-    <task id="LOCAL-00158" summary="comments">
-      <created>1586182653382</created>
-      <option name="number" value="00158" />
-      <option name="presentableId" value="LOCAL-00158" />
-      <option name="project" value="LOCAL" />
-      <updated>1586182653383</updated>
+      <workItem from="1586385794425" duration="1092000" />
     </task>
     <task id="LOCAL-00159" summary="comments">
       <created>1586182759779</created>
@@ -453,7 +445,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586385813790</updated>
     </task>
-    <option name="localTasksCounter" value="207" />
+    <task id="LOCAL-00207" summary="comments">
+      <created>1586387496937</created>
+      <option name="number" value="00207" />
+      <option name="presentableId" value="LOCAL-00207" />
+      <option name="project" value="LOCAL" />
+      <updated>1586387496937</updated>
+    </task>
+    <option name="localTasksCounter" value="208" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -484,33 +483,37 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="465" y="313" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1586207656130" />
-    <state x="368" y="10" key="CommitChangelistDialog2" timestamp="1586385813546">
+    <state x="368" y="10" key="CommitChangelistDialog2" timestamp="1586387496793">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="368" y="10" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1586385813546" />
+    <state x="368" y="10" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1586387496793" />
     <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583969216068" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.836@0.23.1440.836" timestamp="1586197892524" />
     <state x="550" y="169" key="FileChooserDialogImpl" timestamp="1584977836701">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="550" y="169" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1584977836701" />
+    <state x="431" y="173" key="MultipleFileMergeDialog" timestamp="1586387516911">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="431" y="173" key="MultipleFileMergeDialog/0.0.1440.900@0.0.1440.900" timestamp="1586387516911" />
     <state x="279" y="57" key="SettingsEditor" timestamp="1586127415655">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="279" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586127415655" />
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1586385816908">
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1586387525849">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1586385816908" />
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1586387525849" />
     <state x="362" y="147" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583969271623" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1585579726970">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585579726970" />
-    <state x="468" y="225" key="git4idea.merge.GitPullDialog" timestamp="1586208169852">
+    <state x="468" y="225" key="git4idea.merge.GitPullDialog" timestamp="1586387508849">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="468" y="225" key="git4idea.merge.GitPullDialog/0.0.1440.900@0.0.1440.900" timestamp="1586208169852" />
+    <state x="468" y="225" key="git4idea.merge.GitPullDialog/0.0.1440.900@0.0.1440.900" timestamp="1586387508849" />
     <state x="499" y="206" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1585547378750" />
     <state x="426" y="188" width="672" height="677" key="run.anything.popup" timestamp="1586136274161">
       <screen x="0" y="0" width="1536" height="824" />

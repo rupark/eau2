@@ -197,7 +197,7 @@ public:
 
     void visit(Row& r) {
         if (!k()) next();
-        String & key = *k();
+        String* key = k();
         size_t value = v();
         r.set(0, key);
         r.set(1, (int) value);
