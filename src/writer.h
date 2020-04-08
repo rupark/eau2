@@ -146,7 +146,12 @@ public:
 
     /** Returns a value from the SIMap at the current i and j **/
     size_t v() {
+
         if (i == map_.capacity_ || j == map_.items_[i].keys_.size()) {
+            cout << "i in case: " << i << endl;
+            cout << "j in case: " << j << endl;
+            cout << "map cap: "<<map_.capacity_ << endl;
+            cout << "map_.items_[i].keys_.size(): "<< map_.items_[i].keys_.size() << endl;
             assert(false);
             return 0;
         }
