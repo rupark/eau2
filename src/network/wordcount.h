@@ -134,6 +134,9 @@ public:
         }
         local_count();
         reduce();
+        DataFrame* df = kv.get(new Key("wc-map-000"));
+        cout << "printing" << endl;
+        df->print();
     }
 
     /** Returns a key for given node.  These keys are homed on master node
