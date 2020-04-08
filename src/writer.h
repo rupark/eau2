@@ -124,7 +124,7 @@ public:
         cout << "kate ===========" << map_.get(*new String("kate"))->v << endl;
     }
 
-    /** Progresses the file **/
+    /** Progresses the map **/
     void next() {
         if (i == map_.capacity_) return;
         if (j < map_.items_[i].keys_.size()) {
@@ -147,7 +147,7 @@ public:
     /** Returns a value from the SIMap at the current i and j **/
     size_t v() {
         if (i == map_.capacity_ || j == map_.items_[i].keys_.size()) {
-            //assert(false);
+            assert(false);
             return 0;
         }
         return ((Num *) (map_.items_[i].vals_.get_(j)))->v;
@@ -155,6 +155,12 @@ public:
 
     /** Gets a String, Num pair from SIMap and stores them in the given Row */
     void visit(Row &r) override {
+        cout << "i: " << i << endl;
+        cout << "j: " << j << endl;
+        cout << "seen: " << seen << endl;
+        cout << "map size: " << map_.size() << endl;
+        cout << "map cap: " << map_.capacity_ << endl;
+        cout << "bucket size: " << map_.items_[i].keys_.size() << endl;
         if (!k()) {
             next();
         }

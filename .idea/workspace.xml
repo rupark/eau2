@@ -10,7 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/writer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/writer.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,21 +107,7 @@
       <workItem from="1586041857641" duration="4497000" />
       <workItem from="1586124589852" duration="4543000" />
       <workItem from="1586129767104" duration="3432000" />
-      <workItem from="1586385794425" duration="1092000" />
-    </task>
-    <task id="LOCAL-00159" summary="comments">
-      <created>1586182759779</created>
-      <option name="number" value="00159" />
-      <option name="presentableId" value="LOCAL-00159" />
-      <option name="project" value="LOCAL" />
-      <updated>1586182759780</updated>
-    </task>
-    <task id="LOCAL-00160" summary="comments">
-      <created>1586182931050</created>
-      <option name="number" value="00160" />
-      <option name="presentableId" value="LOCAL-00160" />
-      <option name="project" value="LOCAL" />
-      <updated>1586182931050</updated>
+      <workItem from="1586385794425" duration="2211000" />
     </task>
     <task id="LOCAL-00161" summary="comments">
       <created>1586183171443</created>
@@ -452,7 +438,21 @@
       <option name="project" value="LOCAL" />
       <updated>1586387496937</updated>
     </task>
-    <option name="localTasksCounter" value="208" />
+    <task id="LOCAL-00208" summary="comments">
+      <created>1586387685742</created>
+      <option name="number" value="00208" />
+      <option name="presentableId" value="LOCAL-00208" />
+      <option name="project" value="LOCAL" />
+      <updated>1586387685742</updated>
+    </task>
+    <task id="LOCAL-00209" summary="comments">
+      <created>1586387812886</created>
+      <option name="number" value="00209" />
+      <option name="presentableId" value="LOCAL-00209" />
+      <option name="project" value="LOCAL" />
+      <updated>1586387812887</updated>
+    </task>
+    <option name="localTasksCounter" value="210" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -483,10 +483,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="465" y="313" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1586207656130" />
-    <state x="368" y="10" key="CommitChangelistDialog2" timestamp="1586387685627">
+    <state x="368" y="10" key="CommitChangelistDialog2" timestamp="1586387812776">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="368" y="10" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1586387685627" />
+    <state x="368" y="10" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1586387812776" />
     <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583969216068" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.836@0.23.1440.836" timestamp="1586197892524" />
     <state x="550" y="169" key="FileChooserDialogImpl" timestamp="1584977836701">
