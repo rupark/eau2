@@ -134,7 +134,7 @@ public:
         }
         local_count();
         reduce();
-        DataFrame* df = kv.get(new Key("wc-map-000"));
+        DataFrame* df = kv.get(new Key("wc-map-"));
         cout << "printing" << endl;
         cout << "ncol: " << df->ncol << endl;
         cout << "nrow: " << df->nrow << endl;
@@ -174,7 +174,8 @@ public:
             merge(kv.waitAndGet(*ok), map);
             delete ok;
         }
-        //cout << "Different words: " << map.size() << endl;
+        cout << "key name: " << own->name->c_str() << endl;
+        cout << "Different words: " << map.size() << endl;
 
         //delete own;
     }
