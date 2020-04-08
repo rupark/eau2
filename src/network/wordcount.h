@@ -134,10 +134,7 @@ public:
         }
         local_count();
         reduce();
-        DataFrame* df = kv.get(new Key("wc-map-"));
-        cout << "printing" << endl;
-        cout << "ncol: " << df->ncol << endl;
-        cout << "nrow: " << df->nrow << endl;
+
     }
 
     /** Returns a key for given node.  These keys are homed on master node
@@ -168,13 +165,16 @@ public:
         SIMap map;
         kbuf = new Key("wc-map-", 0);
         Key *own = mk_key(0);
+        DataFrame* df = kv.get(*own);
+        cout << "printing" << endl;
+        cout << "ncol: " << df->ncol << endl;
+        cout << "nrow: " << df->nrow << endl;
         merge(kv.get(*own), map);
         for (size_t i = 1; i < arg.num_nodes; ++i) { // merge other nodes
             Key *ok = mk_key(i);
             merge(kv.waitAndGet(*ok), map);
             delete ok;
         }
-        cout << "key name: " << own->name->c_str() << endl;
         cout << "Different words: " << map.size() << endl;
 
         //delete own;
