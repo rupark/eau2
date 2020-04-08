@@ -386,20 +386,20 @@ public:
 
     /** Print the dataframe in SoR format to standard output. */
     void print() {
-        for (size_t i = 0; i < nrow; i++) {
-            for (size_t j = 0; j < ncol; j++) {
-                switch (columns[j]->get_type()) {
+        for (size_t i = 0; i < ncol; i++) {
+            for (size_t j = 0; j < nrow; j++) {
+                switch (columns[i]->get_type()) {
                     case 'F':
-                        cout << "<" << columns[j]->as_float()->get(i) << ">";
+                        cout << "<" << columns[i]->as_float()->get(j) << ">";
                         break;
                     case 'B':
-                        cout << "<" << columns[j]->as_bool()->get(i) << ">";
+                        cout << "<" << columns[i]->as_bool()->get(j) << ">";
                         break;
                     case 'I':
-                        cout << "<" << columns[j]->as_int()->get(i) << ">";
+                        cout << "<" << columns[i]->as_int()->get(j) << ">";
                         break;
                     case 'S':
-                        cout << "<" << columns[j]->as_string()->get(i)->cstr_ << ">";
+                        cout << "<" << columns[i]->as_string()->get(j)->cstr_ << ">";
                         break;
                 }
             }
