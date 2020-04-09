@@ -135,7 +135,7 @@ public:
         } else {
             i = i + 1;
             j = 0;
-            while (i < map_.capacity_ && map_.items_[i].keys_.size() == 0 && k() != nullptr) {
+            while (i < map_.capacity_ && map_.items_[i].keys_.size() == 0 && k() == nullptr) {
                 i = i + 1;
             }
             if (k() != nullptr) {
