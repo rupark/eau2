@@ -388,7 +388,6 @@ public:
     void print() {
         for (size_t i = 0; i < ncol; i++) {
             for (size_t j = 0; j < nrow; j++) {
-                cout << "col type: " << columns[i]->get_type() << endl;
                 switch (columns[i]->get_type()) {
                     case 'F':
                         cout << "<" << columns[i]->as_float()->get(j) << ">";
