@@ -129,22 +129,22 @@ public:
         if (i == map_.capacity_) {return;}
         else if (j < map_.items_[i].keys_.size()) {
             j = j + 1;
-            if (k() != nullptr ) {
-                seen = seen + 1;
-            } else {
-                next();
-            }
+//            if (k() != nullptr ) {
+//                seen = seen + 1;
+//            } else {
+//                next();
+//            }
         } else {
             i = i + 1;
             j = 0;
             while (i < map_.capacity_ && map_.items_[i].keys_.size() == 0 && k() == nullptr) {
                 i = i + 1;
             }
-            if (k() != nullptr) {
-                seen = seen + 1;
-            } else {
+//            if (k() != nullptr) {
+//                seen = seen + 1;
+//            } else {
                 next();
-            }
+//            }
         }
     }
 
@@ -183,6 +183,7 @@ public:
             size_t value = v();
             r.set(0, key);
             r.set(1, (int) value);
+            seen++;
             next();
     }
 
