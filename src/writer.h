@@ -128,13 +128,17 @@ public:
     void next() {
         if (i == map_.capacity_) return;
         if (j < map_.items_[i].keys_.size()) {
-            j++;
-            ++seen;
+            j = j + 1;
+            seen = seen + 1;
         } else {
-            ++i;
+            i = i + 1;
             j = 0;
-            while (i < map_.capacity_ && map_.items_[i].keys_.size() == 0) i++;
-            if (k()) ++seen;
+            while (i < map_.capacity_ && map_.items_[i].keys_.size() == 0) {
+                i = i + 1;
+            }
+            if (k()) {
+                seen = seen + 1;
+            }
         }
     }
 
