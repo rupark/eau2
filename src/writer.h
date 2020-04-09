@@ -176,5 +176,5 @@ public:
     }
 
     /** Returns true when there are no more words String, Num pairs in SIMap */
-    bool done() override { return seen == map_.size(); }
+    bool done() override { return seen >= map_.size(); }
 };
