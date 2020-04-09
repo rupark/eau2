@@ -129,9 +129,9 @@ public:
         if (i == map_.capacity_) {return;}
         else if (j < map_.items_[i].keys_.size()) {
             j = j + 1;
-            if (k() != nullptr ) {
+            //if (k() != nullptr ) {
                 seen = seen + 1;
-            }
+            //}
         } else {
             i = i + 1;
             j = 0;
