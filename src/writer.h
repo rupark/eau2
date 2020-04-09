@@ -143,7 +143,7 @@ public:
 //            if (k() != nullptr) {
 //                seen = seen + 1;
 //            } else {
-                next();
+//                next();
 //            }
         }
     }
