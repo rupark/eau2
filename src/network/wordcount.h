@@ -165,10 +165,10 @@ public:
         SIMap map;
         kbuf = new Key("wc-map-", 0);
         Key *own = mk_key(0);
-        DataFrame* df = kv.get(*own);
-        cout << "printing" << endl;
-        cout << "ncol: " << df->ncol << endl;
-        cout << "nrow: " << df->nrow << endl;
+//        DataFrame* df = kv.get(*own);
+//        cout << "printing" << endl;
+//        cout << "ncol: " << df->ncol << endl;
+//        cout << "nrow: " << df->nrow << endl;
         merge(kv.get(*own), map);
         cout << "done merging" << endl;
         for (size_t i = 1; i < arg.num_nodes; ++i) { // merge other nodes
