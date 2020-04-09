@@ -173,13 +173,12 @@ public:
         cout << "bucket size: " << map_.items_[i].keys_.size() << endl << endl;
         if (k() == nullptr) {
             next();
-        } else {
+        }
             String *key = k();
             size_t value = v();
             r.set(0, key);
             r.set(1, (int) value);
             next();
-        }
     }
 
     /** Returns true when there are no more words String, Num pairs in SIMap */
