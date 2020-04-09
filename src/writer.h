@@ -117,11 +117,11 @@ public:
 
     Summer(SIMap &map) : map_(map) {
         cout << "map size from constructor = " << map_.size() << endl;
-        cout << "welcome ===========" << map_.get(*new String("welcome"))->v << endl;
-        cout << "to ===========" << map_.get(*new String("to"))->v << endl;
-        cout << "the ===========" << map_.get(*new String("the"))->v << endl;
-        cout << "mark ===========" << map_.get(*new String("mark"))->v << endl;
-        cout << "kate ===========" << map_.get(*new String("kate"))->v << endl;
+//        cout << "welcome ===========" << map_.get(*new String("welcome"))->v << endl;
+//        cout << "to ===========" << map_.get(*new String("to"))->v << endl;
+//        cout << "the ===========" << map_.get(*new String("the"))->v << endl;
+//        cout << "mark ===========" << map_.get(*new String("mark"))->v << endl;
+//        cout << "kate ===========" << map_.get(*new String("kate"))->v << endl;
     }
 
     /** Progresses the map **/
