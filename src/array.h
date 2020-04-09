@@ -56,7 +56,7 @@ public:
     // Removes all of elements from this list
     void clear() {
         size_ = 0;
-        arr_ = new Object *[size_];
+        arr_ = new Object *[capacity_];
     }
 
     // Returns the hash code value for this list.
@@ -99,9 +99,9 @@ public:
         return true;
     }
 
-    void erase_(int idx) {
-        this->set(idx, nullptr);
-    }
+//    void erase_(int idx) {
+//        this->set(idx, nullptr);
+//    }
 
     // Returns the index of the first occurrence of o, or -1 if not there
     size_t index_of(Object *o) {
@@ -210,7 +210,7 @@ public:
     }
 
     // Removes the element at i
-    Object *remove(size_t i) {
+    Object *erase(size_t i) {
         Object *returnVal = nullptr;
         Object **temp = new Object *[capacity_];
         // check index
