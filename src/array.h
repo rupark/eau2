@@ -210,7 +210,7 @@ public:
     }
 
     // Removes the element at i
-    Object *erase(size_t i) {
+    Object *erase_(size_t i) {
         Object *returnVal = nullptr;
         Object **temp = new Object *[capacity_];
         // check index
