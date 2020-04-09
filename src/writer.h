@@ -129,13 +129,13 @@ public:
         if (i == map_.capacity_) {return;}
         else if (j < map_.items_[i].keys_.size()) {
             j = j + 1;
-            //if (k() != nullptr ) {
+            if (k() != nullptr ) {
                 seen = seen + 1;
-            //}
+            }
         } else {
             i = i + 1;
             j = 0;
-            while (i < map_.capacity_ && map_.items_[i].keys_.size() == 0) {
+            while (i < map_.capacity_ && map_.items_[i].keys_.size() == 0 && k() != nullptr) {
                 i = i + 1;
             }
             if (k() != nullptr) {
