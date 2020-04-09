@@ -129,7 +129,9 @@ public:
         if (i == map_.capacity_) return;
         if (j < map_.items_[i].keys_.size()) {
             j = j + 1;
-            seen = seen + 1;
+            if (k()) {
+                seen = seen + 1;
+            }
         } else {
             i = i + 1;
             j = 0;
@@ -170,11 +172,6 @@ public:
         cout << "map cap: " << map_.capacity_ << endl;
         cout << "bucket size: " << map_.items_[i].keys_.size() << endl << endl;
         if (k() == nullptr) {
-            next();
-            String *key = k();
-            size_t value = v();
-            r.set(0, key);
-            r.set(1, (int) value);
             next();
         } else {
             String *key = k();
