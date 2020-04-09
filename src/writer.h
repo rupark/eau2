@@ -131,6 +131,8 @@ public:
             j = j + 1;
             if (k() != nullptr ) {
                 seen = seen + 1;
+            } else {
+                next();
             }
         } else {
             i = i + 1;
@@ -179,7 +181,7 @@ public:
             size_t value = v();
             r.set(0, key);
             r.set(1, (int) value);
-        next();
+            next();
     }
 
     /** Returns true when there are no more words String, Num pairs in SIMap */
