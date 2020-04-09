@@ -45,7 +45,11 @@ public:
         for (int i = 0; i < size; i++) {
             if (key.equals(keys[i])) {
                 if (dfs[i] != nullptr) {
+                            cout << "printing" << endl;
+                            cout << "ncol: " << dfs[i]->ncol << endl;
+                            cout << "nrow: " << dfs[i]->nrow << endl;
                     return dfs[i];
+
                 } else {
                 }
             }
