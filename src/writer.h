@@ -169,16 +169,17 @@ public:
         cout << "map size: " << map_.size() << endl;
         cout << "map cap: " << map_.capacity_ << endl;
         cout << "bucket size: " << map_.items_[i].keys_.size() << endl << endl;
-        if (!k()) {
+        if (k() == nullptr) {
+            next();
+        } else {
+            String *key = k();
+            size_t value = v();
+            r.set(0, key);
+            r.set(1, (int) value);
             next();
         }
-        String *key = k();
-        size_t value = v();
-        r.set(0, key);
-        r.set(1, (int) value);
-        next();
     }
 
     /** Returns true when there are no more words String, Num pairs in SIMap */
-    bool done() override { return seen >= map_.capacity_; }
+    bool done() override { return seen >= map_.size(); }
 };
