@@ -171,6 +171,7 @@ public:
         cout << "map size: " << map_.size() << endl;
         cout << "map cap: " << map_.capacity_ << endl;
         cout << "bucket size: " << map_.items_[i].keys_.size() << endl << endl;
+        next();
         if (k() == nullptr) {
             next();
         }
