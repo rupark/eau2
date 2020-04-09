@@ -171,6 +171,7 @@ public:
         cout << "printing" << endl;
         cout << "ncol: " << df->ncol << endl;
         cout << "nrow: " << df->nrow << endl;
+        df->print();
         for (size_t i = 1; i < arg.num_nodes; ++i) { // merge other nodes
             Key *ok = mk_key(i);
             merge(kv.waitAndGet(*ok), map);
