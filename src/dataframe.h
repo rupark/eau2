@@ -390,13 +390,13 @@ public:
             for (size_t j = 0; j < nrow; j++) {
                 switch (columns[i]->get_type()) {
                     case 'F':
-                        cout << "<" << columns[i]->as_float()->get(j) << ">";
+                        cout << "<" << *columns[i]->as_float()->get(j) << ">";
                         break;
                     case 'B':
-                        cout << "<" << columns[i]->as_bool()->get(j) << ">";
+                        cout << "<" << *columns[i]->as_bool()->get(j) << ">";
                         break;
                     case 'I':
-                        cout << "<" << columns[i]->as_int()->get(j) << ">";
+                        cout << "<" << *columns[i]->as_int()->get(j) << ">";
                         break;
                     case 'S':
                         cout << "<" << columns[i]->as_string()->get(j)->cstr_ << ">";
