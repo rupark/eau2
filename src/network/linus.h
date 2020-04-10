@@ -8,6 +8,8 @@
 #include "../SImap.h"
 #include "../writer.h"
 #include "network.h"
+#include <iostream>
+using namespace std;
 
 /*************************************************************************
  * This computes the collaborators of Linus Torvalds.
