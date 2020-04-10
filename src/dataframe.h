@@ -348,8 +348,13 @@ public:
                         break;
                 }
             }
-            r.visit(*row);
             completed++;
+
+            if (i == 11) {
+                row->printRow();
+            }
+
+            r.visit(*row);
             cout << completed << " " << "row visited | ";
             row->printRow();
             cout << endl;

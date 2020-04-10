@@ -46,7 +46,7 @@ public:
                 wStart = 0;
                 fillBuffer_();
             }
-            if (isspace(buf_[i_])) break;
+            if (isspace(buf_[i_]) || !isalnum(buf_[i_])) break;
             ++i_;
         }
         buf_[i_] = 0;
