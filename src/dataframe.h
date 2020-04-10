@@ -358,6 +358,11 @@ public:
     }
 
     /** Visits the rows in order on THIS node */
+    void local_map(Reader &r) {
+        map(r);
+    }
+
+    /** Visits the rows in order on THIS node */
     void local_map(Adder &r) {
         int completed = 0;
         cout << "local map: nrows = " << this->nrows() << endl;
