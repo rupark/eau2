@@ -32,6 +32,8 @@ public:
         this->home = orig->home;
     }
 
+    Key(String* s) : Key(s->c_str()){}
+
     ~Key() {
         delete name;
     }

@@ -8,6 +8,7 @@
 #include "../SImap.h"
 #include "../writer.h"
 #include "../set.h"
+#include "network.h"
 
 /*************************************************************************
  * This computes the collaborators of Linus Torvalds.
@@ -27,7 +28,7 @@ public:
     Set* uSet; // Linus' collaborators
     Set* pSet; // projects of collaborators
 
-    Linus(size_t idx, NetworkIfc& net): Application(idx, net) {}
+    Linus(size_t idx, NetworkIP& net): Application(idx, net) {}
 
     /** Compute DEGREES of Linus.  */
     void run_() override {
@@ -45,14 +46,14 @@ public:
         Key pK("projs");
         Key uK("usrs");
         Key cK("comts");
-        if (index == 0) {
-            pln("Reading...");
+        if (this_node() == 0) {
+            Sys::pln("Reading...");
             projects = DataFrame::fromFile(PROJ, pK.clone(), &kv);
-            p("    ").p(projects->nrows()).pln(" projects");
+            Sys::p("    ").Sys::p(projects->nrows()).Sys::pln(" projects");
             users = DataFrame::fromFile(USER, uK.clone(), &kv);
-            p("    ").p(users->nrows()).pln(" users");
+            Sys::p("    ").Sys::p(users->nrows()).Sys::pln(" users");
             commits = DataFrame::fromFile(COMM, cK.clone(), &kv);
-            p("    ").p(commits->nrows()).pln(" commits");
+            Sys::p("    ").Sys::p(commits->nrows()).Sys::pln(" commits");
             // This dataframe contains the id of Linus.
             delete DataFrame::fromScalarInt(new Key("users-0-0"), &kv, LINUS);
         } else {
@@ -68,7 +69,7 @@ public:
      *  datafrrames (projects, users, commits), the sets of tagged users and
      *  projects, and the users added in the previous round. */
     void step(int stage) {
-        p("Stage ").pln(stage);
+        Sys::p("Stage ").Sys::pln(stage);
         // Key of the shape: users-stage-0
         Key uK(StrBuff("users-").c(stage).c("-0").get());
         // A df with all the users added on the previous round
@@ -85,9 +86,9 @@ public:
         commits->local_map(utagger);
         merge(utagger.newUsers, "users-", stage + 1);
         uSet->union_(utagger.newUsers);
-        p("    after stage ").p(stage).pln(":");
-        p("        tagged projects: ").pln(pSet->size());
-        p("        tagged users: ").pln(uSet->size());
+        Sys::p("    after stage ").Sys::p(stage).Sys::pln(":");
+        Sys::p("        tagged projects: ").Sys::pln(pSet->size());
+        Sys::p("        tagged users: ").Sys::pln(uSet->size());
     }
 
     /** Gather updates to the given set from all the nodes in the systems.
@@ -101,24 +102,24 @@ public:
             for (size_t i = 1; i < arg.num_nodes; ++i) {
                 Key nK(StrBuff(name).c(stage).c("-").c(i).get());
                 DataFrame* delta = dynamic_cast<DataFrame*>(kv.waitAndGet(nK));
-                p("    received delta of ").p(delta->nrows())
-                        .p(" elements from node ").pln(i);
+                Sys::p("    received delta of ").Sys::p(delta->nrows())
+                        .Sys::p(" elements from node ").Sys::pln(i);
                 SetUpdater upd(set);
                 delta->map(upd);
                 delete delta;
             }
-            p("    storing ").p(set.size()).pln(" merged elements");
+            Sys::p("    storing ").Sys::p(set.size()).Sys::pln(" merged elements");
             SetWriter writer(set);
             Key k(StrBuff(name).c(stage).c("-0").get());
             delete DataFrame::fromVisitor(&k, &kv, "I", writer);
         } else {
-            p("    sending ").p(set.size()).pln(" elements to master node");
+            Sys::p("    sending ").Sys::p(set.size()).Sys::pln(" elements to master node");
             SetWriter writer(set);
             Key k(StrBuff(name).c(stage).c("-").c(index).get());
             delete DataFrame::fromVisitor(&k, &kv, "I", writer);
             Key mK(StrBuff(name).c(stage).c("-0").get());
             DataFrame* merged = dynamic_cast<DataFrame*>(kv.waitAndGet(mK));
-            p("    receiving ").p(merged->nrows()).pln(" merged elements");
+            Sys::p("    receiving ").Sys::p(merged->nrows()).Sys::pln(" merged elements");
             SetUpdater upd(set);
             merged->map(upd);
             delete merged;
