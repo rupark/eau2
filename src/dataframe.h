@@ -522,7 +522,7 @@ public:
         return df;
     }
 
-    static DataFrame* fromFile(char* file, Object* key, KVStore* kv) {
+    static DataFrame* fromFile(const char* file, Object* key, KVStore* kv) {
         //TODO
         DataFrame* df = new DataFrame(*new Schema("S"));
         return df;
