@@ -676,4 +676,4 @@ public:
             }
         return false;
     }
-}
+};
