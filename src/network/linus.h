@@ -104,7 +104,7 @@ public:
                 Key nK(StrBuff(name).c(stage).c("-").c(i).get());
                 DataFrame* delta = dynamic_cast<DataFrame*>(kv.waitAndGet(nK));
                 cout << "    received delta of " << delta->nrows() << endl;
-                         << " elements from node " << i << endl;
+                cout << " elements from node " << i << endl;
                 SetUpdater upd(set);
                 delta->map(upd);
                 delete delta;
