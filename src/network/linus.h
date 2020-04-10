@@ -69,7 +69,7 @@ public:
      *  datafrrames (projects, users, commits), the sets of tagged users and
      *  projects, and the users added in the previous round. */
     void step(int stage) {
-        cout << "Stage " << stage);
+        cout << "Stage " << stage << endl;
         // Key of the shape: users-stage-0
         Key uK(StrBuff("users-").c(stage).c("-0").get());
         // A df with all the users added on the previous round

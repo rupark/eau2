@@ -25,6 +25,7 @@
 #include "column_prov.h"
 #include "writer.h"
 #include "reader.h"
+#include "set.h"
 
 using namespace std;
 
@@ -327,6 +328,37 @@ public:
     }
 
     /** Visits the rows in order on THIS node */
+    void map(SetUpdater &r) {
+        int completed = 0;
+        cout << "local map: nrows = " << this->nrows() << endl;
+        for (size_t i = 0; i < this->nrows(); i++) {
+            Row *row = new Row(this->schema);
+            for (size_t j = 0; j < this->ncols(); j++) {
+                switch (row->col_type(j)) {
+                    case 'I':
+                        row->set(j, this->columns[j]->as_int()->get(i));
+                        break;
+                    case 'B':
+                        row->set(j, this->columns[j]->as_bool()->get(i));
+                        break;
+                    case 'S':
+                        row->set(j, this->columns[j]->as_string()->get(i));
+                        break;
+                    case 'F':
+                        row->set(j, this->columns[j]->as_float()->get(i));
+                        break;
+                }
+            }
+            completed++;
+
+            r.visit(*row);
+            cout << completed << " " << "row visited | ";
+            row->printRow();
+            cout << endl;
+        }
+    }
+
+    /** Visits the rows in order on THIS node */
     void local_map(Adder &r) {
         int completed = 0;
         cout << "local map: nrows = " << this->nrows() << endl;
@@ -484,11 +516,15 @@ public:
     /**
      * Contructs a DataFrame from the size_t and associates the given Key with the DataFrame in the given KVStore
      */
-    static DataFrame *fromScalar(Key *key, KVStore *kv, size_t scalar) {
+    static DataFrame *fromScalarInt(Key *key, KVStore *kv, size_t scalar) {
         DataFrame *df = new DataFrame(*new Schema("I"));
         df->columns[0]->push_back((int) scalar);
         kv->put(key, df);
         return df;
+    }
+
+    static DataFrame* fromFile(char* file, Key key, KVStore kv) {
+        //TODO
     }
 
 };
