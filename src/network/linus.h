@@ -7,7 +7,6 @@
 #include "../reader.h"
 #include "../SImap.h"
 #include "../writer.h"
-#include "../set.h"
 #include "network.h"
 
 /*************************************************************************
