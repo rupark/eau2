@@ -27,6 +27,12 @@ public:
         this->home = 0;
     }
 
+    // If no homenode passed in, default 0.
+    Key(const char *name) {
+        this->name = new String(name);
+        this->home = 0;
+    }
+
     Key(Key *orig) {
         this->name = orig->name;
         this->home = orig->home;
