@@ -28,6 +28,8 @@
 
 using namespace std;
 
+class SetUpdater;
+
 /** Represents a set of data */
 class DataFrame : public Object {
 public:
