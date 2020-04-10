@@ -13,77 +13,77 @@ class Sys {
 public:
 
     // Printing functions
-    static Sys &p(char *c) {
+     Sys &p(char *c) {
         std::cout << c;
         return *this;
     }
 
-    static Sys &p(bool c) {
+     Sys &p(bool c) {
         std::cout << c;
         return *this;
     }
 
-    static Sys &p(float c) {
+     Sys &p(float c) {
         std::cout << c;
         return *this;
     }
 
-    static Sys &p(int i) {
+     Sys &p(int i) {
         std::cout << i;
         return *this;
     }
 
-    static Sys &p(size_t i) {
+     Sys &p(size_t i) {
         std::cout << i;
         return *this;
     }
 
-    static Sys &p(const char *c) {
+     Sys &p(const char *c) {
         std::cout << c;
         return *this;
     }
 
-    static Sys &p(char c) {
+     Sys &p(char c) {
         std::cout << c;
         return *this;
     }
 
-    static Sys &pln() {
+     Sys &pln() {
         std::cout << "\n";
         return *this;
     }
 
-    static Sys &pln(int i) {
+     Sys &pln(int i) {
         std::cout << i << "\n";
         return *this;
     }
 
-    static Sys &pln(char *c) {
+     Sys &pln(char *c) {
         std::cout << c << "\n";
         return *this;
     }
 
-    static Sys &pln(bool c) {
+     Sys &pln(bool c) {
         std::cout << c << "\n";
         return *this;
     }
 
-    static Sys &pln(char c) {
+     Sys &pln(char c) {
         std::cout << c << "\n";
         return *this;
     }
 
-    static Sys &pln(float x) {
+     Sys &pln(float x) {
         std::cout << x << "\n";
         return *this;
     }
 
-    static Sys &pln(size_t x) {
+     Sys &pln(size_t x) {
         std::cout << x << "\n";
         return *this;
     }
 
-    static Sys &pln(const char *c) {
+     Sys &pln(const char *c) {
         std::cout << c << "\n";
         return *this;
     }

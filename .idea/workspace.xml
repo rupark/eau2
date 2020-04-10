@@ -11,15 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helper.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/key.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/key.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/network/linus.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/linus.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/reader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/set.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/set.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/writer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/writer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/m4/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m4/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wordcount" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

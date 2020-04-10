@@ -47,13 +47,13 @@ public:
         Key uK("usrs");
         Key cK("comts");
         if (this_node() == 0) {
-            Sys::pln("Reading...");
+            cout << "Reading..." << endl;
             projects = DataFrame::fromFile(PROJ, pK.clone(), &kv);
-            Sys::p("    ").Sys::p(projects->nrows()).Sys::pln(" projects");
+            cout << "    " << projects->nrows() << " projects" << endl;
             users = DataFrame::fromFile(USER, uK.clone(), &kv);
-            Sys::p("    ").Sys::p(users->nrows()).Sys::pln(" users");
+            cout << "    " << users->nrows() << " users" << endl;
             commits = DataFrame::fromFile(COMM, cK.clone(), &kv);
-            Sys::p("    ").Sys::p(commits->nrows()).Sys::pln(" commits");
+            cout << "    " << commits->nrows() << " commits" << endl;
             // This dataframe contains the id of Linus.
             delete DataFrame::fromScalarInt(new Key("users-0-0"), &kv, LINUS);
         } else {
@@ -69,7 +69,7 @@ public:
      *  datafrrames (projects, users, commits), the sets of tagged users and
      *  projects, and the users added in the previous round. */
     void step(int stage) {
-        Sys::p("Stage ").Sys::pln(stage);
+        cout << "Stage " << stage);
         // Key of the shape: users-stage-0
         Key uK(StrBuff("users-").c(stage).c("-0").get());
         // A df with all the users added on the previous round
@@ -86,9 +86,9 @@ public:
         commits->local_map(utagger);
         merge(utagger.newUsers, "users-", stage + 1);
         uSet->union_(utagger.newUsers);
-        Sys::p("    after stage ").Sys::p(stage).Sys::pln(":");
-        Sys::p("        tagged projects: ").Sys::pln(pSet->size());
-        Sys::p("        tagged users: ").Sys::pln(uSet->size());
+        cout << "    after stage " << stage << ":" << endl;
+        cout << "        tagged projects: " << pSet->size() << endl;
+        cout << "        tagged users: " << uSet->size() << endl;
     }
 
     /** Gather updates to the given set from all the nodes in the systems.
@@ -102,24 +102,24 @@ public:
             for (size_t i = 1; i < arg.num_nodes; ++i) {
                 Key nK(StrBuff(name).c(stage).c("-").c(i).get());
                 DataFrame* delta = dynamic_cast<DataFrame*>(kv.waitAndGet(nK));
-                Sys::p("    received delta of ").Sys::p(delta->nrows())
-                        .Sys::p(" elements from node ").Sys::pln(i);
+                cout << "    received delta of " << delta->nrows())
+                         << " elements from node " << i << endl;
                 SetUpdater upd(set);
                 delta->map(upd);
                 delete delta;
             }
-            Sys::p("    storing ").Sys::p(set.size()).Sys::pln(" merged elements");
+            cout << "    storing " << set.size() << " merged elements" << endl;
             SetWriter writer(set);
             Key k(StrBuff(name).c(stage).c("-0").get());
             delete DataFrame::fromVisitor(&k, &kv, "I", writer);
         } else {
-            Sys::p("    sending ").Sys::p(set.size()).Sys::pln(" elements to master node");
+            cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter writer(set);
             Key k(StrBuff(name).c(stage).c("-").c(index).get());
             delete DataFrame::fromVisitor(&k, &kv, "I", writer);
             Key mK(StrBuff(name).c(stage).c("-0").get());
             DataFrame* merged = dynamic_cast<DataFrame*>(kv.waitAndGet(mK));
-            Sys::p("    receiving ").Sys::p(merged->nrows()).Sys::pln(" merged elements");
+            cout << "    receiving " << merged->nrows() << " merged elements" << endl;
             SetUpdater upd(set);
             merged->map(upd);
             delete merged;
