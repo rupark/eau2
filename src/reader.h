@@ -30,12 +30,16 @@ public:
         cout << "in visit: ";
         r.printRow();
         cout << endl;
+
         String *word = r.get_string(0);
+        cout << "in visit word:" << word->c_str() << endl;
         assert(word != nullptr);
         Num *num = map_.contains(*word) ? map_.get(*word) : new Num();
+        cout << "in visit got num" << endl;
         assert(num != nullptr);
         num->v++;
         map_.set(*word, num);
+        cout << "in visit set map: word=" << word->c_str() << " num: " << num->v << endl;
         return false;
     }
 };
