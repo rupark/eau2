@@ -3,8 +3,11 @@
 //
 #pragma once
 #include "dataframe.h"
-#include "reader.h"
-#include "writer.h"
+//#include "reader.h"
+//#include "writer.h"
+
+class Reader;
+class Writer;
 
 /**************************************************************************
  * A bit set contains size() booleans that are initialize to false and can
