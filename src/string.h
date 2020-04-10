@@ -105,6 +105,10 @@ public:
         c(init);
     }
 
+    StrBuff(const char *init) : StrBuff() {
+        c(init);
+    }
+
     /** Grows this StrBuff by the given step **/
     void grow_by_(size_t step) {
         if (step + size_ < capacity_) return;
