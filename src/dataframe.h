@@ -330,27 +330,27 @@ public:
     void local_map(Adder &r) {
         int completed = 0;
         cout << "local map: nrows = " << this->nrows() << endl;
-        for (size_t i = 0; i < this->nrows(); i++) {
+        for (size_t i = 0; i < this->ncols(); i++) {
             Row *row = new Row(this->schema);
-            for (size_t j = 0; j < this->ncols(); j++) {
-                switch (row->col_type(j)) {
+            for (size_t j = 0; j < this->nrows(); j++) {
+                switch (row->col_type(i)) {
                     case 'I':
-                        row->set(j, this->columns[j]->as_int()->get(i));
+                        row->set(i, this->columns[i]->as_int()->get(j));
                         break;
                     case 'B':
-                        row->set(j, this->columns[j]->as_bool()->get(i));
+                        row->set(i, this->columns[i]->as_bool()->get(j));
                         break;
                     case 'S':
-                        row->set(j, this->columns[j]->as_string()->get(i));
+                        row->set(i, this->columns[i]->as_string()->get(j));
                         break;
                     case 'F':
-                        row->set(j, this->columns[j]->as_float()->get(i));
+                        row->set(i, this->columns[i]->as_float()->get(j));
                         break;
                 }
             }
             completed++;
 
-            if (i == 11) {
+            if (i == 11 || i == 49) {
                 row->printRow();
             }
 

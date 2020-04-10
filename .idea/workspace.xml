@@ -9,9 +9,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="">
+    <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/WCData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/WCData.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataframe.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataframe.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/m1/a1-part1-test" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m1/a1-part1-test" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/m1/sorer" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m1/sorer" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/m3/a.out" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m3/a.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wordcount" beforeDir="false" afterPath="$PROJECT_DIR$/wordcount" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
