@@ -11,10 +11,11 @@
 #include <stdio.h>
 #include "../../src/parser.h"
 #include "../../src/dataframe.h"
+//#include "../../src/network/linus.h"
 
 using namespace std;
 
-//Args arg;
+Args arg;
 
 NetworkIP *initialize() {
     NetworkIP *res = new NetworkIP();
@@ -42,7 +43,11 @@ NetworkIP *initialize() {
 }
 
 Application *pick(size_t i, NetworkIP &net) {
-    return new WordCount(i, net);
+//    if (arg.app == "wc") {
+        return new WordCount(i, net);
+//    } else {
+//        return new Linus(i, net);
+//    }
 }
 
 int main(int argc, char *argv[]) {
