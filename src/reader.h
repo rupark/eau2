@@ -35,7 +35,7 @@ public:
         cout << "in visit word:" << word->c_str() << endl;
         assert(word != nullptr);
         Num *num = map_.contains(*word) ? map_.get(*word) : new Num();
-        cout << "in visit got num" << endl;
+        cout << "in visit got num: " << num->v << endl;
         assert(num != nullptr);
         num->v++;
         map_.set(*word, num);
