@@ -7,6 +7,8 @@
  */
 #pragma once
 
+#include <stdio.h>
+#include <stdlib.h>
 #include "floatcol.h"
 #include "intcol.h"
 #include "boolcol.h"
@@ -25,6 +27,7 @@
 #include "column_prov.h"
 #include "writer.h"
 #include "reader.h"
+#include "parser.h"
 
 using namespace std;
 
@@ -557,10 +560,15 @@ public:
         return df;
     }
 
-    static DataFrame* fromFile(const char* file, Object* key, KVStore* kv) {
-        //TODO
-        DataFrame* df = new DataFrame(*new Schema("S"));
-        return df;
+    static DataFrame* fromFile(const char* filep, Object* key, KVStore* kv) {
+        FILE* file = fopen(filep, "r");
+        size_t file_size = ftell(file);
+
+        SorParser parser{filep, 0, file_size, file_size};
+        parser.guessSchema();
+        parser.parseFile();
+        DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
+        return d;
     }
 
 };
