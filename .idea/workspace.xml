@@ -9,14 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="comments">
-      <change afterPath="$PROJECT_DIR$/src/network/linus.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/set.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/reader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/writer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/writer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/m4/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m4/main.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,16 +56,16 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/myfiles" />
-      <recent name="Y:\Classes\cs4500\milestone1\group4500" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/tests/m4" />
       <recent name="$PROJECT_DIR$/tests/m3" />
       <recent name="$PROJECT_DIR$/report/imgs" />
       <recent name="$PROJECT_DIR$/tests/m1" />
       <recent name="$PROJECT_DIR$/data" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/myfiles" />
+      <recent name="Y:\Classes\cs4500\milestone1\group4500" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -116,20 +109,6 @@
       <workItem from="1586471744125" duration="44000" />
       <workItem from="1586473357115" duration="161000" />
       <workItem from="1586475111644" duration="841000" />
-    </task>
-    <task id="LOCAL-00199" summary="comments">
-      <created>1586197892624</created>
-      <option name="number" value="00199" />
-      <option name="presentableId" value="LOCAL-00199" />
-      <option name="project" value="LOCAL" />
-      <updated>1586197892624</updated>
-    </task>
-    <task id="LOCAL-00200" summary="comments">
-      <created>1586198248414</created>
-      <option name="number" value="00200" />
-      <option name="presentableId" value="LOCAL-00200" />
-      <option name="project" value="LOCAL" />
-      <updated>1586198248414</updated>
     </task>
     <task id="LOCAL-00201" summary="comments">
       <created>1586207294835</created>
@@ -460,7 +439,21 @@
       <option name="project" value="LOCAL" />
       <updated>1586475261715</updated>
     </task>
-    <option name="localTasksCounter" value="248" />
+    <task id="LOCAL-00248" summary="comments">
+      <created>1586477974757</created>
+      <option name="number" value="00248" />
+      <option name="presentableId" value="LOCAL-00248" />
+      <option name="project" value="LOCAL" />
+      <updated>1586477974757</updated>
+    </task>
+    <task id="LOCAL-00249" summary="comments">
+      <created>1586478073861</created>
+      <option name="number" value="00249" />
+      <option name="presentableId" value="LOCAL-00249" />
+      <option name="project" value="LOCAL" />
+      <updated>1586478073861</updated>
+    </task>
+    <option name="localTasksCounter" value="250" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -491,10 +484,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="465" y="313" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1586207656130" />
-    <state x="368" y="10" key="CommitChangelistDialog2" timestamp="1586477974541">
+    <state x="368" y="10" key="CommitChangelistDialog2" timestamp="1586478073651">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="368" y="10" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1586477974541" />
+    <state x="368" y="10" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1586478073651" />
     <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583969216068" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.836@0.23.1440.836" timestamp="1586197892524" />
     <state x="550" y="169" key="FileChooserDialogImpl" timestamp="1584977836701">
@@ -509,10 +502,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="279" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586127415655" />
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1586477976205">
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1586478075324">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1586477976205" />
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1586478075324" />
     <state x="362" y="147" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583969271623" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1585579726970">
       <screen x="0" y="0" width="1536" height="824" />

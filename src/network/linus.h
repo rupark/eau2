@@ -1,5 +1,6 @@
 //
 // Created by Kate Rupar on 4/9/20.
+#pragma once
 #include "application.h"
 #include "../dataframe.h"
 #include "../key.h"
