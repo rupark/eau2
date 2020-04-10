@@ -522,8 +522,10 @@ public:
         return df;
     }
 
-    static DataFrame* fromFile(char* file, Key key, KVStore kv) {
+    static DataFrame* fromFile(char* file, Object* key, KVStore* kv) {
         //TODO
+        DataFrame* df = new DataFrame(new Schema(""));
+        return df;
     }
 
 };
