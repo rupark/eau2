@@ -1,7 +1,7 @@
 //
 // Created by Kate Rupar on 4/9/20.
 //
-
+#include "dataframe.h"
 /**************************************************************************
  * A bit set contains size() booleans that are initialize to false and can
  * be set to true with the set() method. The test() method returns the
