@@ -28,8 +28,6 @@
 
 using namespace std;
 
-class SetUpdater;
-
 /** Represents a set of data */
 class DataFrame : public Object {
 public:
@@ -329,7 +327,7 @@ public:
     }
 
     /** Visits the rows in order on THIS node */
-    void map(SetUpdater &r) {
+    void map(Reader &r) {
         int completed = 0;
         cout << "local map: nrows = " << this->nrows() << endl;
         for (size_t i = 0; i < this->nrows(); i++) {
