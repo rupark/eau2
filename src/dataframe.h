@@ -564,7 +564,7 @@ public:
         FILE* file = fopen(filep, "r");
         size_t file_size = ftell(file);
 
-        SorParser parser((char*)filep, 0, file_size, file_size);
+        SorParser parser((char*)filep, (size_t)0, file_size, file_size);
         parser.guessSchema();
         parser.parseFile();
         DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
