@@ -1,9 +1,16 @@
 clean:
-	rm *.o client server client2 *.out wordcount *.h.gch src/*.h.gch src/network/*.h.gch
+	rm *.o client server client2 *.out wordcount linus *.h.gch src/*.h.gch src/network/*.h.gch
 
-build:
+buildl:
 	g++ -std=c++11 -c tests/m4/main.cpp -o main.o
-	g++ -std=c++11 src/network/wordcount.h main.o -o wordcount
+	g++ -std=c++11 src/network/wordcount.h main.o -o linus
 
-run: build
+buildwc:
+	g++ -std=c++11 -c tests/m4/main.cpp -o main.o
+	g++ -std=c++11 src/network/wordcount.h main.o -o wordcount 
+
+runwc: buildwc
 	./wordcount -index 0 -file data/WCData.txt -node 1 -port 8080 -masterip "127.0.0.4" -app "wc"
+
+runl: buildl
+	./wordcount -index 0 -file data/WCData.txt -node 1 -port 8080 -masterip "127.0.0.4" -app "linus"
