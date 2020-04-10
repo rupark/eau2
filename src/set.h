@@ -1,6 +1,7 @@
 //
 // Created by Kate Rupar on 4/9/20.
 //
+#pragma once
 #include "dataframe.h"
 /**************************************************************************
  * A bit set contains size() booleans that are initialize to false and can
