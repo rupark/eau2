@@ -116,7 +116,7 @@ public:
         } else {
             cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter writer(set);
-            Key k(StrBuff(name).c(stage).c("-").c(index).get());
+            Key k(StrBuff(name).c(stage).c("-").c(idx_).get());
             delete DataFrame::fromVisitor(&k, &kv, "I", writer);
             Key mK(StrBuff(name).c(stage).c("-0").get());
             DataFrame* merged = dynamic_cast<DataFrame*>(kv.waitAndGet(mK));
