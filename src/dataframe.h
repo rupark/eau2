@@ -481,6 +481,21 @@ public:
         return df;
     }
 
+    /**
+     * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
+     */
+    static DataFrame *fromVisitor(Key *key, KVStore *kv, const char *schema, FileReader w) {
+        DataFrame *df = new DataFrame(*new Schema(schema));
+        while (!w.done()) {
+            Row *r = new Row(*new Schema(schema));
+            w.visit(*r);
+            df->add_row(*r);
+            cout << "ROW: " << r->get_string(0)->c_str() << endl;
+        }
+        kv->put(key, df);
+        return df;
+    }
+
     /** Returns a section of this DataFrame as a new DataFrame **/
     DataFrame *chunk(size_t chunk) {
         int start_row = chunk * arg.rows_per_chunk;
