@@ -659,20 +659,21 @@ public:
  *************************************************************************/
 class UsersTagger : public Reader {
 public:
-    Set& pSet;
-    Set& uSet;
+    Set &pSet;
+    Set &uSet;
     Set newUsers;
 
-    UsersTagger(Set& pSet,Set& uSet, DataFrame* users):
-            pSet(pSet), uSet(uSet), newUsers(users->nrows()) { }
+    UsersTagger(Set &pSet, Set &uSet, DataFrame *users) :
+            pSet(pSet), uSet(uSet), newUsers(users->nrows()) {}
 
-    bool visit(Row & row) override {
+    bool visit(Row &row) override {
         int pid = row.get_int(0);
         int uid = row.get_int(1);
         if (pSet.test(pid))
-            if(!uSet.test(uid)) {
+            if (!uSet.test(uid)) {
                 uSet.set(uid);
                 newUsers.set(uid);
             }
         return false;
     }
+}
