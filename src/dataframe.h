@@ -524,7 +524,7 @@ public:
 
     static DataFrame* fromFile(char* file, Object* key, KVStore* kv) {
         //TODO
-        DataFrame* df = new DataFrame(new Schema(""));
+        DataFrame* df = new DataFrame(*new Schema("S"));
         return df;
     }
 
