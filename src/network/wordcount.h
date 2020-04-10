@@ -151,11 +151,16 @@ public:
         DataFrame *words = kv.get(in);
         cout << "Node " << this_node() << ": starting local count..." << endl;
         SIMap map;
+        cout << "map created" << endl;
         Adder add(map);
+        cout << "adder created" << endl;
         words->local_map(add);
+        cout << "local mapped" << endl;
         //delete words;
         Summer cnt(map);
+        cout << "summer created" << endl;
         DataFrame::fromVisitor(mk_key(this_node()), &kv, "SI", cnt);
+        cout << "df visited" << endl;
     }
 
     /** Merge the data frames of all nodes */

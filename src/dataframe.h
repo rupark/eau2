@@ -328,6 +328,8 @@ public:
 
     /** Visits the rows in order on THIS node */
     void local_map(Adder &r) {
+        int completed = 0;
+        cout << "local map: nrows = " << this->nrows() << endl;
         for (size_t i = 0; i < this->nrows(); i++) {
             Row *row = new Row(this->schema);
             for (size_t j = 0; j < this->ncols(); j++) {
@@ -347,6 +349,10 @@ public:
                 }
             }
             r.visit(*row);
+            completed++;
+            cout << completed << " " << "row visited | ";
+            row->printRow();
+            cout << endl;
         }
     }
 
