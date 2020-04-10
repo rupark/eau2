@@ -330,21 +330,21 @@ public:
     void local_map(Adder &r) {
         int completed = 0;
         cout << "local map: nrows = " << this->nrows() << endl;
-        for (size_t i = 0; i < this->ncols(); i++) {
+        for (size_t i = 0; i < this->nrows(); i++) {
             Row *row = new Row(this->schema);
-            for (size_t j = 0; j < this->nrows(); j++) {
-                switch (row->col_type(i)) {
+            for (size_t j = 0; j < this->ncols(); j++) {
+                switch (row->col_type(j)) {
                     case 'I':
-                        row->set(i, this->columns[i]->as_int()->get(j));
+                        row->set(j, this->columns[j]->as_int()->get(i));
                         break;
                     case 'B':
-                        row->set(i, this->columns[i]->as_bool()->get(j));
+                        row->set(j, this->columns[j]->as_bool()->get(i));
                         break;
                     case 'S':
-                        row->set(i, this->columns[i]->as_string()->get(j));
+                        row->set(j, this->columns[j]->as_string()->get(i));
                         break;
                     case 'F':
-                        row->set(i, this->columns[i]->as_float()->get(j));
+                        row->set(j, this->columns[j]->as_float()->get(i));
                         break;
                 }
             }

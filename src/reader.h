@@ -27,7 +27,9 @@ public:
     /** Reads from the given Row and adds elements to map **/
     bool visit(Row &r) override {
         // Good Debug Below.
-        //r.printRow();
+        cout << "in visit: ";
+        r.printRow();
+        cout << endl;
         String *word = r.get_string(0);
         assert(word != nullptr);
         Num *num = map_.contains(*word) ? map_.get(*word) : new Num();
