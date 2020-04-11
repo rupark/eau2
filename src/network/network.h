@@ -140,9 +140,9 @@ public:
         inet_aton(client_adr, (struct in_addr *) &ip_.sin_addr.s_addr);
 
         ip_.sin_port = htons(port);
-        //assert(bind(sock_, (sockaddr * ) & ip_, sizeof(ip_)) >= 0);
+        assert(bind(sock_, (sockaddr * ) & ip_, sizeof(ip_)) >= 0);
         //so we run on mac
-        assert(bind( sock_, ( const struct sockaddr *)&ip_, (socklen_t)sizeof( ip_ ) ) >= 0);
+        //assert(bind( sock_, ( const struct sockaddr *)&ip_, (socklen_t)sizeof( ip_ ) ) >= 0);
         assert(listen(sock_, 100) >= 0);
     }
 
