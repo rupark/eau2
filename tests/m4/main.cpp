@@ -12,6 +12,7 @@
 #include "../../src/parser.h"
 #include "../../src/dataframe.h"
 #include "../../src/network/linus.h"
+#include <string.h>
 
 using namespace std;
 
@@ -43,11 +44,11 @@ NetworkIP *initialize() {
 }
 
 Application *pick(size_t i, NetworkIP &net) {
-//    if (arg.app == "wc") {
+    if (strcmp(arg.app, "wc") == 0) {
         return new WordCount(i, net);
-//    } else if (arg.app == "linus"){
-//        return new Linus(i, net);
-//    }
+    } else if (strcmp(arg.app, "linus") == 0){
+        return new Linus(i, net);
+    }
 }
 
 int main(int argc, char *argv[]) {
