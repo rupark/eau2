@@ -43,11 +43,11 @@ NetworkIP *initialize() {
 }
 
 Application *pick(size_t i, NetworkIP &net) {
-    if (arg.app == "wc") {
+//    if (arg.app == "wc") {
         return new WordCount(i, net);
-    } else if (arg.app == "linus"){
-        return new Linus(i, net);
-    }
+//    } else if (arg.app == "linus"){
+//        return new Linus(i, net);
+//    }
 }
 
 int main(int argc, char *argv[]) {
