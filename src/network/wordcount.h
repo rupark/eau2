@@ -127,6 +127,7 @@ public:
 
     /** The master nodes reads the input, then all of the nodes count. */
     void run_() override {
+        cout <<"in wc" <<endl;
         if (idx_ == 0) {
             FileReader fr = *new FileReader();
 //            delete DataFrame::fromVisitor(&in, &kv, "S", fr);

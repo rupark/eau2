@@ -331,6 +331,7 @@ public:
 
     /** Visits the rows in order on THIS node */
     void map(Reader &r) {
+        cout << "bad map" << endl;
         int completed = 0;
         cout << "local map: nrows = " << this->nrows() << endl;
         for (size_t i = 0; i < this->nrows(); i++) {
@@ -362,6 +363,7 @@ public:
 
     /** Visits the rows in order on THIS node */
     void local_map(Reader &r) {
+        cout << "bad map" << endl;
         map(r);
     }
 
@@ -473,6 +475,7 @@ public:
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
     static DataFrame *fromVisitor(Key *key, KVStore *kv, const char *schema, Writer w) {
+        cout << "bad writer" << endl;
         DataFrame *df = new DataFrame(*new Schema(schema));
         while (!w.done()) {
             Row *r = new Row(*new Schema(schema));
