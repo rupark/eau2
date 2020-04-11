@@ -58,6 +58,7 @@ int main(int argc, char *argv[]) {
     try {
         Application *app = pick(network->index(), *network);
         cout << "app set" << endl;
+        cout << arg.app << endl;
         app->run_();
         cout << "finished running app" << endl;
     } catch (std::exception const &e) {
