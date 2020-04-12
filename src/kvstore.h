@@ -34,8 +34,10 @@ public:
     void put(Key *key, DataFrame *df) {
         cout << key->name->c_str() << endl;
         cout  << "in put" << endl;
+        cout << "size: " << size << endl;
         // check if key is already there
         for (size_t k = 0; k < size; k++) {
+            cout << "in loop" << endl;
             // if found already, replace
             if(this->keys[k]->equals(key)) {
                 this->dfs[k] = df;
