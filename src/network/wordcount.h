@@ -156,7 +156,9 @@ public:
             cout << "rdy to local count" << endl;
             local_count();
             cout << "local counted" << endl;
-            Status msg(this->idx_, 0, kv.get(mk_key(this->idx_)));
+            DataFrame* storeDF = kv.get(mk_key(this->idx_));
+            cout << "got df" << endl;
+            Status msg(this->idx_, 0, storeDF);
             cout << "msg constructed" << endl;
             this->net.send_m(&msg);
             cout << "sending chunk back" << endl;
