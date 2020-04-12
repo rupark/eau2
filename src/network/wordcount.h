@@ -148,9 +148,12 @@ public:
             cout << "client received" << endl;
             kv.put(&in,kv.get(in)->append_chunk(ipd->msg_)); // check if put is needed? df pointer manipulated...
 
+            cout << "rdy to local count" << endl;
             local_count();
+            cout << "local counted" << endl;
             Status msg(this->idx_, 0, kv.get(mk_key(this->idx_)));
             this->net.send_m(&msg);
+            cout << "sending chunk back" << endl;
             cout << "DONE" << endl;
         }
     }
