@@ -145,10 +145,13 @@ public:
             // TODO need to loop until received all?
             cout << "client waiting to receive chunk" << endl;
             Status *ipd = dynamic_cast<Status *>(this->net.recv_m()); // Put this in Kv?
+            cout << "nrows ipd: " << ipd->msg_->nrow << endl;
             cout << "client received" << endl;
 
             DataFrame* chunkSoFar = kv.get(*new Key("data"));
             chunkSoFar->append_chunk(ipd->msg_);
+            cout << "nrows chunksofar: " << chunkSoFar->nrow << endl;
+            cout <<
             kv.put(new Key("data"),chunkSoFar); // check if put is needed? df pointer manipulated...
 
             cout << "rdy to local count" << endl;
@@ -186,7 +189,7 @@ public:
     /** Compute word counts on the local node and build a data frame. */
     void local_count() {
 //      DataFrame* words = kv.waitAndGet(in);
-        DataFrame *words = kv.get(*new Key("data"));
+        DataFrame *words = kv.get(in);
         cout << "made words" << endl;
         cout << words->nrow << endl;
         cout << words->ncol << endl;
