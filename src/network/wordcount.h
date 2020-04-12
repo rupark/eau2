@@ -63,9 +63,11 @@ public:
         //buf_.c(orig_->c_str());
         String *s = buf_.get();
         Key *k = new Key(s->steal(), orig_->home);
+        buf_ = *new StrBuff("wc-map-");
         delete s;
         return k;
     }
+
 }; // KeyBuff
 
 /****************************************************************************
@@ -183,7 +185,6 @@ public:
      *  which then joins them one by one. */
     Key *mk_key(size_t idx) {
         Key *k = kbuf.c(idx).get();
-        cout << "Created key " << k->c_str() << endl;
         cout << "Created key " << k->c_str() << endl;
         return k;
     }
