@@ -58,12 +58,14 @@ public:
      * Returns the DataFrame associated in this KVStore with the given Key
      */
     DataFrame *get(Key key) {
+        cout << "get" << endl;
         for (int i = 0; i < size; i++) {
             if (key.equals(keys[i])) {
-                if (dfs[i] != nullptr) {
+                cout << "found key" << endl;
+                //if (dfs[i] != nullptr) {
                     return dfs[i];
-                } else {
-                }
+//                } else {
+//                }
             }
         }
         return nullptr;
