@@ -37,7 +37,7 @@ NetworkIP *initialize() {
 
     } else {
         StrBuff *client_adr = new StrBuff();
-        client_adr->c("127.0.0.4");
+        client_adr->c("127.0.0.5");
         //client_adr->c(arg.index + 1);
         res->client_init(arg.index, arg.port, arg.master_ip, arg.master_port, client_adr->get()->c_str());
         delete client_adr;
