@@ -171,6 +171,7 @@ public:
     Message *recv_m() {
         sockaddr_in sender;
         socklen_t addrlen = sizeof(sender);
+        cout << "waiting for connection" << endl;
         int req = accept(sock_, (sockaddr * ) & sender, &addrlen);
         cout << "accepted connection" << endl;
         size_t size = 0;
