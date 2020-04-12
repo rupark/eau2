@@ -157,6 +157,7 @@ public:
             local_count();
             cout << "local counted" << endl;
             Status msg(this->idx_, 0, kv.get(mk_key(this->idx_)));
+            cout << "msg constructed" << endl;
             this->net.send_m(&msg);
             cout << "sending chunk back" << endl;
             cout << "DONE" << endl;
