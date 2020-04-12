@@ -34,7 +34,7 @@ using namespace std;
 /** Represents a set of data */
 class DataFrame : public Object {
 public:
-    Schema schema;
+    Schema schema; // Cannot be changed
     Column **columns;
     int nrow;
     int ncol;
@@ -63,7 +63,9 @@ public:
 
         nrow = 0;
         // set nrow to 0 but if schema comes in with nrow then use that
-        nrow = schema.nrow;
+        //nrow = schema.nrow;
+        // RESETS SCHEMA ROWS
+        schema.nrow = 0;
 
         for (size_t i = 0; i < schema.ncol; i++) {
             char type = this->schema.col_type(i);
@@ -230,29 +232,35 @@ public:
     }
 
     Row* get_row(size_t i) {
+
         if (i < 0 || i >= this->nrows()) {
+            cout << "returning nullptr" << endl;
             return nullptr;
         }
 
-        // run through columns at index i to build row
+//        // run through columns at index i to build row
         Row* build_row = new Row(this->schema);
-        for (size_t col_idx = 0; this->ncol; col_idx++) {
-            switch (this->get_schema().col_type(col_idx)) {
-                case 'B':
-                    build_row->set(i,this->get_bool(col_idx,i));
-                    break;
-                case 'I':
-                    build_row->set(i,this->get_int(col_idx,i));
-                    break;
-                case 'F':
-                    build_row->set(i,this->get_float(col_idx,i));
-                    break;
-                case 'S':
-                    build_row->set(i,this->get_string(col_idx,i));
-                    break;
-            }
-        }
+//        for (size_t col_idx = 0; this->ncol; col_idx++) {
+//            switch (this->get_schema().col_type(col_idx)) {
+//                case 'B':
+//                    build_row->set(i,this->get_bool(col_idx,i));
+//                    break;
+//                case 'I':
+//                    build_row->set(i,this->get_int(col_idx,i));
+//                    break;
+//                case 'F':
+//                    build_row->set(i,this->get_float(col_idx,i));
+//                    break;
+//                case 'S':
+//                    build_row->set(i,this->get_string(col_idx,i));
+//                    break;
+//            }
+//        }
 
+        this->fill_row(i,*build_row);
+        cout << "row built = ";
+        build_row->printRow();
+        cout << endl;
         return build_row;
     }
 
@@ -324,7 +332,8 @@ public:
 
     /** The number of rows in the dataframe. */
     size_t nrows() {
-        return schema.length();
+        //return schema.length();
+        return nrow;
     }
 
     /** The number of columns in the dataframe.*/
@@ -545,10 +554,14 @@ public:
     }
 
     /** Returns a section of this DataFrame as a new DataFrame **/
-    DataFrame *chunk(size_t chunk) {
-        int start_row = chunk * arg.rows_per_chunk;
+    DataFrame *chunk(size_t chunk_select) {
+
+        int start_row = chunk_select * arg.rows_per_chunk;
+        cout << "start row: " << start_row << endl;
+        cout << "chunk select " << chunk_select << endl;
         DataFrame *df = new DataFrame(this->schema);
-        for (size_t i = start_row; start_row < start_row + arg.rows_per_chunk; i++) {
+
+        for (size_t i = start_row; i < start_row + arg.rows_per_chunk; i++) {
             if (i >= nrow) {
                 return df;
             } else {

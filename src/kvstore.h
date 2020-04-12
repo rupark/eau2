@@ -32,6 +32,7 @@ public:
      * Adds the given Key and DataFrame to this KVStore
      */
     void put(Key *key, DataFrame *df) {
+        cout  << "in put" << endl;
         // check if key is already there
         for (size_t k = 0; k < size; k++) {
             // if fonud already, replace

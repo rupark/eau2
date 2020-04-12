@@ -59,7 +59,9 @@ public:
     void server_init(unsigned idx, unsigned port, char *server_adr) {
         this_node_ = idx;
         assert(idx == 0 && "Server must be 0");
+        cout << "creating sock at: " << server_adr << endl;
         init_sock_(port, server_adr);
+        cout << "server set at: " << server_adr << endl;
         nodes_ = new NodeInfo[arg.num_nodes];
 
         for (size_t i = 0; i < arg.num_nodes; ++i) nodes_[i].id = 0;
@@ -141,9 +143,11 @@ public:
         inet_aton(client_adr, (struct in_addr *) &ip_.sin_addr.s_addr);
 
         ip_.sin_port = htons(port);
-        //assert(bind(sock_, (sockaddr * ) & ip_, sizeof(ip_)) >= 0);
-        //so we run on mac
-        assert(bind( sock_, ( const struct sockaddr *)&ip_, (socklen_t)sizeof( ip_ ) ) >= 0);
+        assert(bind(sock_, (sockaddr * ) & ip_, sizeof(ip_)) >= 0);
+
+        //NOTE! - so we run on mac
+        //assert(bind( sock_, ( const struct sockaddr *)&ip_, (socklen_t)sizeof( ip_ ) ) >= 0);
+
         assert(listen(sock_, 100) >= 0);
     }
 
@@ -154,9 +158,14 @@ public:
         cout << "Sending Message to " << inet_ntoa(tgt.address.sin_addr) << endl;
         int conn = socket(AF_INET, SOCK_STREAM, 0);
         assert(conn >= 0 && "Unable to create client socket");
+//        assert(connect(conn, (sockaddr * ) & tgt.address, sizeof(tgt.address)) < 0);
+
         if (connect(conn, (sockaddr * ) & tgt.address, sizeof(tgt.address)) < 0) {
             cout << "Unable to connect to remote node" << endl;
+            exit(-1);
         }
+
+
         String *msg_ser = msg->serialize();
         cout << "Message: " << msg_ser->cstr_ << endl;
         char *buf = msg_ser->c_str();

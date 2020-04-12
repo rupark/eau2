@@ -98,23 +98,34 @@ public:
 
             // Split into chunks and send iteratively to nodes
             int num_chunks = ceil(df->nrow / arg.rows_per_chunk);
+            cout << "Num Chunks = " << num_chunks << endl;
             int selectedNode = 0;
 
             for (size_t j = 0; j < num_chunks; j++) {
+                cout << "building chunk " << j << endl;
                 DataFrame *cur_chunk = df->chunk(j);
+                cout << "chunk built size = " << cur_chunk->nrows() << endl;
+                cout << "rowsperchunk = " << arg.rows_per_chunk << endl;
+//                cur_chunk->print();
+//                cout << endl;
+
                 // if server's turn, keep chunks of DataFrame.
                 if (selectedNode == 0) {
                     // put chunks into local kv store as received
+                    cout << "putting cur_chunk " << j << " in key" << in.name->c_str() << endl;
                     kv.put(&in, kv.get(in)->append_chunk(cur_chunk));
+                    cout << "chunk put" << endl;
+                    cout << "selected node = " << selectedNode << endl;
                 } else {
                     // Sending to Clients
+                    cout << "(to) selected node = " << selectedNode << endl;
                     Status* chunkMsg = new Status(0, selectedNode, cur_chunk);
                     cout << "Server sending chunk" << endl;
-                    sleep(3);
+                    ///sleep(3);
                     this->net.send_m(chunkMsg);
                 }
                 // incriment selected node circularly between nodes
-                selectedNode = selectedNode == arg.num_nodes ? selectedNode=0 : selectedNode++;
+                selectedNode = ++selectedNode == arg.num_nodes ? selectedNode=0 : selectedNode++;
             }
 
             local_count();
@@ -132,7 +143,9 @@ public:
         } else {
 
             // TODO need to loop until received all?
+            cout << "client waiting to receive chunk" << endl;
             Status *ipd = dynamic_cast<Status *>(this->net.recv_m()); // Put this in Kv?
+            cout << "client received" << endl;
             kv.put(&in,kv.get(in)->append_chunk(ipd->msg_)); // check if put is needed? df pointer manipulated...
 
             local_count();
