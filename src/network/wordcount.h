@@ -147,7 +147,7 @@ public:
             Status *ipd = dynamic_cast<Status *>(this->net.recv_m()); // Put this in Kv?
             cout << "client received" << endl;
 
-            DataFrame* chunkSoFar = kv.get(in);
+            DataFrame* chunkSoFar = kv.get(*new Key("data"));
             chunkSoFar->append_chunk(ipd->msg_);
             kv.put(new Key("data"),chunkSoFar); // check if put is needed? df pointer manipulated...
 
