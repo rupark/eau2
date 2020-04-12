@@ -38,7 +38,7 @@ public:
     sockaddr_in ip_;
 
     ~NetworkIP() {
-        close(sock_);
+        //close(sock_);
     }
 
     NetworkIP() {
@@ -127,9 +127,9 @@ public:
             }
         }
 
-        //delete[] nodes_;
+        delete[] nodes_;
         nodes_ = nodes;
-        //delete ipd;
+        delete ipd;
     }
 
     /** Create a socket and bind it. */
@@ -154,6 +154,7 @@ public:
     /** Based on the message target, creates new connection to the appropriate
      * server and then serializes the message on the connection fd. **/
     void send_m(Message *msg) {
+        //init_sock_(arg.master_port, arg.master_ip);
         NodeInfo &tgt = nodes_[msg->target_];
         cout << "Sending Message to " << inet_ntoa(tgt.address.sin_addr) << endl;
         int conn = socket(AF_INET, SOCK_STREAM, 0);
