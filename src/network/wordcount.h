@@ -151,7 +151,6 @@ public:
             DataFrame* chunkSoFar = kv.get(*new Key("data"));
             chunkSoFar->append_chunk(ipd->msg_);
             cout << "nrows chunksofar: " << chunkSoFar->nrow << endl;
-            cout <<
             kv.put(new Key("data"),chunkSoFar); // check if put is needed? df pointer manipulated...
 
             cout << "rdy to local count" << endl;
