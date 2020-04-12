@@ -58,7 +58,7 @@ public:
      * Returns the DataFrame associated in this KVStore with the given Key
      */
     DataFrame *get(Key key) {
-        //cout << key.name->c_str() << endl;
+        cout << key.name->c_str() << endl;
         cout << "get" << endl;
         for (int i = 0; i < size; i++) {
             if (key.equals(keys[i])) {

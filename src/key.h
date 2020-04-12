@@ -6,6 +6,7 @@
 
 #include "object.h"
 #include "string.h"
+#include "args.h"
 
 /**
  * Represents a String, home Node association
@@ -21,10 +22,10 @@ public:
         this->home = home;
     }
 
-    // If no homenode passed in, default 0.
+    // If no homenode passed in, index.
     Key(char *name) {
         this->name = new String(name);
-        this->home = 0;
+        this->home = arg.index;
     }
 
     // If no homenode passed in, default 0.
