@@ -40,6 +40,7 @@ public:
             cout << "in loop" << endl;
             // if found already, replace
             if(this->keys[k]->equals(key)) {
+                cout << "found key" << endl;
                 this->dfs[k] = df;
                 return;
             }
