@@ -154,7 +154,6 @@ public:
     /** Based on the message target, creates new connection to the appropriate
      * server and then serializes the message on the connection fd. **/
     void send_m(Message *msg) {
-        //init_sock_(arg.master_port, arg.master_ip);
         NodeInfo &tgt = nodes_[msg->target_];
         cout << "Sending Message to " << inet_ntoa(tgt.address.sin_addr) << endl;
         int conn = socket(AF_INET, SOCK_STREAM, 0);
