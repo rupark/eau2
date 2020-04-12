@@ -199,6 +199,10 @@ public:
         } else {
             columns[ncol] = col;
             schema.add_column(col->get_type(), name);
+            if (col->size() > nrow) {
+                this->nrow = col->size();
+                schema.nrow = col->size();
+            }
             ncol++;
         }
     }
