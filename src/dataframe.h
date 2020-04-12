@@ -229,6 +229,33 @@ public:
         return schema.row_idx(col.c_str());
     }
 
+    Row* get_row(size_t i) {
+        if (i < 0 || i >= this->nrows()) {
+            return nullptr;
+        }
+
+        // run through columns at index i to build row
+        Row* build_row = new Row(this->schema);
+        for (size_t col_idx = 0; this->ncol; col_idx++) {
+            switch (this->get_schema().col_type(col_idx)) {
+                case 'B':
+                    build_row->set(i,this->get_bool(col_idx,i));
+                    break;
+                case 'I':
+                    build_row->set(i,this->get_int(col_idx,i));
+                    break;
+                case 'F':
+                    build_row->set(i,this->get_float(col_idx,i));
+                    break;
+                case 'S':
+                    build_row->set(i,this->get_string(col_idx,i));
+                    break;
+            }
+        }
+
+        return build_row;
+    }
+
     /** Set the value at the given column and row to the given value.
       * If the column is not  of the right type or the indices are out of
       * bound, the result is undefined. */
@@ -527,6 +554,7 @@ public:
             } else {
                 Row *r = new Row(this->schema);
                 this->fill_row(i, *r);
+                df->add_row(*r);
             }
         }
         return df;
@@ -573,6 +601,17 @@ public:
         DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
         return d;
     }
+
+    /**
+     * Adds chunk dataframe passed in to this dataframe
+     */
+     DataFrame* append_chunk(DataFrame* df) {
+         for (size_t r = 0; r < df->nrows(); r++) {
+             this->add_row(*df->get_row(r));
+         }
+
+         return this;
+     }
 
 };
 

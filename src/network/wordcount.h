@@ -15,6 +15,7 @@
 #include "../writer.h"
 #include "../SImap.h"
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 
@@ -76,72 +77,89 @@ public:
 class WordCount : public Application {
 public:
     static const size_t BUFSIZE = 1024;
-    Key in;
+    Key in; // mapped to words local count needed for (a subset of words_all).
     KeyBuff kbuf;
     SIMap all;
+    Key words_all; // used by server to separate word chunks.
 
     WordCount(size_t idx, NetworkIP &net) :
-            Application(idx, net), in("data"), kbuf(new Key("wc-map-", 0)) {}
+            Application(idx, net), in("data"), kbuf(new Key("wc-map-", 0)), words_all("words-all") {
+        kv.put(&in, new DataFrame(*new Schema("S")));
+    }
 
 //TODO IMPLEMENT THIS
-//    /** The master nodes reads the input, then all of the nodes count. */
-//    void run_() override {
-//        if (idx_ == 0) {
-//            cout << "In server run" << endl;
-//            FileReader fr = *new FileReader();
-//
-//            DataFrame *df = DataFrame::fromVisitor(&in, &kv, "S", fr);
-//
-//            int num_chunks = ceil(df->nrow / arg.rows_per_chunk);
-//            int selectedNode = 1;
-//            for (int j = 0; j < num_chunks; j++) {
-//                DataFrame *chunk = df.chunk(j);
-//                Status chunkMsg(selectedNode, 0, chunk);
-//                cout << "Server sending chunk" << endl;
-//                sleep(3);
-//                send_m(&chunkMsg);
-//                selectedNode++;
-//                if (selectedNode == arg.num_nodes) {
-//                    selectedNode = 1;
-//                }
-//            }
-//
-//            //HERE IS WHERE WE RECIEVE EVERYONE AND ADD THEIR DFs to the KV TODO
-//            for (size_t i = 1; i < arg.num_nodes; i++) {
-//                Status *msg = dynamic_cast<Status *>(n.recv_m());
-//                this->kv.put(mk_key(this->idx_), msg->msg_);
-//            }
-//
-//            //Theoretically everyone should now be in the store to reduce
-//            reduce();
-//            cout << "finished reduce" << endl;
-//
-//        } else {
-//            Status *ipd = dynamic_cast<Status *>(recv_m()); // Put this in Kv?
-//            local_count();
-//            Status msg(this->idx_, 0, kv.get(mk_key(this->idx_)));
-//            send_m(&msg);
-//            cout << "DONE" << endl;
-//        }
-//    }
-
     /** The master nodes reads the input, then all of the nodes count. */
     void run_() override {
-        cout <<"in wc" <<endl;
         if (idx_ == 0) {
+            cout << "In server run" << endl;
+            // Reads in File to Dataframe
             FileReader fr = *new FileReader();
-//            delete DataFrame::fromVisitor(&in, &kv, "S", fr);
-            DataFrame::fromVisitor(&in, &kv, "S", fr);
-        }
-        local_count();
-        reduce();
+            DataFrame *df = DataFrame::fromVisitor(&words_all, &kv, "S", fr);
 
+            // Split into chunks and send iteratively to nodes
+            int num_chunks = ceil(df->nrow / arg.rows_per_chunk);
+            int selectedNode = 0;
+
+            for (size_t j = 0; j < num_chunks; j++) {
+                DataFrame *cur_chunk = df->chunk(j);
+                // if server's turn, keep chunks of DataFrame.
+                if (selectedNode == 0) {
+                    // put chunks into local kv store as received
+                    kv.put(&in, kv.get(in)->append_chunk(cur_chunk));
+                } else {
+                    // Sending to Clients
+                    Status* chunkMsg = new Status(0, selectedNode, cur_chunk);
+                    cout << "Server sending chunk" << endl;
+                    sleep(3);
+                    this->net.send_m(chunkMsg);
+                }
+                // incriment selected node circularly between nodes
+                selectedNode = selectedNode == arg.num_nodes ? selectedNode=0 : selectedNode++;
+            }
+
+            local_count();
+
+            //HERE IS WHERE WE RECEIVE EVERYONE AND ADD THEIR DFs to the KV
+            for (size_t i = 1; i < arg.num_nodes; i++) {
+                Status *msg = dynamic_cast<Status *>(this->net.recv_m());
+                this->kv.put(mk_key(i), msg->msg_);
+            }
+
+            //Theoretically everyone should now be in the store to reduce
+            reduce();
+            cout << "finished reduce" << endl;
+
+        } else {
+
+            // TODO need to loop until received all?
+            Status *ipd = dynamic_cast<Status *>(this->net.recv_m()); // Put this in Kv?
+            kv.put(&in,kv.get(in)->append_chunk(ipd->msg_)); // check if put is needed? df pointer manipulated...
+
+            local_count();
+            Status msg(this->idx_, 0, kv.get(mk_key(this->idx_)));
+            this->net.send_m(&msg);
+            cout << "DONE" << endl;
+        }
     }
+
+//    /** The master nodes reads the input, then all of the nodes count. */
+//    void run_() override {
+//        cout <<"in wc" <<endl;
+//        if (idx_ == 0) {
+//            FileReader fr = *new FileReader();
+////            delete DataFrame::fromVisitor(&in, &kv, "S", fr);
+//            DataFrame::fromVisitor(&in, &kv, "S", fr);
+//        }
+//        local_count();
+//        reduce();
+//
+//    }
 
     /** Returns a key for given node.  These keys are homed on master node
      *  which then joins them one by one. */
     Key *mk_key(size_t idx) {
         Key *k = kbuf.c(idx).get();
+        cout << "Created key " << k->c_str() << endl;
         cout << "Created key " << k->c_str() << endl;
         return k;
     }

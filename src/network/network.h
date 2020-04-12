@@ -69,6 +69,7 @@ public:
 
         for (size_t i = 1; i < arg.num_nodes; i++) {
             Register *msg = dynamic_cast<Register *>(recv_m());
+            cout << "registered a node" << endl;
             nodes_[msg->sender_].id = msg->sender_;
             nodes_[msg->sender_].address.sin_family = AF_INET;
             nodes_[msg->sender_].address.sin_addr = msg->client.sin_addr;

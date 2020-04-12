@@ -32,9 +32,18 @@ public:
      * Adds the given Key and DataFrame to this KVStore
      */
     void put(Key *key, DataFrame *df) {
+        // check if key is already there
+        for (size_t k = 0; k < size; k++) {
+            // if fonud already, replace
+            if(this->keys[k]->equals(key)) {
+                this->dfs[k] = df;
+                return;
+            }
+        }
+
+        // if new key add and increment size
         this->keys[size] = key;
         this->dfs[size] = df;
-
         size++;
     }
 
@@ -56,11 +65,12 @@ public:
     //Client facing
     // Wait until we find the key
     DataFrame *waitAndGet(Key key) {
-        if (key.home == 0) {
-            return get(key);
-        } else {
-            cout << "ERROR: NOT WORKING WAIT AND GET NETWORK" << endl;
-        }
+        return get(key);
+//        if (key.home == 0) {
+//            return get(key);
+//        } else {
+//            cout << "ERROR: NOT WORKING WAIT AND GET NETWORK" << endl;
+//        }
     }
 
 };
