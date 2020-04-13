@@ -25,7 +25,6 @@ public:
 
     /** Reads from the given Row and adds elements to map **/
     bool visit(Row &r) override {
-        cout << "ADDER VISIT ROW SIZE = " << r.size << endl;
 
         r.printRow();
 
@@ -37,7 +36,6 @@ public:
             assert(num != nullptr);
             num->v++;
             map_.set(*word, num);
-            ////cout << "in visit set map: word=" << word->c_str() << " num: " << num->v << endl;
             return false;
         } else if (r.size > 1 && r.col_type(0) == 'S' && r.col_type(1) == 'I') {
 
@@ -51,12 +49,7 @@ public:
             assert(num != nullptr);
             num->v += count;
 
-            if (word->equals(new String("nibh"))) {
-                cout << "merge nibh: " << num->v << endl;
-            }
-
             map_.set(*word, num);
-            ////cout << "in visit set map: word=" << word->c_str() << " num: " << num->v << endl;
             return false;
         }
     }
