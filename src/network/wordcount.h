@@ -143,13 +143,10 @@ public:
             //HERE IS WHERE WE RECEIVE EVERYONE AND ADD THEIR DFs to the KV
             for (size_t i = 1; i < arg.num_nodes; i++) {
                 Status *msg = dynamic_cast<Status *>(this->net.recv_m());
-//                this->kv.put(mk_key(i), msg->msg_);
+                cout << msg->sender_ << endl;
+                this->kv.put(mk_key(msg->sender_), msg->msg_);
 
-                //cout << "\n\n\nPRINTING CLIENT DF" << endl;
-                //               msg->msg_->print();
-                //cout << "\n\n\n\n";
-
-                this->kv.put(new Key("wc-map-1"), msg->msg_); // TODO ABSTRACT!
+                //this->kv.put(new Key("wc-map-1"), msg->msg_); // TODO ABSTRACT!
             }
 
             //Theoretically everyone should now be in the store to reduce
