@@ -51,6 +51,7 @@ public:
             String *word = r.get_string(0);
             //cout << "row co-2 type: " << r.col_type(1) << endl;
             int count = r.get_int(1);
+
             //cout << "word = " << word->c_str() << " count from row: " << count << endl;
 
 //        //cout << "in visit word:" << word->c_str() << endl;
@@ -58,9 +59,14 @@ public:
 
             Num *num = map_.contains(*word) ? map_.get(*word) : new Num();
 
+
 //        //cout << "in visit got num: " << num->v << endl;
             assert(num != nullptr);
             num->v+=count;
+
+            if (word->equals(new String("nibh"))) {
+                cout << "nibh: " << num->v << endl;
+            }
 
             map_.set(*word, num);
             ////cout << "in visit set map: word=" << word->c_str() << " num: " << num->v << endl;

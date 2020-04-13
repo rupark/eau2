@@ -279,6 +279,7 @@ public:
         Key *own = new Key(s->get());
         DataFrame *df = kv.get(*own);
         merge(df, map);
+        cout << map.get(*new String("nibh"))->v << endl;
         //cout << "done merging server MAP SIZE = " << map.size() << endl;
 
 //        //cout << "ncol: " << df->ncol << endl;
