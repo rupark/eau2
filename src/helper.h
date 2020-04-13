@@ -13,77 +13,77 @@ class Sys {
 public:
 
     // Printing functions
-     Sys &p(char *c) {
+    Sys &p(char *c) {
         std::cout << c;
         return *this;
     }
 
-     Sys &p(bool c) {
+    Sys &p(bool c) {
         std::cout << c;
         return *this;
     }
 
-     Sys &p(float c) {
+    Sys &p(float c) {
         std::cout << c;
         return *this;
     }
 
-     Sys &p(int i) {
+    Sys &p(int i) {
         std::cout << i;
         return *this;
     }
 
-     Sys &p(size_t i) {
+    Sys &p(size_t i) {
         std::cout << i;
         return *this;
     }
 
-     Sys &p(const char *c) {
+    Sys &p(const char *c) {
         std::cout << c;
         return *this;
     }
 
-     Sys &p(char c) {
+    Sys &p(char c) {
         std::cout << c;
         return *this;
     }
 
-     Sys &pln() {
+    Sys &pln() {
         std::cout << "\n";
         return *this;
     }
 
-     Sys &pln(int i) {
+    Sys &pln(int i) {
         std::cout << i << "\n";
         return *this;
     }
 
-     Sys &pln(char *c) {
+    Sys &pln(char *c) {
         std::cout << c << "\n";
         return *this;
     }
 
-     Sys &pln(bool c) {
+    Sys &pln(bool c) {
         std::cout << c << "\n";
         return *this;
     }
 
-     Sys &pln(char c) {
+    Sys &pln(char c) {
         std::cout << c << "\n";
         return *this;
     }
 
-     Sys &pln(float x) {
+    Sys &pln(float x) {
         std::cout << x << "\n";
         return *this;
     }
 
-     Sys &pln(size_t x) {
+    Sys &pln(size_t x) {
         std::cout << x << "\n";
         return *this;
     }
 
-     Sys &pln(const char *c) {
+    Sys &pln(const char *c) {
         std::cout << c << "\n";
         return *this;
     }
@@ -109,7 +109,6 @@ public:
     }
 
     // Definitely fail
-//  void FAIL() {
     void myfail() {
         pln("Failing");
         exit(1);

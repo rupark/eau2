@@ -59,7 +59,6 @@ public:
     void server_init(unsigned idx, unsigned port, char *server_adr) {
         this_node_ = idx;
         assert(idx == 0 && "Server must be 0");
-        //cout << "creating sock at: " << server_adr << endl;
         init_sock_(port, server_adr);
         cout << "server set at: " << server_adr << endl;
         nodes_ = new NodeInfo[arg.num_nodes];
@@ -85,8 +84,6 @@ public:
         }
 
         Directory ipd(ports, addresses, arg.num_nodes - 1);
-
-        //cout << "nodes:" << ipd.nodes << endl;
 
         for (size_t i = 1; i < arg.num_nodes; i++) {
             ipd.target_ = i;
@@ -123,7 +120,6 @@ public:
             nodes[i + 1].address.sin_port = htons(ipd->ports[i]);
             if (inet_pton(AF_INET, ipd->addresses[i]->c_str(),
                           &nodes[i + 1].address.sin_addr) <= 0) {
-                //cout << "Invalid IP direcotry-addr" << endl;
             }
         }
 
@@ -137,16 +133,12 @@ public:
         assert((sock_ = socket(AF_INET, SOCK_STREAM, 0)) >= 0);
         int opt = 1;
         if (setsockopt(sock_, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(int)) < 0) {
-            //cout << "error" << endl;
         }
         ip_.sin_family = AF_INET;
         inet_aton(client_adr, (struct in_addr *) &ip_.sin_addr.s_addr);
 
         ip_.sin_port = htons(port);
         assert(bind(sock_, (sockaddr * ) & ip_, sizeof(ip_)) >= 0);
-
-        //NOTE! - so we run on mac
-        //assert(bind( sock_, ( const struct sockaddr *)&ip_, (socklen_t)sizeof( ip_ ) ) >= 0);
 
         assert(listen(sock_, 100) >= 0);
     }
@@ -158,7 +150,6 @@ public:
         cout << "Sending Message to " << inet_ntoa(tgt.address.sin_addr) << endl;
         int conn = socket(AF_INET, SOCK_STREAM, 0);
         assert(conn >= 0 && "Unable to create client socket");
-//        assert(connect(conn, (sockaddr * ) & tgt.address, sizeof(tgt.address)) < 0);
 
         if (connect(conn, (sockaddr * ) & tgt.address, sizeof(tgt.address)) < 0) {
             cout << "Unable to connect to remote node" << endl;
@@ -182,7 +173,6 @@ public:
         socklen_t addrlen = sizeof(sender);
         cout << "waiting for connection" << endl;
         int req = accept(sock_, (sockaddr * ) & sender, &addrlen);
-        //cout << "accepted connection" << endl;
         size_t size = 0;
         if (read(req, &size, sizeof(size_t)) == 0) {
             cout << "failed to read" << endl;

@@ -615,15 +615,8 @@ public:
         cout << "file opened" << endl;
         SorParser parser(file, (size_t)0, (size_t)file_size, (size_t)file_size);
         parser.guessSchema();
-        cout << "schema guessed" << endl;
-        cout << "parsing file..." << endl;
         parser.parseFile();
-        cout << "constructing df" << endl;
         DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
-
-        cout << "putting df mapped to " << key->name->c_str() << endl;
-        kv->put(key,d);
-        cout << "put df" << endl;
         return d;
     }
 
