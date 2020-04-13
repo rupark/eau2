@@ -12,7 +12,6 @@
 #include "../helper.h"
 #include "../array.h"
 #include "../args.h"
-#include "../parser.h"
 #include "../writer.h"
 #include "../SImap.h"
 #include <iostream>
@@ -154,15 +153,11 @@ public:
 
             //This is a terrible way to go about this but it will work
             //Finding out size of file
-            FILE *file = fopen(arg.file, "r");
-            size_t file_size = ftell(file);
-            SorParser parser(file, (size_t) 0, (size_t) file_size, (size_t) file_size);
-            parser.guessSchema();
-            parser.parseFile();
-            DataFrame *d = new DataFrame(parser.getColumnSet(), parser._num_columns);
+            FileReader fr = *new FileReader();
+            DataFrame *df = DataFrame::fromVisitor(&words_all, &kv, "S", fr);
 
             //Calculating the number of chunks and figuring out how many go to this node
-            int num_chunks = ceil(d->nrow / arg.rows_per_chunk);
+            int num_chunks = ceil(df->nrow / arg.rows_per_chunk);
             int num_received = 0;
             int selectedNode = 0;
             for (int i = 0; i < num_chunks; i++) {
