@@ -10,10 +10,13 @@ buildwc:
 	g++ -std=c++11 src/network/wordcount.h main.o -o wordcount
 
 runwcs:
-	./wordcount -index 0 -file data/WCData.txt -node 2 -port 8080 -masterip "127.0.0.4" -app "wc" -rowsperchunk 5 -masterport 8080
+	./wordcount -index 0 -file data/100k.txt -node 3 -port 8080 -masterip "127.0.0.4" -app "wc" -rowsperchunk 10 -masterport 8080
 
 runwcc:
-	./wordcount -index 1 -file data/WCData.txt -node 2 -port 8080 -masterip "127.0.0.4" -app "wc" -rowsperchunk 5 -masterport 8080
+	./wordcount -index 1 -file data/100k.txt -node 3 -port 8080 -masterip "127.0.0.4" -app "wc" -rowsperchunk 10 -masterport 8080
+
+runwcc2:
+	./wordcount -index 2 -file data/100k.txt -node 3 -port 8080 -masterip "127.0.0.4" -app "wc" -rowsperchunk 10 -masterport 8080
 
 runl: buildl
 	./linus -index 0 -file data/WCData.txt -node 1 -port 8080 -masterip "127.0.0.1" -app "linus"
