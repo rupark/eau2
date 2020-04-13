@@ -65,4 +65,8 @@ public:
         return ret;
     }
 
+    Key* clone() {
+        return new Key(this->name);
+    }
+
 };

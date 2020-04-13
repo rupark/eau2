@@ -36,7 +36,6 @@ public:
         readInput();
         for (size_t i = 0; i < DEGREES; i++) step(i);
     }
-
     /** Node 0 reads three files, cointainng projects, users and commits, and
      *  creates thre dataframes. All other nodes wait and load the three
      *  dataframes. Once we know the size of users and projects, we create

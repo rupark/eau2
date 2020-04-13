@@ -596,14 +596,34 @@ public:
         return df;
     }
 
-    static DataFrame* fromFile(const char* filep, Object* key, KVStore* kv) {
-        FILE* file = fopen(filep, "r");
-        size_t file_size = ftell(file);
+    static size_t get_file_size(FILE* p_file) // path to file
+    {
+        fseek(p_file,0,SEEK_END);
+        size_t size = ftell(p_file);
+        fclose(p_file);
+        return size;
+    }
 
+    static DataFrame* fromFile(const char* filep, Key* key, KVStore* kv) {
+        cout << "in from file: " << filep << endl;
+        FILE* file = fopen(filep, "rb");
+        FILE* file_dup = fopen(filep, "rb");
+        cout << "fopen file: " << (file == nullptr) << endl;
+        size_t file_size = get_file_size(file_dup);
+        cout << "size of file calced " << file_size << endl;
+
+        cout << "file opened" << endl;
         SorParser parser(file, (size_t)0, (size_t)file_size, (size_t)file_size);
         parser.guessSchema();
+        cout << "schema guessed" << endl;
+        cout << "parsing file..." << endl;
         parser.parseFile();
+        cout << "constructing df" << endl;
         DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
+
+        cout << "putting df mapped to " << key->name->c_str() << endl;
+        kv->put(key,d);
+        cout << "put df" << endl;
         return d;
     }
 

@@ -159,6 +159,7 @@ public:
      * @param file_size The total size of the file (as obtained by e.g. ftell)
      */
     LineReader(FILE *file, size_t file_start, size_t file_end, size_t file_size) : Object() {
+        assert(file != nullptr);
         _file = file;
         _file_start = file_start;
         _file_end = file_end;
@@ -522,6 +523,7 @@ public:
         size_t max_columns = 0;
         for (size_t i = 0; i < GUESS_SCHEMA_LINES; i++) {
             char *next_line = _reader->readLine();
+            cout << "next line: " << next_line << endl;
             if (next_line == nullptr) {
                 break;
             }
@@ -570,8 +572,16 @@ public:
         _reader->reset();
 
         char *line;
+        size_t lines_read = 0;
         while (true) {
             line = _reader->readLine();
+            lines_read++;
+            //cout << "constructing df line: " << line << endl;
+
+            if ( lines_read > 900000 && lines_read % 1000000 == 0) {
+                cout << "lines read: " << lines_read << endl;
+            }
+
             if (line == nullptr) {
                 break;
             }

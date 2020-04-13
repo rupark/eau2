@@ -28,7 +28,7 @@ public:
 
     IntColumn() {
         size_ = 0;
-        capacity_ = 100 * 1000 * 1000;
+        capacity_ = 1000 * 1000 * 1000;
         vals_ = new Integer *[capacity_];
     }
 
