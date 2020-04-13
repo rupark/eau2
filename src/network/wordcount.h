@@ -247,7 +247,12 @@ public:
         //delete words;
         Summer cnt(map);
         //cout << "summer created" << endl;
-        Key *key_counts = mk_key(this_node());
+
+        StrBuff* s = new StrBuff();
+        s->c("wc-map-");
+        s->c(this->idx_);
+
+        Key *key_counts = new Key(s->get());
         //cout << "created key " << key_counts->name->c_str() << endl;
         DataFrame::fromVisitor(key_counts, &kv, "SI", cnt);
         //cout << "df visited" << endl;
