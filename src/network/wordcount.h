@@ -268,7 +268,7 @@ public:
 
         for (size_t i = 1; i < arg.num_nodes; ++i) { // merge other nodes
             //Key *ok = mk_key(i);
-            Key *ok = new Key("wc-map-1"); // TODO ABSTRACT!
+            Key *ok = mk_key(i); // TODO ABSTRACT!
             merge(kv.get(*ok), map);
             //           delete ok;
         }
