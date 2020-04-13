@@ -611,6 +611,7 @@ public:
      * Adds chunk dataframe passed in to this dataframe
      */
      DataFrame* append_chunk(DataFrame* df) {
+         cout << df->nrow << endl;
          for (size_t r = 0; r < df->nrows(); r++) {
              this->add_row(*df->get_row(r));
          }
