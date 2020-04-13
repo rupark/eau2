@@ -123,7 +123,6 @@ public:
             //HERE IS WHERE WE RECEIVE EVERYONE AND ADD THEIR DFs to the KV
             for (size_t i = 1; i < arg.num_nodes; i++) {
                 Status *msg = dynamic_cast<Status *>(this->net.recv_m());
-                cout << msg->sender_ << endl;
                 StrBuff *s = new StrBuff();
                 s->c("wc-map-");
                 s->c(msg->sender_);
@@ -212,7 +211,6 @@ public:
         Key *own = new Key(s->get());
         DataFrame *df = kv.get(*own);
         merge(df, map);
-        cout << map.get(*new String("nibh"))->v << endl;
 
         for (size_t i = 1; i < arg.num_nodes; ++i) { // merge other nodes
             StrBuff *s = new StrBuff();
