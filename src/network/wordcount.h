@@ -192,7 +192,10 @@ public:
             //cout << "rdy to local count" << endl;
             local_count();
             //cout << "local counted" << endl;
-            Key *key_counts2 = mk_key(this->idx_);
+            StrBuff* s = new StrBuff();
+            s->c("wc-map-");
+            s->c(this->idx_);
+            Key *key_counts2 = new Key(s->get());
             //cout << "made key counts 2 = " << key_counts2->name->c_str() << endl;
             DataFrame *storeDF = kv.get(key_counts2);
             if (storeDF == nullptr) {
