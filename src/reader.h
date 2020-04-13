@@ -29,7 +29,7 @@ public:
 
         // Good Debug Below.
 //        //cout << "in visit: ";
-//        r.printRow();
+        r.printRow();
         ////cout << endl;
 
         if (r.size == 1) {
