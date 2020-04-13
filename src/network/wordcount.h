@@ -274,13 +274,7 @@ public:
         }
         cout << "Different words: " << map.size() << endl;
 
-        cout << "my : " << map.get(*new String("my"))->v << endl;
-        cout << "name : " << map.get(*new String("name"))->v << endl;
-        cout << "is : " << map.get(*new String("is"))->v << endl;
-        cout << "kate : " << map.get(*new String("kate"))->v << endl;
-        cout << "and : " << map.get(*new String("and"))->v << endl;
-        cout << "his : " << map.get(*new String("his"))->v << endl;
-        cout << "mark : " << map.get(*new String("mark"))->v << endl;
+        cout << "nibh : " << map.get(*new String("nibh"))->v << endl;
 
 
         //delete own;
