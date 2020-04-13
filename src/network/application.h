@@ -27,9 +27,11 @@ public:
 
     }
 
+    /** Returns the index of this node **/
     size_t this_node() {
         return idx_;
     }
 
+    /** Executes the Application **/
     virtual void run_() {}
 };

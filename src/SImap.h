@@ -142,7 +142,6 @@ public:
                 items_[i].vals_.put(j, nullptr);
             }
         }
-        //delete[] items_;
         items_ = newm.items_;
         capacity_ = newm.capacity_;
         assert(size_ == newm.size_);

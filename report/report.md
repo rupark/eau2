@@ -25,9 +25,21 @@ The Application class is an interface which can be extended by the different app
 application essentially is the desired program the user wants to execute. For example,
 WordCount is one such Application. The Application class contains a KVStore, an index which
 is the index of the node the Application is being run on, and a NetworkIP which communicates
-with the other nodes. An Application is run on every node. The Application's run method
-produces the desired functionality. In our design, the run method also is used for interacting with
-other nodes to send and receive DataFrames.
+with the other nodes. An Application is run on every node. 
+#### Run - How eau2 interacts with the Network ####
+The Application's run method executes the desired functionality of the app. In our design, the run method also is used for interacting with
+other nodes to send and receive DataFrames. There are three phases:
+1. The server distributes DataFrames of size rowsperchunk to the nodes.
+2. All nodes, including the server, execute the app functionality on their given DataFrames and produce a result.
+3. The nodes send their result back to the server who merges each nodes results to produce a final result.
+
+This process is depicted in the above diagrams.
+#### Supported Applications ####
+##### WordCount #####
+Returns the number of different words in a text file. To select this application use the flag "-app "wc"".
+##### Linus #####
+Returns the number of people who worked on projects up to seven degrees of Linus Torvalds. 
+To select this application use the flag "-app "linus"".
 ### KVStore
 The KVStore class found in kvstore.h represents a Key Value Store. KVStore contains an array of Key* and DataFrame*, as well as a size. 
 The KVStore contains three methods: get, put, and getAndWait. get takes in a Key and returns the DataFrame associated with that Key in the store.
@@ -56,6 +68,22 @@ sends the server a Register method and waits to receive a Directory Message in r
 Readers are used to read DataFrames. Writers are used to construct/modify DataFrames. 
 ## Use cases ##
 ```
+//====================TO BUILD:=====================
+make build
+//====================TO RUN:=====================
+//To run you must include the following flags:
+-index : the index of this node
+-file : if you are running WordCount, you must provide this flag with the desired text file to count
+-node : the number of nodes
+-port : the port of this node
+-masterip : the ip address of the server (node 0)
+-masterport : the port of the server (node 0)
+-app : enter "wc" for WordCount or "linus" for Linus
+-rowsperchunk : determines how large the DataFrames that are being distributed are
+//EXAMPLE:
+./eau2 -index 0 -file data/100k.txt -node 3 -port 8080 -masterip "127.0.0.4" -app "wc" -rowsperchunk 10 -masterport 8080
+
+////====================OTHER FUNCTIONALITY:=====================
 //Creating a new KVStore
 KVStore kv = *new KVStore();
 
@@ -103,15 +131,13 @@ WordCount* wc = new WordCount(0, server);
 wc.run();
 ```
 ## Open questions ##
-* Should NetworkIP be in Application or KVStore?
-* Is the main flow of this program that each node receives chunks of Data which
-perform an operation on the chunk and return a DataFrame? Where does that DataFrame go?
-* How are Key names formatted/created?
+* How can we better manage our memory?
+* How can we make our program more efficient?
 ## Status ##
 | Milestone Number | Status  | Objective  |
 |:---:|:---:|:---|
 | 1 | ✓ | Be able to build a DataFrame from a SoR file |
 | 2 | ✓ | Implement get, put, and getAndWait on a single-node Key Value Store system |
-| 3 | IP  | Distribute the key value store; be able to run with multiple KV stores, and thus multiple instances of the application |
-| 4 | IP | Incorporate the network layer
-| 5 | ✗ | Complete any missing bits in our implementation and write the distributed application "7 degrees of Linus"
+| 3 | ✓  | Distribute the key value store; be able to run with multiple KV stores, and thus multiple instances of the application |
+| 4 | ✓ | Incorporate the network layer
+| 5 | .5 | Complete any missing bits in our implementation and write the distributed application "7 degrees of Linus"

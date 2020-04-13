@@ -62,8 +62,7 @@ public:
         this->schema = *new Schema(schema);
 
         nrow = 0;
-        // set nrow to 0 but if schema comes in with nrow then use that
-        //nrow = schema.nrow;
+
         // RESETS SCHEMA ROWS
         schema.nrow = 0;
 
@@ -235,36 +234,19 @@ public:
         return schema.row_idx(col.c_str());
     }
 
-    Row* get_row(size_t i) {
+    Row *get_row(size_t i) {
 
         if (i < 0 || i >= this->nrows()) {
-            //cout << "returning nullptr" << endl;
+
             return nullptr;
         }
 
-//        // run through columns at index i to build row
-        Row* build_row = new Row(this->schema);
-//        for (size_t col_idx = 0; this->ncol; col_idx++) {
-//            switch (this->get_schema().col_type(col_idx)) {
-//                case 'B':
-//                    build_row->set(i,this->get_bool(col_idx,i));
-//                    break;
-//                case 'I':
-//                    build_row->set(i,this->get_int(col_idx,i));
-//                    break;
-//                case 'F':
-//                    build_row->set(i,this->get_float(col_idx,i));
-//                    break;
-//                case 'S':
-//                    build_row->set(i,this->get_string(col_idx,i));
-//                    break;
-//            }
-//        }
+        Row *build_row = new Row(this->schema);
 
-        this->fill_row(i,*build_row);
-        //cout << "row built = ";
+        this->fill_row(i, *build_row);
+
         build_row->printRow();
-        //cout << endl;
+
         return build_row;
     }
 
@@ -298,10 +280,10 @@ public:
                     row.set(i, columns[i]->as_float()->get(idx));
                     break;
                 case 'B':
-                    row.set(i, (bool)*columns[i]->as_bool()->get(idx));
+                    row.set(i, (bool) *columns[i]->as_bool()->get(idx));
                     break;
                 case 'I':
-                    row.set(i, (int)*columns[i]->as_int()->get(idx));
+                    row.set(i, (int) *columns[i]->as_int()->get(idx));
                     break;
                 case 'S':
                     row.set(i, columns[i]->as_string()->get(idx));
@@ -336,7 +318,6 @@ public:
 
     /** The number of rows in the dataframe. */
     size_t nrows() {
-        //return schema.length();
         return nrow;
     }
 
@@ -347,26 +328,8 @@ public:
 
     /** Visit rows in order */
     void map(Rower &r) {
-        //cout << "schema: " << this->get_schema().types->c_str() << endl;
         for (size_t i = 0; i < this->nrows(); i++) {
             Row *row = new Row(this->schema);
-//            for (size_t j = 0; j < this->ncols(); j++) {
-//                switch (row->col_type(j)) {
-//                    case 'I':
-//                        //cout << "setting int" << endl;
-//                        row->set(j, this->columns[j]->as_int()->get(i));
-//                        break;
-//                    case 'B':
-//                        row->set(j, this->columns[j]->as_bool()->get(i));
-//                        break;
-//                    case 'S':
-//                        row->set(j, this->columns[j]->as_string()->get(i));
-//                        break;
-//                    case 'F':
-//                        row->set(j, this->columns[j]->as_float()->get(i));
-//                        break;
-//                }
-//            }
             fill_row(i, *row);
             r.accept(*row);
         }
@@ -374,59 +337,28 @@ public:
 
     /** Visits the rows in order on THIS node */
     void map(Reader &r) {
-        //cout << "bad map" << endl;
         int completed = 0;
-        //cout << "local map: nrows = " << this->nrows() << endl;
         for (size_t i = 0; i < this->nrows(); i++) {
             Row *row = new Row(this->schema);
-            this->fill_row(i,*row);
-//            for (size_t j = 0; j < this->ncols(); j++) {
-//                switch (row->col_type(j)) {
-//                    case 'I':
-//                        row->set(j, this->columns[j]->as_int()->get(i));
-//                        break;
-//                    case 'B':
-//                        row->set(j, this->columns[j]->as_bool()->get(i));
-//                        break;
-//                    case 'S':
-//                        row->set(j, this->columns[j]->as_string()->get(i));
-//                        break;
-//                    case 'F':
-//                        row->set(j, this->columns[j]->as_float()->get(i));
-//                        break;
-//                }
-//            }
+            this->fill_row(i, *row);
             completed++;
             r.visit(*row);
-//            //cout << completed << " " << "row visited | ";
-//            row->printRow();
-//            //cout << endl;
         }
     }
 
     /** Visits the rows in order on THIS node */
     void local_map(Reader &r) {
-        //cout << "bad map" << endl;
         map(r);
     }
 
     /** Visits the rows in order on THIS node */
     void local_map(Adder &r) {
         int completed = 0;
-        //cout << "schema" << schema.types->c_str() << endl;
-        //cout << "local map: nrows = " << this->nrows() << endl;
         for (size_t i = 0; i < this->nrows(); i++) {
             Row *row = new Row(this->schema);
             this->fill_row(i, *row);
             completed++;
-//            assert(row->col_type(0)=="S");
-//            assert(row->col_type(1)=="I");
-            //cout << "row->coltype 0 " << row->col_type(0) << endl;
-            //cout << "row->coltype 1 " << row->col_type(1) << endl;
             r.visit(*row);
-            //cout << completed << " " << "row visited | ";
-            //row->printRow();
-            //cout << endl;
         }
     }
 
@@ -503,13 +435,11 @@ public:
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
     static DataFrame *fromVisitor(Key *key, KVStore *kv, const char *schema, Writer w) {
-        //cout << "bad writer" << endl;
         DataFrame *df = new DataFrame(*new Schema(schema));
         while (!w.done()) {
             Row *r = new Row(*new Schema(schema));
             w.visit(*r);
             df->add_row(*r);
-            //cout << "ROW: " << r->get_string(0)->c_str() << endl;
         }
         kv->put(key, df);
         return df;
@@ -524,7 +454,6 @@ public:
             Row *r = new Row(*new Schema(schema));
             w.visit(*r);
             df->add_row(*r);
-            //cout << "ROW: " << r->get_string(0)->c_str() << endl;
         }
         kv->put(key, df);
         return df;
@@ -539,7 +468,6 @@ public:
             Row *r = new Row(*new Schema(schema));
             w.visit(*r);
             df->add_row(*r);
-            //cout << "ROW: " << r->get_string(0)->c_str() << endl;
         }
         kv->put(key, df);
         return df;
@@ -549,8 +477,6 @@ public:
     DataFrame *chunk(size_t chunk_select) {
 
         int start_row = chunk_select * arg.rows_per_chunk;
-        //cout << "start row: " << start_row << endl;
-        //cout << "chunk select " << chunk_select << endl;
         DataFrame *df = new DataFrame(this->schema);
 
         for (size_t i = start_row; i < start_row + arg.rows_per_chunk; i++) {
@@ -596,27 +522,28 @@ public:
         return df;
     }
 
-    static DataFrame* fromFile(const char* filep, Object* key, KVStore* kv) {
-        FILE* file = fopen(filep, "r");
+    /** Produces a DataFrame from the given file path and places it in the KVStore under the given Key **/
+    static DataFrame *fromFile(const char *filep, Object *key, KVStore *kv) {
+        FILE *file = fopen(filep, "r");
         size_t file_size = ftell(file);
 
-        SorParser parser(file, (size_t)0, (size_t)file_size, (size_t)file_size);
+        SorParser parser(file, (size_t) 0, (size_t) file_size, (size_t) file_size);
         parser.guessSchema();
         parser.parseFile();
-        DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
+        DataFrame *d = new DataFrame(parser.getColumnSet(), parser._num_columns);
         return d;
     }
 
     /**
      * Adds chunk dataframe passed in to this dataframe
      */
-     DataFrame* append_chunk(DataFrame* df) {
-         for (size_t r = 0; r < df->nrows(); r++) {
-             this->add_row(*df->get_row(r));
-         }
+    DataFrame *append_chunk(DataFrame *df) {
+        for (size_t r = 0; r < df->nrows(); r++) {
+            this->add_row(*df->get_row(r));
+        }
 
-         return this;
-     }
+        return this;
+    }
 
 };
 
@@ -628,15 +555,15 @@ public:
  ************************************************************************/
 class Set {
 public:
-    bool* vals_;  // owned; data
+    bool *vals_;  // owned; data
     size_t size_; // number of elements
 
     /** Creates a set of the same size as the dataframe. */
-    Set(DataFrame* df) : Set(df->nrows()) {}
+    Set(DataFrame *df) : Set(df->nrows()) {}
 
     /** Creates a set of the given size. */
-    Set(size_t sz) :  vals_(new bool[sz]), size_(sz) {
-        for(size_t i = 0; i < size_; i++)
+    Set(size_t sz) : vals_(new bool[sz]), size_(sz) {
+        for (size_t i = 0; i < size_; i++)
             vals_[i] = false;
     }
 
@@ -647,7 +574,7 @@ public:
      *  that did not appear in projects or users.
      */
     void set(size_t idx) {
-        if (idx >= size_ ) return; // ignoring out of bound writes
+        if (idx >= size_) return; // ignoring out of bound writes
         vals_[idx] = true;
     }
 
@@ -660,7 +587,7 @@ public:
     size_t size() { return size_; }
 
     /** Performs set union in place. */
-    void union_(Set& from) {
+    void union_(Set &from) {
         for (size_t i = 0; i < from.size_; i++)
             if (from.test(i))
                 set(i);
@@ -672,12 +599,12 @@ public:
  * dataframe. The data contains all the values in the set. The dataframe has
  * at least one integer column.
  ****************************************************************************/
-class SetWriter: public Writer {
+class SetWriter : public Writer {
 public:
-    Set& set_; // set to read from
+    Set &set_; // set to read from
     int i_ = 0;  // position in set
 
-    SetWriter(Set& set): set_(set) { }
+    SetWriter(Set &set) : set_(set) {}
 
     /** Skip over false values and stop when the entire set has been seen */
     bool done() {
@@ -685,7 +612,7 @@ public:
         return i_ == set_.size_;
     }
 
-    void visit(Row & row) { row.set(0, i_++); }
+    void visit(Row &row) { row.set(0, i_++); }
 };
 
 
@@ -695,14 +622,17 @@ public:
  ******************************************************************************/
 class SetUpdater : public Reader {
 public:
-    Set& set_; // set to update
+    Set &set_; // set to update
 
-    SetUpdater(Set& set): set_(set) {}
+    SetUpdater(Set &set) : set_(set) {}
 
     /** Assume a row with at least one column of type I. Assumes that there
      * are no missing. Reads the value and sets the corresponding position.
      * The return value is irrelevant here. */
-    bool visit(Row & row) { set_.set(row.get_int(0));  return false; }
+    bool visit(Row &row) {
+        set_.set(row.get_int(0));
+        return false;
+    }
 
 };
 
@@ -719,17 +649,17 @@ public:
  *************************************************************************/
 class ProjectsTagger : public Reader {
 public:
-    Set& uSet; // set of collaborator
-    Set& pSet; // set of projects of collaborators
+    Set &uSet; // set of collaborator
+    Set &pSet; // set of projects of collaborators
     Set newProjects;  // newly tagged collaborator projects
 
-    ProjectsTagger(Set& uSet, Set& pSet, DataFrame* proj):
+    ProjectsTagger(Set &uSet, Set &pSet, DataFrame *proj) :
             uSet(uSet), pSet(pSet), newProjects(proj) {}
 
     /** The data frame must have at least two integer columns. The newProject
      * set keeps track of projects that were newly tagged (they will have to
      * be communicated to other nodes). */
-    bool visit(Row & row) override {
+    bool visit(Row &row) override {
         int pid = row.get_int(0);
         int uid = row.get_int(1);
         if (uSet.test(uid))

@@ -10,9 +10,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92d26fbc-46ee-417a-a62b-3efa29021ead" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/m4/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/report.md" beforeDir="false" afterPath="$PROJECT_DIR$/report/report.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SImap.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/SImap.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataframe.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataframe.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/key.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/key.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/kvstore.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/kvstore.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/application.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/application.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/network.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/network.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/serial.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/serial.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/network/wordcount.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/wordcount.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/object.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/object.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/reader.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/writer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/writer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start-script.sh" beforeDir="false" afterPath="$PROJECT_DIR$/tests/start-script.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/m4/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m4/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,13 +129,7 @@
       <workItem from="1586473357115" duration="161000" />
       <workItem from="1586475111644" duration="841000" />
       <workItem from="1586488920272" duration="1658000" />
-    </task>
-    <task id="LOCAL-00298" summary="debug">
-      <created>1586731031355</created>
-      <option name="number" value="00298" />
-      <option name="presentableId" value="LOCAL-00298" />
-      <option name="project" value="LOCAL" />
-      <updated>1586731031355</updated>
+      <workItem from="1586801564391" duration="3462000" />
     </task>
     <task id="LOCAL-00299" summary="debug">
       <created>1586731113877</created>
@@ -458,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586747280278</updated>
     </task>
-    <option name="localTasksCounter" value="347" />
+    <task id="LOCAL-00347" summary="debug">
+      <created>1586747549794</created>
+      <option name="number" value="00347" />
+      <option name="presentableId" value="LOCAL-00347" />
+      <option name="project" value="LOCAL" />
+      <updated>1586747549794</updated>
+    </task>
+    <option name="localTasksCounter" value="348" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -492,10 +508,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="465" y="313" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1586207656130" />
-    <state x="368" y="23" key="CommitChangelistDialog2" timestamp="1586747280125">
+    <state x="368" y="23" key="CommitChangelistDialog2" timestamp="1586747549595">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="368" y="23" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1586747280125" />
+    <state x="368" y="23" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1586747549595" />
     <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586480934893" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.831@0.23.1440.831" timestamp="1586563285546" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.836@0.23.1440.836" timestamp="1586197892524" />
@@ -511,10 +527,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="279" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586127415655" />
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1586747283887">
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1586747552112">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1586747283887" />
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1586747552112" />
     <state x="362" y="147" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586480942382" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1585579726970">
       <screen x="0" y="0" width="1536" height="824" />

@@ -129,7 +129,6 @@ public:
                     token = strtok(NULL, "}");
                     c = new StringColumn();
                     while (token != NULL) {
-                        //cout << "pushing back " << token << endl;
                         c->push_back(new String(token));
                         token = strtok(NULL, "}");
                     }
@@ -153,9 +152,6 @@ public:
             }
             d->add_column(c, new String(""));
         }
-
-        //cout << d->columns[0]->as_string()->get(0)->c_str() << endl;
-        //cout << d->nrow << endl;
 
         this->msg_ = d;
 

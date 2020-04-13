@@ -20,10 +20,3 @@ runwcc2:
 
 runl: buildl
 	./linus -index 0 -file data/WCData.txt -node 1 -port 8080 -masterip "127.0.0.1" -app "linus"
-
-run:
-    ./eau2 -index 0 -file data/100k.txt -node 1 -port 8080 -masterip "127.0.0.4" -app "wc" -rowsperchunk 10 -masterport 8080
-
-build:
-    g++ -std=c++11 -c tests/m4/main.cpp -o main.o
-    g++ -std=c++11 src/network/wordcount.h main.o -o eau2

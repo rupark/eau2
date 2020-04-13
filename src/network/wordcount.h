@@ -18,8 +18,6 @@
 
 using namespace std;
 
-//Args arg;
-
 /***************************************************************************/
 
 class MutableString : public String {
@@ -92,7 +90,6 @@ public:
     void run_() override {
 
         if (idx_ == 0) {
-            //cout << "In server run" << endl;
             // Reads in File to Dataframe
             FileReader fr = *new FileReader();
             DataFrame *df = DataFrame::fromVisitor(&words_all, &kv, "S", fr);
@@ -102,38 +99,25 @@ public:
             cout << arg.rows_per_chunk << endl;
             int num_chunks = 1 + ((df->nrow - 1) / arg.rows_per_chunk);
             cout << "num chunks: " << num_chunks << endl;
-            //cout << "Num Chunks = " << num_chunks << endl;
             int selectedNode = 0;
 
             for (size_t j = 0; j < num_chunks; j++) {
-                //cout << "building chunk " << j << endl;
                 DataFrame *cur_chunk = df->chunk(j);
-                //cout << "chunk built size = " << cur_chunk->nrows() << endl;
-                //cout << "rowsperchunk = " << arg.rows_per_chunk << endl;
-//                cur_chunk->print();
-//                //cout << endl;
 
                 // if server's turn, keep chunks of DataFrame.
                 if (selectedNode == 0) {
                     // put chunks into local kv store as received
                     cout << "putting cur_chunk " << j << " in key" << in.name->c_str() << endl;
-                    //kv.put(&in, kv.get(in)->append_chunk(cur_chunk));
                     DataFrame *chunkSoFar = kv.get(*new Key("data"));
                     chunkSoFar->append_chunk(cur_chunk);
                     kv.put(new Key("data"), chunkSoFar);
-                    cout << "put" << endl;
-
-                    //cout << "chunk put" << endl;
-                    //cout << "selected node = " << selectedNode << endl;
                 } else {
                     // Sending to Clients
-                    //cout << "(to) selected node = " << selectedNode << endl;
                     Status *chunkMsg = new Status(0, selectedNode, cur_chunk);
                     cout << "Server sending chunk" << endl;
-                    ///sleep(3);
                     this->net.send_m(chunkMsg);
                 }
-                // incriment selected node circularly between nodes
+                // increment selected node circularly between nodes
                 selectedNode = ++selectedNode == arg.num_nodes ? selectedNode = 0 : selectedNode++;
             }
 
@@ -144,17 +128,14 @@ public:
             for (size_t i = 1; i < arg.num_nodes; i++) {
                 Status *msg = dynamic_cast<Status *>(this->net.recv_m());
                 cout << msg->sender_ << endl;
-                StrBuff* s = new StrBuff();
+                StrBuff *s = new StrBuff();
                 s->c("wc-map-");
                 s->c(msg->sender_);
                 this->kv.put(new Key(s->get()), msg->msg_);
-
-                //this->kv.put(new Key("wc-map-1"), msg->msg_); // TODO ABSTRACT!
             }
 
             //Theoretically everyone should now be in the store to reduce
             reduce();
-            //cout << "finished reduce" << endl;
 
         } else {
 
@@ -163,7 +144,7 @@ public:
             DataFrame *df = DataFrame::fromVisitor(&words_all, &kv, "S", fr);
 
             //Calculating the number of chunks and figuring out how many go to this node
-            int num_chunks =  1 + ((df->nrow - 1) / arg.rows_per_chunk);
+            int num_chunks = 1 + ((df->nrow - 1) / arg.rows_per_chunk);
             int num_received = 0;
             int selectedNode = 0;
             for (int i = 0; i < num_chunks; i++) {
@@ -177,93 +158,50 @@ public:
             }
 
             for (size_t i = 0; i < num_received; i++) {
-                // TODO need to loop until received all?
                 cout << "client waiting to receive chunk" << endl;
-                Status *ipd = dynamic_cast<Status *>(this->net.recv_m()); // Put this in Kv?
-                //cout << "nrows ipd: " << ipd->msg_->nrow << endl;
+                Status *ipd = dynamic_cast<Status *>(this->net.recv_m());
                 cout << "client received" << endl;
 
                 DataFrame *chunkSoFar = kv.get(*new Key("data"));
                 chunkSoFar->append_chunk(ipd->msg_);
-                //cout << "nrows chunksofar: " << chunkSoFar->nrow << endl;
-                kv.put(new Key("data"), chunkSoFar); // check if put is needed? df pointer manipulated...
+                kv.put(new Key("data"), chunkSoFar);
             }
 
-            //cout << "rdy to local count" << endl;
             local_count();
-            //cout << "local counted" << endl;
-            StrBuff* s = new StrBuff();
+            StrBuff *s = new StrBuff();
             s->c("wc-map-");
             s->c(this->idx_);
             Key *key_counts2 = new Key(s->get());
-            //cout << "made key counts 2 = " << key_counts2->name->c_str() << endl;
             DataFrame *storeDF = kv.get(key_counts2);
-            if (storeDF == nullptr) {
-                //cout << "STORE DF IS NULL!! =========================" << endl;
-            }
-            cout << "got df of size" << storeDF->nrows() << endl;
             Status msg(this->idx_, 0, storeDF);
-            //cout << "msg constructed" << endl;
             this->net.send_m(&msg);
             cout << "sending chunk back" << endl;
             cout << "DONE" << endl;
         }
     }
 
-//    /** The master nodes reads the input, then all of the nodes count. */
-//    void run_() override {
-//        //cout <<"in wc" <<endl;
-//        if (idx_ == 0) {
-//            FileReader fr = *new FileReader();
-////            delete DataFrame::fromVisitor(&in, &kv, "S", fr);
-//            DataFrame::fromVisitor(&in, &kv, "S", fr);
-//        }
-//        local_count();
-//        reduce();
-//
-//    }
-
     /** Returns a key for given node.  These keys are homed on master node
      *  which then joins them one by one. */
     Key *mk_key(size_t idx) {
         kbuf = *new KeyBuff(new Key("wc-map-"));
-        //cout << "adding to kbuf: " << idx << endl;
         Key *k = kbuf.c(idx).get();
-        //cout << "Created key " << k->c_str() << endl;
         return k;
     }
 
     /** Compute word counts on the local node and build a data frame. */
     void local_count() {
-//      DataFrame* words = kv.waitAndGet(in);
         DataFrame *words = kv.get(in);
-        //cout << "made words" << endl;
-        //cout << words->nrow << endl;
-        //cout << words->ncol << endl;
-        //cout << "Node " << this_node() << ": starting local count..." << endl;
         SIMap map;
-        //cout << "map created" << endl;
         Adder add(map);
-        //cout << "adder created" << endl;
         words->local_map(add);
-        //cout << "local mapped" << endl;
-        //delete words;
         Summer cnt(map);
-        //cout << "summer created" << endl;
 
-//        kbuf = new Key("wc-map-", this_node());
-//        Key *key_counts = mk_key(this_node());
-        StrBuff* s = new StrBuff();
+        StrBuff *s = new StrBuff();
         s->c("wc-map-");
         s->c(this->idx_);
         Key *key_counts = new Key(s->get());
 
-
-        //cout << "created key " << key_counts->name->c_str() << endl;
         DataFrame::fromVisitor(key_counts, &kv, "SI", cnt);
-        //cout << "df visited" << endl;
-
-        cout << "nibh : " << map.get(*new String("nibh"))->v << endl;
     }
 
     /** Merge the data frames of all nodes */
@@ -272,48 +210,31 @@ public:
         cout << "Node 0: reducing counts..." << endl;
         SIMap map;
 
-
-        StrBuff* s = new StrBuff();
+        StrBuff *s = new StrBuff();
         s->c("wc-map-");
         s->c(this->idx_);
         Key *own = new Key(s->get());
         DataFrame *df = kv.get(*own);
         merge(df, map);
         cout << map.get(*new String("nibh"))->v << endl;
-        //cout << "done merging server MAP SIZE = " << map.size() << endl;
-
-//        //cout << "ncol: " << df->ncol << endl;
-//        //cout << "nrow: " << df->nrow << endl;
-//        df->print();
 
         for (size_t i = 1; i < arg.num_nodes; ++i) { // merge other nodes
-            //Key *ok = mk_key(i);
-
-            StrBuff* s = new StrBuff();
+            StrBuff *s = new StrBuff();
             s->c("wc-map-");
             s->c(i);
 
-            Key *ok = new Key(s->get()); // TODO ABSTRACT!
+            Key *ok = new Key(s->get());
             merge(kv.get(*ok), map);
-            //           delete ok;
         }
 
         cout << "Different words: " << map.size() << endl;
 
-        cout << "nibh : " << map.get(*new String("nibh"))->v << endl;
-
-
-        //delete own;
     }
 
     /** Adds map values into dataframe */
     void merge(DataFrame *df, SIMap &m) {
-        //cout << "in merge-------SCHEMA: " << df->get_schema().types->c_str() << endl;
         Adder add(m);
-        //cout << "starting map using adder" << endl;
         df->map(add);
-        //cout << "done with map using adder" << endl;
-        //delete df;
     }
 
 }; // WordcountDemo

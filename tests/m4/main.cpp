@@ -24,17 +24,6 @@ NetworkIP *initialize() {
         cout << "initializing server" << endl;
         res->server_init(arg.index, arg.port, arg.master_ip);
         cout << "server initialized" << endl;
-
-// TODO: Incorporate SoR parser??
-//        Constructing DataFrame from file
-//        FILE* file = fopen(arg.file, "r");
-//        size_t file_size = ftell(file);
-//
-//        SorParser parser{arg.file, 0, file_size, file_size};
-//        parser.guessSchema();
-//        parser.parseFile();
-//        DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
-
     } else {
         StrBuff *client_adr = new StrBuff();
         client_adr->c("127.0.0.");

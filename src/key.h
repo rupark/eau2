@@ -39,7 +39,7 @@ public:
         this->home = orig->home;
     }
 
-    Key(String* s) : Key(s->c_str()){}
+    Key(String *s) : Key(s->c_str()) {}
 
     ~Key() {
         delete name;
@@ -55,6 +55,7 @@ public:
         return name->equals(x->name) && home == x->home;
     }
 
+    /** Returns the name of this key plus its homenode **/
     char *c_str() override {
         StrBuff *a = new StrBuff();
         a->c(this->name->c_str());

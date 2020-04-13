@@ -116,35 +116,19 @@ public:
     size_t seen = 0;
 
     Summer(SIMap &map) : map_(map) {
-        //cout << "map size from constructor = " << map_.size() << endl;
-//        cout << "welcome ===========" << map_.get(*new String("welcome"))->v << endl;
-//        cout << "to ===========" << map_.get(*new String("to"))->v << endl;
-//        cout << "the ===========" << map_.get(*new String("the"))->v << endl;
-//        cout << "mark ===========" << map_.get(*new String("mark"))->v << endl;
-//        cout << "kate ===========" << map_.get(*new String("kate"))->v << endl;
     }
 
     /** Progresses the map **/
     void next() {
-        if (i == map_.capacity_) {return;}
+        if (i == map_.capacity_) { return; }
         else if (j < map_.items_[i].keys_.size()) {
             j = j + 1;
-//            if (k() != nullptr ) {
-//                seen = seen + 1;
-//            } else {
-//                next();
-//            }
         } else {
             i = i + 1;
             j = 0;
             while (i < map_.capacity_ && map_.items_[i].keys_.size() == 0 && k() == nullptr) {
                 i = i + 1;
             }
-//            if (k() != nullptr) {
-//                seen = seen + 1;
-//            } else {
-//                next();
-//            }
         }
     }
 
@@ -157,10 +141,6 @@ public:
     /** Returns a value from the SIMap at the current i and j **/
     size_t v() {
         if (i == map_.capacity_ || j == map_.items_[i].keys_.size()) {
-            //cout << "i in case: " << i << endl;
-            //cout << "j in case: " << j << endl;
-            //cout << "map cap: "<<map_.capacity_ << endl;
-            //cout << "map_.items_[i].keys_.size(): "<< map_.items_[i].keys_.size() << endl;
             assert(false);
             return 0;
         }
@@ -169,25 +149,15 @@ public:
 
     /** Gets a String, Num pair from SIMap and stores them in the given Row */
     void visit(Row &r) override {
-        //cout << "i: " << i << endl;
-        //cout << "j: " << j << endl;
-        //cout << "seen: " << seen << endl;
-        //cout << "map size: " << map_.size() << endl;
-        //cout << "map cap: " << map_.capacity_ << endl;
-        //cout << "bucket size: " << map_.items_[i].keys_.size() << endl << endl;
-
-//        if(r.size == 3) {
-//            r.printRow();
-//        }
         if (k() == nullptr) {
             next();
         }
-            String *key = k();
-            size_t value = v();
-            r.set(0, key);
-            r.set(1, (int) value);
-            seen++;
-            next();
+        String *key = k();
+        size_t value = v();
+        r.set(0, key);
+        r.set(1, (int) value);
+        seen++;
+        next();
     }
 
     /** Returns true when there are no more words String, Num pairs in SIMap */
