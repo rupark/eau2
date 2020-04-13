@@ -248,11 +248,14 @@ public:
         Summer cnt(map);
         //cout << "summer created" << endl;
 
+//        kbuf = new Key("wc-map-", this_node());
+//        Key *key_counts = mk_key(this_node());
         StrBuff* s = new StrBuff();
         s->c("wc-map-");
         s->c(this->idx_);
-
         Key *key_counts = new Key(s->get());
+
+
         //cout << "created key " << key_counts->name->c_str() << endl;
         DataFrame::fromVisitor(key_counts, &kv, "SI", cnt);
         //cout << "df visited" << endl;
@@ -265,8 +268,12 @@ public:
         if (this_node() != 0) return;
         cout << "Node 0: reducing counts..." << endl;
         SIMap map;
-        kbuf = new Key("wc-map-", 0);
-        Key *own = mk_key(0);
+
+
+        StrBuff* s = new StrBuff();
+        s->c("wc-map-");
+        s->c(this->idx_);
+        Key *own = new Key(s->get());
         DataFrame *df = kv.get(*own);
         merge(df, map);
         //cout << "done merging server MAP SIZE = " << map.size() << endl;
