@@ -159,7 +159,7 @@ public:
             DataFrame *df = DataFrame::fromVisitor(&words_all, &kv, "S", fr);
 
             //Calculating the number of chunks and figuring out how many go to this node
-            int num_chunks = ceil(df->nrow / arg.rows_per_chunk);
+            int num_chunks =  1 + ((df->nrow - 1) / arg.rows_per_chunk);
             int num_received = 0;
             int selectedNode = 0;
             for (int i = 0; i < num_chunks; i++) {
