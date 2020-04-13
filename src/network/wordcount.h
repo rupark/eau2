@@ -144,7 +144,10 @@ public:
             for (size_t i = 1; i < arg.num_nodes; i++) {
                 Status *msg = dynamic_cast<Status *>(this->net.recv_m());
                 cout << msg->sender_ << endl;
-                this->kv.put(mk_key(msg->sender_), msg->msg_);
+                StrBuff* s = new StrBuff();
+                s->c("wc-map-");
+                s->c(msg->sender_);
+                this->kv.put(new Key(s->get()), msg->msg_);
 
                 //this->kv.put(new Key("wc-map-1"), msg->msg_); // TODO ABSTRACT!
             }
@@ -155,7 +158,6 @@ public:
 
         } else {
 
-            //This is a terrible way to go about this but it will work
             //Finding out size of file
             FileReader fr = *new FileReader();
             DataFrame *df = DataFrame::fromVisitor(&words_all, &kv, "S", fr);
@@ -268,10 +270,16 @@ public:
 
         for (size_t i = 1; i < arg.num_nodes; ++i) { // merge other nodes
             //Key *ok = mk_key(i);
-            Key *ok = mk_key(i); // TODO ABSTRACT!
+
+            StrBuff* s = new StrBuff();
+            s->c("wc-map-");
+            s->c(i);
+
+            Key *ok = new Key(s->get()); // TODO ABSTRACT!
             merge(kv.get(*ok), map);
             //           delete ok;
         }
+
         cout << "Different words: " << map.size() << endl;
 
         cout << "nibh : " << map.get(*new String("nibh"))->v << endl;
