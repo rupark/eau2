@@ -175,7 +175,7 @@ public:
                 }
             }
 
-            for (size_t i = 0; i < num_recieved; i++) {
+            for (size_t i = 0; i < num_received; i++) {
                 // TODO need to loop until received all?
                 cout << "client waiting to receive chunk" << endl;
                 Status *ipd = dynamic_cast<Status *>(this->net.recv_m()); // Put this in Kv?
