@@ -25,7 +25,7 @@ public:
 
     /** Reads from the given Row and adds elements to map **/
     bool visit(Row &r) override {
-        //cout << "ADDER VISIT ROW SIZE = " << r.size << endl;
+        cout << "ADDER VISIT ROW SIZE = " << r.size << endl;
 
         // Good Debug Below.
 //        //cout << "in visit: ";
@@ -45,6 +45,7 @@ public:
             ////cout << "in visit set map: word=" << word->c_str() << " num: " << num->v << endl;
             return false;
         } else if (r.size == 2) {
+
    //         r.printRow();
             //cout << endl;
             //cout << "row is 2" << endl;
