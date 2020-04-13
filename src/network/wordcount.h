@@ -251,6 +251,8 @@ public:
         //cout << "created key " << key_counts->name->c_str() << endl;
         DataFrame::fromVisitor(key_counts, &kv, "SI", cnt);
         //cout << "df visited" << endl;
+
+        cout << "nibh : " << map.get(*new String("nibh"))->v << endl;
     }
 
     /** Merge the data frames of all nodes */
