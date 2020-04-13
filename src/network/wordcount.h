@@ -95,10 +95,7 @@ public:
             DataFrame *df = DataFrame::fromVisitor(&words_all, &kv, "S", fr);
 
             // Split into chunks and send iteratively to nodes
-            cout << df->nrow << endl;
-            cout << arg.rows_per_chunk << endl;
             int num_chunks = 1 + ((df->nrow - 1) / arg.rows_per_chunk);
-            cout << "num chunks: " << num_chunks << endl;
             int selectedNode = 0;
 
             for (size_t j = 0; j < num_chunks; j++) {
@@ -107,7 +104,6 @@ public:
                 // if server's turn, keep chunks of DataFrame.
                 if (selectedNode == 0) {
                     // put chunks into local kv store as received
-                    cout << "putting cur_chunk " << j << " in key" << in.name->c_str() << endl;
                     DataFrame *chunkSoFar = kv.get(*new Key("data"));
                     chunkSoFar->append_chunk(cur_chunk);
                     kv.put(new Key("data"), chunkSoFar);

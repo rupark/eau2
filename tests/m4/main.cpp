@@ -49,10 +49,9 @@ int main(int argc, char *argv[]) {
     assert(arg.num_nodes != 0 && "cannot have empty cloud");
     try {
         Application *app = pick(network->index(), *network);
-        cout << "app set" << endl;
-        cout << arg.app << endl;
+        cout << "CHOSEN APP: " << arg.app << endl;
         app->run_();
-        cout << "finished running app" << endl;
+        cout << "Finished Running App" << endl;
     } catch (std::exception const &e) {
         cout << "error: " << e.what() << endl;
     }
