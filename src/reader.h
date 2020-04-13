@@ -44,7 +44,7 @@ public:
             map_.set(*word, num);
             ////cout << "in visit set map: word=" << word->c_str() << " num: " << num->v << endl;
             return false;
-        } else if (r.size == 2) {
+        } else if (r.size > 1 && r.col_type(0) == 'S' && r.col_type(1) == 'I') {
 
    //         r.printRow();
             //cout << endl;
