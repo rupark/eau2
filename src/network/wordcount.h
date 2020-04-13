@@ -89,9 +89,9 @@ public:
         kv.put(&in, new DataFrame(*new Schema("S")));
     }
 
-//TODO IMPLEMENT THIS
     /** The master nodes reads the input, then all of the nodes count. */
     void run_() override {
+
         if (idx_ == 0) {
             //cout << "In server run" << endl;
             // Reads in File to Dataframe
@@ -121,13 +121,13 @@ public:
                 } else {
                     // Sending to Clients
                     //cout << "(to) selected node = " << selectedNode << endl;
-                    Status* chunkMsg = new Status(0, selectedNode, cur_chunk);
+                    Status *chunkMsg = new Status(0, selectedNode, cur_chunk);
                     cout << "Server sending chunk" << endl;
                     ///sleep(3);
                     this->net.send_m(chunkMsg);
                 }
                 // incriment selected node circularly between nodes
-                selectedNode = ++selectedNode == arg.num_nodes ? selectedNode=0 : selectedNode++;
+                selectedNode = ++selectedNode == arg.num_nodes ? selectedNode = 0 : selectedNode++;
             }
 
             local_count();
@@ -139,7 +139,7 @@ public:
 //                this->kv.put(mk_key(i), msg->msg_);
 
                 //cout << "\n\n\nPRINTING CLIENT DF" << endl;
- //               msg->msg_->print();
+                //               msg->msg_->print();
                 //cout << "\n\n\n\n";
 
                 this->kv.put(new Key("wc-map-1"), msg->msg_); // TODO ABSTRACT!
@@ -151,27 +151,52 @@ public:
 
         } else {
 
-            // TODO need to loop until received all?
-            cout << "client waiting to receive chunk" << endl;
-            Status *ipd = dynamic_cast<Status *>(this->net.recv_m()); // Put this in Kv?
-            //cout << "nrows ipd: " << ipd->msg_->nrow << endl;
-            cout << "client received" << endl;
+            //This is a terrible way to go about this but it will work
+            //Finding out size of file
+            FILE *file = fopen(arg.file, "r");
+            size_t file_size = ftell(file);
+            SorParser parser(file, (size_t) 0, (size_t) file_size, (size_t) file_size);
+            parser.guessSchema();
+            parser.parseFile();
+            DataFrame *d = new DataFrame(parser.getColumnSet(), parser._num_columns);
 
-            DataFrame* chunkSoFar = kv.get(*new Key("data"));
-            chunkSoFar->append_chunk(ipd->msg_);
-            //cout << "nrows chunksofar: " << chunkSoFar->nrow << endl;
-            kv.put(new Key("data"),chunkSoFar); // check if put is needed? df pointer manipulated...
+            //Calculating the number of chunks and figuring out how many go to this node
+            int num_chunks = ceil(df->nrow / arg.rows_per_chunk);
+            int num_received = 0;
+            int selectedNode = 0;
+            for (int i = 0; i < num_chunks; i++) {
+                if (selectedNode == idx_) {
+                    num_received++;
+                }
+                selectedNode++;
+                if (selectedNode > arg.num_nodes - 1) {
+                    selectedNode = 0;
+                }
+            }
+
+            for (size_t i = 0; i < num_recieved; i++) {
+                // TODO need to loop until received all?
+                cout << "client waiting to receive chunk" << endl;
+                Status *ipd = dynamic_cast<Status *>(this->net.recv_m()); // Put this in Kv?
+                //cout << "nrows ipd: " << ipd->msg_->nrow << endl;
+                cout << "client received" << endl;
+
+                DataFrame *chunkSoFar = kv.get(*new Key("data"));
+                chunkSoFar->append_chunk(ipd->msg_);
+                //cout << "nrows chunksofar: " << chunkSoFar->nrow << endl;
+                kv.put(new Key("data"), chunkSoFar); // check if put is needed? df pointer manipulated...
+            }
 
             //cout << "rdy to local count" << endl;
             local_count();
             //cout << "local counted" << endl;
-            Key* key_counts2 = mk_key(this->idx_);
+            Key *key_counts2 = mk_key(this->idx_);
             //cout << "made key counts 2 = " << key_counts2->name->c_str() << endl;
-            DataFrame* storeDF = kv.get(key_counts2);
+            DataFrame *storeDF = kv.get(key_counts2);
             if (storeDF == nullptr) {
                 //cout << "STORE DF IS NULL!! =========================" << endl;
             }
-            cout << "got df of size"  << storeDF->nrows() << endl;
+            cout << "got df of size" << storeDF->nrows() << endl;
             Status msg(this->idx_, 0, storeDF);
             //cout << "msg constructed" << endl;
             this->net.send_m(&msg);
@@ -220,7 +245,7 @@ public:
         //delete words;
         Summer cnt(map);
         //cout << "summer created" << endl;
-        Key* key_counts = mk_key(this_node());
+        Key *key_counts = mk_key(this_node());
         //cout << "created key " << key_counts->name->c_str() << endl;
         DataFrame::fromVisitor(key_counts, &kv, "SI", cnt);
         //cout << "df visited" << endl;
@@ -233,7 +258,7 @@ public:
         SIMap map;
         kbuf = new Key("wc-map-", 0);
         Key *own = mk_key(0);
-        DataFrame* df = kv.get(*own);
+        DataFrame *df = kv.get(*own);
         merge(df, map);
         //cout << "done merging server MAP SIZE = " << map.size() << endl;
 
@@ -243,9 +268,9 @@ public:
 
         for (size_t i = 1; i < arg.num_nodes; ++i) { // merge other nodes
             //Key *ok = mk_key(i);
-            Key* ok = new Key("wc-map-1"); // TODO ABSTRACT!
+            Key *ok = new Key("wc-map-1"); // TODO ABSTRACT!
             merge(kv.get(*ok), map);
- //           delete ok;
+            //           delete ok;
         }
         cout << "Different words: " << map.size() << endl;
 
