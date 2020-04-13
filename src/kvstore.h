@@ -32,37 +32,37 @@ public:
      * Adds the given Key and DataFrame to this KVStore
      */
     void put(Key *key, DataFrame *df) {
-        cout << key->name->c_str() << endl;
-        cout  << "in put" << endl;
-        cout << "size: " << size << endl;
+        //cout << key->name->c_str() << endl;
+        //cout  << "in put" << endl;
+        //cout << "size: " << size << endl;
         // check if key is already there
         for (size_t k = 0; k < size; k++) {
-            cout << "in loop" << endl;
+            //cout << "in loop" << endl;
             // if found already, replace
             if(this->keys[k]->equals(key)) {
-                cout << "found key" << endl;
+                //cout << "found key" << endl;
                 this->dfs[k] = df;
                 return;
             }
         }
 
-        cout << "new key" << endl;
+        //cout << "new key" << endl;
         // if new key add and increment size
         this->keys[size] = key;
         this->dfs[size] = df;
         size++;
-        cout << "done with put" << endl;
+        //cout << "done with put" << endl;
     }
 
     /**
      * Returns the DataFrame associated in this KVStore with the given Key
      */
     DataFrame *get(Key key) {
-        cout << key.name->c_str() << endl;
-        cout << "get" << endl;
+        //cout << key.name->c_str() << endl;
+        //cout << "get" << endl;
         for (int i = 0; i < size; i++) {
             if (key.equals(keys[i])) {
-                cout << "found key" << endl;
+                //cout << "found key" << endl;
                 //if (dfs[i] != nullptr) {
                     return dfs[i];
 //                } else {
@@ -79,7 +79,7 @@ public:
 //        if (key.home == 0) {
 //            return get(key);
 //        } else {
-//            cout << "ERROR: NOT WORKING WAIT AND GET NETWORK" << endl;
+//            //cout << "ERROR: NOT WORKING WAIT AND GET NETWORK" << endl;
 //        }
     }
 

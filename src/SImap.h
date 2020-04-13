@@ -148,6 +148,7 @@ public:
         assert(size_ == newm.size_);
         newm.items_ = nullptr;
     }
+
 }; // Map
 
 class SIMap : public Map {
@@ -161,4 +162,5 @@ public:
         assert(v);
         Map::set(k, v);
     }
+
 }; // KVMap

@@ -116,7 +116,7 @@ public:
     size_t seen = 0;
 
     Summer(SIMap &map) : map_(map) {
-        cout << "map size from constructor = " << map_.size() << endl;
+        //cout << "map size from constructor = " << map_.size() << endl;
 //        cout << "welcome ===========" << map_.get(*new String("welcome"))->v << endl;
 //        cout << "to ===========" << map_.get(*new String("to"))->v << endl;
 //        cout << "the ===========" << map_.get(*new String("the"))->v << endl;
@@ -157,10 +157,10 @@ public:
     /** Returns a value from the SIMap at the current i and j **/
     size_t v() {
         if (i == map_.capacity_ || j == map_.items_[i].keys_.size()) {
-            cout << "i in case: " << i << endl;
-            cout << "j in case: " << j << endl;
-            cout << "map cap: "<<map_.capacity_ << endl;
-            cout << "map_.items_[i].keys_.size(): "<< map_.items_[i].keys_.size() << endl;
+            //cout << "i in case: " << i << endl;
+            //cout << "j in case: " << j << endl;
+            //cout << "map cap: "<<map_.capacity_ << endl;
+            //cout << "map_.items_[i].keys_.size(): "<< map_.items_[i].keys_.size() << endl;
             assert(false);
             return 0;
         }
@@ -169,12 +169,12 @@ public:
 
     /** Gets a String, Num pair from SIMap and stores them in the given Row */
     void visit(Row &r) override {
-        cout << "i: " << i << endl;
-        cout << "j: " << j << endl;
-        cout << "seen: " << seen << endl;
-        cout << "map size: " << map_.size() << endl;
-        cout << "map cap: " << map_.capacity_ << endl;
-        cout << "bucket size: " << map_.items_[i].keys_.size() << endl << endl;
+        //cout << "i: " << i << endl;
+        //cout << "j: " << j << endl;
+        //cout << "seen: " << seen << endl;
+        //cout << "map size: " << map_.size() << endl;
+        //cout << "map cap: " << map_.capacity_ << endl;
+        //cout << "bucket size: " << map_.items_[i].keys_.size() << endl << endl;
 
         if (k() == nullptr) {
             next();

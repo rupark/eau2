@@ -238,7 +238,7 @@ public:
     Row* get_row(size_t i) {
 
         if (i < 0 || i >= this->nrows()) {
-            cout << "returning nullptr" << endl;
+            //cout << "returning nullptr" << endl;
             return nullptr;
         }
 
@@ -262,9 +262,9 @@ public:
 //        }
 
         this->fill_row(i,*build_row);
-        cout << "row built = ";
+        //cout << "row built = ";
         build_row->printRow();
-        cout << endl;
+        //cout << endl;
         return build_row;
     }
 
@@ -298,10 +298,10 @@ public:
                     row.set(i, columns[i]->as_float()->get(idx));
                     break;
                 case 'B':
-                    row.set(i, columns[i]->as_bool()->get(idx));
+                    row.set(i, (bool)*columns[i]->as_bool()->get(idx));
                     break;
                 case 'I':
-                    row.set(i, columns[i]->as_int()->get(idx));
+                    row.set(i, (int)*columns[i]->as_int()->get(idx));
                     break;
                 case 'S':
                     row.set(i, columns[i]->as_string()->get(idx));
@@ -347,98 +347,86 @@ public:
 
     /** Visit rows in order */
     void map(Rower &r) {
+        //cout << "schema: " << this->get_schema().types->c_str() << endl;
         for (size_t i = 0; i < this->nrows(); i++) {
             Row *row = new Row(this->schema);
-            for (size_t j = 0; j < this->ncols(); j++) {
-                switch (row->col_type(j)) {
-                    case 'I':
-                        row->set(j, this->columns[j]->as_int()->get(i));
-                        break;
-                    case 'B':
-                        row->set(j, this->columns[j]->as_bool()->get(i));
-                        break;
-                    case 'S':
-                        row->set(j, this->columns[j]->as_string()->get(i));
-                        break;
-                    case 'F':
-                        row->set(j, this->columns[j]->as_float()->get(i));
-                        break;
-                }
-            }
+//            for (size_t j = 0; j < this->ncols(); j++) {
+//                switch (row->col_type(j)) {
+//                    case 'I':
+//                        //cout << "setting int" << endl;
+//                        row->set(j, this->columns[j]->as_int()->get(i));
+//                        break;
+//                    case 'B':
+//                        row->set(j, this->columns[j]->as_bool()->get(i));
+//                        break;
+//                    case 'S':
+//                        row->set(j, this->columns[j]->as_string()->get(i));
+//                        break;
+//                    case 'F':
+//                        row->set(j, this->columns[j]->as_float()->get(i));
+//                        break;
+//                }
+//            }
+            fill_row(i, *row);
             r.accept(*row);
         }
     }
 
     /** Visits the rows in order on THIS node */
     void map(Reader &r) {
-        cout << "bad map" << endl;
+        //cout << "bad map" << endl;
         int completed = 0;
-        cout << "local map: nrows = " << this->nrows() << endl;
+        //cout << "local map: nrows = " << this->nrows() << endl;
         for (size_t i = 0; i < this->nrows(); i++) {
             Row *row = new Row(this->schema);
-            for (size_t j = 0; j < this->ncols(); j++) {
-                switch (row->col_type(j)) {
-                    case 'I':
-                        row->set(j, this->columns[j]->as_int()->get(i));
-                        break;
-                    case 'B':
-                        row->set(j, this->columns[j]->as_bool()->get(i));
-                        break;
-                    case 'S':
-                        row->set(j, this->columns[j]->as_string()->get(i));
-                        break;
-                    case 'F':
-                        row->set(j, this->columns[j]->as_float()->get(i));
-                        break;
-                }
-            }
+            this->fill_row(i,*row);
+//            for (size_t j = 0; j < this->ncols(); j++) {
+//                switch (row->col_type(j)) {
+//                    case 'I':
+//                        row->set(j, this->columns[j]->as_int()->get(i));
+//                        break;
+//                    case 'B':
+//                        row->set(j, this->columns[j]->as_bool()->get(i));
+//                        break;
+//                    case 'S':
+//                        row->set(j, this->columns[j]->as_string()->get(i));
+//                        break;
+//                    case 'F':
+//                        row->set(j, this->columns[j]->as_float()->get(i));
+//                        break;
+//                }
+//            }
             completed++;
-
             r.visit(*row);
-            cout << completed << " " << "row visited | ";
-            row->printRow();
-            cout << endl;
+//            //cout << completed << " " << "row visited | ";
+//            row->printRow();
+//            //cout << endl;
         }
     }
 
     /** Visits the rows in order on THIS node */
     void local_map(Reader &r) {
-        cout << "bad map" << endl;
+        //cout << "bad map" << endl;
         map(r);
     }
 
     /** Visits the rows in order on THIS node */
     void local_map(Adder &r) {
         int completed = 0;
-        cout << "local map: nrows = " << this->nrows() << endl;
+        //cout << "schema" << schema.types->c_str() << endl;
+        //cout << "local map: nrows = " << this->nrows() << endl;
         for (size_t i = 0; i < this->nrows(); i++) {
             Row *row = new Row(this->schema);
-            for (size_t j = 0; j < this->ncols(); j++) {
-                switch (row->col_type(j)) {
-                    case 'I':
-                        row->set(j, this->columns[j]->as_int()->get(i));
-                        break;
-                    case 'B':
-                        row->set(j, this->columns[j]->as_bool()->get(i));
-                        break;
-                    case 'S':
-                        row->set(j, this->columns[j]->as_string()->get(i));
-                        break;
-                    case 'F':
-                        row->set(j, this->columns[j]->as_float()->get(i));
-                        break;
-                }
-            }
+            this->fill_row(i, *row);
             completed++;
-
-            if (i == 11 || i == 49) {
-                row->printRow();
-            }
-
+//            assert(row->col_type(0)=="S");
+//            assert(row->col_type(1)=="I");
+            //cout << "row->coltype 0 " << row->col_type(0) << endl;
+            //cout << "row->coltype 1 " << row->col_type(1) << endl;
             r.visit(*row);
-            cout << completed << " " << "row visited | ";
-            row->printRow();
-            cout << endl;
+            //cout << completed << " " << "row visited | ";
+            //row->printRow();
+            //cout << endl;
         }
     }
 
@@ -515,13 +503,13 @@ public:
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
     static DataFrame *fromVisitor(Key *key, KVStore *kv, const char *schema, Writer w) {
-        cout << "bad writer" << endl;
+        //cout << "bad writer" << endl;
         DataFrame *df = new DataFrame(*new Schema(schema));
         while (!w.done()) {
             Row *r = new Row(*new Schema(schema));
             w.visit(*r);
             df->add_row(*r);
-            cout << "ROW: " << r->get_string(0)->c_str() << endl;
+            //cout << "ROW: " << r->get_string(0)->c_str() << endl;
         }
         kv->put(key, df);
         return df;
@@ -536,7 +524,7 @@ public:
             Row *r = new Row(*new Schema(schema));
             w.visit(*r);
             df->add_row(*r);
-            cout << "ROW: " << r->get_string(0)->c_str() << endl;
+            //cout << "ROW: " << r->get_string(0)->c_str() << endl;
         }
         kv->put(key, df);
         return df;
@@ -551,7 +539,7 @@ public:
             Row *r = new Row(*new Schema(schema));
             w.visit(*r);
             df->add_row(*r);
-            cout << "ROW: " << r->get_string(0)->c_str() << endl;
+            //cout << "ROW: " << r->get_string(0)->c_str() << endl;
         }
         kv->put(key, df);
         return df;
@@ -561,8 +549,8 @@ public:
     DataFrame *chunk(size_t chunk_select) {
 
         int start_row = chunk_select * arg.rows_per_chunk;
-        cout << "start row: " << start_row << endl;
-        cout << "chunk select " << chunk_select << endl;
+        //cout << "start row: " << start_row << endl;
+        //cout << "chunk select " << chunk_select << endl;
         DataFrame *df = new DataFrame(this->schema);
 
         for (size_t i = start_row; i < start_row + arg.rows_per_chunk; i++) {
