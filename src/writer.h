@@ -176,6 +176,9 @@ public:
         //cout << "map cap: " << map_.capacity_ << endl;
         //cout << "bucket size: " << map_.items_[i].keys_.size() << endl << endl;
 
+        if(r.size == 3) {
+            r.printRow();
+        }
         if (k() == nullptr) {
             next();
         }
