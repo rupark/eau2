@@ -65,7 +65,7 @@ public:
             num->v+=count;
 
             if (word->equals(new String("nibh"))) {
-                cout << "nibh: " << num->v << endl;
+                cout << "merge nibh: " << num->v << endl;
             }
 
             map_.set(*word, num);
