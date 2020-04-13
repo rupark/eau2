@@ -231,7 +231,7 @@ public:
     void local_count() {
 //      DataFrame* words = kv.waitAndGet(in);
         DataFrame *words = kv.get(in);
-        //cout << "made words" << endl;
+        cout << "made words" << endl;
         //cout << words->nrow << endl;
         //cout << words->ncol << endl;
         //cout << "Node " << this_node() << ": starting local count..." << endl;
