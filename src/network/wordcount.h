@@ -119,7 +119,7 @@ public:
                     cout << "putting cur_chunk " << j << " in key" << in.name->c_str() << endl;
                     //kv.put(&in, kv.get(in)->append_chunk(cur_chunk));
                     DataFrame *chunkSoFar = kv.get(*new Key("data"));
-                    chunkSoFar->append_chunk(ipd->msg_);
+                    chunkSoFar->append_chunk(cur_chunk);
                     kv.put(new Key("data"), chunkSoFar);
                     cout << "put" << endl;
 
