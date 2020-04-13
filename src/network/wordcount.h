@@ -117,8 +117,12 @@ public:
                 if (selectedNode == 0) {
                     // put chunks into local kv store as received
                     cout << "putting cur_chunk " << j << " in key" << in.name->c_str() << endl;
-                    kv.put(&in, kv.get(in)->append_chunk(cur_chunk));
+                    //kv.put(&in, kv.get(in)->append_chunk(cur_chunk));
+                    DataFrame *chunkSoFar = kv.get(*new Key("data"));
+                    chunkSoFar->append_chunk(ipd->msg_);
+                    kv.put(new Key("data"), chunkSoFar);
                     cout << "put" << endl;
+
                     //cout << "chunk put" << endl;
                     //cout << "selected node = " << selectedNode << endl;
                 } else {
@@ -231,7 +235,7 @@ public:
     void local_count() {
 //      DataFrame* words = kv.waitAndGet(in);
         DataFrame *words = kv.get(in);
-        cout << "made words" << endl;
+        //cout << "made words" << endl;
         //cout << words->nrow << endl;
         //cout << words->ncol << endl;
         //cout << "Node " << this_node() << ": starting local count..." << endl;
