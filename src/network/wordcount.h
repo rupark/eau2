@@ -12,6 +12,7 @@
 #include "../helper.h"
 #include "../array.h"
 #include "../args.h"
+#include "../parser.h"
 #include "../writer.h"
 #include "../SImap.h"
 #include <iostream>
@@ -161,7 +162,7 @@ public:
             DataFrame *d = new DataFrame(parser.getColumnSet(), parser._num_columns);
 
             //Calculating the number of chunks and figuring out how many go to this node
-            int num_chunks = ceil(df->nrow / arg.rows_per_chunk);
+            int num_chunks = ceil(d->nrow / arg.rows_per_chunk);
             int num_received = 0;
             int selectedNode = 0;
             for (int i = 0; i < num_chunks; i++) {
