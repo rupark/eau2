@@ -101,7 +101,7 @@ public:
             // Split into chunks and send iteratively to nodes
             cout << df->nrow << endl;
             cout << arg.rows_per_chunk << endl;
-            int num_chunks = ceil(df->nrow / arg.rows_per_chunk);
+            int num_chunks = (int)ceil(df->nrow / arg.rows_per_chunk);
             cout << "num chunks: " << num_chunks << endl;
             //cout << "Num Chunks = " << num_chunks << endl;
             int selectedNode = 0;
