@@ -117,7 +117,7 @@ public:
                 if (selectedNode == 0) {
                     // put chunks into local kv store as received
                     cout << "putting cur_chunk " << j << " in key" << in.name->c_str() << endl;
-                    kv.put(&in, kv.get(in)->append_chunk(cur_chunk));
+                    kv.put(new Key("data"), kv.get(in)->append_chunk(cur_chunk));
                     //cout << "chunk put" << endl;
                     //cout << "selected node = " << selectedNode << endl;
                 } else {
