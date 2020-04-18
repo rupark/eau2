@@ -42,7 +42,7 @@ public:
     Key(String *s) : Key(s->c_str()) {}
 
     ~Key() {
-        delete name;
+        //delete name;
     }
 
     /**
@@ -72,7 +72,8 @@ public:
     }
 
     Key* clone() {
-        return new Key(this->name->c_str());
+        Key* key = new Key(this->name->c_str());
+        return key;
     }
 
 };
