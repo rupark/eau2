@@ -80,16 +80,16 @@ public:
         // Key of the shape: users-stage-0
         cout << "KV size? " << kv.size << endl;
         cout << "kv.keys NULL?" << (kv.keys == nullptr) << endl;
-        cout << "kv.keys[0] NULL?" << (kv.keys[0] == nullptr) << endl;
-        cout << "kv.keys[1] NULL?" << (kv.keys[1] == nullptr) << endl;
+//        cout << "kv.keys[0] NULL?" << (kv.keys[0] == nullptr) << endl;
+//        cout << "kv.keys[1] NULL?" << (kv.keys[1] == nullptr) << endl;
         Key uK(StrBuff("users-").c(stage).c("-0").get());
 
         cout << "made key: " << uK.name->c_str() << endl;
         // A df with all the users added on the previous round
         //DataFrame* newUsers = dynamic_cast<DataFrame*>(kv.waitAndGet(uK));
-        if (kv.keys[1] != nullptr) {
-            cout << " keys[1] = " << kv.keys[1]->name->c_str() << endl;
-        }
+//        if (kv.keys[1] != nullptr) {
+//            cout << " keys[1] = " << kv.keys[1]->name->c_str() << endl;
+//        }
         cout << "creating newUsers" << endl;
         DataFrame* newUsers = kv.get(uK);
         cout << "made newUsers" << endl;
@@ -114,7 +114,7 @@ public:
         cout << "second merge" << endl;
         merge(utagger->newUsers, "users-", stage + 1);
 
-        cout << "kv.key[1] null??" << (kv.keys[1] == nullptr) << endl;
+//        cout << "kv.key[1] null??" << (kv.keys[1] == nullptr) << endl;
 //        if (kv.keys[1] != nullptr) {
 //            cout << "starting cstr" << endl;
 //            kv.keys[2]->c_str();
@@ -157,10 +157,10 @@ public:
             //delete DataFrame::fromVisitor(&k, &kv, "I", writer);
             cout << "calling fromVisitor" << endl;
             DataFrame::fromVisitor(&k, &kv, "I", writer);
-            cout << "kv.keys[1] NULL?" << (kv.keys[1]  == nullptr) << endl;
-            if (kv.keys[1]  != nullptr) {
-                cout << "kv.keys[1] NULL?" << kv.keys[1]->name->c_str() << endl;
-            }
+ //           cout << "kv.keys[1] NULL?" << (kv.keys[1]  == nullptr) << endl;
+//            if (kv.keys[1]  != nullptr) {
+//                cout << "kv.keys[1] NULL?" << kv.keys[1]->name->c_str() << endl;
+//            }
         } else {
             cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter* writer = new SetWriter(set);
