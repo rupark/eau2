@@ -72,7 +72,7 @@ public:
             if (key.equals(keys[i])) {
                 cout << "found : " << i << endl;
                 cout << "dfs[0]" << dfs[0] << endl;
-                //size--;
+                size--;
                 //delete keys[i];
                 //delete dfs[i];
                 return dfs[i];
