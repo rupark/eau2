@@ -117,9 +117,9 @@ public:
         cout << "kv.key[1] null??" << (kv.keys[1] == nullptr) << endl;
         if (kv.keys[1] != nullptr) {
             cout << "starting cstr" << endl;
-            kv.keys[0]->c_str();
+            kv.keys[2]->c_str();
             cout << "finished cstr..." << endl;
-            cout << "!!!!kv.keys[1].name null? = " << kv.keys[0]->c_str() << endl;
+            cout << "!!!!kv.keys[1].name null? = " << kv.keys[2]->c_str() << endl;
         }
 
         cout << "uset union" << endl;
