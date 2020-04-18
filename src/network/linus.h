@@ -115,12 +115,12 @@ public:
         merge(utagger->newUsers, "users-", stage + 1);
 
         cout << "kv.key[1] null??" << (kv.keys[1] == nullptr) << endl;
-        if (kv.keys[1] != nullptr) {
-            cout << "starting cstr" << endl;
-            kv.keys[2]->c_str();
-            cout << "finished cstr..." << endl;
-            cout << "!!!!kv.keys[1].name null? = " << kv.keys[2]->c_str() << endl;
-        }
+//        if (kv.keys[1] != nullptr) {
+//            cout << "starting cstr" << endl;
+//            kv.keys[2]->c_str();
+//            cout << "finished cstr..." << endl;
+//            cout << "!!!!kv.keys[1].name null? = " << kv.keys[2]->c_str() << endl;
+//        }
 
         cout << "uset union" << endl;
         uSet->union_(utagger->newUsers);
@@ -147,7 +147,7 @@ public:
                 cout << " elements from node " << i << endl;
                 SetUpdater* upd = new SetUpdater(set);
                 delta->map(upd);
-                delete delta;
+                //delete delta;
             }
             cout << "    storing " << set.size() << " merged elements" << endl;
             SetWriter* writer = new SetWriter(set);

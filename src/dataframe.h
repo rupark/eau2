@@ -664,11 +664,13 @@ public:
         vals_ = new bool[sz];
         size_ = sz;
         cout << "creating set" << endl;
-        for(size_t i = 0; i < size_; i++)
+        for(size_t i = 0; i < size_; i++) {
             vals_[i] = false;
+        }
     }
 
-    ~Set() { delete[] vals_; }
+    ~Set() { //delete[] vals_;
+        }
 
     /** Add idx to the set. If idx is out of bound, ignore it.  Out of bound
      *  values can occur if there are references to pids or uids in commits
