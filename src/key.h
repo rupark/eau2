@@ -60,7 +60,7 @@ public:
     }
 
     /** Returns the name of this key **/
-    char *c_str() override {
+    char *c_str()  {
         cout << "in cstr" << endl;
         StrBuff *a = new StrBuff();
         cout << "in cstr" << endl;
