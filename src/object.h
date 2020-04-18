@@ -30,7 +30,9 @@ public:
     virtual size_t hash_me() { return 1; };
 
     /** Returned c_str is owned by the object, don't modify nor delete. */
-    virtual char *c_str() { return nullptr; }
+    virtual char *c_str() {
+        cout << "in object" << endl;
+        return nullptr; }
 
     /** print method **/
     virtual void print() { cout << "" << endl; }
