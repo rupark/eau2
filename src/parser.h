@@ -523,7 +523,6 @@ public:
         size_t max_columns = 0;
         for (size_t i = 0; i < GUESS_SCHEMA_LINES; i++) {
             char *next_line = _reader->readLine();
-            cout << "next line: " << next_line << endl;
             if (next_line == nullptr) {
                 break;
             }
@@ -578,7 +577,7 @@ public:
             lines_read++;
             //cout << "constructing df line: " << line << endl;
 
-            if ( lines_read > 900000 && lines_read % 1000000 == 0) {
+            if ( lines_read > 9900000 && lines_read % 10000000 == 0) {
                 cout << "lines read: " << lines_read << endl;
             }
 

@@ -88,8 +88,12 @@ public:
 
     /** Fill DataFrame from group 4500NE's sorer adapter */
     DataFrame(Provider::ColumnSet *data, size_t num_columns) {
-        this->columns = new Column *[100 * 1000 * 1000];
+
+        cout << "col set size: " << data->getColumn(0)->_length << endl;
+        this->columns = new Column *[1000 * 1000 * 1000];
         this->schema = *new Schema();
+        this->nrow = 0;
+        this->ncol = 0;
 
         Column *working_col;
 
@@ -165,9 +169,11 @@ public:
                 }
             }
 
+
             // add this column to this dataframe
             this->add_column(working_col, nullptr);
         }
+
 
     }
 
@@ -337,6 +343,7 @@ public:
     /** The number of rows in the dataframe. */
     size_t nrows() {
         //return schema.length();
+
         return nrow;
     }
 
@@ -373,31 +380,19 @@ public:
     }
 
     /** Visits the rows in order on THIS node */
-    void map(Reader &r) {
+    void map(Reader* r) {
         //cout << "bad map" << endl;
         int completed = 0;
-        //cout << "local map: nrows = " << this->nrows() << endl;
+        cout << "local map: nrows = " << this->nrows() << endl;
         for (size_t i = 0; i < this->nrows(); i++) {
+            if (i>999 && i%1000 == 0) {
+                cout << "row: " << i << " size: " << this->nrows() << endl;
+            }
             Row *row = new Row(this->schema);
             this->fill_row(i,*row);
-//            for (size_t j = 0; j < this->ncols(); j++) {
-//                switch (row->col_type(j)) {
-//                    case 'I':
-//                        row->set(j, this->columns[j]->as_int()->get(i));
-//                        break;
-//                    case 'B':
-//                        row->set(j, this->columns[j]->as_bool()->get(i));
-//                        break;
-//                    case 'S':
-//                        row->set(j, this->columns[j]->as_string()->get(i));
-//                        break;
-//                    case 'F':
-//                        row->set(j, this->columns[j]->as_float()->get(i));
-//                        break;
-//                }
-//            }
+
             completed++;
-            r.visit(*row);
+            r->visit(*row);
 //            //cout << completed << " " << "row visited | ";
 //            row->printRow();
 //            //cout << endl;
@@ -405,7 +400,7 @@ public:
     }
 
     /** Visits the rows in order on THIS node */
-    void local_map(Reader &r) {
+    void local_map(Reader* r) {
         //cout << "bad map" << endl;
         map(r);
     }
@@ -502,16 +497,22 @@ public:
     /**
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
-    static DataFrame *fromVisitor(Key *key, KVStore *kv, const char *schema, Writer w) {
-        //cout << "bad writer" << endl;
+    static DataFrame *fromVisitor(Key *key, KVStore *kv, const char *schema, Writer* w) {
+        cout << "in fromVisitor" << endl;
         DataFrame *df = new DataFrame(*new Schema(schema));
-        while (!w.done()) {
+        cout << "made df" << endl;
+        while (!w->done()) {
+//            cout << "making row" << endl;
             Row *r = new Row(*new Schema(schema));
-            w.visit(*r);
+            w->visit(*r);
             df->add_row(*r);
             //cout << "ROW: " << r->get_string(0)->c_str() << endl;
         }
+        cout << "putting in kv under key " << key->name->cstr_ << "df size - " << df->nrows() << endl;
         kv->put(key, df);
+        if (key->name->equals(new String("users-1-0"))) {
+            cout << "kv.keys[1] = " << kv->keys[1]->name->c_str() << endl;
+        }
         return df;
     }
 
@@ -590,9 +591,16 @@ public:
      * Contructs a DataFrame from the size_t and associates the given Key with the DataFrame in the given KVStore
      */
     static DataFrame *fromScalarInt(Key *key, KVStore *kv, size_t scalar) {
+        cout << "Creating df " << endl;
         DataFrame *df = new DataFrame(*new Schema("I"));
+        cout << "pushing back" << endl;
         df->columns[0]->push_back((int) scalar);
+        if (df->nrow < df->columns[0]->size()){
+            df->nrow = df->columns[0]->size();
+        }
+        cout << "putting in kv store: " << key->name->c_str()  << "size of df" << df->nrows() << endl;
         kv->put(key, df);
+        cout << "done in fromScalarInt" << endl;
         return df;
     }
 
@@ -608,15 +616,19 @@ public:
         cout << "in from file: " << filep << endl;
         FILE* file = fopen(filep, "rb");
         FILE* file_dup = fopen(filep, "rb");
-        cout << "fopen file: " << (file == nullptr) << endl;
+        cout << "fopen file null?: " << (file == nullptr) << endl;
         size_t file_size = get_file_size(file_dup);
         cout << "size of file calced " << file_size << endl;
 
         cout << "file opened" << endl;
         SorParser parser(file, (size_t)0, (size_t)file_size, (size_t)file_size);
+        cout << "parser created" << endl;
         parser.guessSchema();
+        cout << "schema guessed" << endl;
         parser.parseFile();
+        cout << "file parsed" << endl;
         DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
+        cout << "data frame created of SIZE " << d->nrows() << endl;
         return d;
     }
 
@@ -648,7 +660,10 @@ public:
     Set(DataFrame* df) : Set(df->nrows()) {}
 
     /** Creates a set of the given size. */
-    Set(size_t sz) :  vals_(new bool[sz]), size_(sz) {
+    Set(size_t sz) {
+        vals_ = new bool[sz];
+        size_ = sz;
+        cout << "creating set" << endl;
         for(size_t i = 0; i < size_; i++)
             vals_[i] = false;
     }
@@ -690,15 +705,17 @@ public:
     Set& set_; // set to read from
     int i_ = 0;  // position in set
 
-    SetWriter(Set& set): set_(set) { }
+    SetWriter(Set& set) : set_(set){
+    }
 
     /** Skip over false values and stop when the entire set has been seen */
-    bool done() {
+    virtual bool done() override {
         while (i_ < set_.size_ && set_.test(i_) == false) ++i_;
+//        cout << "i " << i_ << "size " << set_.size_ << endl;
         return i_ == set_.size_;
     }
 
-    void visit(Row & row) { row.set(0, i_++); }
+    virtual void visit(Row & row) override { row.set(0, i_++); }
 };
 
 
@@ -745,12 +762,14 @@ public:
     bool visit(Row & row) override {
         int pid = row.get_int(0);
         int uid = row.get_int(1);
-        if (uSet.test(uid))
+        if (uSet.test(uid)) {
             if (!pSet.test(pid)) {
                 pSet.set(pid);
                 newProjects.set(pid);
+                return true;
             }
-        return false;
+            return false;
+        }
     }
 };
 
@@ -771,14 +790,17 @@ public:
     UsersTagger(Set &pSet, Set &uSet, DataFrame *users) :
             pSet(pSet), uSet(uSet), newUsers(users->nrows()) {}
 
+    //Kate did some stuff
     bool visit(Row &row) override {
         int pid = row.get_int(0);
         int uid = row.get_int(1);
-        if (pSet.test(pid))
+        if (pSet.test(pid)) {
             if (!uSet.test(uid)) {
                 uSet.set(uid);
                 newUsers.set(uid);
+                return true;
             }
-        return false;
+            return false;
+        }
     }
 };

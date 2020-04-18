@@ -23,7 +23,9 @@ public:
     virtual void visit(Row &) {}
 
     /** Returns true when there are no more words to read. **/
-    virtual bool done() {}
+    virtual bool done() {
+        assert(false && "Calling Virtual Done Method");
+    }
 };
 
 
