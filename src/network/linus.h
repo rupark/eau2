@@ -127,7 +127,7 @@ public:
         cout << "    after stage " << stage << ":" << endl;
         cout << "        tagged projects: " << pSet->size() << endl;
         cout << "        tagged users: " << uSet->size() << endl;
-        cout << "        kv.keys[1]: " << (kv.keys[1] == nullptr) << "name: " << kv.keys[1]->c_str() << endl;
+        //cout << "        kv.keys[1]: " << (kv.keys[1] == nullptr) << "name: " << kv.keys[1]->c_str() << endl;
     }
 
     /** Gather updates to the given set from all the nodes in the systems.
