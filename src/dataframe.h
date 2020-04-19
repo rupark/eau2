@@ -495,6 +495,7 @@ public:
      */
     static DataFrame *fromVisitor(Key key, KVStore kv, const char *schema, Writer* w) {
         cout << "in fromVisitor" << endl;
+        cout << key
         DataFrame *df = new DataFrame(*new Schema(schema));
         cout << "made df" << endl;
         while (!w->done()) {
