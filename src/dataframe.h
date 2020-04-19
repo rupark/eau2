@@ -510,7 +510,7 @@ public:
         }
         cout << "putting in kv under key " << key.name->cstr_ << "df size - " << df->nrows() << endl;
         Key* key2;
-        key2* = key;
+        *key2 = key;
         kv.put(key2, df);
         if (key.name->equals(new String("users-1-0"))) {
             //cout << "kv.keys[1] = " << kv->keys[1]->name->c_str() << endl;
