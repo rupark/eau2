@@ -508,9 +508,9 @@ public:
             df->add_row(*r);
             //cout << "ROW: " << r->get_string(0)->c_str() << endl;
         }
-        cout << "putting in kv under key " << key->name->cstr_ << "df size - " << df->nrows() << endl;
-        kv->put(key, df);
-        if (key->name->equals(new String("users-1-0"))) {
+        cout << "putting in kv under key " << key.name->cstr_ << "df size - " << df->nrows() << endl;
+        kv.put(key, df);
+        if (key.name->equals(new String("users-1-0"))) {
             //cout << "kv.keys[1] = " << kv->keys[1]->name->c_str() << endl;
         }
         return df;
