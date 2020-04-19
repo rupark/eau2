@@ -53,7 +53,7 @@ public:
 
     /** Return the raw char*. The result should not be modified or freed. */
     char *c_str() {
-        cout << "in cstr" << endl;
+        cout << "in string str" << endl;
         return cstr_;
     }
 
