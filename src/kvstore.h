@@ -66,7 +66,7 @@ public:
      */
     DataFrame *get(Key key) {
         cout << "in get size: " << size << endl;
-        cout << "key given name:" << key.name->cstr_ << endl;
+        cout << "key given name:" << key.name->c_str() << endl;
         for (int i = 0; i < size; i++) {
             cout << "keys: " << keys[i]->name->cstr_ << endl;
             if (key.equals(keys[i])) {
