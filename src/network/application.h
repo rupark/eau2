@@ -11,18 +11,18 @@
  */
 class Application {
 public:
-    KVStore kv;
+    KVStore* kv;
     size_t idx_;
     NetworkIP net;
 
     Application(size_t idx, NetworkIP net) {
-        kv = *new KVStore();
+        kv = new KVStore();
         idx_ = idx;
         this->net = net;
     }
 
     Application(size_t idx) {
-        kv = *new KVStore();
+        kv = new KVStore();
         this->idx_ = idx;
 
     }

@@ -51,19 +51,19 @@ public:
         Key cK("comts");
         if (this_node() == 0) {
             cout << "Reading..." << endl;
-            projects = DataFrame::fromFile(PROJ, pK.clone(), &kv);
+            projects = DataFrame::fromFile(PROJ, pK.clone(), kv);
             cout << "    " << projects->nrows() << " projects" << endl;
-            users = DataFrame::fromFile(USER, uK.clone(), &kv);
+            users = DataFrame::fromFile(USER, uK.clone(), kv);
             cout << "    " << users->nrows() << " users" << endl;
-            commits = DataFrame::fromFile(COMM, cK.clone(), &kv);
+            commits = DataFrame::fromFile(COMM, cK.clone(), kv);
             cout << "    " << commits->nrows() << " commits" << endl;
             // This dataframe contains the id of Linus.
             //delete
-            DataFrame::fromScalarInt(new Key("users-0-0"), &kv, LINUS);
+            DataFrame::fromScalarInt(new Key("users-0-0"), kv, LINUS);
         } else {
-            projects = kv.get(pK);
-            users = kv.get(uK);
-            commits = kv.get(cK);
+            projects = kv->get(pK);
+            users = kv->get(uK);
+            commits = kv->get(cK);
         }
         cout << "making sets" <<endl;
         uSet = new Set(users);
@@ -78,49 +78,146 @@ public:
     void step(int stage) {
         cout << "Stage " << stage << endl;
         // Key of the shape: users-stage-0
-        cout << "KV size? " << kv.size << endl;
-        cout << "kv.keys NULL?" << (kv.keys == nullptr) << endl;
-//        cout << "kv.keys[0] NULL?" << (kv.keys[0] == nullptr) << endl;
-//        cout << "kv.keys[1] NULL?" << (kv.keys[1] == nullptr) << endl;
+        cout << "KV size? " << kv->size << endl;
+        cout << "\n\n\n" << endl;
+        for (size_t m = 0; m < kv->size; m++) {
+            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+        }
+        cout << "\n\n\n" << endl;
+        cout << "kv->keys NULL?" << (kv->keys == nullptr) << endl;
+//        cout << "kv->keys[0] NULL?" << (kv->keys[0] == nullptr) << endl;
+//        cout << "kv->keys[1] NULL?" << (kv->keys[1] == nullptr) << endl;
         Key uK(StrBuff("users-").c(stage).c("-0").get());
-
         cout << "made key: " << uK.name->c_str() << endl;
         // A df with all the users added on the previous round
-        //DataFrame* newUsers = dynamic_cast<DataFrame*>(kv.waitAndGet(uK));
-//        if (kv.keys[1] != nullptr) {
-//            cout << " keys[1] = " << kv.keys[1]->name->c_str() << endl;
+        //DataFrame* newUsers = dynamic_cast<DataFrame*>(kv->waitAndGet(uK));
+//        if (kv->keys[1] != nullptr) {
+//            cout << " keys[1] = " << kv->keys[1]->name->c_str() << endl;
 //        }
         cout << "creating newUsers" << endl;
-        DataFrame* newUsers = kv.get(uK);
-        cout << "new users null?" << (newUsers == nullptr) << endl;
+        DataFrame* newUsers = kv->get(uK);
+        cout << "GOT new users dataframe from KV key: " << uK.c_str() << endl;
+        cout << "\n\n\n" << endl;
+        for (size_t m = 0; m < kv->size; m++) {
+            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+        }
+        cout << "\n\n\n" << endl;
+
+
+        cout << "new users null? nrows=" << (newUsers->nrows()) << endl;
         //cout << "made newUsers" << endl;
         Set delta(users);
         cout << "made delta" << endl;
+        cout << "\n\n\n" << endl;
+        for (size_t m = 0; m < kv->size; m++) {
+            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+        }
+        cout << "\n\n\n" << endl;
+
+
         SetUpdater* upd = new SetUpdater(delta);
         cout << "made upd" <<endl;
+
+        cout << "\n\n\n" << endl;
+        for (size_t m = 0; m < kv->size; m++) {
+            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+        }
+        cout << "\n\n\n" << endl;
+
+
         newUsers->map(upd); // all of the new users are copied to delta.
         cout << "mapped" << endl;
+
+        cout << "\n\n\n" << endl;
+        for (size_t m = 0; m < kv->size; m++) {
+            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+        }
+        cout << "\n\n\n" << endl;
+
         //delete newUsers;
         ProjectsTagger* ptagger = new ProjectsTagger(delta, *pSet, projects);
         cout << "ptagger" << endl;
+
+        cout << "\n\n\n" << endl;
+        for (size_t m = 0; m < kv->size; m++) {
+            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+        }
+        cout << "\n\n\n" << endl;
+
         commits->local_map(ptagger); // marking all projects touched by delta
-        cout << "merge" <<endl;
-        merge(ptagger->newProjects, "projects-", stage);
+        cout << "mapped" <<endl;
+        cout << "\n\n\n" << endl;
+        for (size_t m = 0; m < kv->size; m++) {
+            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+        }
+        cout << "\n\n\n" << endl;
+
+
+        this->kv = merge(ptagger->newProjects, "projects-", stage);
+        cout << "merged" <<endl;
+
+        cout << "\n\n\n" << endl;
+        for (size_t m = 0; m < kv->size; m++) {
+            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+        }
+        cout << "\n\n\n" << endl;
+
+
         cout << "pset union" <<endl;
-        pSet->union_(ptagger->newProjects); //
+        pSet->union_(ptagger->newProjects);
+
+        cout << "\n\n\n" << endl;
+        for (size_t m = 0; m < kv->size; m++) {
+            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+        }
+        cout << "\n\n\n" << endl;
+
+
         cout << "utagger" << endl;
         UsersTagger* utagger = new UsersTagger(ptagger->newProjects, *uSet, users);
+
+
+        cout << "\n\n\n" << endl;
+        for (size_t m = 0; m < kv->size; m++) {
+            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+        }
+        cout << "\n\n\n" << endl;
+
+
         cout << "commits local map" << endl;
         commits->local_map(utagger);
-        cout << "second merge" << endl;
-        merge(utagger->newUsers, "users-", stage + 1);
 
-//        cout << "kv.key[1] null??" << (kv.keys[1] == nullptr) << endl;
-//        if (kv.keys[1] != nullptr) {
+        cout << "\n\n\n" << endl;
+        for (size_t m = 0; m < kv->size; m++) {
+            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+        }
+        cout << "\n\n\n" << endl;
+
+
+
+        cout << "second merge" << endl;
+
+        cout << "\n\n\n" << endl;
+        for (size_t m = 0; m < kv->size; m++) {
+            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+        }
+        cout << "\n\n\n" << endl;
+        cout << "STARTING MERGE" << endl;
+        this->kv = merge(utagger->newUsers, "users-", stage + 1);
+        cout << "MERGE FINISHED" << endl;
+
+        cout << "\n\n\n" << endl;
+        for (size_t m = 0; m < kv->size; m++) {
+            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+        }
+        cout << "\n\n\n" << endl;
+
+//        cout << "kv->key[1] null??" << (kv->keys[1] == nullptr) << endl;
+//        if (kv->keys[1] != nullptr) {
 //            cout << "starting cstr" << endl;
-//            kv.keys[2]->c_str();
+//            kv->keys[2]->c_str();
 //            cout << "finished cstr..." << endl;
-//            cout << "!!!!kv.keys[1].name null? = " << kv.keys[2]->c_str() << endl;
+//            cout << "!!!!kv->keys[1].name null? = " << kv->keys[2]->c_str() << endl;
 //        }
 
         cout << "uset union" << endl;
@@ -128,7 +225,14 @@ public:
         cout << "    after stage " << stage << ":" << endl;
         cout << "        tagged projects: " << pSet->size() << endl;
         cout << "        tagged users: " << uSet->size() << endl;
-        //cout << "        kv.keys[1]: " << (kv.keys[1] == nullptr) << "name: " << kv.keys[1]->c_str() << endl;
+        //cout << "        kv->keys[1]: " << (kv->keys[1] == nullptr) << "name: " << kv->keys[1]->c_str() << endl;
+
+        cout << "\n\n\n" << endl;
+        for (size_t m = 0; m < kv->size; m++) {
+            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+        }
+        cout << "\n\n\n" << endl;
+
     }
 
     /** Gather updates to the given set from all the nodes in the systems.
@@ -137,13 +241,13 @@ public:
      * 'users' or 'projects', stage is the degree of separation being
      * computed.
      */
-    void merge(Set& set, char const* name, int stage) {
+    KVStore* merge(Set& set, char const* name, int stage) {
         cout << "in merge" << endl;
         if (this_node() == 0) {
             cout << "found node 0" << endl;
             for (size_t i = 1; i < arg.num_nodes; ++i) {
                 Key nK(StrBuff(name).c(stage).c("-").c(i).get());
-                DataFrame* delta = dynamic_cast<DataFrame*>(kv.waitAndGet(nK));
+                DataFrame* delta = dynamic_cast<DataFrame*>(kv->waitAndGet(nK));
                 cout << "    received delta of " << delta->nrows() << endl;
                 cout << " elements from node " << i << endl;
                 SetUpdater* upd = new SetUpdater(set);
@@ -157,22 +261,39 @@ public:
             cout << "k name ------- " << k.name->c_str() << endl;
             //delete DataFrame::fromVisitor(&k, &kv, "I", writer);
             cout << "calling fromVisitor" << endl;
-            DataFrame::fromVisitor(k, &kv, "I", writer);
- //           cout << "kv.keys[1] NULL?" << (kv.keys[1]  == nullptr) << endl;
-//            if (kv.keys[1]  != nullptr) {
-//                cout << "kv.keys[1] NULL?" << kv.keys[1]->name->c_str() << endl;
+
+            cout << "\n\n\n" << endl;
+            for (size_t m = 0; m < kv->size; m++) {
+                cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+            }
+            cout << "\n\n\n" << endl;
+
+            DataFrame::fromVisitor(k, kv, "I", writer);
+            cout << "FROM VISITOR FINISHED" << endl;
+
+            cout << "\n\n\n" << endl;
+            for (size_t m = 0; m < kv->size; m++) {
+                cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+            }
+            cout << "\n\n\n" << endl;
+            return kv;
+
+ //           cout << "kv->keys[1] NULL?" << (kv->keys[1]  == nullptr) << endl;
+//            if (kv->keys[1]  != nullptr) {
+//                cout << "kv->keys[1] NULL?" << kv->keys[1]->name->c_str() << endl;
 //            }
         } else {
             cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter* writer = new SetWriter(set);
             Key k(StrBuff(name).c(stage).c("-").c(idx_).get());
 //            delete DataFrame::fromVisitor(&k, &kv, "I", writer);
-            DataFrame::fromVisitor(k, &kv, "I", writer);
+            DataFrame::fromVisitor(k, kv, "I", writer);
             Key mK(StrBuff(name).c(stage).c("-0").get());
-            DataFrame* merged = dynamic_cast<DataFrame*>(kv.get(mK));
+            DataFrame* merged = dynamic_cast<DataFrame*>(kv->get(mK));
             cout << "    receiving " << merged->nrows() << " merged elements" << endl;
             SetUpdater* upd = new SetUpdater(set);
             merged->map(upd);
+            return nullptr;
             //delete merged;
         }
     }

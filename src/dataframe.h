@@ -55,8 +55,8 @@ public:
 
     /** Create a data frame from a schema. All columns are created empty. */
     DataFrame(Schema &schema) {
-        this->columns = new Column *[100 * 1000 * 1000];
-
+//        this->columns = new Column *[100 * 1000 * 1000];
+        this->columns = new Column *[50*1000];
         ncol = schema.width();
 
         this->schema = *new Schema(schema);

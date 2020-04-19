@@ -6,7 +6,7 @@
 #include "../../src/network/network.h"
 #include "../../src/network/thread.h"
 #include "../../src/network/application.h"
-#include "../../src/network/wordcount.h"
+//#include "../../src/network/wordcount.h"
 #include <iostream>
 #include <stdio.h>
 #include "../../src/parser.h"
@@ -36,7 +36,8 @@ NetworkIP *initialize() {
 
 Application *pick(size_t i, NetworkIP &net) {
     if (strcmp(arg.app, "wc") == 0) {
-        return new WordCount(i, net);
+//        return new WordCount(i, net);
+        return nullptr;
     } else if (strcmp(arg.app, "linus") == 0){
         return new Linus(i, net);
     }

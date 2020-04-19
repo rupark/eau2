@@ -61,11 +61,8 @@ public:
 
     /** Returns the name of this key **/
     char *c_str()  {
-        cout << "in cstr" << endl;
         StrBuff *a = new StrBuff();
-        cout << "in cstr" << endl;
         a->c(this->name->c_str());
-        cout << "added name to buf" << endl;
         char *ret = a->get()->c_str();
 //        delete a;
         return ret;
