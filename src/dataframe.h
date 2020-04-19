@@ -493,7 +493,7 @@ public:
     /**
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
-    static DataFrame *fromVisitor(Key key, KVStore kv, const char *schema, Writer* w) {
+    static DataFrame *fromVisitor(Key key, KVStore* kv, const char *schema, Writer* w) {
         cout << "in fromVisitor" << endl;
         DataFrame *df = new DataFrame(*new Schema(schema));
         cout << "made df" << endl;
@@ -507,7 +507,7 @@ public:
         cout << "putting in kv under key " << key.name->cstr_ << "df size - " << df->nrows() << endl;
         Key* key2;
         *key2 = key;
-        kv.put(key2, df);
+        kv->put(key2, df);
         if (key.name->equals(new String("users-1-0"))) {
             //cout << "kv.keys[1] = " << kv->keys[1]->name->c_str() << endl;
         }
