@@ -385,12 +385,8 @@ public:
         int completed = 0;
         cout << "local map: nrows = " << this->nrows() << endl;
         for (size_t i = 0; i < this->nrows(); i++) {
-            if (i>999 && i%1000 == 0) {
-                cout << "row: " << i << " size: " << this->nrows() << endl;
-            }
             Row *row = new Row(this->schema);
             this->fill_row(i,*row);
-
             completed++;
             r->visit(*row);
 //            //cout << completed << " " << "row visited | ";

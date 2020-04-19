@@ -92,6 +92,7 @@ public:
 //        }
         cout << "creating newUsers" << endl;
         DataFrame* newUsers = kv.get(uK);
+        cout << "new users null?" << newUsers == nullptr << endl;
         cout << "made newUsers" << endl;
         Set delta(users);
         cout << "made delta" << endl;
