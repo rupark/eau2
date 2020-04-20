@@ -34,19 +34,18 @@ using namespace std;
 /** Represents a set of data */
 class DataFrame : public Object {
 public:
-    Schema schema; // Cannot be changed
+    Schema* schema; // Cannot be changed
     Column **columns;
-    int nrow;
-    int ncol;
 
     /** Create a data frame with the same columns as the given df but with no rows or rownmaes */
     DataFrame(DataFrame &df) {
-        int ncol = df.ncols();
-        int nrow = df.nrows();
+        int ncol = df.get_num_cols();
+        int nrow = df.get_num_rows();
         schema = df.get_schema();
         columns = df.columns;
     }
 
+    //TODO
     ~DataFrame() {
         for (int i = 0; i < ncol; i++) {
             delete columns[i];
@@ -55,17 +54,8 @@ public:
 
     /** Create a data frame from a schema. All columns are created empty. */
     DataFrame(Schema &schema) {
-//        this->columns = new Column *[100 * 1000 * 1000];
         this->columns = new Column *[50*1000];
-        ncol = schema.width();
-
         this->schema = *new Schema(schema);
-
-        nrow = 0;
-        // set nrow to 0 but if schema comes in with nrow then use that
-        //nrow = schema.nrow;
-        // RESETS SCHEMA ROWS
-        schema.nrow = 0;
 
         for (size_t i = 0; i < schema.ncol; i++) {
             char type = this->schema.col_type(i);
@@ -91,9 +81,7 @@ public:
 
         cout << "col set size: " << data->getColumn(0)->_length << endl;
         this->columns = new Column *[1000 * 1000 * 1000];
-        this->schema = *new Schema();
-        this->nrow = 0;
-        this->ncol = 0;
+        this->schema = new Schema();
 
         Column *working_col;
 
@@ -171,7 +159,7 @@ public:
 
 
             // add this column to this dataframe
-            this->add_column(working_col, nullptr);
+            this->add_column(working_col);
         }
 
 
@@ -192,24 +180,23 @@ public:
 
     /** Returns the dataframe's schema. Modifying the schema after a dataframe
       * has been created in undefined. */
-    Schema &get_schema() {
+    Schema* get_schema() {
         return schema;
     }
 
     /** Adds a column this dataframe, updates the schema, the new column
       * is external, and appears as the last column of the dataframe, the
       * name is optional and external. A nullptr colum is undefined. */
-    void add_column(Column *col, String *name) {
+    void add_column(Column *col) {
         if (col == nullptr) {
             exit(1);
         } else {
             columns[ncol] = col;
-            schema.add_column(col->get_type(), name);
-            if (col->size() > nrow) {
-                this->nrow = col->size();
-                schema.nrow = col->size();
+            schema->add_column(col->get_type());
+            if (col->size() > schema->nrow) {
+                schema->nrow = col->size();
             }
-            ncol++;
+            schema->add_column(col->get_type())
         }
     }
 
@@ -231,46 +218,13 @@ public:
         return columns[col]->as_string()->get(row);
     }
 
-    /** Return the offset of the given column name or -1 if no such col. */
-    int get_col(String &col) {
-        return schema.col_idx(col.c_str());
-    }
-
-    /** Return the offset of the given row name or -1 if no such row. */
-    int get_row(String &col) {
-        return schema.row_idx(col.c_str());
-    }
-
     Row* get_row(size_t i) {
-
-        if (i < 0 || i >= this->nrows()) {
-            //cout << "returning nullptr" << endl;
+        if (i < 0 || i >= this->get_num_rows()) {
             return nullptr;
         }
-
-//        // run through columns at index i to build row
         Row* build_row = new Row(this->schema);
-//        for (size_t col_idx = 0; this->ncol; col_idx++) {
-//            switch (this->get_schema().col_type(col_idx)) {
-//                case 'B':
-//                    build_row->set(i,this->get_bool(col_idx,i));
-//                    break;
-//                case 'I':
-//                    build_row->set(i,this->get_int(col_idx,i));
-//                    break;
-//                case 'F':
-//                    build_row->set(i,this->get_float(col_idx,i));
-//                    break;
-//                case 'S':
-//                    build_row->set(i,this->get_string(col_idx,i));
-//                    break;
-//            }
-//        }
-
         this->fill_row(i,*build_row);
-        //cout << "row built = ";
         build_row->printRow();
-        //cout << endl;
         return build_row;
     }
 
@@ -319,9 +273,8 @@ public:
     /** Add a row at the end of this dataframe. The row is expected to have
      *  the right schema and be filled with values, otherwise undedined.  */
     void add_row(Row &row) {
-        row.set_idx(nrow);
-        this->nrow++;
-        schema.nrow++;
+        row.set_idx(schema->get_num_rows());
+        schema->add_row();
         for (size_t i = 0; i < ncol; i++) {
             switch (columns[i]->get_type()) {
                 case 'F':
@@ -341,124 +294,45 @@ public:
     }
 
     /** The number of rows in the dataframe. */
-    size_t nrows() {
-        //return schema.length();
-
-        return nrow;
+    size_t get_num_rows() {
+        return schema->get_num_rows();
     }
 
     /** The number of columns in the dataframe.*/
-    size_t ncols() {
-        return schema.width();
+    size_t get_num_cols() {
+        return schema->get_num_cols();
     }
-
-    /** Visit rows in order */
-    void map(Rower &r) {
-        //cout << "schema: " << this->get_schema().types->c_str() << endl;
-        for (size_t i = 0; i < this->nrows(); i++) {
-            Row *row = new Row(this->schema);
-//            for (size_t j = 0; j < this->ncols(); j++) {
-//                switch (row->col_type(j)) {
-//                    case 'I':
-//                        //cout << "setting int" << endl;
-//                        row->set(j, this->columns[j]->as_int()->get(i));
-//                        break;
-//                    case 'B':
-//                        row->set(j, this->columns[j]->as_bool()->get(i));
-//                        break;
-//                    case 'S':
-//                        row->set(j, this->columns[j]->as_string()->get(i));
-//                        break;
-//                    case 'F':
-//                        row->set(j, this->columns[j]->as_float()->get(i));
-//                        break;
-//                }
-//            }
-            fill_row(i, *row);
-            r.accept(*row);
-        }
-    }
-
+    
     /** Visits the rows in order on THIS node */
     void map(Reader* r) {
-        //cout << "bad map" << endl;
         int completed = 0;
-        cout << "local map: nrows = " << this->nrows() << endl;
-        for (size_t i = 0; i < this->nrows(); i++) {
+        
+        for (size_t i = 0; i < this->get_num_rows(); i++) {
             Row *row = new Row(this->schema);
             this->fill_row(i,*row);
             completed++;
             r->visit(*row);
-//            //cout << completed << " " << "row visited | ";
-//            row->printRow();
-//            //cout << endl;
         }
+        
     }
 
     /** Visits the rows in order on THIS node */
-    void local_map(Reader* r) {
-        //cout << "bad map" << endl;
-        map(r);
-    }
-
-    /** Visits the rows in order on THIS node */
-    void local_map(Adder &r) {
+    void map(Writer* r) {
         int completed = 0;
-        //cout << "schema" << schema.types->c_str() << endl;
-        //cout << "local map: nrows = " << this->nrows() << endl;
-        for (size_t i = 0; i < this->nrows(); i++) {
+
+        for (size_t i = 0; i < this->get_num_rows(); i++) {
             Row *row = new Row(this->schema);
-            this->fill_row(i, *row);
+            this->fill_row(i,*row);
             completed++;
-//            assert(row->col_type(0)=="S");
-//            assert(row->col_type(1)=="I");
-            //cout << "row->coltype 0 " << row->col_type(0) << endl;
-            //cout << "row->coltype 1 " << row->col_type(1) << endl;
-            r.visit(*row);
-            //cout << completed << " " << "row visited | ";
-            //row->printRow();
-            //cout << endl;
+            r->visit(*row);
         }
-    }
 
-    /** Applies the given Adder to each Row in this DataFrame **/
-    void map(Adder &r) {
-        local_map(r);
-    }
-
-    /** Create a new dataframe, constructed from rows for which the given Rower
-      * returned true from its accept method. */
-    DataFrame *filter(Rower &r) {
-        DataFrame *d = new DataFrame(this->get_schema());
-        for (size_t i = 0; i < this->nrows(); i++) {
-            Row *row = new Row(this->schema);
-            for (size_t j = 0; j < this->ncols(); j++) {
-                switch (row->col_type(j)) {
-                    case 'I':
-                        row->set(j, this->columns[j]->as_int()->get(i));
-                        break;
-                    case 'B':
-                        row->set(j, this->columns[j]->as_bool()->get(i));
-                        break;
-                    case 'S':
-                        row->set(j, this->columns[j]->as_string()->get(i));
-                        break;
-                    case 'F':
-                        row->set(j, this->columns[j]->as_float()->get(i));
-                        break;
-                }
-            }
-            if (r.accept(*row)) {
-                d->add_row(*row);
-            }
-        }
-        return d;
     }
 
     /** Print the dataframe in SoR format to standard output. */
     void print() {
-        for (size_t i = 0; i < ncol; i++) {
-            for (size_t j = 0; j < nrow; j++) {
+        for (size_t i = 0; i < get_num_cols(); i++) {
+            for (size_t j = 0; j < get_num_rows(); j++) {
                 switch (columns[i]->get_type()) {
                     case 'F':
                         cout << "<" << *columns[i]->as_float()->get(j) << ">";
@@ -493,67 +367,28 @@ public:
     /**
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
-    static DataFrame *fromVisitor(Key key, KVStore* kv, const char *schema, Writer* w) {
+    static DataFrame *fromVisitor(Key key, KVStore* kv, char *schema, Writer* w) {
         cout << "in fromVisitor" << endl;
         DataFrame *df = new DataFrame(*new Schema(schema));
         cout << "made df" << endl;
         while (!w->done()) {
-//            cout << "making row" << endl;
             Row *r = new Row(*new Schema(schema));
             w->visit(*r);
             df->add_row(*r);
-            //cout << "ROW: " << r->get_string(0)->c_str() << endl;
         }
-        cout << "putting in kv under key " << key.name->cstr_ << "df size - " << df->nrows() << endl;
-        Key* key2;
-        *key2 = key;
-        kv->put(key2, df);
-        if (key.name->equals(new String("users-1-0"))) {
-            //cout << "kv.keys[1] = " << kv->keys[1]->name->c_str() << endl;
-        }
+        
+        kv->put(key.clone(), df);
         return df;
     }
-
-    /**
- * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
- */
-    static DataFrame *fromVisitor(Key *key, KVStore *kv, char *schema, FileReader w) {
-        DataFrame *df = new DataFrame(*new Schema(schema));
-        while (!w.done()) {
-            Row *r = new Row(*new Schema(schema));
-            w.visit(*r);
-            df->add_row(*r);
-            //cout << "ROW: " << r->get_string(0)->c_str() << endl;
-        }
-        kv->put(key, df);
-        return df;
-    }
-
-    /**
-     * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
-     */
-    static DataFrame *fromVisitor(Key *key, KVStore *kv, const char *schema, FileReader w) {
-        DataFrame *df = new DataFrame(*new Schema(schema));
-        while (!w.done()) {
-            Row *r = new Row(*new Schema(schema));
-            w.visit(*r);
-            df->add_row(*r);
-            //cout << "ROW: " << r->get_string(0)->c_str() << endl;
-        }
-        kv->put(key, df);
-        return df;
-    }
-
+    
     /** Returns a section of this DataFrame as a new DataFrame **/
     DataFrame *chunk(size_t chunk_select) {
 
         int start_row = chunk_select * arg.rows_per_chunk;
-        //cout << "start row: " << start_row << endl;
-        //cout << "chunk select " << chunk_select << endl;
         DataFrame *df = new DataFrame(this->schema);
 
         for (size_t i = start_row; i < start_row + arg.rows_per_chunk; i++) {
-            if (i >= nrow) {
+            if (i >= this->get_num_rows()) {
                 return df;
             } else {
                 Row *r = new Row(this->schema);
@@ -562,22 +397,8 @@ public:
             }
         }
         return df;
-    };
-
-    /**
-     * Contructs a DataFrame of the given schema from the given Summer and puts it in the KVStore at the given Key
-     */
-    static DataFrame *fromVisitor(Key *key, KVStore *kv, char *schema, Summer w) {
-        DataFrame *df = new DataFrame(*new Schema(schema));
-        while (!w.done()) {
-            Row *r = new Row(*new Schema(schema));
-            w.visit(*r);
-            df->add_row(*r);
-        }
-        kv->put(key, df);
-        return df;
     }
-
+    
     /**
      * Returns the double at the given column and row in this DataFrame
      */
@@ -593,10 +414,10 @@ public:
         DataFrame *df = new DataFrame(*new Schema("I"));
         cout << "pushing back" << endl;
         df->columns[0]->push_back((int) scalar);
-        if (df->nrow < df->columns[0]->size()){
-            df->nrow = df->columns[0]->size();
+        if (df->get_num_rows() < df->columns[0]->size()){
+            df->schema->nrow = df->columns[0]->size();
         }
-        cout << "putting in kv store: " << key->name->c_str()  << "size of df" << df->nrows() << endl;
+        cout << "putting in kv store: " << key->name->c_str()  << "size of df" << df->get_num_rows() << endl;
         kv->put(key, df);
         cout << "done in fromScalarInt" << endl;
         return df;
@@ -626,7 +447,7 @@ public:
         parser.parseFile();
         cout << "file parsed" << endl;
         DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
-        cout << "data frame created of SIZE " << d->nrows() << endl;
+        cout << "data frame created of SIZE " << d->get_num_rows() << endl;
         return d;
     }
 
@@ -634,7 +455,7 @@ public:
      * Adds chunk dataframe passed in to this dataframe
      */
      DataFrame* append_chunk(DataFrame* df) {
-         for (size_t r = 0; r < df->nrows(); r++) {
+         for (size_t r = 0; r < df->get_num_rows(); r++) {
              this->add_row(*df->get_row(r));
          }
 
@@ -655,7 +476,7 @@ public:
     size_t size_; // number of elements
 
     /** Creates a set of the same size as the dataframe. */
-    Set(DataFrame* df) : Set(df->nrows()) {}
+    Set(DataFrame* df) : Set(df->get_num_rows()) {}
 
     /** Creates a set of the given size. */
     Set(size_t sz) {
@@ -711,7 +532,6 @@ public:
     /** Skip over false values and stop when the entire set has been seen */
     virtual bool done() override {
         while (i_ < set_.size_ && set_.test(i_) == false) ++i_;
-//        cout << "i " << i_ << "size " << set_.size_ << endl;
         return i_ == set_.size_;
     }
 
@@ -788,7 +608,7 @@ public:
     Set newUsers;
 
     UsersTagger(Set &pSet, Set &uSet, DataFrame *users) :
-            pSet(pSet), uSet(uSet), newUsers(users->nrows()) {}
+            pSet(pSet), uSet(uSet), newUsers(users->get_num_rows()) {}
 
     //Kate did some stuff
     bool visit(Row &row) override {

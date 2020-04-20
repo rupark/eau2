@@ -18,25 +18,19 @@
 class Schema : public Object {
 public:
     String *types;
-    int nrow;
-    int ncol;
-    String **col_names;
-    String **row_names;
+    size_t ncol;
+    size_t nrow;
 
     /** Copying constructor */
     Schema(Schema &from) {
         this->types = new String(*from.types);
-        this->col_names = new String *[1000];
-        this->row_names = new String *[1000];
-        this->nrow = from.nrow;
         this->ncol = from.ncol;
+        this->nrow = from.nrow;
     }
 
     /** Create an empty schema **/
     Schema() {
         this->types = new String("");
-        this->col_names = new String *[1000];
-        this->row_names = new String *[100 * 1000 * 1000];
         this->ncol = 0;
         this->nrow = 0;
     }
@@ -47,12 +41,8 @@ public:
       * undefined. **/
     Schema(const char *types) {
         this->types = new String(types);
-
-        this->col_names = new String *[1000];
-        this->row_names = new String *[1000];
-
-        this->nrow = 0;
         this->ncol = this->types->size();
+        this->nrow = 0;
     }
 
     ~Schema() {
@@ -62,29 +52,13 @@ public:
     /** Add a column of the given type and name (can be nullptr), name
       * is external. Names are expectd to be unique, duplicates result
       * in undefined behavior. */
-    void add_column(char typ, String *name) {
+    void add_column(char typ) {
         this->append(typ);
-        this->col_names[ncol] = name;
         ncol++;
     }
 
-    /** Add a row with a name (possibly nullptr), name is external.  Names are
-     *  expectd to be unique, duplicates result in undefined behavior. */
-    void add_row(String *name) {
-        this->row_names[nrow] = name;
-        nrow = nrow + 1;
-    }
-
-    /** Return name of row at idx; nullptr indicates no name. An idx >= width
-      * is undefined. */
-    String *row_name(size_t idx) {
-        return row_names[idx];
-    }
-
-    /** Return name of column at idx; nullptr indicates no name given.
-      *  An idx >= width is undefined.*/
-    String *col_name(size_t idx) {
-        return col_names[idx];
+    void add_row() {
+        nrow++;
     }
 
     /** Return type of column at idx. An idx >= width is undefined. */
@@ -92,36 +66,13 @@ public:
         return types->at(idx);
     }
 
-    /** Given a column name return its index, or -1. */
-    int col_idx(const char *name) {
-        String *nameAsString = new String(name);
-        for (int i = 0; i < ncol; i++) {
-            if (nameAsString->equals(col_names[i])) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    /** Given a row name return its index, or -1. */
-    int row_idx(const char *name) {
-        String *nameAsString = new String(name);
-        for (int i = 0; i < nrow; i++) {
-            if (nameAsString->equals(row_names[i])) {
-                return i;
-            }
-        }
-        return -1;
+    size_t get_num_rows() {
+        return nrow;
     }
 
     /** The number of columns */
-    size_t width() {
+    size_t get_num_cols() {
         return ncol;
-    }
-
-    /** The number of rows */
-    size_t length() {
-        return nrow;
     }
 
     /** Appends the given char to this Schema's types String */
