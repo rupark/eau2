@@ -254,13 +254,13 @@ public:
         if (this_node() == 0) {
             cout << "found node 0" << endl;
             for (size_t i = 1; i < arg.num_nodes; ++i) {
-                StrBuff* s = new StrBuff)();
+                StrBuff* s = new StrBuff();
                 s->c(name);
                 s->c(stage);
                 s->c("-");
                 s->c(i);
-                Key* nK = new Key(s.get());
-                DataFrame* delta = kv->get(*nK));
+                Key* nK = new Key(s->get());
+                DataFrame* delta = kv->get(*nK);
                 cout << "    received delta of " << delta->nrows() << endl;
                 cout << " elements from node " << i << endl;
                 SetUpdater* upd = new SetUpdater(set);
