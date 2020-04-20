@@ -439,7 +439,7 @@ public:
         cout << "size of file calced " << file_size << endl;
 
         cout << "file opened" << endl;
-        SorParser* parser(file, (size_t)0, (size_t)file_size, (size_t)file_size);
+        SorParser* parser = new SorParser(file, (size_t)0, (size_t)file_size, (size_t)file_size);
         cout << "parser created" << endl;
         parser->guessSchema();
         cout << "schema guessed" << endl;
