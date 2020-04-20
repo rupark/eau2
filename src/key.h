@@ -39,7 +39,10 @@ public:
         this->home = orig->home;
     }
 
-    Key(String *s) : Key(s->c_str()) {}
+    Key(String *s) {
+        this->name = s;
+        this->home = 0;
+    }
 
     ~Key() {
         //delete name;
@@ -69,7 +72,7 @@ public:
     }
 
     Key* clone() {
-        Key* key = new Key(this->name->c_str());
+        Key* key = new Key(this->name);
         return key;
     }
 
