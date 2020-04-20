@@ -436,18 +436,17 @@ public:
         FILE* file_dup = fopen(filep, "rb");
         cout << "fopen file null?: " << (file == nullptr) << endl;
         size_t file_size = get_file_size(file_dup);
+        delete file_dup;
         cout << "size of file calced " << file_size << endl;
-
         cout << "file opened" << endl;
         SorParser* parser = new SorParser(file, (size_t)0, (size_t)file_size, (size_t)file_size);
         cout << "parser created" << endl;
         parser->guessSchema();
         cout << "schema guessed" << endl;
         parser->parseFile();
+        delete file;
         cout << "file parsed" << endl;
         DataFrame* d = new DataFrame(parser->getColumnSet(), parser->_num_columns);
-        delete file;
-        delete file_dup;
         cout << "data frame created of SIZE " << d->get_num_rows() << endl;
         cout << "deleting Provider::Parser..." << endl;
         delete parser;
