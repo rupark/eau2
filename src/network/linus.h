@@ -167,6 +167,7 @@ public:
         pSet->union_(ptagger->newProjects);
 
         cout << "finished pset" << endl;
+        cout << kv->size << endl;
 
         cout << "\n\n\n" << endl;
         for (size_t m = 0; m < kv->size; m++) {
