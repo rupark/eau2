@@ -55,7 +55,7 @@ public:
     /** Create a data frame from a schema-> All columns are created empty. */
     DataFrame(Schema &schema) {
         this->columns = new Column *[50*1000];
-        this->schema = *new Schema(schema);
+        this->schema = new Schema(schema);
 
         for (size_t i = 0; i < schema->ncol; i++) {
             char type = this->schema->col_type(i);
