@@ -371,7 +371,7 @@ public:
         DataFrame *df = new DataFrame(*new Schema(schema));
         cout << "made df" << endl;
         while (!w->done()) {
-            Row *r = new Row(*new Schema(schema));
+            Row *r = new Row(new Schema(schema));
             w->visit(*r);
             df->add_row(*r);
         }
