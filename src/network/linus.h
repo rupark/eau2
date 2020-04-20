@@ -77,7 +77,7 @@ public:
      *  datafrrames (projects, users, commits), the sets of tagged users and
      *  projects, and the users added in the previous round. */
     void step(int stage) {
-        cout << "Stage " << stage << endl;
+        cout << "\n\n\nStage " << stage << endl;
         // Key of the shape: users-stage-0
         //cout << "KV size? " << kv->size << endl;
         //cout << "\n\n\n" << endl;

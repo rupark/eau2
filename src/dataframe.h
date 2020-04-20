@@ -54,7 +54,7 @@ public:
 
     /** Create a data frame from a schema-> All columns are created empty. */
     DataFrame(Schema &schema) {
-        this->columns = new Column *[50*1000];
+        this->columns = new Column *[10];
         this->schema = new Schema(schema);
 
         for (size_t i = 0; i < this->get_num_cols(); i++) {
@@ -80,7 +80,7 @@ public:
     DataFrame(Provider::ColumnSet *data, size_t num_columns) {
 
         cout << "col set size: " << data->getColumn(0)->_length << endl;
-        this->columns = new Column *[1000 * 1000 * 1000];
+        this->columns = new Column *[10];
         this->schema = new Schema();
 
         Column *working_col;

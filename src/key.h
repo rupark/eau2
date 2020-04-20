@@ -52,13 +52,13 @@ public:
      * Returns true if this Key equals the given object
      */
     bool equals(Object *other) {
-        cout << "in key equals" << endl;
+//        cout << "in key equals" << endl;
         if (other == this) return true;
         Key *x = dynamic_cast<Key *>(other);
         if (x == nullptr) return false;
-        cout << "checking key equivalency: " << name->c_str() << "and " << x->name->c_str() <<endl;
+//        cout << "checking key equivalency: " << name->c_str() << "and " << x->name->c_str() <<endl;
         bool ret = name->equals(x->name);
-        cout << "return value = " << ret << endl;
+//        cout << "return value = " << ret << endl;
         return ret;
     }
 

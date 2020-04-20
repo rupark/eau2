@@ -33,19 +33,19 @@ public:
      */
     void put(Key *key, DataFrame *df) {
         if (key->name->equals(new String("users-1-0"))) {
-            cout << "??????????????????????????????????????????????????????????????????????????" << endl;
+//            cout << "??????????????????????????????????????????????????????????????????????????" << endl;
         }
 
         assert(df != nullptr && "Putting Dataframe Null Pointer!");
-        cout << "size: " << size << "new key: " << key->name->c_str() << endl;
+//        cout << "size: " << size << "new key: " << key->name->c_str() << endl;
 
         // check if key is already there
         for (size_t k = 0; k < size; k++) {
             // if found already, replace
             if (this->keys[k]->equals(key)) {
-                cout << "put key already found: " << keys[k]->name->c_str() << " at " << k << endl;
+//                cout << "put key already found: " << keys[k]->name->c_str() << " at " << k << endl;
                 this->dfs[k] = df;
-                cout << "DF Set new size = " << size << endl;
+//                cout << "DF Set new size = " << size << endl;
                 return;
             }
         }
@@ -54,24 +54,24 @@ public:
         this->keys[size] = key;
         this->dfs[size] = df;
 
-        cout << "dfs[0]- " << dfs[0] << endl;
+//        cout << "dfs[0]- " << dfs[0] << endl;
 
 
         size++;
-        cout << "put done new size: " << size << endl;
+//        cout << "put done new size: " << size << endl;
     }
 
     /**
      * Returns the DataFrame associated in this KVStore with the given Key
      */
     DataFrame *get(Key key) {
-        cout << "in get size: " << size << endl;
-        cout << "key given name:" << key.name->c_str() << endl;
+//        cout << "in get size: " << size << endl;
+//        cout << "key given name:" << key.name->c_str() << endl;
         for (int i = 0; i < size; i++) {
-            cout << "keys: " << keys[i]->name->cstr_ << endl;
+//            cout << "keys: " << keys[i]->name->cstr_ << endl;
             if (key.equals(keys[i])) {
-                cout << "found : " << i << endl;
-                cout << "dfs[0]" << dfs[0] << endl;
+//                cout << "found : " << i << endl;
+//                cout << "dfs[0]" << dfs[0] << endl;
                 //size--;
                 //delete keys[i];
                 //delete dfs[i];

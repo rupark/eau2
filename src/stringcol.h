@@ -34,7 +34,7 @@ public:
 
     StringColumn() {
         size_ = 0;
-        capacity_ = 1000 * 1000 * 1000;
+        capacity_ = 200 * 1000 * 1000;
         vals_ = new String *[capacity_];
     }
 
