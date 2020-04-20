@@ -446,6 +446,8 @@ public:
         parser->parseFile();
         cout << "file parsed" << endl;
         DataFrame* d = new DataFrame(parser->getColumnSet(), parser->_num_columns);
+        delete file;
+        delete file_dup;
         cout << "data frame created of SIZE " << d->get_num_rows() << endl;
         cout << "deleting Provider::Parser..." << endl;
         delete parser;
