@@ -16,7 +16,7 @@
 #include "column.h"
 #include "string.h"
 #include "fielder.h"
-#include "schema->h"
+#include "schema.h"
 #include "row.h"
 #include "rower.h"
 #include <iostream>
