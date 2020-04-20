@@ -166,6 +166,8 @@ public:
         cout << "pset union" <<endl;
         pSet->union_(ptagger->newProjects);
 
+        cout << "finished pset" << endl;
+
         cout << "\n\n\n" << endl;
         for (size_t m = 0; m < kv->size; m++) {
             cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
