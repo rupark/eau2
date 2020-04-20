@@ -31,7 +31,7 @@ public:
 
     /** Build a row following a schema. */
     Row(Schema* scm) {
-        this->elements = new Object *[100 * 1000];
+        this->elements = new Object *[10];
         index = 0;
         size = scm->get_num_cols();
         for (size_t i = 0; i < scm->get_num_cols(); i++) {
