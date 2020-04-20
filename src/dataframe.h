@@ -16,7 +16,7 @@
 #include "column.h"
 #include "string.h"
 #include "fielder.h"
-#include "schema.h"
+#include "schema->h"
 #include "row.h"
 #include "rower.h"
 #include <iostream>
@@ -52,13 +52,13 @@ public:
         }
     }
 
-    /** Create a data frame from a schema. All columns are created empty. */
+    /** Create a data frame from a schema-> All columns are created empty. */
     DataFrame(Schema &schema) {
         this->columns = new Column *[50*1000];
         this->schema = *new Schema(schema);
 
-        for (size_t i = 0; i < schema.ncol; i++) {
-            char type = this->schema.col_type(i);
+        for (size_t i = 0; i < schema->ncol; i++) {
+            char type = this->schema->col_type(i);
             switch (type) {
                 case 'F':
                     columns[i] = new FloatColumn();
@@ -178,7 +178,7 @@ public:
         return true;
     }
 
-    /** Returns the dataframe's schema. Modifying the schema after a dataframe
+    /** Returns the dataframe's schema-> Modifying the schema after a dataframe
       * has been created in undefined. */
     Schema* get_schema() {
         return schema;
