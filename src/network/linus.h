@@ -50,13 +50,14 @@ public:
         Key* uK = new Key("usrs");
         Key* cK = new Key("comts");
         if (this_node() == 0) {
+            // We never put these dfs in the store???
             cout << "Reading..." << endl;
+            commits = DataFrame::fromFile(COMM, cK, kv);
+            cout << "    " << commits->get_num_rows() << " commits" << endl;
             projects = DataFrame::fromFile(PROJ, pK, kv);
             cout << "    " << projects->get_num_rows() << " projects" << endl;
             users = DataFrame::fromFile(USER, uK, kv);
             cout << "    " << users->get_num_rows() << " users" << endl;
-            commits = DataFrame::fromFile(COMM, cK, kv);
-            cout << "    " << commits->get_num_rows() << " commits" << endl;
             // This dataframe contains the id of Linus.
             //delete
             Key* key = new Key("users-0-0");
