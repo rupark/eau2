@@ -52,11 +52,11 @@ public:
         if (this_node() == 0) {
             cout << "Reading..." << endl;
             projects = DataFrame::fromFile(PROJ, pK, kv);
-            cout << "    " << projects->nrows() << " projects" << endl;
+            cout << "    " << projects->get_num_rows() << " projects" << endl;
             users = DataFrame::fromFile(USER, uK, kv);
-            cout << "    " << users->nrows() << " users" << endl;
+            cout << "    " << users->get_num_rows() << " users" << endl;
             commits = DataFrame::fromFile(COMM, cK, kv);
-            cout << "    " << commits->nrows() << " commits" << endl;
+            cout << "    " << commits->get_num_rows() << " commits" << endl;
             // This dataframe contains the id of Linus.
             //delete
             Key* key = new Key("users-0-0");
@@ -109,7 +109,7 @@ public:
         cout << "\n\n\n" << endl;
 
 
-        cout << "new users null? nrows=" << (newUsers->nrows()) << endl;
+        cout << "new users null? nrows=" << (newUsers->get_num_rows()) << endl;
         //cout << "made newUsers" << endl;
         Set delta(users);
         cout << "made delta" << endl;
@@ -149,7 +149,7 @@ public:
         }
         cout << "\n\n\n" << endl;
 
-        commits->local_map(ptagger); // marking all projects touched by delta
+        commits->map(ptagger); // marking all projects touched by delta
         cout << "mapped" <<endl;
         cout << "\n\n\n" << endl;
         for (size_t m = 0; m < kv->size; m++) {
@@ -193,7 +193,7 @@ public:
 
 
         cout << "commits local map" << endl;
-        commits->local_map(utagger);
+        commits->map(utagger);
 
         cout << "\n\n\n" << endl;
         for (size_t m = 0; m < kv->size; m++) {
@@ -261,7 +261,7 @@ public:
                 s->c(i);
                 Key* nK = new Key(s->get());
                 DataFrame* delta = kv->get(*nK);
-                cout << "    received delta of " << delta->nrows() << endl;
+                cout << "    received delta of " << delta->get_num_rows() << endl;
                 cout << " elements from node " << i << endl;
                 SetUpdater* upd = new SetUpdater(set);
                 delta->map(upd);
@@ -307,7 +307,7 @@ public:
             DataFrame::fromVisitor(k, kv, "I", writer);
             Key mK(StrBuff(name).c(stage).c("-0").get());
             DataFrame* merged = dynamic_cast<DataFrame*>(kv->get(mK));
-            cout << "    receiving " << merged->nrows() << " merged elements" << endl;
+            cout << "    receiving " << merged->get_num_rows() << " merged elements" << endl;
             SetUpdater* upd = new SetUpdater(set);
             merged->map(upd);
             return nullptr;

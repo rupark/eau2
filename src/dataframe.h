@@ -47,7 +47,7 @@ public:
 
     //TODO
     ~DataFrame() {
-        for (int i = 0; i < ncol; i++) {
+        for (int i = 0; i < this->schema->get_num_cols(); i++) {
             delete columns[i];
         }
     }
@@ -57,7 +57,7 @@ public:
         this->columns = new Column *[50*1000];
         this->schema = new Schema(schema);
 
-        for (size_t i = 0; i < schema->ncol; i++) {
+        for (size_t i = 0; i < this->get_num_cols(); i++) {
             char type = this->schema->col_type(i);
             switch (type) {
                 case 'F':
@@ -191,12 +191,11 @@ public:
         if (col == nullptr) {
             exit(1);
         } else {
-            columns[ncol] = col;
+            columns[this->get_num_cols()] = col;
             schema->add_column(col->get_type());
-            if (col->size() > schema->nrow) {
+            if (col->size() > schema->get_num_rows()) {
                 schema->nrow = col->size();
             }
-            schema->add_column(col->get_type())
         }
     }
 
@@ -252,7 +251,7 @@ public:
       * dataframe, results are undefined.
       */
     void fill_row(size_t idx, Row &row) {
-        for (size_t i = 0; i < ncol; i++) {
+        for (size_t i = 0; i < this->get_num_cols(); i++) {
             switch (columns[i]->get_type()) {
                 case 'F':
                     row.set(i, columns[i]->as_float()->get(idx));
@@ -275,7 +274,7 @@ public:
     void add_row(Row &row) {
         row.set_idx(schema->get_num_rows());
         schema->add_row();
-        for (size_t i = 0; i < ncol; i++) {
+        for (size_t i = 0; i < get_num_cols(); i++) {
             switch (columns[i]->get_type()) {
                 case 'F':
                     columns[i]->push_back(row.get_float(i));
@@ -385,7 +384,7 @@ public:
     DataFrame *chunk(size_t chunk_select) {
 
         int start_row = chunk_select * arg.rows_per_chunk;
-        DataFrame *df = new DataFrame(this->schema);
+        DataFrame *df = new DataFrame(*this->schema);
 
         for (size_t i = start_row; i < start_row + arg.rows_per_chunk; i++) {
             if (i >= this->get_num_rows()) {

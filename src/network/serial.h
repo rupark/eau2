@@ -150,7 +150,7 @@ public:
                     }
                     break;
             }
-            d->add_column(c, new String(""));
+            d->add_column(c);
         }
 
         this->msg_ = d;
@@ -178,7 +178,7 @@ public:
         s->c(str);
         snprintf(str, sizeof str, "?");
         s->c(str);
-        for (int i = 0; i < msg_->ncol; i++) {
+        for (int i = 0; i < msg_->get_num_cols(); i++) {
             snprintf(str, sizeof str, "%s", msg_->columns[i]->serialize()->cstr_);
             s->c(str);
         }

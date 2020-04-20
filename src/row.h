@@ -30,12 +30,12 @@ public:
     size_t index;
 
     /** Build a row following a schema. */
-    Row(Schema &scm) {
+    Row(Schema* scm) {
         this->elements = new Object *[100 * 1000];
         index = 0;
-        size = scm.ncol;
-        for (size_t i = 0; i < scm.ncol; i++) {
-            char type = scm.types->at(i);
+        size = scm->get_num_cols();
+        for (size_t i = 0; i < scm->get_num_cols(); i++) {
+            char type = scm->types->at(i);
             switch (type) {
                 case 'F':
                     elements[i] = new Float(0);
