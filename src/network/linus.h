@@ -100,7 +100,7 @@ public:
 //            cout << " keys[1] = " << kv->keys[1]->name->c_str() << endl;
 //        }
         cout << "creating newUsers" << endl;
-        DataFrame* newUsers = kv->get(&uK);
+        DataFrame* newUsers = kv->get(*uK);
         cout << "GOT new users dataframe from KV key: " << uK->c_str() << endl;
         cout << "\n\n\n" << endl;
         for (size_t m = 0; m < kv->size; m++) {
@@ -254,8 +254,13 @@ public:
         if (this_node() == 0) {
             cout << "found node 0" << endl;
             for (size_t i = 1; i < arg.num_nodes; ++i) {
-                Key nK(StrBuff(name).c(stage).c("-").c(i).get());
-                DataFrame* delta = dynamic_cast<DataFrame*>(kv->waitAndGet(nK));
+                StrBuff* s = new StrBuff)();
+                s->c(name);
+                s->c(stage);
+                s->c("-");
+                s->c(i);
+                Key* nK = new Key(s.get());
+                DataFrame* delta = kv->get(*nK));
                 cout << "    received delta of " << delta->nrows() << endl;
                 cout << " elements from node " << i << endl;
                 SetUpdater* upd = new SetUpdater(set);
@@ -265,8 +270,12 @@ public:
             cout << "    storing " << set.size() << " merged elements" << endl;
             SetWriter* writer = new SetWriter(set);
             cout << "making key" << endl;
-            Key k(StrBuff(name).c(stage).c("-0").get());
-            cout << "k name ------- " << k.name->c_str() << endl;
+            StrBuff* h = new StrBuff();
+            h->c(name);
+            h->c(stage);
+            h->c("-0");
+            Key* k = new Key(h->get());
+            cout << "k name ------- " << k->name->c_str() << endl;
             //delete DataFrame::fromVisitor(&k, &kv, "I", writer);
             cout << "calling fromVisitor" << endl;
 
