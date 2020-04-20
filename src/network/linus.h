@@ -46,20 +46,21 @@ public:
      *  'tagged' users. At this point the dataframe consists of only
      *  Linus. **/
     void readInput() {
-        Key pK("projs");
-        Key uK("usrs");
-        Key cK("comts");
+        Key* pK = new Key("projs");
+        Key* uK = new Key("usrs");
+        Key* cK = new Key("comts");
         if (this_node() == 0) {
             cout << "Reading..." << endl;
-            projects = DataFrame::fromFile(PROJ, pK.clone(), kv);
+            projects = DataFrame::fromFile(PROJ, pK, kv);
             cout << "    " << projects->nrows() << " projects" << endl;
-            users = DataFrame::fromFile(USER, uK.clone(), kv);
+            users = DataFrame::fromFile(USER, uK, kv);
             cout << "    " << users->nrows() << " users" << endl;
-            commits = DataFrame::fromFile(COMM, cK.clone(), kv);
+            commits = DataFrame::fromFile(COMM, cK, kv);
             cout << "    " << commits->nrows() << " commits" << endl;
             // This dataframe contains the id of Linus.
             //delete
-            DataFrame::fromScalarInt(new Key("users-0-0"), kv, LINUS);
+            Key* key = new Key("users-0-0");
+            DataFrame::fromScalarInt(key, kv, LINUS);
         } else {
             projects = kv->get(pK);
             users = kv->get(uK);
@@ -87,16 +88,20 @@ public:
         cout << "kv->keys NULL?" << (kv->keys == nullptr) << endl;
 //        cout << "kv->keys[0] NULL?" << (kv->keys[0] == nullptr) << endl;
 //        cout << "kv->keys[1] NULL?" << (kv->keys[1] == nullptr) << endl;
-        Key uK(StrBuff("users-").c(stage).c("-0").get());
-        cout << "made key: " << uK.name->c_str() << endl;
+        StrBuff* s = new StrBuff();
+        s->c("users-");
+        s->c(stage);
+        s->c("-0");
+        Key* uK = new Key(s->get());
+        cout << "made key: " << uK->name->c_str() << endl;
         // A df with all the users added on the previous round
         //DataFrame* newUsers = dynamic_cast<DataFrame*>(kv->waitAndGet(uK));
 //        if (kv->keys[1] != nullptr) {
 //            cout << " keys[1] = " << kv->keys[1]->name->c_str() << endl;
 //        }
         cout << "creating newUsers" << endl;
-        DataFrame* newUsers = kv->get(uK);
-        cout << "GOT new users dataframe from KV key: " << uK.c_str() << endl;
+        DataFrame* newUsers = kv->get(&uK);
+        cout << "GOT new users dataframe from KV key: " << uK->c_str() << endl;
         cout << "\n\n\n" << endl;
         for (size_t m = 0; m < kv->size; m++) {
             cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
