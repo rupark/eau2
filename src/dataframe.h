@@ -367,9 +367,9 @@ public:
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
     static DataFrame *fromVisitor(Key key, KVStore* kv, char *schema, Writer* w) {
-        cout << "in fromVisitor" << endl;
+//        cout << "in fromVisitor" << endl;
         DataFrame *df = new DataFrame(*new Schema(schema));
-        cout << "made df" << endl;
+//        cout << "made df" << endl;
         while (!w->done()) {
             Row *r = new Row(new Schema(schema));
             w->visit(*r);
@@ -409,16 +409,16 @@ public:
      * Contructs a DataFrame from the size_t and associates the given Key with the DataFrame in the given KVStore
      */
     static DataFrame *fromScalarInt(Key *key, KVStore *kv, size_t scalar) {
-        cout << "Creating df " << endl;
+//        cout << "Creating df " << endl;
         DataFrame *df = new DataFrame(*new Schema("I"));
-        cout << "pushing back" << endl;
+//        cout << "pushing back" << endl;
         df->columns[0]->push_back((int) scalar);
         if (df->get_num_rows() < df->columns[0]->size()){
             df->schema->nrow = df->columns[0]->size();
         }
-        cout << "putting in kv store: " << key->name->c_str()  << "size of df" << df->get_num_rows() << endl;
+//        cout << "putting in kv store: " << key->name->c_str()  << "size of df" << df->get_num_rows() << endl;
         kv->put(key, df);
-        cout << "done in fromScalarInt" << endl;
+//        cout << "done in fromScalarInt" << endl;
         return df;
     }
 

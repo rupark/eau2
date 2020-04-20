@@ -79,13 +79,13 @@ public:
     void step(int stage) {
         cout << "Stage " << stage << endl;
         // Key of the shape: users-stage-0
-        cout << "KV size? " << kv->size << endl;
-        cout << "\n\n\n" << endl;
-        for (size_t m = 0; m < kv->size; m++) {
-            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
-        }
-        cout << "\n\n\n" << endl;
-        cout << "kv->keys NULL?" << (kv->keys == nullptr) << endl;
+        //cout << "KV size? " << kv->size << endl;
+        //cout << "\n\n\n" << endl;
+//        for (size_t m = 0; m < kv->size; m++) {
+//            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+//        }
+//        cout << "\n\n\n" << endl;
+//        cout << "kv->keys NULL?" << (kv->keys == nullptr) << endl;
 //        cout << "kv->keys[0] NULL?" << (kv->keys[0] == nullptr) << endl;
 //        cout << "kv->keys[1] NULL?" << (kv->keys[1] == nullptr) << endl;
         StrBuff* s = new StrBuff();
@@ -93,132 +93,132 @@ public:
         s->c(stage);
         s->c("-0");
         Key* uK = new Key(s->get());
-        cout << "made key: " << uK->name->c_str() << endl;
+//        cout << "made key: " << uK->name->c_str() << endl;
         // A df with all the users added on the previous round
         //DataFrame* newUsers = dynamic_cast<DataFrame*>(kv->waitAndGet(uK));
 //        if (kv->keys[1] != nullptr) {
 //            cout << " keys[1] = " << kv->keys[1]->name->c_str() << endl;
 //        }
-        cout << "creating newUsers" << endl;
+//        cout << "creating newUsers" << endl;
         DataFrame* newUsers = kv->get(*uK);
-        cout << "GOT new users dataframe from KV key: " << uK->c_str() << endl;
-        cout << "\n\n\n" << endl;
-        for (size_t m = 0; m < kv->size; m++) {
-            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
-        }
-        cout << "\n\n\n" << endl;
+//        cout << "GOT new users dataframe from KV key: " << uK->c_str() << endl;
+//        cout << "\n\n\n" << endl;
+//        for (size_t m = 0; m < kv->size; m++) {
+//            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+//        }
+//        cout << "\n\n\n" << endl;
 
 
-        cout << "new users null? nrows=" << (newUsers->get_num_rows()) << endl;
+//        cout << "new users null? nrows=" << (newUsers->get_num_rows()) << endl;
         //cout << "made newUsers" << endl;
         Set delta(users);
-        cout << "made delta" << endl;
-        cout << "\n\n\n" << endl;
-        for (size_t m = 0; m < kv->size; m++) {
-            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
-        }
-        cout << "\n\n\n" << endl;
+//        cout << "made delta" << endl;
+//        cout << "\n\n\n" << endl;
+//        for (size_t m = 0; m < kv->size; m++) {
+//            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+//        }
+//        cout << "\n\n\n" << endl;
 
 
         SetUpdater* upd = new SetUpdater(delta);
-        cout << "made upd" <<endl;
+//        cout << "made upd" <<endl;
 
-        cout << "\n\n\n" << endl;
-        for (size_t m = 0; m < kv->size; m++) {
-            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
-        }
-        cout << "\n\n\n" << endl;
+//        cout << "\n\n\n" << endl;
+//        for (size_t m = 0; m < kv->size; m++) {
+//            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+//        }
+//        cout << "\n\n\n" << endl;
 
 
         newUsers->map(upd); // all of the new users are copied to delta.
         cout << "mapped" << endl;
 
-        cout << "\n\n\n" << endl;
-        for (size_t m = 0; m < kv->size; m++) {
-            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
-        }
-        cout << "\n\n\n" << endl;
+//        cout << "\n\n\n" << endl;
+//        for (size_t m = 0; m < kv->size; m++) {
+//            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+//        }
+//        cout << "\n\n\n" << endl;
 
         //delete newUsers;
         ProjectsTagger* ptagger = new ProjectsTagger(delta, *pSet, projects);
-        cout << "ptagger" << endl;
-
-        cout << "\n\n\n" << endl;
-        for (size_t m = 0; m < kv->size; m++) {
-            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
-        }
-        cout << "\n\n\n" << endl;
+//        cout << "ptagger" << endl;
+//
+//        cout << "\n\n\n" << endl;
+//        for (size_t m = 0; m < kv->size; m++) {
+//            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+//        }
+//        cout << "\n\n\n" << endl;
 
         commits->map(ptagger); // marking all projects touched by delta
         cout << "mapped" <<endl;
-        cout << "\n\n\n" << endl;
-        for (size_t m = 0; m < kv->size; m++) {
-            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
-        }
-        cout << "\n\n\n" << endl;
+//        cout << "\n\n\n" << endl;
+//        for (size_t m = 0; m < kv->size; m++) {
+//            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+//        }
+//        cout << "\n\n\n" << endl;
 
 
         this->kv = merge(ptagger->newProjects, "projects-", stage);
-        cout << "merged" <<endl;
+//        cout << "merged" <<endl;
 
-        cout << "\n\n\n" << endl;
-        for (size_t m = 0; m < kv->size; m++) {
-            cout << "KV Store Key " << m << ": " << &kv->keys[m]->name->cstr_ << endl;
-        }
-        cout << "\n\n\n" << endl;
+//        cout << "\n\n\n" << endl;
+//        for (size_t m = 0; m < kv->size; m++) {
+//            cout << "KV Store Key " << m << ": " << &kv->keys[m]->name->cstr_ << endl;
+//        }
+//        cout << "\n\n\n" << endl;
 
 
-        cout << "pset union" <<endl;
+//        cout << "pset union" <<endl;
         pSet->union_(ptagger->newProjects);
 
-        cout << "finished pset" << endl;
-        cout << kv->size << endl;
+//        cout << "finished pset" << endl;
+//        cout << kv->size << endl;
+//
+//        cout << "\n\n\n" << endl;
+//        for (size_t m = 0; m < kv->size; m++) {
+//            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+//        }
+//        cout << "\n\n\n" << endl;
 
-        cout << "\n\n\n" << endl;
-        for (size_t m = 0; m < kv->size; m++) {
-            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
-        }
-        cout << "\n\n\n" << endl;
 
-
-        cout << "utagger" << endl;
+//        cout << "utagger" << endl;
         UsersTagger* utagger = new UsersTagger(ptagger->newProjects, *uSet, users);
 
 
-        cout << "\n\n\n" << endl;
-        for (size_t m = 0; m < kv->size; m++) {
-            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
-        }
-        cout << "\n\n\n" << endl;
+//        cout << "\n\n\n" << endl;
+//        for (size_t m = 0; m < kv->size; m++) {
+//            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+//        }
+//        cout << "\n\n\n" << endl;
 
 
-        cout << "commits local map" << endl;
+//        cout << "commits local map" << endl;
         commits->map(utagger);
 
-        cout << "\n\n\n" << endl;
-        for (size_t m = 0; m < kv->size; m++) {
-            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
-        }
-        cout << "\n\n\n" << endl;
+//        cout << "\n\n\n" << endl;
+//        for (size_t m = 0; m < kv->size; m++) {
+//            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+//        }
+//        cout << "\n\n\n" << endl;
 
 
 
-        cout << "second merge" << endl;
-
-        cout << "\n\n\n" << endl;
-        for (size_t m = 0; m < kv->size; m++) {
-            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
-        }
-        cout << "\n\n\n" << endl;
-        cout << "STARTING MERGE" << endl;
+//        cout << "second merge" << endl;
+//
+//        cout << "\n\n\n" << endl;
+//        for (size_t m = 0; m < kv->size; m++) {
+//            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+//        }
+//        cout << "\n\n\n" << endl;
+//        cout << "STARTING MERGE" << endl;
         this->kv = merge(utagger->newUsers, "users-", stage + 1);
-        cout << "MERGE FINISHED" << endl;
+//        cout << "MERGE FINISHED" << endl;
 
-        cout << "\n\n\n" << endl;
-        for (size_t m = 0; m < kv->size; m++) {
-            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
-        }
-        cout << "\n\n\n" << endl;
+//        cout << "\n\n\n" << endl;
+//        for (size_t m = 0; m < kv->size; m++) {
+//            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+//        }
+//        cout << "\n\n\n" << endl;
 
 //        cout << "kv->key[1] null??" << (kv->keys[1] == nullptr) << endl;
 //        if (kv->keys[1] != nullptr) {
@@ -228,18 +228,18 @@ public:
 //            cout << "!!!!kv->keys[1].name null? = " << kv->keys[2]->c_str() << endl;
 //        }
 
-        cout << "uset union" << endl;
+//        cout << "uset union" << endl;
         uSet->union_(utagger->newUsers);
-        cout << "    after stage " << stage << ":" << endl;
-        cout << "        tagged projects: " << pSet->size() << endl;
-        cout << "        tagged users: " << uSet->size() << endl;
+//        cout << "    after stage " << stage << ":" << endl;
+//        cout << "        tagged projects: " << pSet->size() << endl;
+//        cout << "        tagged users: " << uSet->size() << endl;
         //cout << "        kv->keys[1]: " << (kv->keys[1] == nullptr) << "name: " << kv->keys[1]->c_str() << endl;
 
-        cout << "\n\n\n" << endl;
-        for (size_t m = 0; m < kv->size; m++) {
-            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
-        }
-        cout << "\n\n\n" << endl;
+//        cout << "\n\n\n" << endl;
+//        for (size_t m = 0; m < kv->size; m++) {
+//            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+//        }
+//        cout << "\n\n\n" << endl;
 
     }
 
@@ -250,9 +250,9 @@ public:
      * computed.
      */
     KVStore* merge(Set& set, char const* name, int stage) {
-        cout << "in merge" << endl;
+//        cout << "in merge" << endl;
         if (this_node() == 0) {
-            cout << "found node 0" << endl;
+//            cout << "found node 0" << endl;
             for (size_t i = 1; i < arg.num_nodes; ++i) {
                 StrBuff* s = new StrBuff();
                 s->c(name);
@@ -269,30 +269,30 @@ public:
             }
             cout << "    storing " << set.size() << " merged elements" << endl;
             SetWriter* writer = new SetWriter(set);
-            cout << "making key" << endl;
+//            cout << "making key" << endl;
             StrBuff* h = new StrBuff();
             h->c(name);
             h->c(stage);
             h->c("-0");
             Key* k = new Key(h->get());
-            cout << "k name ------- " << k->name->c_str() << endl;
+//            cout << "k name ------- " << k->name->c_str() << endl;
             //delete DataFrame::fromVisitor(&k, &kv, "I", writer);
-            cout << "calling fromVisitor" << endl;
+//            cout << "calling fromVisitor" << endl;
 
-            cout << "\n\n\n" << endl;
-            for (size_t m = 0; m < kv->size; m++) {
-                cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
-            }
-            cout << "\n\n\n" << endl;
+//            cout << "\n\n\n" << endl;
+//            for (size_t m = 0; m < kv->size; m++) {
+//                cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
+//            }
+//            cout << "\n\n\n" << endl;
 
             DataFrame::fromVisitor(k, kv, "I", writer);
-            cout << "FROM VISITOR FINISHED" << endl;
-
-            cout << "\n\n\n" << endl;
-            for (size_t m = 0; m < kv->size; m++) {
-                cout << "KV Store Key " << m << ": " << &kv->keys[m]->name->cstr_ << endl;
-            }
-            cout << "\n\n\n" << endl;
+//            cout << "FROM VISITOR FINISHED" << endl;
+//
+//            cout << "\n\n\n" << endl;
+//            for (size_t m = 0; m < kv->size; m++) {
+//                cout << "KV Store Key " << m << ": " << &kv->keys[m]->name->cstr_ << endl;
+//            }
+//            cout << "\n\n\n" << endl;
             return kv;
 
  //           cout << "kv->keys[1] NULL?" << (kv->keys[1]  == nullptr) << endl;
