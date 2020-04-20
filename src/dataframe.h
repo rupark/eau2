@@ -439,13 +439,13 @@ public:
         cout << "size of file calced " << file_size << endl;
 
         cout << "file opened" << endl;
-        SorParser parser(file, (size_t)0, (size_t)file_size, (size_t)file_size);
+        SorParser* parser(file, (size_t)0, (size_t)file_size, (size_t)file_size);
         cout << "parser created" << endl;
-        parser.guessSchema();
+        parser->guessSchema();
         cout << "schema guessed" << endl;
-        parser.parseFile();
+        parser->parseFile();
         cout << "file parsed" << endl;
-        DataFrame* d = new DataFrame(parser.getColumnSet(), parser._num_columns);
+        DataFrame* d = new DataFrame(parser->getColumnSet(), parser->_num_columns);
         cout << "data frame created of SIZE " << d->get_num_rows() << endl;
         cout << "deleting Provider::Parser..." << endl;
         delete parser;
