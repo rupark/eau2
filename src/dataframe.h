@@ -508,6 +508,7 @@ public:
     }
 
     ~Set() {
+        cout << "in set des" << endl;
         delete[] vals_;
     }
 

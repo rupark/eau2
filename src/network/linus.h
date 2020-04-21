@@ -341,7 +341,7 @@ public:
             h->c("-0");
             Key* k = new Key(h->get());
 //            cout << "k name ------- " << k->name->c_str() << endl;
-            delete DataFrame::fromVisitor(k, kv, "I", writer);
+            DataFrame::fromVisitor(k, kv, "I", writer);
 //            cout << "calling fromVisitor" << endl;
 
 //            cout << "\n\n\n" << endl;
@@ -368,7 +368,7 @@ public:
             cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter* writer = new SetWriter(set);
             Key* k = new Key(StrBuff(name).c(stage).c("-").c(idx_).get());
-           delete DataFrame::fromVisitor(k, kv, "I", writer);
+            DataFrame::fromVisitor(k, kv, "I", writer);
             //DataFrame::fromVisitor(k, kv, "I", writer);
             Key mK(StrBuff(name).c(stage).c("-0").get());
             DataFrame* merged = dynamic_cast<DataFrame*>(kv->get(mK));
