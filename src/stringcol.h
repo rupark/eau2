@@ -56,7 +56,8 @@ public:
     * Append missing bool is default 0.
     */
     void appendMissing() {
-        this->vals_.push_back(*new String(""));
+        const char* c = "";
+        this->vals_.push_back(*new String(c));
     }
 
     /**
