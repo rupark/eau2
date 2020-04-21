@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     NetworkIP *network = initialize();
     assert(arg.num_nodes != 0 && "cannot have empty cloud");
 //    try {
-        Application *app = pick(network->index(), *network);
+        Linus *app = new Linus(network->index(), *network);
         cout << "CHOSEN APP: " << arg.app << endl;
         app->run_();
         cout << "Finished Running App" << endl;
