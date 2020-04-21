@@ -68,7 +68,6 @@ public:
         FILE* file_dup = fopen(filep, "rb");
         cout << "fopen file null?: " << (file == nullptr) << endl;
         size_t file_size = get_file_size(file_dup);
-        delete file_dup;
         cout << "size of file calced " << file_size << endl;
         cout << "file opened" << endl;
 
