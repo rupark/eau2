@@ -37,11 +37,6 @@ public:
 
     ~Linus() {
         cout << "in linus des" << endl;
-        //delete[] PROJ;
-        cout << "1" << endl;
-        //delete[] USER;
-        cout << "2" << endl;
-        //delete[] COMM;
         cout << "3" << endl;
         delete projects;
         cout << "4" << endl;
