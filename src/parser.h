@@ -378,12 +378,10 @@ public:
      */
     virtual ~SorParser() {
         delete _reader;
-//        if (_columns != nullptr) {
-// TODO            delete _columns;
-//        }
         if (_typeGuesses != nullptr) {
             delete[] _typeGuesses;
         }
+        delete parsed_df;
     }
 
     /**
