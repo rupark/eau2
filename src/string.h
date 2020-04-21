@@ -104,6 +104,10 @@ public:
         size_ = 0;
     }
 
+    ~StrBuff() {
+        delete[] val_;
+    }
+
     StrBuff(char *init) : StrBuff() {
         c(init);
     }
