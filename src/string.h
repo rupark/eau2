@@ -35,7 +35,7 @@ public:
         cstr_ = cstr;
     }
 
-    String(char const *cstr) : String(cstr, strlen(cstr)) {}
+    String(char *cstr) : String(cstr, strlen(cstr)) {}
 
     /** Build a string from another String */
     String(String &from) :
