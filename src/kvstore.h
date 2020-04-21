@@ -52,6 +52,8 @@ public:
             cout << this->keys[i]->name->cstr_ << endl;
         }
 
+        cout << "h" << endl;
+
         // check if key is already there
         for (size_t k = 0; k < size; k++) {
             // if found already, replace
