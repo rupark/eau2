@@ -155,6 +155,7 @@ public:
         s->c(stage);
         s->c("-0");
         Key* uK = new Key(s->get());
+        delete s;
 //        cout << "made key: " << uK->name->c_str() << endl;
         // A df with all the users added on the previous round
         //DataFrame* newUsers = dynamic_cast<DataFrame*>(kv->waitAndGet(uK));
@@ -364,7 +365,7 @@ public:
         } else {
             cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter* writer = new SetWriter(set);
-            Key k(StrBuff(name).c(stage).c("-").c(idx_).get());
+            Key* k = new Key(StrBuff(name).c(stage).c("-").c(idx_).get());
 //            delete DataFrame::fromVisitor(&k, &kv, "I", writer);
             DataFrame::fromVisitor(k, kv, "I", writer);
             Key mK(StrBuff(name).c(stage).c("-0").get());

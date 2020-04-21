@@ -380,7 +380,7 @@ public:
     /**
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
-    static DataFrame *fromVisitor(Key key, KVStore *kv, char *schema, Writer *w) {
+    static DataFrame *fromVisitor(Key* key, KVStore *kv, char *schema, Writer *w) {
         cout << "in fromVisitor" << endl;
         DataFrame *df = new DataFrame(*new Schema(schema));
 //        cout << "made df" << endl;
@@ -391,7 +391,7 @@ public:
         }
         cout << "done visiting" << endl;
 
-        kv->put(key.clone(), df);
+        kv->put(key, df);
         return df;
     }
 
