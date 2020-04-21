@@ -374,6 +374,7 @@ public:
             df->columns[0]->push_back((float) vals[i]);
         }
         kv->put(key, df);
+        delete vals;
         return df;
     }
 
