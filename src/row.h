@@ -31,23 +31,23 @@ public:
 
     /** Build a row following a schema. */
     Row(Schema* scm) {
-        this->elements = new Object *[10];
+        this->elements = new Object [10];
         index = 0;
         size = scm->get_num_cols();
         for (size_t i = 0; i < scm->get_num_cols(); i++) {
             char type = scm->types->at(i);
             switch (type) {
                 case 'F':
-                    elements[i] = new Float(0);
+                    elements[i] = *new Float(0);
                     break;
                 case 'B':
-                    elements[i] = new Bool(0);
+                    elements[i] = *new Bool(0);
                     break;
                 case 'I':
-                    elements[i] = new Integer(0);
+                    elements[i] = *new Integer(0);
                     break;
                 case 'S':
-                    elements[i] = new String("");
+                    elements[i] = *new String("");
                     break;
             }
         }
@@ -64,7 +64,7 @@ public:
       * a value of the wrong type is undefined. */
     void set(size_t col, int val) {
         if (col < size && col >= 0) {
-            elements[col] = new Integer(val);
+            elements[col] = *new Integer(val);
         } else {
             exit(1);
         }
@@ -72,7 +72,7 @@ public:
 
     void set(size_t col, float val) {
         if (col < size && col >= 0) {
-            elements[col] = new Float(val);
+            elements[col] = *new Float(val);
         } else {
             exit(1);
         }
@@ -80,7 +80,7 @@ public:
 
     void set(size_t col, bool val) {
         if (col < size && col >= 0) {
-            elements[col] = new Bool(val);
+            elements[col] = *new Bool(val);
         } else {
             exit(1);
         }
@@ -89,7 +89,7 @@ public:
     /** The string is external. */
     void set(size_t col, String *val) {
         if (col < size && col >= 0) {
-            elements[col] = val;
+            elements[col] = *val;
         } else {
             exit(1);
         }
