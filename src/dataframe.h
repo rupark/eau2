@@ -383,7 +383,9 @@ public:
      */
     static DataFrame *fromVisitor(Key* key, KVStore *kv, char *schema, Writer *w) {
         cout << "in fromVisitor" << endl;
-        DataFrame *df = new DataFrame(*new Schema(schema));
+        Schema* s = new Schema(schema);
+        DataFrame *df = new DataFrame(*s);
+        delete s;
 //        cout << "made df" << endl;
         while (!w->done()) {
             Row *r = new Row(new Schema(schema));
