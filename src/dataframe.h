@@ -320,13 +320,18 @@ public:
 
     /** Visits the rows in order on THIS node */
     void map(Reader *r) {
+        cout << "in map" << endl;
         int completed = 0;
 
         for (size_t i = 0; i < this->get_num_rows(); i++) {
             Row *row = new Row(this->schema);
+            cout << "fill row" << endl;
             this->fill_row(i, *row);
+            cout << "completed" << endl;
             completed++;
+            cout << "prep visit" << endl;
             r->visit(*row);
+            cout << "Visited" << endl;
             delete row;
         }
 
