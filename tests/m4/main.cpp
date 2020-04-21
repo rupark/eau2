@@ -56,6 +56,6 @@ int main(int argc, char *argv[]) {
 //    } catch (std::exception const &e) {
 //        cout << "error: " << e.what() << endl;
 //    }
-    delete network;
+   // delete network;
 }
 
