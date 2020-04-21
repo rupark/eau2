@@ -84,7 +84,9 @@ public:
 
     /** Out of bound idx is undefined. */
     void set(size_t idx, int *val) {
-        vals_.at(idx) = *new Integer(*val);
+        Integer* i = new Integer(*val);
+        vals_.at(idx) = *i;
+        delete i;
     }
 
     /**
@@ -142,6 +144,8 @@ public:
         }
 
         s->c("!");
-        return s->get();
+        String* sresult = s->get();
+        delete s;
+        return sresult;
     }
 };

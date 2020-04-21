@@ -157,6 +157,8 @@ public:
         }
 
         s->c("!");
-        return s->get();
+        String* sresult = s->get();
+        delete s;
+        return sresult;
     }
 };

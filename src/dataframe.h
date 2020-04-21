@@ -327,6 +327,7 @@ public:
             this->fill_row(i, *row);
             completed++;
             r->visit(*row);
+            delete row;
         }
 
     }
@@ -340,6 +341,7 @@ public:
             this->fill_row(i, *row);
             completed++;
             r->visit(*row);
+            delete row;
         }
 
     }
@@ -371,7 +373,9 @@ public:
      * Contructs a DataFrame from the given array of doubles and associates the given Key with the DataFrame in the given KVStore
      */
     static DataFrame *fromArray(Key *key, KVStore *kv, size_t sz, double *vals) {
-        DataFrame *df = new DataFrame(*new Schema("F"));
+        Schema *s = new Schema("F");
+        DataFrame *df = new DataFrame(*s);
+        delete s;
         for (int i = 0; i < sz; i++) {
             df->columns[0]->push_back((float) vals[i]);
         }
@@ -383,19 +387,18 @@ public:
     /**
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
-    static DataFrame *fromVisitor(Key* key, KVStore *kv, char *schema, Writer *w) {
+    static DataFrame *fromVisitor(Key *key, KVStore *kv, char *schema, Writer *w) {
         cout << "in fromVisitor" << endl;
-        Schema* s = new Schema(schema);
+        Schema *s = new Schema(schema);
         DataFrame *df = new DataFrame(*s);
-        delete s;
-//        cout << "made df" << endl;
         while (!w->done()) {
-            Row *r = new Row(new Schema(schema));
+            Row *r = new Row(s);
             w->visit(*r);
             df->add_row(*r);
+            delete r;
         }
+        delete s;
         cout << "done visiting" << endl;
-
         kv->put(key, df);
         return df;
     }
@@ -413,6 +416,7 @@ public:
                 Row *r = new Row(this->schema);
                 this->fill_row(i, *r);
                 df->add_row(*r);
+                delete r;
             }
         }
         return df;
@@ -430,7 +434,9 @@ public:
      */
     static DataFrame *fromScalarInt(Key *key, KVStore *kv, size_t scalar) {
 //        cout << "Creating df " << endl;
-        DataFrame *df = new DataFrame(*new Schema("I"));
+        Schema *s = new Schema("I");
+        DataFrame *df = new DataFrame(*s);
+        delete s;
 //        cout << "pushing back" << endl;
         df->columns[0]->push_back((int) scalar);
         if (df->get_num_rows() < df->columns[0]->size()) {
