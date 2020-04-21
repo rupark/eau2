@@ -112,7 +112,7 @@ public:
      * Adds the given float to this if it is a FloatColumn
      */
     virtual void push_back(float val) {
-        vals_.push_back(&new Float(val));
+        vals_.push_back(new Float(val));
     }
 
     /**
