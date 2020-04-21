@@ -25,13 +25,13 @@
 
 class Row : public Object {
 public:
-    Object* elements;
+    Object *elements;
     size_t size;
     size_t index;
 
     /** Build a row following a schema. */
     Row(Schema* scm) {
-        this->elements = new Object [10];
+        this->elements = new Object *[10];
         index = 0;
         size = scm->get_num_cols();
         for (size_t i = 0; i < scm->get_num_cols(); i++) {
@@ -54,6 +54,9 @@ public:
     }
 
     ~Row() {
+        for (int i = 0; i < size; i++) {
+            delete elements[i];
+        }
         delete[] elements;
     };
 
@@ -61,8 +64,7 @@ public:
       * a value of the wrong type is undefined. */
     void set(size_t col, int val) {
         if (col < size && col >= 0) {
-            Integer i(val);
-            elements[col] = i;
+            elements[col] = new Integer(val);
         } else {
             exit(1);
         }
@@ -70,8 +72,7 @@ public:
 
     void set(size_t col, float val) {
         if (col < size && col >= 0) {
-            Float f(val);
-            elements[col] = f;
+            elements[col] = new Float(val);
         } else {
             exit(1);
         }
@@ -79,8 +80,7 @@ public:
 
     void set(size_t col, bool val) {
         if (col < size && col >= 0) {
-            Bool b(val);
-            elements[col] = b;
+            elements[col] = new Bool(val);
         } else {
             exit(1);
         }
@@ -89,8 +89,7 @@ public:
     /** The string is external. */
     void set(size_t col, String *val) {
         if (col < size && col >= 0) {
-            String s(val->cstr_);
-            elements[col] = s;
+            elements[col] = val;
         } else {
             exit(1);
         }
@@ -109,22 +108,19 @@ public:
     /** Getters: get the value at the given column. If the column is not
       * of the requested type, the result is undefined. */
     int get_int(size_t col) {
-        return ((Integer)elements[col]).val;
+        return dynamic_cast<Integer &>(elements[col]).val;
     }
 
     bool get_bool(size_t col) {
-        //bool v = dynamic_cast<Bool *>(elements[col])->val;
-        return ((Bool)elements[col]).val;
+        return dynamic_cast<Bool &>(elements[col]).val;
     }
 
     float get_float(size_t col) {
-        //float v = dynamic_cast<Float *>(elements[col])->val;
-        return ((Float)elements[col]).val;
+        return dynamic_cast<Float &>(elements[col]).val;
     }
 
     String *get_string(size_t col) {
-        //String *v = (String *) elements[col];
-        return &((String)elements[col]).val;
+        return dynamic_cast<String &>(elements[col]);
     }
 
     /** Number of fields in the row. */
