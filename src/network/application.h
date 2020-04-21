@@ -21,10 +21,13 @@ public:
         this->net = net;
     }
 
+    ~Application() {
+        delete kv;
+    }
+
     Application(size_t idx) {
         kv = new KVStore();
         this->idx_ = idx;
-
     }
 
     /** Returns the index of this node **/

@@ -46,7 +46,7 @@ public:
     }
 
     ~Schema() {
-        delete[] types;
+        delete types;
     }
 
     /** Add a column of the given type and name (can be nullptr), name

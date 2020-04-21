@@ -28,6 +28,15 @@ public:
         this->dfs = new DataFrame *[500];
     }
 
+    ~KVStore() {
+        for (int i = 0; i < size; i++) {
+            delete keys[i];
+            delete dfs[i];
+        }
+        delete[] keys;
+        delete[] dfs;
+    };
+
     /**
      * Adds the given Key and DataFrame to this KVStore
      */

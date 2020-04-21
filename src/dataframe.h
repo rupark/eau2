@@ -48,6 +48,8 @@ public:
         for (int i = 0; i < this->schema->get_num_cols(); i++) {
             delete columns[i];
         }
+        delete[] columns;
+        delete schema;
     }
 
     /** Create a data frame from a schema-> All columns are created empty. */
@@ -503,7 +505,8 @@ public:
         }
     }
 
-    ~Set() { //delete[] vals_;
+    ~Set() {
+        delete[] vals_;
         }
 
     /** Add idx to the set. If idx is out of bound, ignore it.  Out of bound

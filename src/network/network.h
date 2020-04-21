@@ -38,12 +38,11 @@ public:
     sockaddr_in ip_;
 
     ~NetworkIP() {
+        delete[] nodes_;
         //close(sock_);
     }
 
-    NetworkIP() {
-
-    }
+    NetworkIP() {}
 
     /**
      *

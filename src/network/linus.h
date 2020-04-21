@@ -35,6 +35,17 @@ public:
 
     Linus(size_t idx, NetworkIP& net): Application(idx, net) {}
 
+    ~Linus() {
+        delete[] PROJ;
+        delete[] USER;
+        delete[] COMM;
+        delete projects;
+        delete users;
+        delete commits;
+        delete uSet;
+        delete pSet;
+    }
+
     /** Compute DEGREES of Linus.  */
     void run_() override {
         readInput();
