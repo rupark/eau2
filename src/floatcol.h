@@ -23,13 +23,13 @@ using namespace std;
  */
 class FloatColumn : public Column {
 public:
-    vector<Float *> vals_;
+    vector<Float> vals_;
 
     FloatColumn() {
     }
 
     ~FloatColumn() {
-        vector<Float*>().swap(vals_);
+        //vector<Float*>().swap(vals_);
 //        for (int i = 0; i < size_; i++) {
 //            if (vals_[i] != nullptr) {
 //                delete vals_[i];
@@ -42,7 +42,7 @@ public:
     * Append missing bool is default 0.
     */
     void appendMissing() {
-        vals_.push_back(new Float(0));
+        vals_.push_back(*new Float(0));
     }
 
     /**
@@ -79,12 +79,12 @@ public:
 
     /** Returns the float at idx; undefined on invalid idx.*/
     float *get(size_t idx) {
-        return &vals_.at(idx)->val;
+        return &vals_.at(idx).val;
     }
 
     /** Out of bound idx is undefined. */
     void set(size_t idx, float *val) {
-        vals_.at(idx) = new Float(*val);
+        vals_.at(idx) = *new Float(*val);
     }
 
     /**
@@ -113,7 +113,7 @@ public:
      * Adds the given float to this if it is a FloatColumn
      */
     virtual void push_back(float val) {
-        vals_.push_back(new Float(val));
+        vals_.push_back(*new Float(val));
     }
 
     /**
@@ -135,7 +135,7 @@ public:
 
         for (int i = 0; i < this->vals_.size(); i++) {
             char str[256] = ""; /* In fact not necessary as snprintf() adds the 0-terminator. */
-            snprintf(str, sizeof str, "%f}", this->vals_.at(i)->val);
+            snprintf(str, sizeof str, "%f}", this->vals_.at(i).val);
             s->c(str);
         }
 

@@ -23,7 +23,7 @@ using namespace std;
  */
 class IntColumn : public Column {
 public:
-    vector<Integer *> vals_;
+    vector<Integer> vals_;
 
     IntColumn() {
     }
@@ -79,12 +79,12 @@ public:
 
     /** Returns the int at idx; undefined on invalid idx.*/
     int *get(size_t idx) {
-        return &vals_.at(idx)->val;
+        return &vals_.at(idx).val;
     }
 
     /** Out of bound idx is undefined. */
     void set(size_t idx, int *val) {
-        vals_.at(idx) = new Integer(*val);
+        vals_.at(idx) = *new Integer(*val);
     }
 
     /**
@@ -98,7 +98,7 @@ public:
      * Adds the given int to this if it is a IntColumn
      */
     virtual void push_back(int val) {
-        vals_.push_back(new Integer(val));
+        vals_.push_back(*new Integer(val));
     }
 
     /**

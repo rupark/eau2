@@ -29,7 +29,7 @@ using namespace std;
  */
 class StringColumn : public Column {
 public:
-    vector<String *> vals_;
+    vector<String> vals_;
 
     StringColumn() {
     }
@@ -56,7 +56,7 @@ public:
     * Append missing bool is default 0.
     */
     void appendMissing() {
-        this->vals_.push_back(new String(""));
+        this->vals_.push_back(*new String(""));
     }
 
     /**
@@ -134,7 +134,7 @@ public:
      * Adds the given String to this if it is a StringColumn
      */
     virtual void push_back(String *val) {
-        vals_.push_back(val);
+        vals_.push_back(*val);
     }
 
     /** Return the type of this column as a char: 'S', 'B', 'I' and 'F'. */
@@ -149,7 +149,7 @@ public:
 
         for (int i = 0; i < this->vals_.size(); i++) {
             char str[256] = ""; /* In fact not necessary as snprintf() adds the 0-terminator. */
-            snprintf(str, sizeof str, "%s}", this->vals_.at(i));
+            snprintf(str, sizeof str, "%s}", this->vals_.at(i).cstr_);
             s->c(str);
         }
 

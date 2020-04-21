@@ -23,7 +23,7 @@ using namespace std;
  */
 class BoolColumn : public Column {
 public:
-    vector<Bool *> vals_;
+    vector<Bool> vals_;
 
     BoolColumn() {
     }
@@ -78,12 +78,12 @@ public:
 
     /** Returns the Bool at idx; undefined on invalid idx.*/
     bool *get(size_t idx) {
-        return &vals_.at(idx)->val;
+        return &vals_.at(idx).val;
     }
 
     /** Out of bound idx is undefined. */
     void set(size_t idx, bool *val) {
-        vals_.at(idx) = new Bool(*val);
+        vals_.at(idx) = *new Bool(*val);
     }
 
     /**
@@ -104,7 +104,7 @@ public:
      * Adds the given bool to this if it is a BoolColumn
      */
     virtual void push_back(bool val) {
-        vals_.push_back(new Bool(val));
+        vals_.push_back(*new Bool(val));
     }
 
     /**
@@ -134,7 +134,7 @@ public:
 
         for (int i = 0; i < this->vals_.size(); i++) {
             char str[256] = ""; /* In fact not necessary as snprintf() adds the 0-terminator. */
-            snprintf(str, sizeof str, "%d}", this->vals_.at(i)->val);
+            snprintf(str, sizeof str, "%d}", this->vals_.at(i).val);
             s->c(str);
         }
 
