@@ -9,6 +9,7 @@
 #include "../writer.h"
 #include "network.h"
 #include <iostream>
+#include "../parser.h"
 using namespace std;
 
 /*************************************************************************
@@ -20,7 +21,7 @@ class Linus : public Application {
 public:
     int DEGREES = 4;  // How many degrees of separation form linus?
     int LINUS = 4967;   // The uid of Linus (offset in the user df)
-    bool subset = false;
+    bool subset = true;
 
     const char* PROJ = (subset ? "datasets/projects_subset.ltgt" : "datasets/projects.ltgt");
     const char* USER = (subset ? "datasets/users_subset.ltgt" : "datasets/users.ltgt");
@@ -39,6 +40,45 @@ public:
         readInput();
         for (size_t i = 0; i < DEGREES; i++) step(i);
     }
+
+    size_t get_file_size(FILE* p_file) // path to file
+    {
+        fseek(p_file,0,SEEK_END);
+        size_t size = ftell(p_file);
+        fclose(p_file);
+        return size;
+    }
+
+    DataFrame* readDataFrameFromFile(const char* filep) {
+        cout << "in from file: " << filep << endl;
+        FILE* file = fopen(filep, "rb");
+        FILE* file_dup = fopen(filep, "rb");
+        cout << "fopen file null?: " << (file == nullptr) << endl;
+        size_t file_size = get_file_size(file_dup);
+        delete file_dup;
+        cout << "size of file calced " << file_size << endl;
+        cout << "file opened" << endl;
+
+
+        ///////////////////////////////////////
+        SorParser* parser = new SorParser(file, (size_t)0, (size_t)file_size, (size_t)file_size);
+        cout << "parser created" << endl;
+        parser->guessSchema();
+        cout << "schema guessed" << endl;
+        parser->parseFile();
+        ///////////////////////////////////////
+
+
+        delete file;
+        cout << "file parsed" << endl;
+//        DataFrame* d = new DataFrame(parser->getColumnSet(), parser->_num_columns);
+        DataFrame* d = parser->parsed_df;
+        cout << "data frame created of SIZE " << d->get_num_rows() << endl;
+        delete parser;
+
+        return d;
+    }
+
     /** Node 0 reads three files, cointainng projects, users and commits, and
      *  creates thre dataframes. All other nodes wait and load the three
      *  dataframes. Once we know the size of users and projects, we create
@@ -52,11 +92,14 @@ public:
         if (this_node() == 0) {
             // We never put these dfs in the store???
             cout << "Reading..." << endl;
-            commits = DataFrame::fromFile(COMM, cK, kv);
+//            commits = DataFrame::fromFile(COMM, cK, kv);
+            commits = readDataFrameFromFile(COMM);
             cout << "    " << commits->get_num_rows() << " commits" << endl;
-            projects = DataFrame::fromFile(PROJ, pK, kv);
+//            projects = DataFrame::fromFile(PROJ, pK, kv);
+            projects = readDataFrameFromFile(PROJ);
             cout << "    " << projects->get_num_rows() << " projects" << endl;
-            users = DataFrame::fromFile(USER, uK, kv);
+//            users = DataFrame::fromFile(USER, uK, kv);
+            users = readDataFrameFromFile(USER);
             cout << "    " << users->get_num_rows() << " users" << endl;
             // This dataframe contains the id of Linus.
             //delete

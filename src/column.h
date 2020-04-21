@@ -49,4 +49,7 @@ public:
 
     /** Return the serialization of this Column as a String */
     virtual String *serialize() {}
+
+    /** Append a missing by pushing back default value for the Column */
+    virtual void appendMissing() {}
 };

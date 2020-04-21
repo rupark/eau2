@@ -42,6 +42,13 @@ public:
     }
 
     /**
+    * Append missing bool is default 0.
+    */
+    void appendMissing() {
+        push_back((float)0);
+    }
+
+    /**
      * Returns this if it is a StringColumn
      * @return
      */

@@ -36,6 +36,15 @@ public:
         delete[] vals_;
     }
 
+
+    /**
+    * Append missing bool is default 0.
+    */
+    void appendMissing() {
+        push_back((int)0);
+    }
+
+
     /**
      * Returns this if it is a StringColumn
      * @return

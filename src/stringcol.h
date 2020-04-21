@@ -50,6 +50,14 @@ public:
         }
     }
 
+
+    /**
+    * Append missing bool is default 0.
+    */
+    void appendMissing() {
+        this->push_back(new String(""));
+    }
+
     /**
      * Returns this if it is a StringColumn
      * @return
