@@ -54,9 +54,9 @@ public:
     }
 
     ~Row() {
-        for (int i = 0; i < size; i++) {
-            delete elements[i];
-        }
+//        for (int i = 0; i < size; i++) {
+//            delete elements[i];
+//        }
         delete[] elements;
     };
 
@@ -120,7 +120,7 @@ public:
     }
 
     String *get_string(size_t col) {
-        return dynamic_cast<String &>(elements[col]);
+        return &dynamic_cast<String &>(elements[col]);
     }
 
     /** Number of fields in the row. */
@@ -130,11 +130,11 @@ public:
 
     /** Type of the field at the given position. An idx >= width is  undefined. */
     char col_type(size_t idx) {
-        if (dynamic_cast<Integer *>(this->elements[idx])) {
+        if (dynamic_cast<Integer &>(this->elements[idx])) {
             return 'I';
-        } else if (dynamic_cast<Bool *>(this->elements[idx])) {
+        } else if (dynamic_cast<Bool &>(this->elements[idx])) {
             return 'B';
-        } else if (dynamic_cast<Float *>(this->elements[idx])) {
+        } else if (dynamic_cast<Float &>(this->elements[idx])) {
             return 'F';
         } else {
             return 'S';
