@@ -109,22 +109,22 @@ public:
     /** Getters: get the value at the given column. If the column is not
       * of the requested type, the result is undefined. */
     int get_int(size_t col) {
-        return (Integer)elements[col].val;
+        return ((Integer)elements[col]).val;
     }
 
     bool get_bool(size_t col) {
         //bool v = dynamic_cast<Bool *>(elements[col])->val;
-        return (Bool)elements[col].val;
+        return ((Bool)elements[col]).val;
     }
 
     float get_float(size_t col) {
         //float v = dynamic_cast<Float *>(elements[col])->val;
-        return (Float)elements[col].val;
+        return ((Float)elements[col]).val;
     }
 
     String *get_string(size_t col) {
         //String *v = (String *) elements[col];
-        return &(String)elements[col].val;
+        return &((String)elements[col]).val;
     }
 
     /** Number of fields in the row. */
