@@ -78,7 +78,7 @@ public:
 
     /** Returns the Bool at idx; undefined on invalid idx.*/
     bool *get(size_t idx) {
-        return vals_.at(idx)->val;
+        return &vals_.at(idx)->val;
     }
 
     /** Out of bound idx is undefined. */
@@ -132,7 +132,7 @@ public:
         StrBuff *s = new StrBuff();
         s->c("B}");
 
-        for (int i = 0; i < this->size_; i++) {
+        for (int i = 0; i < this->vals_.size; i++) {
             char str[256] = ""; /* In fact not necessary as snprintf() adds the 0-terminator. */
             snprintf(str, sizeof str, "%d}", this->vals_.at(i)->val);
             s->c(str);
