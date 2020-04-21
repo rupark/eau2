@@ -44,7 +44,7 @@ public:
                 delete vals_[i];
             }
         }
-        delete vals_;
+        delete vals_[];
     }
 
     StringColumn(int n, ...) {
