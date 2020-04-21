@@ -48,14 +48,14 @@ int main(int argc, char *argv[]) {
 
     NetworkIP *network = initialize();
     assert(arg.num_nodes != 0 && "cannot have empty cloud");
-    try {
+//    try {
         Application *app = pick(network->index(), *network);
         cout << "CHOSEN APP: " << arg.app << endl;
         app->run_();
         cout << "Finished Running App" << endl;
-    } catch (std::exception const &e) {
-        cout << "error: " << e.what() << endl;
-    }
+//    } catch (std::exception const &e) {
+//        cout << "error: " << e.what() << endl;
+//    }
     //delete network;
 }
 
