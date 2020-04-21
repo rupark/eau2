@@ -53,7 +53,7 @@ public:
         cout << "7" << endl;
         delete pSet;
         cout << "8" << endl;
-        delete kv;
+        //delete kv;
         //delete net;
     }
 
