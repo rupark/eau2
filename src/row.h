@@ -130,11 +130,11 @@ public:
 
     /** Type of the field at the given position. An idx >= width is  undefined. */
     char col_type(size_t idx) {
-        if (dynamic_cast<Integer &>(this->elements[idx])) {
+        if (&dynamic_cast<Integer &>(this->elements[idx])) {
             return 'I';
-        } else if (dynamic_cast<Bool &>(this->elements[idx])) {
+        } else if (&dynamic_cast<Bool &>(this->elements[idx])) {
             return 'B';
-        } else if (dynamic_cast<Float &>(this->elements[idx])) {
+        } else if (&dynamic_cast<Float &>(this->elements[idx])) {
             return 'F';
         } else {
             return 'S';
