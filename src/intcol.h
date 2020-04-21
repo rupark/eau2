@@ -98,7 +98,9 @@ public:
      * Adds the given int to this if it is a IntColumn
      */
     virtual void push_back(int val) {
-        vals_.push_back(*new Integer(val));
+        Integer* i = new Integer(val);
+        vals_.push_back(*i);
+        delete i;
     }
 
     /**
