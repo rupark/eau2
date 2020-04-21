@@ -381,7 +381,7 @@ public:
         if (_typeGuesses != nullptr) {
             delete[] _typeGuesses;
         }
-        delete parsed_df;
+        //delete parsed_df;
     }
 
     /**
