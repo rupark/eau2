@@ -22,9 +22,9 @@ public:
     Args() {}
 
     ~Args() {
-        delete[] file;
-        delete[] master_ip;
-        delete[] app;
+//        delete[] file;
+//        delete[] master_ip;
+//        delete[] app;
     }
 
     void parse(int argc, char **argv) {
