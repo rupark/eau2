@@ -45,6 +45,8 @@ public:
         delete commits;
         delete uSet;
         delete pSet;
+        delete kv;
+        delete net;
     }
 
     /** Compute DEGREES of Linus.  */
@@ -202,7 +204,7 @@ public:
 //        }
 //        cout << "\n\n\n" << endl;
 
-        //delete newUsers;
+        delete newUsers;
         ProjectsTagger* ptagger = new ProjectsTagger(delta, *pSet, projects);
 //        cout << "ptagger" << endl;
 //
@@ -328,7 +330,7 @@ public:
                 cout << " elements from node " << i << endl;
                 SetUpdater* upd = new SetUpdater(set);
                 delta->map(upd);
-                //delete delta;
+                delete delta;
             }
             cout << "    storing " << set.size() << " merged elements" << endl;
             SetWriter* writer = new SetWriter(set);
@@ -339,7 +341,7 @@ public:
             h->c("-0");
             Key* k = new Key(h->get());
 //            cout << "k name ------- " << k->name->c_str() << endl;
-            //delete DataFrame::fromVisitor(&k, &kv, "I", writer);
+            delete DataFrame::fromVisitor(&k, &kv, "I", writer);
 //            cout << "calling fromVisitor" << endl;
 
 //            cout << "\n\n\n" << endl;
@@ -366,15 +368,16 @@ public:
             cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter* writer = new SetWriter(set);
             Key* k = new Key(StrBuff(name).c(stage).c("-").c(idx_).get());
-//            delete DataFrame::fromVisitor(&k, &kv, "I", writer);
-            DataFrame::fromVisitor(k, kv, "I", writer);
+           delete DataFrame::fromVisitor(&k, &kv, "I", writer);
+            //DataFrame::fromVisitor(k, kv, "I", writer);
             Key mK(StrBuff(name).c(stage).c("-0").get());
             DataFrame* merged = dynamic_cast<DataFrame*>(kv->get(mK));
             cout << "    receiving " << merged->get_num_rows() << " merged elements" << endl;
             SetUpdater* upd = new SetUpdater(set);
             merged->map(upd);
+            delete merged;
             return nullptr;
-            //delete merged;
+
         }
     }
 }; // Linus

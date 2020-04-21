@@ -53,6 +53,7 @@ int main(int argc, char *argv[]) {
         cout << "CHOSEN APP: " << arg.app << endl;
         app->run_();
         cout << "Finished Running App" << endl;
+        delete app;
 //    } catch (std::exception const &e) {
 //        cout << "error: " << e.what() << endl;
 //    }
