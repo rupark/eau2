@@ -391,7 +391,8 @@ public:
         }
         cout << "done visiting" << endl;
 
-        Key* k = key;
+        Key* k;
+        *k = key;
         kv->put(k, df);
         return df;
     }
