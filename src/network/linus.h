@@ -38,7 +38,7 @@ public:
     /** Compute DEGREES of Linus.  */
     void run_() override {
         readInput();
-        cout << "READING INPUT" << e.what() << endl;
+        cout << "READING INPUT" << endl;
 
         for (size_t i = 0; i < DEGREES; i++) step(i);
     }
@@ -69,7 +69,7 @@ public:
         cout << "schema guessed" << endl;
         try {
             parser->parseFile();
-        } catch (std::exception) {
+        } catch (const std::exception& e) {
             cout << "PARSE FILE: " << e.what() << endl;
         }
 
