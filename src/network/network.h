@@ -38,6 +38,7 @@ public:
     sockaddr_in ip_;
 
     ~NetworkIP() {
+        cout << "in network dex" << endl;
         //delete[] nodes_;
         //close(sock_);
     }
