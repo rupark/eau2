@@ -94,12 +94,12 @@ public:
     /** Returns the string at idx; undefined on invalid idx.*/
     String *get(size_t idx) {
 
-        return vals_.at(idx);
+        return &vals_.at(idx);
     }
 
     /** Out of bound idx is undefined. */
     void set(size_t idx, String *val) {
-        vals_.at(idx) = val;
+        vals_.at(idx) = *val;
     }
 
     /**
