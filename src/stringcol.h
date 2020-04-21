@@ -29,7 +29,7 @@ using namespace std;
  */
 class StringColumn : public Column {
 public:
-    vector<String> vals_;
+    vector<String*> vals_;
 
     StringColumn() {
     }
@@ -41,6 +41,9 @@ public:
 //            }
 //        }
 //        delete[] vals_;
+        for (int i = 0; i < vals_.size(); i++) {
+            delete vals_[i];
+        }
     }
 
 //    StringColumn(int n, ...) {
@@ -56,8 +59,7 @@ public:
     * Append missing bool is default 0.
     */
     void appendMissing() {
-        const char* c = "";
-        this->vals_.push_back(*new String(c));
+        this->vals_.push_back(new String(""));
     }
 
     /**
@@ -95,12 +97,12 @@ public:
     /** Returns the string at idx; undefined on invalid idx.*/
     String *get(size_t idx) {
 
-        return &vals_.at(idx);
+        return vals_.at(idx);
     }
 
     /** Out of bound idx is undefined. */
     void set(size_t idx, String *val) {
-        vals_.at(idx) = *val;
+        vals_.at(idx) = val;
     }
 
     /**
@@ -135,7 +137,7 @@ public:
      * Adds the given String to this if it is a StringColumn
      */
     virtual void push_back(String *val) {
-        vals_.push_back(*val);
+        vals_.push_back(val);
     }
 
     /** Return the type of this column as a char: 'S', 'B', 'I' and 'F'. */
@@ -150,7 +152,7 @@ public:
 
         for (int i = 0; i < this->vals_.size(); i++) {
             char str[256] = ""; /* In fact not necessary as snprintf() adds the 0-terminator. */
-            snprintf(str, sizeof str, "%s}", this->vals_.at(i).cstr_);
+            snprintf(str, sizeof str, "%s}", this->vals_.at(i)->cstr_);
             s->c(str);
         }
 
