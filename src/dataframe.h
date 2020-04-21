@@ -45,6 +45,7 @@ public:
 
     //TODO
     ~DataFrame() {
+        cout << "in df destructor" << endl;
         for (int i = 0; i < this->schema->get_num_cols(); i++) {
             delete columns[i];
         }
@@ -388,6 +389,7 @@ public:
             w->visit(*r);
             df->add_row(*r);
         }
+        cout << "done visiting" << endl;
 
         kv->put(key.clone(), df);
         return df;
