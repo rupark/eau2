@@ -78,7 +78,7 @@ public:
 
     /** Returns the Bool at idx; undefined on invalid idx.*/
     bool *get(size_t idx) {
-        return vals_.at(idx);
+        return vals_.at(idx)->val;
     }
 
     /** Out of bound idx is undefined. */
@@ -104,7 +104,7 @@ public:
      * Adds the given bool to this if it is a BoolColumn
      */
     virtual void push_back(bool val) {
-        vals_.push_back(val);
+        vals_.push_back(new Bool(val));
     }
 
     /**
