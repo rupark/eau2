@@ -13,6 +13,8 @@ class FloatColumn;
 #include "string.h"
 #include "bool.h"
 #include <iostream>
+#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -21,31 +23,26 @@ using namespace std;
  */
 class BoolColumn : public Column {
 public:
-    Bool **vals_;
-    size_t size_;
-    size_t capacity_;
+    vector<Bool *> vals_;
 
     BoolColumn() {
-        size_ = 0;
-        capacity_ = 200 * 1000 * 1000;
-        vals_ = new Bool *[capacity_];
     }
 
     ~BoolColumn() {
-        for (int i = 0; i < size_; i++) {
-            if (vals_[i] != nullptr) {
-                delete vals_[i];
-            }
-        }
-        delete[] vals_;
-    };
+//        for (int i = 0; i < size_; i++) {
+//            if (vals_[i] != nullptr) {
+//                delete vals_[i];
+//            }
+//        }
+//        delete[] vals_;
+    }
 
     /**
      * Append missing bool is default 0.
      */
-     void appendMissing() {
-         push_back(false);
-     }
+    void appendMissing() {
+        vals_.push_back(false);
+    }
 
     /**
      * Returns this if it is a StringColumn
@@ -81,28 +78,19 @@ public:
 
     /** Returns the Bool at idx; undefined on invalid idx.*/
     bool *get(size_t idx) {
-        if (idx >= 0 && idx <= this->size()) {
-            return &vals_[idx]->val;
-        } else {
-            exit(1);
-        }
+        return vals_.at(idx);
     }
 
     /** Out of bound idx is undefined. */
     void set(size_t idx, bool *val) {
-        if (idx >= 0 && idx <= this->size()) {
-            vals_[idx] = new Bool(*val);
-            size_++;
-        } else {
-            exit(1);
-        }
+        vals_.at(idx) = new Bool(*val);
     }
 
     /**
      * Returns the size of this BoolColumn
      */
     size_t size() {
-        return size_;
+        return vals_.size();
     }
 
     /**
@@ -116,8 +104,7 @@ public:
      * Adds the given bool to this if it is a BoolColumn
      */
     virtual void push_back(bool val) {
-        vals_[size_] = new Bool(val);
-        size_++;
+        vals_.push_back(val);
     }
 
     /**
@@ -131,13 +118,8 @@ public:
      * Adds the given String to this if it is a StringColumn
      */
     virtual void push_back(String *val) {
-        // if passing nullptr from <MISSING> in sor then save to array as nullptr calls this method.
-        if (val == nullptr) {
-            this->vals_[size_] = nullptr;
-            size_++;
-        } else {
-            exit(1);
-        }
+        exit(1);
+
     }
 
     /** Return the type of this column as a char: 'S', 'B', 'I' and 'F'. */
@@ -152,7 +134,7 @@ public:
 
         for (int i = 0; i < this->size_; i++) {
             char str[256] = ""; /* In fact not necessary as snprintf() adds the 0-terminator. */
-            snprintf(str, sizeof str, "%d}", this->vals_[i]->val);
+            snprintf(str, sizeof str, "%d}", this->vals_.at(i)->val);
             s->c(str);
         }
 

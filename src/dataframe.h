@@ -26,6 +26,7 @@
 #include "reader.h"
 #include "writer.h"
 #include "reader.h"
+#include "array.h"
 
 using namespace std;
 
@@ -41,6 +42,7 @@ public:
         int nrow = df.get_num_rows();
         schema = df.get_schema();
         columns = df.columns;
+
     }
 
     //TODO
