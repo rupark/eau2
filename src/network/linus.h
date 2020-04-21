@@ -36,6 +36,7 @@ public:
     Linus(size_t idx, NetworkIP& net): Application(idx, net) {}
 
     ~Linus() {
+        cout << "in linus des" << endl;
         delete[] PROJ;
         delete[] USER;
         delete[] COMM;
