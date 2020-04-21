@@ -73,7 +73,7 @@ public:
     }
 
     Key* clone() {
-        Key* key = this;
+        Key* key = new Key(this->name);
         return key;
     }
 

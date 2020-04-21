@@ -391,7 +391,8 @@ public:
         }
         cout << "done visiting" << endl;
 
-        kv->put(key.clone(), df);
+        Key* k = key;
+        kv->put(k, df);
         return df;
     }
 
