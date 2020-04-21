@@ -22,7 +22,7 @@ public:
     }
 
     ~Application() {
-        //delete kv;
+        delete kv;
     }
 
     Application(size_t idx) {

@@ -38,7 +38,7 @@ public:
     sockaddr_in ip_;
 
     ~NetworkIP() {
-        delete[] nodes_;
+        //delete[] nodes_;
         //close(sock_);
     }
 

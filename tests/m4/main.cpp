@@ -29,7 +29,7 @@ NetworkIP *initialize() {
         client_adr->c("127.0.0.");
         client_adr->c(arg.index + 4);
         res->client_init(arg.index, arg.port, arg.master_ip, arg.master_port, client_adr->get()->c_str());
-        delete client_adr;
+       // delete client_adr;
     }
     return res;
 }
