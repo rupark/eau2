@@ -38,12 +38,12 @@ public:
     ~Linus() {
         delete[] PROJ;
         delete[] USER;
-        delete[] COMM;
-        delete projects;
-        delete users;
-        delete commits;
-        delete uSet;
-        delete pSet;
+//        delete[] COMM;
+//        delete projects;
+//        delete users;
+//        delete commits;
+//        delete uSet;
+//        delete pSet;
     }
 
     /** Compute DEGREES of Linus.  */
