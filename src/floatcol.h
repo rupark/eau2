@@ -41,7 +41,7 @@ public:
     * Append missing bool is default 0.
     */
     void appendMissing() {
-        vals_.push_back((float)0);
+        vals_.push_back(new Float(0));
     }
 
     /**
@@ -78,7 +78,7 @@ public:
 
     /** Returns the float at idx; undefined on invalid idx.*/
     float *get(size_t idx) {
-        return vals_.at(idx)->val;
+        return &vals_.at(idx)->val;
     }
 
     /** Out of bound idx is undefined. */
@@ -112,7 +112,7 @@ public:
      * Adds the given float to this if it is a FloatColumn
      */
     virtual void push_back(float val) {
-        vals_.push_back(new Float(val));
+        vals_.push_back(&new Float(val));
     }
 
     /**
