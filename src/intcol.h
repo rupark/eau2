@@ -39,7 +39,7 @@ public:
                 delete vals_[i];
             }
         }
-        delete vals_[];
+        delete[] vals_;
     }
 
 
