@@ -385,6 +385,8 @@ public:
         return df;
     }
 
+    /** Idea: have put take in non-pointers
+
     /**
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
@@ -400,8 +402,9 @@ public:
         }
         delete s;
         cout << "done visiting" << endl;
-        kv->put(key, df);
-        return df;
+        kv->put(*key, *df);
+        delete df;
+        //return df;
     }
 
     /** Returns a section of this DataFrame as a new DataFrame **/
