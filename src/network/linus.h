@@ -258,31 +258,30 @@ public:
 
             /** node 0 send out newUsers to nodes in chunks **/
             // Split into chunks and send iteratively to nodes
-            int selectedNode = 0;
+            int round2 = 0;
 
             cout << "\n\n\n\n\n\n\n\num chunks: " << num_chunks << endl;
             for (size_t j = 0; j < num_chunks; j++) {
                 DataFrame *cur_chunk = newUsers->chunk(j);
                 cout << cur_chunk->get_num_rows() << endl;
                 // if server's turn, keep chunks of DataFrame.
-                if (selectedNode == 0) {
+                if (round2 == 0) {
                     // append chunks as received
                     cout << "append" << endl;
                     chunkSoFar->append_chunk(cur_chunk);
-                    selectedNode = selectedNode+ 1;
-                    if (selectedNode == arg.num_nodes) {
-                        selectedNode = 0;
+                    round2++;
+                    if (round2 == arg.num_nodes) {
+                        round2 = 0;
                     }
-                    break;
                 } else {
+                    cout << "in client" << endl;
                     // Sending to Clients
-                    Status *chunkMsg = new Status(0, selectedNode, cur_chunk);
+                    Status *chunkMsg = new Status(0, round2, cur_chunk);
                     this->net.send_m(chunkMsg);
-                    selectedNode++;
-                    if (selectedNode == arg.num_nodes) {
-                        selectedNode = 0;
+                    round2++;
+                    if (round2 == arg.num_nodes) {
+                        round2 = 0;
                     }
-                    break;
                 }
                 // increment selected node circularly between nodes//break;
                 // selectedNode = ++selectedNode == arg.num_nodes ? selectedNode = 0 : selectedNode++;
