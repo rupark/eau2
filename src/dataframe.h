@@ -511,7 +511,7 @@ public:
     /** Creates a set of the same size as the dataframe. */
     Set(DataFrame *df) {
         vals_ = new bool[df->get_num_rows()];
-        size_ = sz;
+        size_ = df->get_num_rows();
         cout << "creating set" << endl;
         for (size_t i = 0; i < size_; i++) {
             vals_[i] = false;
