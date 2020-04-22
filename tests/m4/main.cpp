@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
         app->run_();
         cout << "Finished Running App" << endl;
         delete app;
-        delete network;
+        //delete network;
 //    } catch (std::exception const &e) {
 //        cout << "error: " << e.what() << endl;
 //    }
