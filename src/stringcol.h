@@ -40,7 +40,9 @@ public:
 
     ~StringColumn() {
         for (int i = 0; i < size(); i++) {
-            delete vals_[i];
+            if (vals_[i] != nullptr) {
+                delete vals_[i];
+            }
         }
         delete[] vals_;
     }
