@@ -406,14 +406,15 @@ public:
         }
 
         switch (column1->get_type()) {
-            case 'S':
+            case 'S': {
                 slice.trim(STRING_QUOTE);
                 assert(slice.getLength() <= MAX_STRING);
 //                dynamic_cast<Provider::StringColumn *>(column)->append(slice.toCString());
-                char* toCString = slice.toCString();
-                dynamic_cast<StringColumn*>(column1)->push_back(new String(toCString));
+                char *toCString = slice.toCString();
+                dynamic_cast<StringColumn *>(column1)->push_back(new String(toCString));
                 delete toCString;
                 break;
+            }
             case 'I':
 //                dynamic_cast<Provider::IntegerColumn *>(column)->append(slice.toInt());
                 dynamic_cast<IntColumn*>(column1)->push_back(slice.toInt());
@@ -453,14 +454,15 @@ public:
         }
 
         switch (column1->get_type()) {
-            case 'S':
+            case 'S': {
                 slice.trim(STRING_QUOTE);
                 assert(slice.getLength() <= MAX_STRING);
 //                dynamic_cast<Provider::StringColumn *>(column)->append(slice.toCString());
-                char* toCString = slice.toCString();
-                dynamic_cast<StringColumn*>(column1)->push_back(new String(toCString));
+                char *toCString = slice.toCString();
+                dynamic_cast<StringColumn *>(column1)->push_back(new String(toCString));
                 delete toCString;
                 break;
+            }
             case 'I':
 //                dynamic_cast<Provider::IntegerColumn *>(column)->append(slice.toInt());
                 dynamic_cast<IntColumn*>(column1)->push_back(slice.toInt());
