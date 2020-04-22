@@ -258,10 +258,12 @@ public:
                     // append chunks as received
                     cout << "append" << endl;
                     chunkSoFar->append_chunk(cur_chunk);
+                    selectedNode++;
                 } else {
                     // Sending to Clients
                     Status *chunkMsg = new Status(0, selectedNode, cur_chunk);
                     this->net.send_m(chunkMsg);
+                    selectedNode++;
                 }
                 // increment selected node circularly between nodes
                 if (selectedNode == arg.num_nodes) {
