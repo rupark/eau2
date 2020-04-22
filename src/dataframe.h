@@ -397,7 +397,7 @@ public:
         while (!w->done()) {
             Row *r = new Row(s);
             w->visit(*r);
-            df.add_row(*r);
+            df->add_row(*r);
             delete r;
         }
         delete s;
