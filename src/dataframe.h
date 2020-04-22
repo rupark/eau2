@@ -44,7 +44,7 @@ public:
     }
 
     ~DataFrame() {
-        cout << "in df destructor" << endl;
+        //cout << "in df destructor" << endl;
         for (int i = 0; i < this->schema->get_num_cols(); i++) {
             if (columns[i] != nullptr) {
             delete columns[i];
