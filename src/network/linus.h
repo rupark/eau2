@@ -544,7 +544,7 @@ public:
 //            }
 //            cout << "\n\n\n" << endl;
 
-            DataFrame::fromVisitor(k, kv, "I", writer);
+            fromVisitor(k, kv, "I", writer);
 //            cout << "FROM VISITOR FINISHED" << endl;
 //
 //            cout << "\n\n\n" << endl;
@@ -563,7 +563,7 @@ public:
             SetWriter *writer = new SetWriter(set);
             Key k(StrBuff(name).c(stage).c("-").c(idx_).get());
 //            delete DataFrame::fromVisitor(&k, &kv, "I", writer);
-            DataFrame *toSend = DataFrame::fromVisitor(k, kv, "I", writer);
+            DataFrame *toSend = fromVisitor(k, kv, "I", writer);
             Status *nodeToServer = new Status(idx_, 0, toSend);
             this->net.send_m(nodeToServer);
 
