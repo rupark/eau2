@@ -1,6 +1,7 @@
 //
 // Created by Kate Rupar on 4/9/20.
 #pragma once
+
 #include "application.h"
 #include "../dataframe.h"
 #include "../key.h"
@@ -10,6 +11,7 @@
 #include "network.h"
 #include <iostream>
 #include "../parser.h"
+
 using namespace std;
 
 /*************************************************************************
@@ -23,17 +25,17 @@ public:
     int LINUS = 4967;   // The uid of Linus (offset in the user df)
     bool subset = true;
 
-    const char* PROJ = (subset ? "datasets/projects_subset.ltgt" : "datasets/projects.ltgt");
-    const char* USER = (subset ? "datasets/users_subset.ltgt" : "datasets/users.ltgt");
-    const char* COMM = (subset ? "datasets/commits_subset.ltgt" : "datasets/commits.ltgt");
+    const char *PROJ = (subset ? "datasets/projects_subset.ltgt" : "datasets/projects.ltgt");
+    const char *USER = (subset ? "datasets/users_subset.ltgt" : "datasets/users.ltgt");
+    const char *COMM = (subset ? "datasets/commits_subset.ltgt" : "datasets/commits.ltgt");
 
-    DataFrame* projects; //  pid x project name
-    DataFrame* users;  // uid x user name
-    DataFrame* commits;  // pid x uid x uid
-    Set* uSet; // Linus' collaborators
-    Set* pSet; // projects of collaborators
+    DataFrame *projects; //  pid x project name
+    DataFrame *users;  // uid x user name
+    DataFrame *commits;  // pid x uid x uid
+    Set *uSet; // Linus' collaborators
+    Set *pSet; // projects of collaborators
 
-    Linus(size_t idx, NetworkIP& net): Application(idx, net) {}
+    Linus(size_t idx, NetworkIP &net) : Application(idx, net) {}
 
     ~Linus() {
         cout << "in linus des" << endl;
@@ -60,18 +62,18 @@ public:
         for (size_t i = 0; i < DEGREES; i++) step(i);
     }
 
-    size_t get_file_size(FILE* p_file) // path to file
+    size_t get_file_size(FILE *p_file) // path to file
     {
-        fseek(p_file,0,SEEK_END);
+        fseek(p_file, 0, SEEK_END);
         size_t size = ftell(p_file);
         fclose(p_file);
         return size;
     }
 
-    DataFrame* readDataFrameFromFile(const char* filep) {
+    DataFrame *readDataFrameFromFile(const char *filep) {
         cout << "in from file: " << filep << endl;
-        FILE* file = fopen(filep, "rb");
-        FILE* file_dup = fopen(filep, "rb");
+        FILE *file = fopen(filep, "rb");
+        FILE *file_dup = fopen(filep, "rb");
         cout << "fopen file null?: " << (file == nullptr) << endl;
         size_t file_size = get_file_size(file_dup);
         cout << "size of file calced " << file_size << endl;
@@ -79,25 +81,25 @@ public:
 
 
         ///////////////////////////////////////
-        SorParser* parser = new SorParser(file, (size_t)0, (size_t)file_size, (size_t)file_size);
+        SorParser *parser = new SorParser(file, (size_t) 0, (size_t) file_size, (size_t) file_size);
         cout << "parser created" << endl;
         parser->guessSchema();
         cout << "schema guessed" << endl;
         try {
             parser->parseFile();
-        } catch (const std::exception& e) {
+        } catch (const std::exception &e) {
             cout << "PARSE FILE: " << e.what() << endl;
         }
 
         ///////////////////////////////////////
         fclose(file);
-      //  fclose(file_dup);
+        //  fclose(file_dup);
 
-       // delete[] file;
+        // delete[] file;
         //delete[] file_dup;
         cout << "file parsed" << endl;
 //        DataFrame* d = new DataFrame(parser->getColumnSet(), parser->_num_columns);
-        DataFrame* d = parser->parsed_df;
+        DataFrame *d = parser->parsed_df;
         cout << "data frame created of SIZE " << d->get_num_rows() << endl;
         delete parser;
 
@@ -111,9 +113,9 @@ public:
      *  'tagged' users. At this point the dataframe consists of only
      *  Linus. **/
     void readInput() {
-        Key* pK = new Key("projs");
-        Key* uK = new Key("usrs");
-        Key* cK = new Key("comts");
+        Key *pK = new Key("projs");
+        Key *uK = new Key("usrs");
+        Key *cK = new Key("comts");
         if (this_node() == 0) {
             // We never put these dfs in the store???
             cout << "Reading..." << endl;
@@ -128,14 +130,14 @@ public:
             cout << "    " << users->get_num_rows() << " users" << endl;
             // This dataframe contains the id of Linus.
             //delete
-            Key* key = new Key("users-0-0");
+            Key *key = new Key("users-0-0");
             fromScalarInt(key, kv, LINUS);
         } else {
             projects = kv->get(pK);
             users = kv->get(uK);
             commits = kv->get(cK);
         }
-        cout << "making sets" <<endl;
+        cout << "making sets" << endl;
         uSet = new Set(users);
         cout << "made a set" << endl;
         pSet = new Set(projects);
@@ -198,7 +200,6 @@ public:
     }
 
 
-
     /** Performs a step of the linus calculation. It operates over the three
      *  datafrrames (projects, users, commits), the sets of tagged users and
      *  projects, and the users added in the previous round. */
@@ -214,11 +215,11 @@ public:
 //        cout << "kv->keys NULL?" << (kv->keys == nullptr) << endl;
 //        cout << "kv->keys[0] NULL?" << (kv->keys[0] == nullptr) << endl;
 //        cout << "kv->keys[1] NULL?" << (kv->keys[1] == nullptr) << endl;
-        StrBuff* s = new StrBuff();
+        StrBuff *s = new StrBuff();
         s->c("users-");
         s->c(stage);
         s->c("-0");
-        Key* uK = new Key(s->get());
+        Key *uK = new Key(s->get());
         delete s;
 //        cout << "made key: " << uK->name->c_str() << endl;
         // A df with all the users added on the previous round
@@ -227,8 +228,7 @@ public:
 //            cout << " keys[1] = " << kv->keys[1]->name->c_str() << endl;
 //        }
 //        cout << "creating newUsers" << endl;
-        DataFrame* newUsers = kv->get(*uK);
-        delete uK;
+        DataFrame *newUsers = kv->get(*uK);
 //        cout << "GOT new users dataframe from KV key: " << uK->c_str() << endl;
 //        cout << "\n\n\n" << endl;
 //        for (size_t m = 0; m < kv->size; m++) {
@@ -248,7 +248,7 @@ public:
 //        cout << "\n\n\n" << endl;
 
 
-        SetUpdater* upd = new SetUpdater(delta);
+        SetUpdater *upd = new SetUpdater(delta);
 //        cout << "made upd" <<endl;
 
 //        cout << "\n\n\n" << endl;
@@ -268,7 +268,7 @@ public:
 //        cout << "\n\n\n" << endl;
 
         delete newUsers;
-        ProjectsTagger* ptagger = new ProjectsTagger(delta, *pSet, projects);
+        ProjectsTagger *ptagger = new ProjectsTagger(delta, *pSet, projects);
 //        cout << "ptagger" << endl;
 //
 //        cout << "\n\n\n" << endl;
@@ -278,7 +278,7 @@ public:
 //        cout << "\n\n\n" << endl;
 
         commits->map(ptagger); // marking all projects touched by delta
-        cout << "mapped" <<endl;
+        cout << "mapped" << endl;
 //        cout << "\n\n\n" << endl;
 //        for (size_t m = 0; m < kv->size; m++) {
 //            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
@@ -313,7 +313,7 @@ public:
 
 
 //        cout << "utagger" << endl;
-        UsersTagger* utagger = new UsersTagger(ptagger->newProjects, *uSet, users);
+        UsersTagger *utagger = new UsersTagger(ptagger->newProjects, *uSet, users);
         delete ptagger;
 
 
@@ -382,36 +382,34 @@ public:
      * 'users' or 'projects', stage is the degree of separation being
      * computed.
      */
-    KVStore* merge(Set& set, char const* name, int stage) {
+    KVStore *merge(Set &set, char const *name, int stage) {
 //        cout << "in merge" << endl;
         if (this_node() == 0) {
 //            cout << "found node 0" << endl;
             for (size_t i = 1; i < arg.num_nodes; ++i) {
-                StrBuff* s = new StrBuff();
+                StrBuff *s = new StrBuff();
                 s->c(name);
                 s->c(stage);
                 s->c("-");
                 s->c(i);
-                Key* nK = new Key(s->get());
-                DataFrame* delta = kv->get(*nK);
-                delete nK;
+                Key *nK = new Key(s->get());
+                DataFrame *delta = kv->get(*nK);
                 cout << "    received delta of " << delta->get_num_rows() << endl;
                 cout << " elements from node " << i << endl;
-                SetUpdater* upd = new SetUpdater(set);
+                SetUpdater *upd = new SetUpdater(set);
                 delta->map(upd);
                 delete delta;
             }
             cout << "    storing " << set.size() << " merged elements" << endl;
-            SetWriter* writer = new SetWriter(set);
+            SetWriter *writer = new SetWriter(set);
 //            cout << "making key" << endl;
-            StrBuff* h = new StrBuff();
+            StrBuff *h = new StrBuff();
             h->c(name);
             h->c(stage);
             h->c("-0");
-            Key* k = new Key(h->get());
+            Key *k = new Key(h->get());
 //            cout << "k name ------- " << k->name->c_str() << endl;
             fromVisitor(k, kv, "I", writer);
-            delete k;
 //            cout << "calling fromVisitor" << endl;
 
 //            cout << "\n\n\n" << endl;
@@ -430,20 +428,20 @@ public:
 //            cout << "\n\n\n" << endl;
             return kv;
 
- //           cout << "kv->keys[1] NULL?" << (kv->keys[1]  == nullptr) << endl;
+            //           cout << "kv->keys[1] NULL?" << (kv->keys[1]  == nullptr) << endl;
 //            if (kv->keys[1]  != nullptr) {
 //                cout << "kv->keys[1] NULL?" << kv->keys[1]->name->c_str() << endl;
 //            }
         } else {
             cout << "    sending " << set.size() << " elements to master node" << endl;
-            SetWriter* writer = new SetWriter(set);
-            Key* k = new Key(StrBuff(name).c(stage).c("-").c(idx_).get());
+            SetWriter *writer = new SetWriter(set);
+            Key *k = new Key(StrBuff(name).c(stage).c("-").c(idx_).get());
             fromVisitor(k, kv, "I", writer);
             //DataFrame::fromVisitor(k, kv, "I", writer);
             Key mK(StrBuff(name).c(stage).c("-0").get());
-            DataFrame* merged = dynamic_cast<DataFrame*>(kv->get(mK));
+            DataFrame *merged = dynamic_cast<DataFrame *>(kv->get(mK));
             cout << "    receiving " << merged->get_num_rows() << " merged elements" << endl;
-            SetUpdater* upd = new SetUpdater(set);
+            SetUpdater *upd = new SetUpdater(set);
             merged->map(upd);
             delete merged;
             return nullptr;
