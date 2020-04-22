@@ -93,7 +93,7 @@ public:
         fclose(file);
       //  fclose(file_dup);
 
-        delete[] file;
+       // delete[] file;
         //delete[] file_dup;
         cout << "file parsed" << endl;
 //        DataFrame* d = new DataFrame(parser->getColumnSet(), parser->_num_columns);
