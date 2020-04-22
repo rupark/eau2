@@ -9,18 +9,18 @@
 
 #pragma once
 
-#include "float.h"
-#include "bool.h"
-#include "integer.h"
-#include "intcol.h"
-#include "boolcol.h"
-#include "floatcol.h"
-#include "stringcol.h"
-#include "object.h"
-#include "string.h"
-#include "column.h"
+#include "../wrappers/float.h"
+#include "../wrappers/bool.h"
+#include "../wrappers/integer.h"
+#include "../column/intcol.h"
+#include "../column/boolcol.h"
+#include "../column/floatcol.h"
+#include "../column/stringcol.h"
+#include "../object.h"
+#include "../wrappers/string.h"
+#include "../column/column.h"
 #include "schema.h"
-#include "fielder.h"
+#include "../fielder.h"
 #include "iostream"
 
 class Row : public Object {

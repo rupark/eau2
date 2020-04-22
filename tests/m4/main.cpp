@@ -5,13 +5,13 @@
 #include "../../src/args.h"
 #include "../../src/network/network.h"
 #include "../../src/network/thread.h"
-#include "../../src/network/application.h"
-#include "../../src/network/wordcount.h"
+#include "../../src/applications/application.h"
+#include "../../src/applications/wordcount.h"
 #include <iostream>
 #include <stdio.h>
-#include "../../src/parser.h"
-#include "../../src/dataframe.h"
-#include "../../src/network/linus.h"
+#include "../../src/CS4500NE/parser.h"
+#include "../../src/dataframe/dataframe.h"
+#include "../../src/applications/linus.h"
 #include <string.h>
 
 using namespace std;

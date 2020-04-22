@@ -3,8 +3,8 @@
 //
 #pragma once
 
-#include "../kvstore.h"
-#include "network.h"
+#include "../key/kvstore.h"
+#include "../network/network.h"
 
 /**
  * The start of our Application class which will be started on each node of the system

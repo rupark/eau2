@@ -10,9 +10,9 @@ class FloatColumn;
 #include "boolcol.h"
 #include "floatcol.h"
 #include "stringcol.h"
-#include "string.h"
+#include "../wrappers/string.h"
 #include "iostream"
-#include "integer.h"
+#include "../wrappers/integer.h"
 #include <iostream>
 
 using namespace std;

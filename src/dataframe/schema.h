@@ -8,11 +8,11 @@
 
 #pragma once
 
-#include "intcol.h"
-#include "boolcol.h"
-#include "floatcol.h"
-#include "stringcol.h"
-#include "string.h"
+#include "../column/intcol.h"
+#include "../column/boolcol.h"
+#include "../column/floatcol.h"
+#include "../column/stringcol.h"
+#include "../wrappers/string.h"
 #include <string>
 
 class Schema : public Object {

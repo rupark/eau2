@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include "object.h"
-#include "string.h"
-#include "args.h"
+#include "../object.h"
+#include "../wrappers/string.h"
+#include "../args.h"
 
 /**
  * Represents a String, home Node association

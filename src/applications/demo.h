@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../key.h"
+#include "../key/key.h"
 #include "application.h"
-#include "../dataframe.h"
-#include "../kvstore.h"
+#include "../dataframe/dataframe.h"
+#include "../key/kvstore.h"
 
 
 /**

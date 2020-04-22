@@ -9,7 +9,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "serial.h"
-#include "../string.h"
+#include "../wrappers/string.h"
 #include <iostream>
 #include "../args.h"
 

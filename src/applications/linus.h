@@ -3,14 +3,14 @@
 #pragma once
 
 #include "application.h"
-#include "../dataframe.h"
-#include "../key.h"
+#include "../dataframe/dataframe.h"
+#include "../key/key.h"
 #include "../reader.h"
 #include "../SImap.h"
 #include "../writer.h"
-#include "network.h"
+#include "../network/network.h"
 #include <iostream>
-#include "../parser.h"
+#include "../CS4500NE/parser.h"
 
 using namespace std;
 

@@ -5,9 +5,9 @@
 #include <stdlib.h>
 
 #include "column_prov.h"
-#include "string.h"
-#include "schema.h"
-#include "dataframe.h"
+#include "../wrappers/string.h"
+#include "../dataframe/schema.h"
+#include "../dataframe/dataframe.h"
 
 /**
  *

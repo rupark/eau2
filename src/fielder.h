@@ -4,7 +4,7 @@
  */
 #pragma once
 
-#include "string.h"
+#include "wrappers/string.h"
 #include "object.h"
 
 /** Used for iterating over a DataFrame row */

@@ -9,22 +9,22 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "floatcol.h"
-#include "intcol.h"
-#include "boolcol.h"
-#include "stringcol.h"
-#include "column.h"
-#include "string.h"
-#include "fielder.h"
+#include "../column/floatcol.h"
+#include "../column/intcol.h"
+#include "../column/boolcol.h"
+#include "../column/stringcol.h"
+#include "../column/column.h"
+#include "../wrappers/string.h"
+#include "../fielder.h"
 #include "schema.h"
 #include "row.h"
-#include "rower.h"
+#include "../rower.h"
 #include <iostream>
 #include <thread>
-#include "reader.h"
-#include "writer.h"
-#include "reader.h"
-#include "array.h"
+#include "../reader.h"
+#include "../writer.h"
+#include "../reader.h"
+#include "../array.h"
 
 using namespace std;
 

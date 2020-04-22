@@ -3,7 +3,7 @@
 #include <cstring>
 #include <string>
 #include <cassert>
-#include "object.h"
+#include "../object.h"
 #include <iostream>
 
 using namespace std;

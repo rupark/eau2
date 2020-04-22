@@ -1,9 +1,3 @@
-/*************************************************************************
- * StringColumn::
- * Holds string pointers. The strings are external.  Nullptr is a valid
- * value.
- */
-
 class IntColumn;
 
 class BoolColumn;
@@ -12,54 +6,46 @@ class FloatColumn;
 
 #pragma once
 
-#include "column.h"
-#include <cstdarg>
-#include "string.h"
-#include "boolcol.h"
-#include "floatcol.h"
-#include "stringcol.h"
 #include "intcol.h"
+#include "boolcol.h"
+#include "stringcol.h"
+#include "../wrappers/string.h"
+#include "column.h"
+#include "../wrappers/float.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 /**
- * Represent a Int of Float SoR Type
+ * Represent a Column of Float
  */
-class StringColumn : public Column {
+class FloatColumn : public Column {
 public:
-    String **vals_;
+    Float **vals_;
     size_t size_;
     size_t capacity_;
 
-    StringColumn() {
+    FloatColumn() {
         size_ = 0;
         capacity_ = 200 * 1000 * 1000;
-        vals_ = new String *[capacity_];
+        vals_ = new Float *[capacity_];
     }
 
-    ~StringColumn() {
-        for (int i = 0; i < size(); i++) {
+    ~FloatColumn() {
+        for (int i = 0; i < size_; i++) {
             if (vals_[i] != nullptr) {
                 delete vals_[i];
             }
         }
-        delete[] vals_;
-    }
-
-    StringColumn(int n, ...) {
-        va_list args;
-        va_start(args, n);
-        for (size_t i = 0; i < n; i++) {
-            vals_[i] = new String(va_arg(args, char * ));
-        }
+        delete vals_;
     }
 
     /**
     * Append missing bool is default 0.
     */
     void appendMissing() {
-        this->push_back(new String(""));
+        push_back((float)0);
     }
 
     /**
@@ -67,14 +53,14 @@ public:
      * @return
      */
     StringColumn *as_string() {
-        return this;
+        return nullptr;
     }
 
     /**
      * Returns this if it is a IntColumn
      * @return
      */
-    virtual IntColumn *as_int() {
+    IntColumn *as_int() {
         return nullptr;
     }
 
@@ -82,7 +68,7 @@ public:
      * Returns this if it is a BoolColumn
      * @return
      */
-    virtual BoolColumn *as_bool() {
+    BoolColumn *as_bool() {
         return nullptr;
     }
 
@@ -90,20 +76,23 @@ public:
      * Returns this if it is a FloatColumn
      * @return
      */
-    virtual FloatColumn *as_float() {
-        return nullptr;
+    FloatColumn *as_float() {
+        return this;
     }
 
-    /** Returns the string at idx; undefined on invalid idx.*/
-    String *get(size_t idx) {
-
-        return vals_[idx];
+    /** Returns the float at idx; undefined on invalid idx.*/
+    float *get(size_t idx) {
+        if (idx >= 0 && idx <= this->size()) {
+            return &vals_[idx]->val;
+        } else {
+            exit(1);
+        }
     }
 
     /** Out of bound idx is undefined. */
-    void set(size_t idx, String *val) {
+    void set(size_t idx, float *val) {
         if (idx >= 0 && idx <= this->size()) {
-            vals_[idx] = val;
+            vals_[idx] = new Float(*val);
             size_++;
         } else {
             exit(1);
@@ -111,7 +100,7 @@ public:
     }
 
     /**
-     * Returns the size of this StringColumn
+     * Returns the size of this FloatColumn
      */
     size_t size() {
         return size_;
@@ -131,40 +120,45 @@ public:
         exit(1);
     }
 
+
     /**
      * Adds the given float to this if it is a FloatColumn
      */
     virtual void push_back(float val) {
-        exit(1);
+        vals_[size_] = new Float(val);
+        size_++;
     }
 
     /**
      * Adds the given String to this if it is a StringColumn
      */
     virtual void push_back(String *val) {
-        vals_[size_] = val;
-        size_++;
+        // if passing nullptr from <MISSING> in sor then save to array as nullptr calls this method.
+        if (val == nullptr) {
+            this->vals_[size_] = nullptr;
+            size_++;
+        } else {
+            exit(1);
+        }
     }
 
     /** Return the type of this column as a char: 'S', 'B', 'I' and 'F'. */
     virtual char get_type() {
-        return 'S';
+        return 'F';
     }
 
-    /** Returns the serialization of this StringColumn as a String */
+    /** Serializes this FloatColumn **/
     virtual String *serialize() {
         StrBuff *s = new StrBuff();
-        s->c("S}");
+        s->c("F}");
 
         for (int i = 0; i < this->size_; i++) {
             char str[256] = ""; /* In fact not necessary as snprintf() adds the 0-terminator. */
-            snprintf(str, sizeof str, "%s}", this->vals_[i]->c_str());
+            snprintf(str, sizeof str, "%f}", this->vals_[i]->val);
             s->c(str);
         }
 
         s->c("!");
-        String* st = s->get();
-        delete s;
-        return st;
+        return s->get();
     }
 };
