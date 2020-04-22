@@ -190,9 +190,9 @@ public:
             Row *r = new Row(s);
             w->visit(*r);
             df->add_row(*r);
-            delete r;
+            //delete r;
         }
-        delete s;
+        //delete s;
         cout << "done visiting" << endl;
         kv->put(key, df);
         return df;
