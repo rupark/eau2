@@ -12,7 +12,6 @@
 
 using namespace std;
 
-
 /**
  * Represents a Key Value Store
  */
