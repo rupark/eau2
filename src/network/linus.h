@@ -166,7 +166,7 @@ public:
     /**
  * Contructs a DataFrame from the size_t and associates the given Key with the DataFrame in the given KVStore
  */
-    static DataFrame *fromScalarInt(Key *key, KVStore *kv, size_t scalar) {
+    static void *fromScalarInt(Key *key, KVStore *kv, size_t scalar) {
 //        cout << "Creating df " << endl;
         Schema *s = new Schema("I");
         DataFrame *df = new DataFrame(*s);
@@ -177,25 +177,29 @@ public:
             df->schema->nrow = df->columns[0]->size();
         }
 //        cout << "putting in kv store: " << key->name->c_str()  << "size of df" << df->get_num_rows() << endl;
-        kv->put(key, df);
+        kv->put(&key, &df);
+        delete key;
+        delete df;
 //        cout << "done in fromScalarInt" << endl;
-        return df;
+        //return df;
     }
 
 
     /**
      * Contructs a DataFrame from the given array of doubles and associates the given Key with the DataFrame in the given KVStore
      */
-    static DataFrame *fromArray(Key *key, KVStore *kv, size_t sz, double *vals) {
+    static void *fromArray(Key *key, KVStore *kv, size_t sz, double *vals) {
         Schema *s = new Schema("F");
         DataFrame *df = new DataFrame(*s);
         delete s;
         for (int i = 0; i < sz; i++) {
             df->columns[0]->push_back((float) vals[i]);
         }
-        kv->put(key, df);
+        kv->put(&key, &df);
+        delete key;
+        delete df;
         delete vals;
-        return df;
+        //return df;
     }
 
     /** Performs a step of the linus calculation. It operates over the three
