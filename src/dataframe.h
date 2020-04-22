@@ -653,7 +653,8 @@ public:
     Set newUsers;
 
     UsersTagger(Set &pSet, Set &uSet, DataFrame *users) :
-            pSet(pSet), uSet(uSet), newUsers(users->get_num_rows()) {}
+            pSet(pSet), uSet(uSet), newUsers(users->get_num_rows()) {
+    }
 
     //Kate did some stuff
     bool visit(Row &row) override {
