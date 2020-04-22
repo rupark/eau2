@@ -66,13 +66,6 @@
       <workItem from="1587140412787" duration="12921000" />
       <workItem from="1587227716818" duration="10832000" />
     </task>
-    <task id="LOCAL-00174" summary="THIS VERSION DOESNT SEGFAULT">
-      <created>1587565317107</created>
-      <option name="number" value="00174" />
-      <option name="presentableId" value="LOCAL-00174" />
-      <option name="project" value="LOCAL" />
-      <updated>1587565317107</updated>
-    </task>
     <task id="LOCAL-00175" summary="THIS VERSION DOESNT SEGFAULT">
       <created>1587565389262</created>
       <option name="number" value="00175" />
@@ -409,7 +402,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587574629458</updated>
     </task>
-    <option name="localTasksCounter" value="223" />
+    <task id="LOCAL-00223" summary="400 blocks of mem leak, segfault after end of exec">
+      <created>1587575157681</created>
+      <option name="number" value="00223" />
+      <option name="presentableId" value="LOCAL-00223" />
+      <option name="project" value="LOCAL" />
+      <updated>1587575157681</updated>
+    </task>
+    <option name="localTasksCounter" value="224" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -423,10 +423,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="400 blocks of mem leak, segfault after end of exec" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587574629339">
+    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587575157573">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1587574629339" />
+    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1587575157573" />
     <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586820289069" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.830@0.23.1440.830" timestamp="1587492452941" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.832@0.23.1440.832" timestamp="1587568622602" />
@@ -446,10 +446,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="483" y="130" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1586820663598" />
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1587574631127">
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1587575172798">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1587574631127" />
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1587575172798" />
     <state x="362" y="147" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586820747812" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1587227722830">
       <screen x="0" y="0" width="1536" height="824" />
@@ -459,9 +459,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="522" y="206" key="git4idea.merge.GitMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1586820307528" />
-    <state x="515" y="206" key="git4idea.merge.GitPullDialog" timestamp="1586820721495">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="483" y="225" key="git4idea.merge.GitPullDialog" timestamp="1587575169033">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="483" y="225" key="git4idea.merge.GitPullDialog/0.0.1440.900@0.0.1440.900" timestamp="1587575169033" />
     <state x="515" y="206" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1586820721495" />
   </component>
 </project>
