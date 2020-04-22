@@ -403,7 +403,7 @@ public:
         delete s;
         cout << "done visiting" << endl;
         kv->put(key, &df);
-        delete df;
+        //delete df;
     }
 
     /** Returns a section of this DataFrame as a new DataFrame **/
