@@ -87,7 +87,6 @@ public:
         size_t length = _end - _start;
         char *sliceCopy = new char[length + 1];
         memcpy(sliceCopy, getChars(), length);
-        delete sliceCopy[length];
         sliceCopy[length] = '\0';
         return sliceCopy;
     }

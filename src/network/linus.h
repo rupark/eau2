@@ -285,6 +285,7 @@ public:
 //        }
 //        cout << "\n\n\n" << endl;
 
+        delete kv;
         this->kv = merge(ptagger->newProjects, "projects-", stage);
 //        cout << "merged" <<endl;
 
