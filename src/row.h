@@ -73,7 +73,9 @@ public:
 
     void set(size_t col, float val) {
         if (col < size && col >= 0) {
-            delete elements[col];
+            if (elements[col] != nullptr) {
+                delete columns[i];
+            }
             elements[col] = new Float(val);
         } else {
             exit(1);

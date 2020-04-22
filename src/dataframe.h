@@ -63,19 +63,27 @@ public:
             char type = this->schema->col_type(i);
             switch (type) {
                 case 'F':
-                    delete columns[i];
+                    if (columns[i] != nullptr) {
+                        delete columns[i];
+                    }
                     columns[i] = new FloatColumn();
                     break;
                 case 'B':
-                    delete columns[i];
+                    if (columns[i] != nullptr) {
+                        delete columns[i];
+                    }
                     columns[i] = new BoolColumn();
                     break;
                 case 'I':
-                    delete columns[i];
+                    if (columns[i] != nullptr) {
+                        delete columns[i];
+                    }
                     columns[i] = new IntColumn();
                     break;
                 case 'S':
-                    delete columns[i];
+                    if (columns[i] != nullptr) {
+                        delete columns[i];
+                    }
                     columns[i] = new StringColumn();
                     break;
             }
