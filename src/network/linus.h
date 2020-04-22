@@ -410,6 +410,7 @@ public:
             h->c(stage);
             h->c("-0");
             Key *k = new Key(h->get());
+            delete h;
 //            cout << "k name ------- " << k->name->c_str() << endl;
             fromVisitor(k, kv, "I", writer);
 //            cout << "calling fromVisitor" << endl;
