@@ -561,7 +561,7 @@ public:
         } else {
             cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter *writer = new SetWriter(set);
-            Key k(StrBuff(name).c(stage).c("-").c(idx_).get());
+            Key* k = new Key(StrBuff(name).c(stage).c("-").c(idx_).get());
 //            delete DataFrame::fromVisitor(&k, &kv, "I", writer);
             DataFrame *toSend = fromVisitor(k, kv, "I", writer);
             Status *nodeToServer = new Status(idx_, 0, toSend);
