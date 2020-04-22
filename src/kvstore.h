@@ -23,30 +23,29 @@ public:
 
     KVStore() {
         this->size = 0;
-        this->keys = new Key*[500];
-        this->dfs = new DataFrame*[500];
+        this->keys = new Key *[500];
+        this->dfs = new DataFrame *[500];
     }
 
     ~KVStore() {
-        cout << "kv des" << endl;
-//        for (int i = 0; i < size; i++) {
-//            delete keys[i];
-//            delete dfs[i];
-//        }
-//        delete[] keys;
-//        delete[] dfs;
+        for (int i = 0; i < size; i++) {
+            delete keys[i];
+            delete dfs[i];
+        }
+        delete[] keys;
+        delete[] dfs;
     };
 
     /**
      * Adds the given Key and DataFrame to this KVStore
      */
-    void put(Key* key, DataFrame* df) {
+    void put(Key *key, DataFrame *df) {
 //        if (key->name->equals(new String("users-1-0"))) {
 ////            cout << "??????????????????????????????????????????????????????????????????????????" << endl;
 //        }
 
         cout << key->name->cstr_ << endl;
-        //assert(df != nullptr && "Putting Dataframe Null Pointer!");
+        assert(df != nullptr && "Putting Dataframe Null Pointer!");
         cout << "size: " << size << "new key: " << key->name->c_str() << endl;
 
         // check if key is already there
@@ -87,7 +86,6 @@ public:
                 //size--;
                 //delete keys[i];
                 //delete dfs[i];
-                //delete key;
                 return dfs[i];
             }
         }
