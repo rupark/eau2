@@ -25,46 +25,46 @@
 
 class Row : public Object {
 public:
-    Object *elements;
+    Object **elements;
     size_t size;
     size_t index;
 
     /** Build a row following a schema. */
     Row(Schema* scm) {
-        this->elements = new Object [10];
+        this->elements = new Object *[10];
         index = 0;
         size = scm->get_num_cols();
         for (size_t i = 0; i < scm->get_num_cols(); i++) {
             char type = scm->types->at(i);
             switch (type) {
                 case 'F':
-                    elements[i] = *new Float(0);
+                    elements[i] = new Float(0);
                     break;
                 case 'B':
-                    elements[i] = *new Bool(0);
+                    elements[i] = new Bool(0);
                     break;
                 case 'I':
-                    elements[i] = *new Integer(0);
+                    elements[i] = new Integer(0);
                     break;
                 case 'S':
-                    elements[i] = *new String("");
+                    elements[i] = new String("");
                     break;
             }
         }
     }
 
     ~Row() {
-//        for (int i = 0; i < size; i++) {
-//            delete elements[i];
-//        }
+        for (int i = 0; i < size; i++) {
+            delete elements[i];
+        }
         delete[] elements;
-    };
+    }
 
     /** Setters: set the given column with the given value. Setting a column with
       * a value of the wrong type is undefined. */
     void set(size_t col, int val) {
         if (col < size && col >= 0) {
-            elements[col] = *new Integer(val);
+            elements[col] = new Integer(val);
         } else {
             exit(1);
         }
@@ -72,7 +72,7 @@ public:
 
     void set(size_t col, float val) {
         if (col < size && col >= 0) {
-            elements[col] = *new Float(val);
+            elements[col] = new Float(val);
         } else {
             exit(1);
         }
@@ -80,7 +80,7 @@ public:
 
     void set(size_t col, bool val) {
         if (col < size && col >= 0) {
-            elements[col] = *new Bool(val);
+            elements[col] = new Bool(val);
         } else {
             exit(1);
         }
@@ -89,7 +89,7 @@ public:
     /** The string is external. */
     void set(size_t col, String *val) {
         if (col < size && col >= 0) {
-            elements[col] = *val;
+            elements[col] = val;
         } else {
             exit(1);
         }
@@ -108,19 +108,23 @@ public:
     /** Getters: get the value at the given column. If the column is not
       * of the requested type, the result is undefined. */
     int get_int(size_t col) {
-        return dynamic_cast<Integer &>(elements[col]).val;
+        Integer *v = dynamic_cast<Integer *>(elements[col]);
+        return v->val;
     }
 
     bool get_bool(size_t col) {
-        return dynamic_cast<Bool &>(elements[col]).val;
+        bool v = dynamic_cast<Bool *>(elements[col])->val;
+        return v;
     }
 
     float get_float(size_t col) {
-        return dynamic_cast<Float &>(elements[col]).val;
+        float v = dynamic_cast<Float *>(elements[col])->val;
+        return v;
     }
 
     String *get_string(size_t col) {
-        return &dynamic_cast<String &>(elements[col]);
+        String *v = (String *) elements[col];
+        return v;
     }
 
     /** Number of fields in the row. */
@@ -130,11 +134,11 @@ public:
 
     /** Type of the field at the given position. An idx >= width is  undefined. */
     char col_type(size_t idx) {
-        if (&dynamic_cast<Integer &>(this->elements[idx])) {
+        if (dynamic_cast<Integer *>(this->elements[idx])) {
             return 'I';
-        } else if (&dynamic_cast<Bool &>(this->elements[idx])) {
+        } else if (dynamic_cast<Bool *>(this->elements[idx])) {
             return 'B';
-        } else if (&dynamic_cast<Float &>(this->elements[idx])) {
+        } else if (dynamic_cast<Float *>(this->elements[idx])) {
             return 'F';
         } else {
             return 'S';

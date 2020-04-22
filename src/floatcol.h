@@ -14,7 +14,6 @@ class FloatColumn;
 #include "float.h"
 #include <iostream>
 #include <string>
-#include <vector>
 
 using namespace std;
 
@@ -23,26 +22,30 @@ using namespace std;
  */
 class FloatColumn : public Column {
 public:
-    vector<Float> vals_;
+    Float **vals_;
+    size_t size_;
+    size_t capacity_;
 
     FloatColumn() {
+        size_ = 0;
+        capacity_ = 200 * 1000 * 1000;
+        vals_ = new Float *[capacity_];
     }
 
     ~FloatColumn() {
-        //vector<Float*>().swap(vals_);
-//        for (int i = 0; i < size_; i++) {
-//            if (vals_[i] != nullptr) {
-//                delete vals_[i];
-//            }
-//        }
-//        delete[] vals_;
+        for (int i = 0; i < size_; i++) {
+            if (vals_[i] != nullptr) {
+                delete vals_[i];
+            }
+        }
+        delete vals_;
     }
 
     /**
     * Append missing bool is default 0.
     */
     void appendMissing() {
-        vals_.push_back(*new Float(0));
+        push_back((float)0);
     }
 
     /**
@@ -79,19 +82,28 @@ public:
 
     /** Returns the float at idx; undefined on invalid idx.*/
     float *get(size_t idx) {
-        return &vals_.at(idx).val;
+        if (idx >= 0 && idx <= this->size()) {
+            return &vals_[idx]->val;
+        } else {
+            exit(1);
+        }
     }
 
     /** Out of bound idx is undefined. */
     void set(size_t idx, float *val) {
-        vals_.at(idx) = *new Float(*val);
+        if (idx >= 0 && idx <= this->size()) {
+            vals_[idx] = new Float(*val);
+            size_++;
+        } else {
+            exit(1);
+        }
     }
 
     /**
      * Returns the size of this FloatColumn
      */
     size_t size() {
-        return vals_.size();
+        return size_;
     }
 
     /**
@@ -113,14 +125,21 @@ public:
      * Adds the given float to this if it is a FloatColumn
      */
     virtual void push_back(float val) {
-        vals_.push_back(*new Float(val));
+        vals_[size_] = new Float(val);
+        size_++;
     }
 
     /**
      * Adds the given String to this if it is a StringColumn
      */
     virtual void push_back(String *val) {
+        // if passing nullptr from <MISSING> in sor then save to array as nullptr calls this method.
+        if (val == nullptr) {
+            this->vals_[size_] = nullptr;
+            size_++;
+        } else {
             exit(1);
+        }
     }
 
     /** Return the type of this column as a char: 'S', 'B', 'I' and 'F'. */
@@ -133,9 +152,9 @@ public:
         StrBuff *s = new StrBuff();
         s->c("F}");
 
-        for (int i = 0; i < this->vals_.size(); i++) {
+        for (int i = 0; i < this->size_; i++) {
             char str[256] = ""; /* In fact not necessary as snprintf() adds the 0-terminator. */
-            snprintf(str, sizeof str, "%f}", this->vals_.at(i).val);
+            snprintf(str, sizeof str, "%f}", this->vals_[i]->val);
             s->c(str);
         }
 
