@@ -390,10 +390,10 @@ public:
     /**
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
-    static DataFrame *fromVisitor(Key key, KVStore *kv, char *schema, Writer *w) {
+    static DataFrame *fromVisitor(Key *key, KVStore *kv, char *schema, Writer *w) {
         cout << "in fromVisitor" << endl;
         Schema *s = new Schema(schema);
-        DataFrame* df = new DataFrame(*s);
+        DataFrame *df = new DataFrame(*s);
         while (!w->done()) {
             Row *r = new Row(s);
             w->visit(*r);
@@ -402,8 +402,8 @@ public:
         }
         delete s;
         cout << "done visiting" << endl;
-        kv->put(&key, df);
-        //delete df;
+        kv->put(key, df);
+        return df;
     }
 
     /** Returns a section of this DataFrame as a new DataFrame **/
