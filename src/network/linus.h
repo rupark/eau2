@@ -133,9 +133,16 @@ public:
             Key *key = new Key("users-0-0");
             fromScalarInt(key, kv, LINUS);
         } else {
-            projects = kv->get(pK);
-            users = kv->get(uK);
-            commits = kv->get(cK);
+            cout << "Reading..." << endl;
+//            commits = DataFrame::fromFile(COMM, cK, kv);
+            commits = readDataFrameFromFile(COMM);
+            cout << "    " << commits->get_num_rows() << " commits" << endl;
+//            projects = DataFrame::fromFile(PROJ, pK, kv);
+            projects = readDataFrameFromFile(PROJ);
+            cout << "    " << projects->get_num_rows() << " projects" << endl;
+//            users = DataFrame::fromFile(USER, uK, kv);
+            users = readDataFrameFromFile(USER);
+            cout << "    " << users->get_num_rows() << " users" << endl;
         }
         cout << "making sets" << endl;
         uSet = new Set(users);
