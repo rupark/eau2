@@ -409,8 +409,10 @@ public:
             h->c(name);
             h->c(stage);
             h->c("-0");
-            Key *k = new Key(h->get());
+            String* str = h->get();
+            Key *k = new Key(s);
             delete h;
+            delete str;
 //            cout << "k name ------- " << k->name->c_str() << endl;
             fromVisitor(k, kv, "I", writer);
 //            cout << "calling fromVisitor" << endl;
