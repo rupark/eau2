@@ -298,7 +298,7 @@ public:
         cout << "mapped commits" << endl;
 
         /** nodes send back commits, server merges projects **/
-        this->kv = merge(ptagger->newProjects, "projects-", stage);
+        merge(ptagger->newProjects, "projects-", stage);
 
         cout << "first merge done" << endl;
         pSet->union_(ptagger->newProjects);
@@ -312,7 +312,7 @@ public:
         commits->map(utagger);
         cout << "second merge" << endl;
         /** nodes send users and server merges **/
-        this->kv = merge(utagger->newUsers, "users-", stage + 1);
+        merge(utagger->newUsers, "users-", stage + 1);
         cout << "last union" << endl;
         uSet->union_(utagger->newUsers);
         delete utagger;
