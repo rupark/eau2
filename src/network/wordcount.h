@@ -95,7 +95,7 @@ public:
 
         if (idx_ == 0) {
             // Reads in File to Dataframe
-            FileReader fr = *new FileReader();
+            FileReader* fr = new FileReader();
             DataFrame *df = fromVisitor(&words_all, kv, "S", fr);
 
             // Split into chunks and send iteratively to nodes
@@ -139,7 +139,7 @@ public:
         } else {
 
             //Finding out size of file
-            FileReader fr = *new FileReader();
+            FileReader* fr = new FileReader();
             DataFrame *df = fromVisitor(&words_all, kv, "S", fr);
 
             //Calculating the number of chunks and figuring out how many go to this node
@@ -212,7 +212,7 @@ public:
         SIMap map;
         Adder add(map);
         words->map(add);
-        Summer cnt(map);
+        Summer *cnt = new Summer(map);
 
         StrBuff *s = new StrBuff();
         s->c("wc-map-");
