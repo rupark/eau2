@@ -65,6 +65,7 @@ public:
     void set(size_t col, int val) {
         if (col < size && col >= 0) {
             if (elements[col] != nullptr) {
+                cout << "5" << endl;
                 delete elements[col];
             }
             elements[col] = new Integer(val);
@@ -76,6 +77,7 @@ public:
     void set(size_t col, float val) {
         if (col < size && col >= 0) {
             if (elements[col] != nullptr) {
+                cout << "8" << endl;
                 delete elements[col];
             }
             elements[col] = new Float(val);
@@ -87,6 +89,7 @@ public:
     void set(size_t col, bool val) {
         if (col < size && col >= 0) {
             if (elements[col] != nullptr) {
+                cout << "6" << endl;
                 delete elements[col];
             }
             elements[col] = new Bool(val);
@@ -99,6 +102,7 @@ public:
     void set(size_t col, String *val) {
         if (col < size && col >= 0) {
             if (elements[col] != nullptr) {
+                cout << "7" << endl;
                 delete elements[col];
             }
             elements[col] = val;
