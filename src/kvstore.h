@@ -45,7 +45,7 @@ public:
 //        }
 
         cout << key.name->cstr_ << endl;
-        assert(df != nullptr && "Putting Dataframe Null Pointer!");
+        //assert(df != nullptr && "Putting Dataframe Null Pointer!");
         cout << "size: " << size << "new key: " << key.name->c_str() << endl;
 
         // check if key is already there
