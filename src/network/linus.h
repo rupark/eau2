@@ -129,7 +129,7 @@ public:
             // This dataframe contains the id of Linus.
             //delete
             Key* key = new Key("users-0-0");
-            fromScalarInt(key, kv, LINUS);
+            fromScalarInt(*key, *kv, LINUS);
         } else {
             projects = kv->get(pK);
             users = kv->get(uK);
@@ -145,7 +145,7 @@ public:
     /**
  * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
  */
-    static void fromVisitor(Key *key, KVStore *kv, char *schema, Writer *w) {
+    static void fromVisitor(Key key, KVStore kv, char *schema, Writer *w) {
         cout << "in fromVisitor" << endl;
         Schema *s = new Schema(schema);
         DataFrame df(*s);
@@ -157,7 +157,7 @@ public:
         }
         //delete s;
         cout << "done visiting" << endl;
-        kv->put(*key, df);
+        kv.put(key, df);
         //delete key;
         //delete df;
         //return df;
@@ -166,7 +166,7 @@ public:
     /**
  * Contructs a DataFrame from the size_t and associates the given Key with the DataFrame in the given KVStore
  */
-    static void *fromScalarInt(Key *key, KVStore *kv, size_t scalar) {
+    static void *fromScalarInt(Key key, KVStore kv, size_t scalar) {
 //        cout << "Creating df " << endl;
         Schema *s = new Schema("I");
         DataFrame df(*s);
@@ -177,7 +177,7 @@ public:
             df.schema->nrow = df.columns[0]->size();
         }
 //        cout << "putting in kv store: " << key->name->c_str()  << "size of df" << df->get_num_rows() << endl;
-        kv->put(*key, df);
+        kv.put(key, df);
         //delete key;
         //delete df;
 //        cout << "done in fromScalarInt" << endl;
@@ -188,14 +188,14 @@ public:
     /**
      * Contructs a DataFrame from the given array of doubles and associates the given Key with the DataFrame in the given KVStore
      */
-    static void *fromArray(Key *key, KVStore *kv, size_t sz, double *vals) {
+    static void *fromArray(Key key, KVStore kv, size_t sz, double *vals) {
         Schema *s = new Schema("F");
         DataFrame df(*s);
         //delete s;
         for (int i = 0; i < sz; i++) {
             df.columns[0]->push_back((float) vals[i]);
         }
-        kv->put(*key, df);
+        kv.put(key, df);
         //delete key;
         //delete df;
         delete vals;
@@ -411,7 +411,7 @@ public:
             h->c("-0");
             Key* k = new Key(h->get());
 //            cout << "k name ------- " << k->name->c_str() << endl;
-            fromVisitor(k, kv, "I", writer);
+            fromVisitor(*k, *kv, "I", writer);
 //            cout << "calling fromVisitor" << endl;
 
 //            cout << "\n\n\n" << endl;
@@ -438,7 +438,7 @@ public:
             cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter* writer = new SetWriter(set);
             Key* k = new Key(StrBuff(name).c(stage).c("-").c(idx_).get());
-            fromVisitor(k, kv, "I", writer);
+            fromVisitor(*k, *kv, "I", writer);
             //DataFrame::fromVisitor(k, kv, "I", writer);
             Key mK(StrBuff(name).c(stage).c("-0").get());
             DataFrame* merged = dynamic_cast<DataFrame*>(kv->get(mK));
