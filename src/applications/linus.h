@@ -213,7 +213,6 @@ public:
             // Split into chunks and send iteratively to nodes
             int round2 = 0;
 
-            cout << "\n\n\n\n\n\n\n\num chunks: " << num_chunks << endl;
             for (size_t j = 0; j < num_chunks; j++) {
                 DataFrame *cur_chunk = newUsers->chunk(j);
                 cout << cur_chunk->get_num_rows() << endl;

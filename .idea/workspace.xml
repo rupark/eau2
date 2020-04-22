@@ -9,9 +9,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6c52458d-a10f-4bfb-93ed-2dc326a69b41" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/column/intcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/column/intcol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataframe/dataframe.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataframe/dataframe.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataframe/row.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataframe/row.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/linus.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/linus.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/reader.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/wrappers/string.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/wrappers/string.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/m4/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m4/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,20 +73,6 @@
       <workItem from="1587139828276" duration="561000" />
       <workItem from="1587140412787" duration="12921000" />
       <workItem from="1587227716818" duration="10832000" />
-    </task>
-    <task id="LOCAL-00215" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587571002105</created>
-      <option name="number" value="00215" />
-      <option name="presentableId" value="LOCAL-00215" />
-      <option name="project" value="LOCAL" />
-      <updated>1587571002105</updated>
-    </task>
-    <task id="LOCAL-00216" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587571174907</created>
-      <option name="number" value="00216" />
-      <option name="presentableId" value="LOCAL-00216" />
-      <option name="project" value="LOCAL" />
-      <updated>1587571174907</updated>
     </task>
     <task id="LOCAL-00217" summary="400 blocks of mem leak, segfault after end of exec">
       <created>1587571405045</created>
@@ -416,7 +403,21 @@
       <option name="project" value="LOCAL" />
       <updated>1587598520070</updated>
     </task>
-    <option name="localTasksCounter" value="264" />
+    <task id="LOCAL-00264" summary="400 blocks of mem leak, segfault after end of exec">
+      <created>1587598767670</created>
+      <option name="number" value="00264" />
+      <option name="presentableId" value="LOCAL-00264" />
+      <option name="project" value="LOCAL" />
+      <updated>1587598767670</updated>
+    </task>
+    <task id="LOCAL-00265" summary="400 blocks of mem leak, segfault after end of exec">
+      <created>1587598872673</created>
+      <option name="number" value="00265" />
+      <option name="presentableId" value="LOCAL-00265" />
+      <option name="project" value="LOCAL" />
+      <updated>1587598872673</updated>
+    </task>
+    <option name="localTasksCounter" value="266" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -430,12 +431,12 @@
     <option name="LAST_COMMIT_MESSAGE" value="400 blocks of mem leak, segfault after end of exec" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587598770702">
+    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587599104911">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
     <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1587597436325" />
     <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586820289069" />
-    <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.830@0.23.1440.830" timestamp="1587598770702" />
+    <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.830@0.23.1440.830" timestamp="1587599104911" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.832@0.23.1440.832" timestamp="1587568622602" />
     <state x="149" y="72" key="DiffContextDialog" timestamp="1586820171771">
       <screen x="0" y="0" width="1536" height="824" />
@@ -453,12 +454,12 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="483" y="130" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1586820663598" />
-    <state x="339" y="171" key="Vcs.Push.Dialog.v2" timestamp="1587598774250">
+    <state x="339" y="171" key="Vcs.Push.Dialog.v2" timestamp="1587598874181">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
     <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1587597437311" />
     <state x="362" y="147" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586820747812" />
-    <state x="339" y="171" key="Vcs.Push.Dialog.v2/0.23.1440.830@0.23.1440.830" timestamp="1587598774250" />
+    <state x="339" y="171" key="Vcs.Push.Dialog.v2/0.23.1440.830@0.23.1440.830" timestamp="1587598874181" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1587227722830">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
