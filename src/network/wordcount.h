@@ -42,7 +42,7 @@ public:
     }
 
     ~KeyBuff() {
-        delete orig_;
+        //delete orig_;
     }
 
     KeyBuff &c(String &s) {
@@ -65,7 +65,7 @@ public:
         String *s = buf_.get();
         Key *k = new Key(s->steal(), orig_->home);
         buf_ = *new StrBuff("wc-map-");
-        delete s;
+        //delete s;
         return k;
     }
 
