@@ -33,8 +33,8 @@ public:
             delete keys[i];
             delete dfs[i];
         }
-        delete[] keys;
-        delete[] dfs;
+//        delete[] keys;
+//        delete[] dfs;
     };
 
     /**
