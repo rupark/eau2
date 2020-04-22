@@ -30,7 +30,7 @@ public:
     size_t index;
 
     /** Build a row following a schema. */
-    Row(Schema* scm) {
+    Row(Schema *scm) {
         this->elements = new Object *[10];
         index = 0;
         size = scm->get_num_cols();

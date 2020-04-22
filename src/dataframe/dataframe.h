@@ -46,7 +46,7 @@ public:
     ~DataFrame() {
         for (int i = 0; i < this->schema->get_num_cols(); i++) {
             if (columns[i] != nullptr) {
-            delete columns[i];
+                delete columns[i];
             }
         }
         delete[] columns;
@@ -264,11 +264,6 @@ public:
         }
     }
 
-
-    /** Idea: have put take in non-pointers
-
-
-
     /** Returns a section of this DataFrame as a new DataFrame **/
     DataFrame *chunk(size_t chunk_select) {
 
@@ -300,7 +295,7 @@ public:
      */
     DataFrame *append_chunk(DataFrame *df) {
         for (size_t r = 0; r < df->get_num_rows(); r++) {
-            Row* r2 = df->get_row(r);
+            Row *r2 = df->get_row(r);
             this->add_row(*r2);
             delete r2;
         }

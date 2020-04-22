@@ -128,8 +128,6 @@ public:
         delete vals;
     }
 
-    /** Idea: have put take in non-pointers
-
     /**
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
@@ -185,7 +183,6 @@ public:
             if (num_chunks < 0) {
                 num_chunks = 1;
             }
-            cout << num_chunks << endl;
 
             cout << "sending num chunks" << endl;
             //sending out the number of chunks each will receive
@@ -215,7 +212,6 @@ public:
 
             for (size_t j = 0; j < num_chunks; j++) {
                 DataFrame *cur_chunk = newUsers->chunk(j);
-                cout << cur_chunk->get_num_rows() << endl;
                 // if server's turn, keep chunks of DataFrame.
                 if (round2 == 0) {
                     // append chunks as received
