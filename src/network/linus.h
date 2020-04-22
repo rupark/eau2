@@ -159,7 +159,7 @@ public:
         cout << "done visiting" << endl;
         kv->put(*key, *df);
         //delete key;
-        delete df;
+        //delete df;
         //return df;
     }
 
@@ -179,7 +179,7 @@ public:
 //        cout << "putting in kv store: " << key->name->c_str()  << "size of df" << df->get_num_rows() << endl;
         kv->put(*key, *df);
         //delete key;
-        delete df;
+        //delete df;
 //        cout << "done in fromScalarInt" << endl;
         //return df;
     }
@@ -197,7 +197,7 @@ public:
         }
         kv->put(*key, *df);
         //delete key;
-        delete df;
+        //delete df;
         delete vals;
         //return df;
     }
