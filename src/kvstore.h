@@ -28,6 +28,7 @@ public:
     }
 
     ~KVStore() {
+        cout << "kv des" << endl;
         for (int i = 0; i < size; i++) {
             delete keys[i];
             delete dfs[i];

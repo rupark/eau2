@@ -198,7 +198,7 @@ public:
         kv.put(&key, &df);
         //delete key;
         //delete df;
-        delete vals;
+        // delete vals;
         //return df;
     }
 
