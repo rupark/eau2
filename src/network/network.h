@@ -123,7 +123,7 @@ public:
             }
         }
 
-        delete[] nodes_;
+        //delete[] nodes_;
         nodes_ = nodes;
         delete ipd;
     }
