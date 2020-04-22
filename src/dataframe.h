@@ -401,6 +401,7 @@ public:
         }
         delete s;
         cout << "done visiting" << endl;
+        //cout << df->get_num_rows() << endl;
         kv->put(key, df);
 
         delete df;
