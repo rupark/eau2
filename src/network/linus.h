@@ -23,7 +23,7 @@ class Linus : public Application {
 public:
     int DEGREES = 4;  // How many degrees of separation form linus?
     int LINUS = 4967;   // The uid of Linus (offset in the user df)
-    bool subset = false;
+    bool subset = true;
 
     const char *PROJ = (subset ? "datasets/projects_subset.ltgt" : "datasets/projects.ltgt");
     const char *USER = (subset ? "datasets/users_subset.ltgt" : "datasets/users.ltgt");
