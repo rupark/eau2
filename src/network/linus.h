@@ -250,7 +250,7 @@ public:
             // Split into chunks and send iteratively to nodes
             int selectedNode = 0;
 
-            cout << num_chunks << endl;
+            cout << "\n\n\n\n\n\n\n\num chunks: " << num_chunks << endl;
             for (size_t j = 0; j < num_chunks; j++) {
                 DataFrame *cur_chunk = newUsers->chunk(j);
                 // if server's turn, keep chunks of DataFrame.
