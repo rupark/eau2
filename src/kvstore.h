@@ -35,7 +35,8 @@ public:
         }
         cout << "done w keys" << endl;
         for (int i = 0; i < size; i++) {
-            delete dfs[i];
+            DataFrame* d = dfs[i];
+            delete d;
         }
         cout << "done with ind" << endl;
         delete[] keys;
