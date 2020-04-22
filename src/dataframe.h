@@ -399,8 +399,6 @@ public:
         return *this->columns[col]->as_float()->get(row);
     }
 
-x
-
 
 //    static DataFrame* fromFile(const char* filep, Key* key, KVStore* kv) {
 //        cout << "in from file: " << filep << endl;
