@@ -47,7 +47,7 @@ public:
 
         cout << key->name->cstr_ << endl;
         assert(df != nullptr && "Putting Dataframe Null Pointer!");
-        cout << "size: " << size << "new key: " << key->name->c_str() << endl;
+        cout << "size: " << size << "new key: " << key.name->c_str() << endl;
         for (int i = 0; i < size; i++) {
             cout << this->keys[i]->name->cstr_ << endl;
         }
@@ -57,7 +57,7 @@ public:
         // check if key is already there
         for (size_t k = 0; k < size; k++) {
             // if found already, replace
-            if (this->keys[k]->equals(key)) {
+            if (this->keys[k]->equals(&key)) {
 //                cout << "put key already found: " << keys[k]->name->c_str() << " at " << k << endl;
                 this->dfs[k] = df;
 //                cout << "DF Set new size = " << size << endl;
@@ -68,7 +68,7 @@ public:
         cout << " we put" << endl;
 
         // if new key add and increment size
-        this->keys[size] = key;
+        this->keys[size] = &key;
         this->dfs[size] = df;
 
 //        cout << "dfs[0]- " << dfs[0] << endl;

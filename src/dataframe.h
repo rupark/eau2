@@ -397,7 +397,7 @@ public:
         while (!w->done()) {
             Row r (s);
             w->visit(r);
-            df->add_row(r)
+            df.add_row(r);
         }
         delete s;
         cout << "done visiting" << endl;
