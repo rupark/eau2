@@ -259,7 +259,7 @@ public:
                     // append chunks as received
                     cout << "append" << endl;
                     chunkSoFar->append_chunk(cur_chunk);
-                    selectedNode++;
+                    selectedNode = selectedNode+ 1;
                     if (selectedNode == arg.num_nodes) {
                         selectedNode = 0;
                     }
