@@ -367,8 +367,8 @@ public:
         uSet->union_(utagger->newUsers);
         delete utagger;
         cout << "    after stage " << stage << ":" << endl;
-        cout << "        tagged projects: " << pSet->size() << endl;
-        cout << "        tagged users: " << uSet->size() << endl;
+        cout << "        tagged projects: " << pSet->num_true() << endl;
+        cout << "        tagged users: " << uSet->num_true() << endl;
         //cout << "        kv->keys[1]: " << (kv->keys[1] == nullptr) << "name: " << kv->keys[1]->c_str() << endl;
 
 //        cout << "\n\n\n" << endl;

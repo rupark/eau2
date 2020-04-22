@@ -514,6 +514,16 @@ public:
 
     size_t size() { return size_; }
 
+    size_t num_true() {
+        size_t size = 0;
+        for (size_t i = 0; i < size_; i++) {
+            if (vals_[i] = true) {
+                size++;
+            }
+        }
+        return size;
+    }
+
     /** Performs set union in place. */
     void union_(Set &from) {
         for (size_t i = 0; i < from.size_; i++)
