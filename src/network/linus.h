@@ -411,7 +411,7 @@ public:
             h->c("-0");
             String* str = h->get();
             Key *k = new Key(str);
-           //delete h;
+            delete h;
 //            cout << "k name ------- " << k->name->c_str() << endl;
             fromVisitor(k, kv, "I", writer);
 //            cout << "calling fromVisitor" << endl;
