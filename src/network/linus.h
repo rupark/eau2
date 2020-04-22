@@ -412,7 +412,6 @@ public:
             String* str = h->get();
             Key *k = new Key(str);
             delete h;
-            delete str;
 //            cout << "k name ------- " << k->name->c_str() << endl;
             fromVisitor(k, kv, "I", writer);
 //            cout << "calling fromVisitor" << endl;
