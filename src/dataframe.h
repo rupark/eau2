@@ -456,9 +456,9 @@ public:
      */
     DataFrame *append_chunk(DataFrame *df) {
         for (size_t r = 0; r < df->get_num_rows(); r++) {
-            Row* r = df->get_row(r);
-            this->add_row(*r);
-            delete r;
+            Row* r2 = df->get_row(r);
+            this->add_row(*r2);
+            delete r2;
         }
         delete df;
 
