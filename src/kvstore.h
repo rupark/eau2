@@ -18,19 +18,19 @@ class DataFrame;
  */
 class KVStore {
 public:
-    Key **keys;
+    Key *keys;
     DataFrame **dfs;
     int size;
 
     KVStore() {
         this->size = 0;
-        this->keys = new Key *[500];
+        this->keys = new Key [500];
         this->dfs = new DataFrame *[500];
     }
 
     ~KVStore() {
         for (int i = 0; i < size; i++) {
-            delete keys[i];
+            //delete keys[i];
             delete dfs[i];
         }
         delete[] keys;
@@ -49,7 +49,7 @@ public:
         assert(df != nullptr && "Putting Dataframe Null Pointer!");
         cout << "size: " << size << "new key: " << key.name->c_str() << endl;
         for (int i = 0; i < size; i++) {
-            cout << this->keys[i]->name->cstr_ << endl;
+            cout << this->keys[i].name->cstr_ << endl;
         }
 
         cout << "h" << endl;
@@ -57,7 +57,7 @@ public:
         // check if key is already there
         for (size_t k = 0; k < size; k++) {
             // if found already, replace
-            if (key.equals(keys[k])) {
+            if (key.equals(&keys[k])) {
 //                cout << "put key already found: " << keys[k]->name->c_str() << " at " << k << endl;
                 this->dfs[k] = df;
 //                cout << "DF Set new size = " << size << endl;
@@ -68,7 +68,7 @@ public:
         cout << " we put" << endl;
 
         // if new key add and increment size
-        this->keys[size] = &key;
+        this->keys[size] = key;
         this->dfs[size] = df;
 
 //        cout << "dfs[0]- " << dfs[0] << endl;
@@ -86,7 +86,7 @@ public:
 //        cout << "key given name:" << key.name->c_str() << endl;
         for (int i = 0; i < size; i++) {
 //            cout << "keys: " << keys[i]->name->cstr_ << endl;
-            if (key.equals(keys[i])) {
+            if (key.equals(&keys[i])) {
 //                cout << "found : " << i << endl;
 //                cout << "dfs[0]" << dfs[0] << endl;
                 //size--;
