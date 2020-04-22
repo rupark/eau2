@@ -210,7 +210,7 @@ public:
     void local_count() {
         DataFrame *words = kv->get(in);
         SIMap map;
-        Adder add(map);
+        Adder* add = new Adder(map);
         words->map(add);
         Summer *cnt = new Summer(map);
 
