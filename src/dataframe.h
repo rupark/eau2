@@ -243,7 +243,7 @@ public:
         Row *build_row = new Row(this->schema);
         //delete build_row;
 
-        delete build_row;
+        //delete build_row;
         this->fill_row(i, *build_row);
         build_row->printRow();
         return build_row;
@@ -456,8 +456,9 @@ public:
      */
     DataFrame *append_chunk(DataFrame *df) {
         for (size_t r = 0; r < df->get_num_rows(); r++) {
-            this->add_row(*df->get_row(r));
-            delete df->get_row(r);
+            Row* r = df->get_row(r);
+            this->add_row(*r);
+            delete r;
         }
         delete df;
 
