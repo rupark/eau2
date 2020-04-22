@@ -238,7 +238,7 @@ public:
 
 
 //        cout << "pset union" <<endl;
-        pSet->union_(ptagger->newProjects)
+        pSet->union_(ptagger->newProjects);
 
 
 
