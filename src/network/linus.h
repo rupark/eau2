@@ -157,7 +157,7 @@ public:
         }
         //delete s;
         cout << "done visiting" << endl;
-        kv.put(key, df);
+        kv.put(&key, &df);
         //delete key;
         //delete df;
         //return df;
@@ -177,7 +177,7 @@ public:
             df.schema->nrow = df.columns[0]->size();
         }
 //        cout << "putting in kv store: " << key->name->c_str()  << "size of df" << df->get_num_rows() << endl;
-        kv.put(key, df);
+        kv.put(&key, &df);
         //delete key;
         //delete df;
 //        cout << "done in fromScalarInt" << endl;
@@ -195,7 +195,7 @@ public:
         for (int i = 0; i < sz; i++) {
             df.columns[0]->push_back((float) vals[i]);
         }
-        kv.put(key, df);
+        kv.put(&key, &df);
         //delete key;
         //delete df;
         delete vals;
