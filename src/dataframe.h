@@ -401,7 +401,7 @@ public:
         }
         delete s;
         cout << "done visiting" << endl;
-        kv->put(key, &df);
+        kv->put(key, df);
 
         delete df;
         //return df;
