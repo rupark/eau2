@@ -57,7 +57,7 @@ public:
         // check if key is already there
         for (size_t k = 0; k < size; k++) {
             // if found already, replace
-            if (key.equals(keys[i])) {
+            if (key.equals(keys[k])) {
 //                cout << "put key already found: " << keys[k]->name->c_str() << " at " << k << endl;
                 this->dfs[k] = df;
 //                cout << "DF Set new size = " << size << endl;
