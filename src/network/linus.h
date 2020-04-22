@@ -353,7 +353,6 @@ public:
             Key *k = new Key(str);
             delete h;
             fromVisitor(k, kv, "I", writer);
-            return kv;
         } else {
             cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter *writer = new SetWriter(set);
