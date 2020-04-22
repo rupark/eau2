@@ -44,7 +44,6 @@ public:
     }
 
     ~DataFrame() {
-        //cout << "in df destructor" << endl;
         for (int i = 0; i < this->schema->get_num_cols(); i++) {
             if (columns[i] != nullptr) {
             delete columns[i];
@@ -64,138 +63,20 @@ public:
             char type = this->schema->col_type(i);
             switch (type) {
                 case 'F':
-//                    if (columns[i] != nullptr) {
-//                        cout << "1" << endl;
-//                        delete columns[i];
-//                    }
                     columns[i] = new FloatColumn();
                     break;
                 case 'B':
-//                    if (columns[i] != nullptr) {
-//                        cout << "2" << endl;
-//                        delete columns[i];
-//                    }
                     columns[i] = new BoolColumn();
                     break;
                 case 'I':
-//                    if (columns[i] != nullptr) {
-//                        cout << "3" << endl;
-//                        delete columns[i];
-//                    }
                     columns[i] = new IntColumn();
                     break;
                 case 'S':
-//                    if (columns[i] != nullptr) {
-//                        cout << "4" << endl;
-//                        delete columns[i];
-//                    }
                     columns[i] = new StringColumn();
                     break;
             }
         }
     }
-
-//    /** Fill DataFrame from group 4500NE's sorer adapter */
-//    DataFrame(Provider::ColumnSet *data, size_t num_columns) {
-//
-//        cout << "col set size: " << data->getColumn(0)->_length << endl;
-//        this->columns = new Column *[10];
-//        this->schema = new Schema();
-//
-//        Column *working_col;
-//
-//        // create columns and fill this df
-//        for (size_t i = 0; i < num_columns; i++) {
-//            // determine col type
-//            switch (data->getColumn(i)->getType()) {
-//
-//                case Provider::ColumnType::BOOL :
-//
-//                    working_col = new BoolColumn();
-//                    break;
-//                case Provider::ColumnType::FLOAT :
-//
-//                    working_col = new FloatColumn();
-//                    break;
-//                case Provider::ColumnType::INTEGER :
-//                    working_col = new IntColumn();
-//                    break;
-//                case Provider::ColumnType::STRING :
-//                    working_col = new StringColumn();
-//                    break;
-//                case Provider::ColumnType::UNKNOWN :
-//                    exit(-1);
-//                    break;
-//            }
-//            // fill the specific typed column
-//            for (size_t j = 0; j < data->getColumn(i)->getLength(); j++) {
-//                switch (data->getColumn(i)->getType()) {
-//                    case Provider::ColumnType::BOOL :
-//                        if (checkColumnEntry(data->getColumn(i), j)) {
-//                            if (data->getColumn(i)->isEntryPresent(j)) {
-//                                working_col->push_back(
-//                                        dynamic_cast<Provider::BoolColumn *>(data->getColumn(i))->getEntry(j));
-//                            } else {
-//                                working_col->push_back(nullptr);
-//                            }
-//                        }
-//                        break;
-//                    case Provider::ColumnType::FLOAT :
-//                        if (checkColumnEntry(data->getColumn(i), j)) {
-//                            if (data->getColumn(i)->isEntryPresent(j)) {
-//                                working_col->push_back(
-//                                        dynamic_cast<Provider::FloatColumn *>(data->getColumn(i))->getEntry(j));
-//                            } else {
-//                                working_col->push_back(nullptr);
-//                            }
-//                        }
-//                        break;
-//                    case Provider::ColumnType::INTEGER :
-//                        if (checkColumnEntry(data->getColumn(i), j)) {
-//                            if (data->getColumn(i)->isEntryPresent(j)) {
-//                                working_col->push_back(
-//                                        dynamic_cast<Provider::IntegerColumn *>(data->getColumn(i))->getEntry(j));
-//                            } else {
-//                                working_col->push_back(nullptr);
-//                            }
-//                        }
-//                        break;
-//                    case Provider::ColumnType::STRING :
-//                        if (checkColumnEntry(data->getColumn(i), j)) {
-//                            if (data->getColumn(i)->isEntryPresent(j)) {
-//                                working_col->push_back(new String(
-//                                        dynamic_cast<Provider::StringColumn *>(data->getColumn(i))->getEntry(j)));
-//                            } else {
-//                                working_col->push_back(nullptr);
-//                            }
-//                        }
-//                        break;
-//                    case Provider::ColumnType::UNKNOWN:
-//
-//                        break;
-//                }
-//            }
-//
-//
-//            // add this column to this dataframe
-//            this->add_column(working_col);
-//        }
-//
-//
-//    }
-//
-//
-//    /**
-//     * Terminates if the given column is not large enough to have the given entry index.
-//     * @param col The column
-//     * @param which The entry index
-//     */
-//    bool checkColumnEntry(Provider::BaseColumn *col, size_t which) {
-//        if (which >= col->getLength()) {
-//            return false;
-//        }
-//        return true;
-//    }
 
     /** Returns the dataframe's schema-> Modifying the schema after a dataframe
       * has been created in undefined. */
@@ -241,11 +122,7 @@ public:
             return nullptr;
         }
         Row *build_row = new Row(this->schema);
-        //delete build_row;
-
-        //delete build_row;
         this->fill_row(i, *build_row);
-        build_row->printRow();
         return build_row;
     }
 
@@ -338,7 +215,6 @@ public:
 
     /** Visits the rows in order on THIS node */
     void map(Reader *r) {
-        cout << "in map" << endl;
         int completed = 0;
 
         for (size_t i = 0; i < this->get_num_rows(); i++) {
@@ -419,52 +295,15 @@ public:
         return *this->columns[col]->as_float()->get(row);
     }
 
-
-//    static DataFrame* fromFile(const char* filep, Key* key, KVStore* kv) {
-//        cout << "in from file: " << filep << endl;
-//        FILE* file = fopen(filep, "rb");
-//        FILE* file_dup = fopen(filep, "rb");
-//        cout << "fopen file null?: " << (file == nullptr) << endl;
-//        size_t file_size = get_file_size(file_dup);
-//        delete file_dup;
-//        cout << "size of file calced " << file_size << endl;
-//        cout << "file opened" << endl;
-//
-//
-//        ///////////////////////////////////////
-//        SorParser* parser = new SorParser(file, (size_t)0, (size_t)file_size, (size_t)file_size);
-//        cout << "parser created" << endl;
-//        parser->guessSchema();
-//        cout << "schema guessed" << endl;
-//        parser->parseFile();
-//        ///////////////////////////////////////
-//
-//
-//        delete file;
-//        cout << "file parsed" << endl;
-//        DataFrame* d = new DataFrame(parser->getColumnSet(), parser->_num_columns);
-//        cout << "data frame created of SIZE " << d->get_num_rows() << endl;
-//        cout << "deleting Provider::Parser..." << endl;
-//        delete parser;
-//        cout << "parser deleted." << endl;
-//
-//        return d;
-//    }
-
     /**
      * Adds chunk dataframe passed in to this dataframe
      */
     DataFrame *append_chunk(DataFrame *df) {
-        cout << "in append chunk " << df->get_num_rows() << endl;
         for (size_t r = 0; r < df->get_num_rows(); r++) {
             Row* r2 = df->get_row(r);
-            cout << "made row" << endl;
             this->add_row(*r2);
-            cout << "add" << endl;
             delete r2;
-            cout << "dek" << endl;
         }
-        cout << "done appending" << endl;
         delete df;
 
         return this;
@@ -487,7 +326,6 @@ public:
     Set(DataFrame *df) {
         vals_ = new bool[df->get_num_rows()];
         size_ = df->get_num_rows();
-        cout << "creating set" << endl;
         for (size_t i = 0; i < size_; i++) {
             vals_[i] = false;
         }
@@ -497,14 +335,12 @@ public:
     Set(size_t sz) {
         vals_ = new bool[sz];
         size_ = sz;
-        cout << "creating set" << endl;
         for (size_t i = 0; i < size_; i++) {
             vals_[i] = false;
         }
     }
 
     ~Set() {
-        cout << "in set des" << endl;
         delete[] vals_;
     }
 
@@ -641,7 +477,6 @@ public:
             pSet(pSet), uSet(uSet), newUsers(users->get_num_rows()) {
     }
 
-    //Kate did some stuff
     bool visit(Row &row) override {
         int pid = row.get_int(0);
         int uid = row.get_int(1);

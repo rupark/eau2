@@ -7,10 +7,11 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c52458d-a10f-4bfb-93ed-2dc326a69b41" name="Default Changelist" comment="400 blocks of mem leak, segfault after end of exec">
+    <list default="true" id="6c52458d-a10f-4bfb-93ed-2dc326a69b41" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/application.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/application.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/linus.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/linus.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/column/intcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/column/intcol.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataframe/dataframe.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataframe/dataframe.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataframe/row.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataframe/row.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,13 +72,6 @@
       <workItem from="1587139828276" duration="561000" />
       <workItem from="1587140412787" duration="12921000" />
       <workItem from="1587227716818" duration="10832000" />
-    </task>
-    <task id="LOCAL-00214" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587570974443</created>
-      <option name="number" value="00214" />
-      <option name="presentableId" value="LOCAL-00214" />
-      <option name="project" value="LOCAL" />
-      <updated>1587570974443</updated>
     </task>
     <task id="LOCAL-00215" summary="400 blocks of mem leak, segfault after end of exec">
       <created>1587571002105</created>
@@ -415,7 +409,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587598031519</updated>
     </task>
-    <option name="localTasksCounter" value="263" />
+    <task id="LOCAL-00263" summary="400 blocks of mem leak, segfault after end of exec">
+      <created>1587598520070</created>
+      <option name="number" value="00263" />
+      <option name="presentableId" value="LOCAL-00263" />
+      <option name="project" value="LOCAL" />
+      <updated>1587598520070</updated>
+    </task>
+    <option name="localTasksCounter" value="264" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -429,12 +430,12 @@
     <option name="LAST_COMMIT_MESSAGE" value="400 blocks of mem leak, segfault after end of exec" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587598275419">
+    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587598519970">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
     <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1587597436325" />
     <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586820289069" />
-    <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.830@0.23.1440.830" timestamp="1587598275419" />
+    <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.830@0.23.1440.830" timestamp="1587598519970" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.832@0.23.1440.832" timestamp="1587568622602" />
     <state x="149" y="72" key="DiffContextDialog" timestamp="1586820171771">
       <screen x="0" y="0" width="1536" height="824" />
@@ -452,12 +453,12 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="483" y="130" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1586820663598" />
-    <state x="339" y="171" key="Vcs.Push.Dialog.v2" timestamp="1587598034377">
+    <state x="339" y="171" key="Vcs.Push.Dialog.v2" timestamp="1587598571186">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
     <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1587597437311" />
     <state x="362" y="147" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586820747812" />
-    <state x="339" y="171" key="Vcs.Push.Dialog.v2/0.23.1440.830@0.23.1440.830" timestamp="1587598034377" />
+    <state x="339" y="171" key="Vcs.Push.Dialog.v2/0.23.1440.830@0.23.1440.830" timestamp="1587598571186" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1587227722830">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -466,10 +467,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="522" y="206" key="git4idea.merge.GitMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1586820307528" />
-    <state x="483" y="225" key="git4idea.merge.GitPullDialog" timestamp="1587585614399">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="483" y="231" key="git4idea.merge.GitPullDialog" timestamp="1587598567757">
+      <screen x="0" y="23" width="1440" height="830" />
     </state>
     <state x="483" y="225" key="git4idea.merge.GitPullDialog/0.0.1440.900@0.0.1440.900" timestamp="1587585614399" />
     <state x="515" y="206" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1586820721495" />
+    <state x="483" y="231" key="git4idea.merge.GitPullDialog/0.23.1440.830@0.23.1440.830" timestamp="1587598567757" />
   </component>
 </project>
