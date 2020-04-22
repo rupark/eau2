@@ -455,11 +455,13 @@ public:
      * Adds chunk dataframe passed in to this dataframe
      */
     DataFrame *append_chunk(DataFrame *df) {
+        cout << "in append chunk " << df->get_num_rows() << endl;
         for (size_t r = 0; r < df->get_num_rows(); r++) {
             Row* r2 = df->get_row(r);
             this->add_row(*r2);
             delete r2;
         }
+        cout << "done appending" << endl;
         delete df;
 
         return this;
