@@ -129,7 +129,7 @@ public:
             // This dataframe contains the id of Linus.
             //delete
             Key* key = new Key("users-0-0");
-            DataFrame::fromScalarInt(key, kv, LINUS);
+            fromScalarInt(key, kv, LINUS);
         } else {
             projects = kv->get(pK);
             users = kv->get(uK);
