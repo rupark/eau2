@@ -164,7 +164,7 @@ public:
     /**
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
-    static void *fromVisitor(Key *key, KVStore *kv, char *schema, Writer *w) {
+    static DataFrame *fromVisitor(Key *key, KVStore *kv, char *schema, Writer *w) {
         cout << "in fromVisitor" << endl;
         Schema *s = new Schema(schema);
         DataFrame *df = new DataFrame(*s);
@@ -177,7 +177,7 @@ public:
         delete s;
         cout << "done visiting" << endl;
         kv->put(key, df);
-        //delete df;
+        return df;
     }
 
     /**
@@ -291,7 +291,7 @@ public:
         chunkSoFar->map(upd); // all of the new users are copied to delta.
         cout << "mapped chunksofar" << endl;
         delete upd;
-        delete newUsers;
+        delete chunkSoFar;
 
         ProjectsTagger *ptagger = new ProjectsTagger(delta, *pSet, projects);
         cout << "ptagger" << endl;
@@ -368,9 +368,9 @@ public:
             cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter *writer = new SetWriter(set);
             Key *k = new Key(StrBuff(name).c(stage).c("-").c(idx_).get());
-            Key k(StrBuff(name).c(stage).c("-").c(idx_).get());
+            //Key k(StrBuff(name).c(stage).c("-").c(idx_).get());
 //            delete DataFrame::fromVisitor(&k, &kv, "I", writer);
-            DataFrame *toSend = DataFrame::fromVisitor(k, kv, "I", writer);
+            DataFrame *toSend = fromVisitor(k, kv, "I", writer);
             Status *nodeToServer = new Status(idx_, 0, toSend);
             this->net.send_m(nodeToServer);
         }
