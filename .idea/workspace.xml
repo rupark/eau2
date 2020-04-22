@@ -9,7 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6c52458d-a10f-4bfb-93ed-2dc326a69b41" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kvstore.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/kvstore.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stringcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/stringcol.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,34 +66,6 @@
       <workItem from="1587139828276" duration="561000" />
       <workItem from="1587140412787" duration="12921000" />
       <workItem from="1587227716818" duration="10832000" />
-    </task>
-    <task id="LOCAL-00094" summary="updates">
-      <created>1587499716663</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1587499716663</updated>
-    </task>
-    <task id="LOCAL-00095" summary="updates">
-      <created>1587499984307</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1587499984307</updated>
-    </task>
-    <task id="LOCAL-00096" summary="updates">
-      <created>1587500010272</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1587500010272</updated>
-    </task>
-    <task id="LOCAL-00097" summary="updates">
-      <created>1587500310587</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1587500310587</updated>
     </task>
     <task id="LOCAL-00098" summary="updates">
       <created>1587500726117</created>
@@ -410,7 +382,35 @@
       <option name="project" value="LOCAL" />
       <updated>1587529457155</updated>
     </task>
-    <option name="localTasksCounter" value="143" />
+    <task id="LOCAL-00143" summary="THIS VERSION DOESNT SEGFAULT">
+      <created>1587529551121</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1587529551121</updated>
+    </task>
+    <task id="LOCAL-00144" summary="THIS VERSION DOESNT SEGFAULT">
+      <created>1587529554051</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1587529554051</updated>
+    </task>
+    <task id="LOCAL-00145" summary="THIS VERSION DOESNT SEGFAULT">
+      <created>1587529624916</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1587529624916</updated>
+    </task>
+    <task id="LOCAL-00146" summary="THIS VERSION DOESNT SEGFAULT">
+      <created>1587529659465</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1587529659465</updated>
+    </task>
+    <option name="localTasksCounter" value="147" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -423,10 +423,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="THIS VERSION DOESNT SEGFAULT" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587529624827">
+    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587529659377">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1587529624827" />
+    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1587529659377" />
     <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586820289069" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.830@0.23.1440.830" timestamp="1587492452941" />
     <state x="149" y="72" key="DiffContextDialog" timestamp="1586820171771">
@@ -445,10 +445,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="483" y="130" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1586820663598" />
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1587529627122">
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1587529660902">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1587529627122" />
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1587529660902" />
     <state x="362" y="147" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586820747812" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1587227722830">
       <screen x="0" y="0" width="1536" height="824" />

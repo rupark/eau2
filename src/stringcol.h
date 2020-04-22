@@ -53,7 +53,6 @@ public:
         }
     }
 
-
     /**
     * Append missing bool is default 0.
     */
@@ -162,6 +161,8 @@ public:
         }
 
         s->c("!");
-        return s->get();
+        String* st = s->get();
+        delete s;
+        return st;
     }
 };

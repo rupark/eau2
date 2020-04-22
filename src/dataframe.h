@@ -509,7 +509,14 @@ public:
     size_t size_; // number of elements
 
     /** Creates a set of the same size as the dataframe. */
-    Set(DataFrame *df) : Set(df->get_num_rows()) {}
+    Set(DataFrame *df) {
+        vals_ = new bool[df->get_num_rows()];
+        size_ = sz;
+        cout << "creating set" << endl;
+        for (size_t i = 0; i < size_; i++) {
+            vals_[i] = false;
+        }
+    }
 
     /** Creates a set of the given size. */
     Set(size_t sz) {
