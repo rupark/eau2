@@ -3,11 +3,11 @@ clean:
 
 buildl:
 	g++ -std=c++11 -c tests/m4/main.cpp -o main.o
-	g++ -std=c++11 src/network/wordcount.h main.o -o linus
+	g++ -std=c++11 src/applications/linus.h main.o -o linus
 
 buildwc:
 	g++ -std=c++11 -c tests/m4/main.cpp -o main.o
-	g++ -std=c++11 src/network/wordcount.h main.o -o wordcount
+	g++ -std=c++11 src/applications/wordcount.h main.o -o wordcount
 
 runwcs:
 	./wordcount -index 0 -file data/100k.txt -node 3 -port 8080 -masterip "127.0.0.4" -app "wc" -rowsperchunk 10 -masterport 8080
