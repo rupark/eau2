@@ -154,7 +154,7 @@ public:
         }
         kv->put(key, df);
         delete vals;
-        delete df;
+        //delete df;
     }
 
     /** Idea: have put take in non-pointers
@@ -175,7 +175,7 @@ public:
         delete s;
         cout << "done visiting" << endl;
         kv->put(key, df);
-        delete df;
+        //delete df;
     }
 
     /**
@@ -194,7 +194,7 @@ public:
 //        cout << "putting in kv store: " << key->name->c_str()  << "size of df" << df->get_num_rows() << endl;
         kv->put(key, df);
 //        cout << "done in fromScalarInt" << endl;
-        delete df;
+        //delete df;
     }
 
 
@@ -228,6 +228,7 @@ public:
 //        }
 //        cout << "creating newUsers" << endl;
         DataFrame* newUsers = kv->get(*uK);
+        delete uK;
 //        cout << "GOT new users dataframe from KV key: " << uK->c_str() << endl;
 //        cout << "\n\n\n" << endl;
 //        for (size_t m = 0; m < kv->size; m++) {
@@ -393,6 +394,7 @@ public:
                 s->c(i);
                 Key* nK = new Key(s->get());
                 DataFrame* delta = kv->get(*nK);
+                delete nK;
                 cout << "    received delta of " << delta->get_num_rows() << endl;
                 cout << " elements from node " << i << endl;
                 SetUpdater* upd = new SetUpdater(set);
@@ -409,6 +411,7 @@ public:
             Key* k = new Key(h->get());
 //            cout << "k name ------- " << k->name->c_str() << endl;
             fromVisitor(k, kv, "I", writer);
+            delete k;
 //            cout << "calling fromVisitor" << endl;
 
 //            cout << "\n\n\n" << endl;
