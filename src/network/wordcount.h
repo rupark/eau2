@@ -96,7 +96,7 @@ public:
         if (idx_ == 0) {
             // Reads in File to Dataframe
             FileReader fr = *new FileReader();
-            DataFrame *df = fromVisitor(&words_all, &kv, "S", fr);
+            DataFrame *df = fromVisitor(&words_all, kv, "S", fr);
 
             // Split into chunks and send iteratively to nodes
             int num_chunks = 1 + ((df->get_num_rows() - 1) / arg.rows_per_chunk);
@@ -140,7 +140,7 @@ public:
 
             //Finding out size of file
             FileReader fr = *new FileReader();
-            DataFrame *df = fromVisitor(&words_all, &kv, "S", fr);
+            DataFrame *df = fromVisitor(&words_all, kv, "S", fr);
 
             //Calculating the number of chunks and figuring out how many go to this node
             int num_chunks = 1 + ((df->get_num_rows() - 1) / arg.rows_per_chunk);
@@ -211,7 +211,7 @@ public:
         DataFrame *words = kv->get(in);
         SIMap map;
         Adder add(map);
-        words->local_map(add);
+        words->map(add);
         Summer cnt(map);
 
         StrBuff *s = new StrBuff();
@@ -219,7 +219,7 @@ public:
         s->c(this->idx_);
         Key *key_counts = new Key(s->get());
 
-        fromVisitor(key_counts, &kv, "SI", cnt);
+        fromVisitor(key_counts, kv, "SI", cnt);
     }
 
     /** Merge the data frames of all nodes */
@@ -250,7 +250,7 @@ public:
 
     /** Adds map values into dataframe */
     void merge(DataFrame *df, SIMap &m) {
-        Adder add(m);
+        Adder* add = new Adder(m);
         df->map(add);
     }
 
