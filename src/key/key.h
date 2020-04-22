@@ -22,13 +22,11 @@ public:
         this->home = home;
     }
 
-    // If no homenode passed in, index.
     Key(char *name) {
         this->name = new String(name);
         this->home = arg.index;
     }
 
-    // If no homenode passed in, default 0.
     Key(const char *name) {
         this->name = new String(name);
         this->home = 0;
@@ -55,13 +53,10 @@ public:
      * Returns true if this Key equals the given object
      */
     bool equals(Object *other) {
-//        cout << "in key equals" << endl;
         if (other == this) return true;
         Key *x = dynamic_cast<Key *>(other);
         if (x == nullptr) return false;
-//        cout << "checking key equivalency: " << name->c_str() << "and " << x->name->c_str() <<endl;
         bool ret = name->equals(x->name);
-//        cout << "return value = " << ret << endl;
         return ret;
     }
 
@@ -70,7 +65,6 @@ public:
         StrBuff *a = new StrBuff();
         a->c(this->name->c_str());
         char *ret = a->get()->c_str();
-//        delete a;
         return ret;
     }
 
