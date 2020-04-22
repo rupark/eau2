@@ -64,7 +64,9 @@ public:
       * a value of the wrong type is undefined. */
     void set(size_t col, int val) {
         if (col < size && col >= 0) {
-            delete elements[col];
+            if (elements[col] != nullptr) {
+                delete elements[col];
+            }
             elements[col] = new Integer(val);
         } else {
             exit(1);
@@ -74,7 +76,7 @@ public:
     void set(size_t col, float val) {
         if (col < size && col >= 0) {
             if (elements[col] != nullptr) {
-                delete columns[i];
+                delete elements[col];
             }
             elements[col] = new Float(val);
         } else {
@@ -84,7 +86,9 @@ public:
 
     void set(size_t col, bool val) {
         if (col < size && col >= 0) {
-            delete elements[col];
+            if (elements[col] != nullptr) {
+                delete elements[col];
+            }
             elements[col] = new Bool(val);
         } else {
             exit(1);
@@ -94,7 +98,9 @@ public:
     /** The string is external. */
     void set(size_t col, String *val) {
         if (col < size && col >= 0) {
-            delete elements[col];
+            if (elements[col] != nullptr) {
+                delete elements[col];
+            }
             elements[col] = val;
         } else {
             exit(1);
