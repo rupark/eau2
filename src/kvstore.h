@@ -29,8 +29,12 @@ public:
 
     ~KVStore() {
         for (int i = 0; i < size; i++) {
-            delete keys[i];
-            delete dfs[i];
+            if (keys[] != nullptr) {
+                delete keys[i];
+            }
+            if (dfs[i] != nullptr) {
+                delete dfs[i];
+            }
         }
         delete[] keys;
         delete[] dfs;
