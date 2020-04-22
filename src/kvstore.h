@@ -19,13 +19,13 @@ class DataFrame;
 class KVStore {
 public:
     Key **keys;
-    DataFrame **dfs;
+    DataFrame *dfs;
     int size;
 
     KVStore() {
         this->size = 0;
         this->keys = new Key *[500];
-        this->dfs = new DataFrame *[500];
+        this->dfs = new DataFrame [500];
     }
 
     ~KVStore() {
@@ -41,7 +41,7 @@ public:
     /**
      * Adds the given Key and DataFrame to this KVStore
      */
-    void put(Key key, DataFrame df) {
+    void put(Key key, DataFrame* df) {
 //        if (key->name->equals(new String("users-1-0"))) {
 ////            cout << "??????????????????????????????????????????????????????????????????????????" << endl;
 //        }
@@ -60,7 +60,7 @@ public:
             // if found already, replace
             if (this->keys[k]->equals(&key)) {
 //                cout << "put key already found: " << keys[k]->name->c_str() << " at " << k << endl;
-                *this->dfs[k] = df;
+                this->dfs[k] = df;
 //                cout << "DF Set new size = " << size << endl;
                 return;
             }
