@@ -202,7 +202,7 @@ public:
 
         newUsers->map(upd); // all of the new users are copied to delta.
         cout << "mapped" << endl;
-
+        delete upd;
 //        cout << "\n\n\n" << endl;
 //        for (size_t m = 0; m < kv->size; m++) {
 //            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
@@ -227,7 +227,6 @@ public:
 //        }
 //        cout << "\n\n\n" << endl;
 
-
         this->kv = merge(ptagger->newProjects, "projects-", stage);
 //        cout << "merged" <<endl;
 
@@ -239,7 +238,11 @@ public:
 
 
 //        cout << "pset union" <<endl;
-        pSet->union_(ptagger->newProjects);
+        pSet->union_(ptagger->newProjects)
+
+
+
+
 
 //        cout << "finished pset" << endl;
 //        cout << kv->size << endl;
@@ -253,6 +256,7 @@ public:
 
 //        cout << "utagger" << endl;
         UsersTagger* utagger = new UsersTagger(ptagger->newProjects, *uSet, users);
+        delete ptagger;
 
 
 //        cout << "\n\n\n" << endl;
@@ -300,6 +304,7 @@ public:
 
 //        cout << "uset union" << endl;
         uSet->union_(utagger->newUsers);
+        delete utagger;
 //        cout << "    after stage " << stage << ":" << endl;
 //        cout << "        tagged projects: " << pSet->size() << endl;
 //        cout << "        tagged users: " << uSet->size() << endl;
