@@ -212,7 +212,7 @@ public:
             s->c("users-");
             s->c(stage);
             s->c("-0");
-            String* t = s->get();
+            String *t = s->get();
             Key *uK = new Key(t);
             delete s;
             DataFrame *newUsers = kv->get(*uK);
@@ -253,23 +253,29 @@ public:
             cout << "\n\n\n\n\n\n\n\num chunks: " << num_chunks << endl;
             for (size_t j = 0; j < num_chunks; j++) {
                 DataFrame *cur_chunk = newUsers->chunk(j);
+                cout << cur_chunk->get_num_rows() << endl;
                 // if server's turn, keep chunks of DataFrame.
                 if (selectedNode == 0) {
                     // append chunks as received
                     cout << "append" << endl;
                     chunkSoFar->append_chunk(cur_chunk);
                     selectedNode++;
+                    if (selectedNode == arg.num_nodes) {
+                        selectedNode = 0;
+                    }
+                    break;
                 } else {
                     // Sending to Clients
                     Status *chunkMsg = new Status(0, selectedNode, cur_chunk);
                     this->net.send_m(chunkMsg);
                     selectedNode++;
+                    if (selectedNode == arg.num_nodes) {
+                        selectedNode = 0;
+                    }
+                    break;
                 }
-                // increment selected node circularly between nodes
-                if (selectedNode == arg.num_nodes) {
-                    selectedNode = 0;
-                }
-               // selectedNode = ++selectedNode == arg.num_nodes ? selectedNode = 0 : selectedNode++;
+                // increment selected node circularly between nodes//break;
+                // selectedNode = ++selectedNode == arg.num_nodes ? selectedNode = 0 : selectedNode++;
             }
 
             delete newUsers;
@@ -359,14 +365,14 @@ public:
             h->c(name);
             h->c(stage);
             h->c("-0");
-            String* str = h->get();
+            String *str = h->get();
             Key *k = new Key(str);
             delete h;
             fromVisitor(k, kv, "I", writer);
         } else {
             cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter *writer = new SetWriter(set);
-            Key* k = new Key(StrBuff(name).c(stage).c("-").c(idx_).get());
+            Key *k = new Key(StrBuff(name).c(stage).c("-").c(idx_).get());
             DataFrame *toSend = fromVisitor(k, kv, "I", writer);
             Status *nodeToServer = new Status(idx_, 0, toSend);
             this->net.send_m(nodeToServer);
