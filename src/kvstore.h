@@ -53,7 +53,7 @@ public:
             // if found already, replace
             if (this->keys[k]->equals(&key)) {
 //                cout << "put key already found: " << keys[k]->name->c_str() << " at " << k << endl;
-                this->dfs[k] = &df;
+                this->dfs[k] = df;
 //                cout << "DF Set new size = " << size << endl;
                 return;
             }
@@ -62,8 +62,8 @@ public:
         cout << " we put" << endl;
 
         // if new key add and increment size
-        this->keys[size] = &key;
-        this->dfs[size] = &df;
+        this->keys[size] = key;
+        this->dfs[size] = df;
 
 //        cout << "dfs[0]- " << dfs[0] << endl;
 
