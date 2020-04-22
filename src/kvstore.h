@@ -63,8 +63,8 @@ public:
         cout << " we put" << endl;
 
         // if new key add and increment size
-        this->keys[size] = key;
-        this->dfs[size] = df;
+        *this->keys[size] = *key;
+        *this->dfs[size] = *df;
 
 //        cout << "dfs[0]- " << dfs[0] << endl;
 
