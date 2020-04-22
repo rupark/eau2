@@ -219,7 +219,9 @@ public:
             cout << "newusers size: " << newUsers->get_num_rows() << endl;
 
             //number of chunks
+            cout << arg.rows_per_chunk << endl;
             int num_chunks = 1 + ((newUsers->get_num_rows() - 1) / arg.rows_per_chunk);
+            cout << num_chunks << endl;
 
             cout << "sending num chunks" << endl;
             //sending out the number of chunks each will receive
