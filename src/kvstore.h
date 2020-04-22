@@ -28,6 +28,7 @@ public:
     }
 
     ~KVStore() {
+        cout << "in kv des" << endl;
         for (int i = 0; i < size; i++) {
             if (keys[i] != nullptr) {
                 delete keys[i];
@@ -36,6 +37,7 @@ public:
                 delete dfs[i];
             }
         }
+        cout << "done with ind" << endl;
         delete[] keys;
         delete[] dfs;
     };
