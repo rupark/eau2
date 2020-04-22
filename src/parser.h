@@ -45,10 +45,6 @@ public:
         _str = str;
     }
 
-    ~StrSlice() {
-        delete[] _str;
-    }
-
     /**
      * @return The length of this slice
      */
@@ -674,7 +670,9 @@ public:
             convertedSchema[j] = getCharFromProvColType(_typeGuesses[j]);
         }
         convertedSchema[_num_columns] = '\0';
-        this->parsed_df = new DataFrame(*new Schema(convertedSchema));
+        Schema* s = new Schema(convertedSchema);
+        this->parsed_df = new DataFrame(*s);
+        delete s;
         ////////////////////////////////////////////
     }
 
