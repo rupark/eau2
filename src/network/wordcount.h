@@ -41,6 +41,10 @@
 //        buf_ = *new StrBuff(orig->c_str());
 //    }
 //
+//    ~KeyBuff() {
+//        delete orig_;
+//    }
+//
 //    KeyBuff &c(String &s) {
 //        buf_.c(s);
 //        return *this;

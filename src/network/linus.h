@@ -35,6 +35,23 @@ public:
 
     Linus(size_t idx, NetworkIP& net): Application(idx, net) {}
 
+    ~Linus() {
+        cout << "in linus des" << endl;
+        cout << "3" << endl;
+        delete projects;
+        cout << "4" << endl;
+        delete users;
+        cout << "5" << endl;
+        delete commits;
+        cout << "6" << endl;
+        delete uSet;
+        cout << "7" << endl;
+        delete pSet;
+        cout << "8" << endl;
+        //delete kv;
+        //delete net;
+    }
+
     /** Compute DEGREES of Linus.  */
     void run_() override {
         readInput();
@@ -57,7 +74,6 @@ public:
         FILE* file_dup = fopen(filep, "rb");
         cout << "fopen file null?: " << (file == nullptr) << endl;
         size_t file_size = get_file_size(file_dup);
-        delete file_dup;
         cout << "size of file calced " << file_size << endl;
         cout << "file opened" << endl;
 
@@ -74,9 +90,11 @@ public:
         }
 
         ///////////////////////////////////////
+        fclose(file);
+      //  fclose(file_dup);
 
-
-        delete file;
+       // delete[] file;
+        //delete[] file_dup;
         cout << "file parsed" << endl;
 //        DataFrame* d = new DataFrame(parser->getColumnSet(), parser->_num_columns);
         DataFrame* d = parser->parsed_df;
@@ -144,6 +162,7 @@ public:
         s->c(stage);
         s->c("-0");
         Key* uK = new Key(s->get());
+        delete s;
 //        cout << "made key: " << uK->name->c_str() << endl;
         // A df with all the users added on the previous round
         //DataFrame* newUsers = dynamic_cast<DataFrame*>(kv->waitAndGet(uK));
@@ -183,14 +202,14 @@ public:
 
         newUsers->map(upd); // all of the new users are copied to delta.
         cout << "mapped" << endl;
-
+        delete upd;
 //        cout << "\n\n\n" << endl;
 //        for (size_t m = 0; m < kv->size; m++) {
 //            cout << "KV Store Key " << m << ": " << kv->keys[m]->c_str() << endl;
 //        }
 //        cout << "\n\n\n" << endl;
 
-        //delete newUsers;
+        delete newUsers;
         ProjectsTagger* ptagger = new ProjectsTagger(delta, *pSet, projects);
 //        cout << "ptagger" << endl;
 //
@@ -208,7 +227,6 @@ public:
 //        }
 //        cout << "\n\n\n" << endl;
 
-
         this->kv = merge(ptagger->newProjects, "projects-", stage);
 //        cout << "merged" <<endl;
 
@@ -222,6 +240,10 @@ public:
 //        cout << "pset union" <<endl;
         pSet->union_(ptagger->newProjects);
 
+
+
+
+
 //        cout << "finished pset" << endl;
 //        cout << kv->size << endl;
 //
@@ -234,6 +256,7 @@ public:
 
 //        cout << "utagger" << endl;
         UsersTagger* utagger = new UsersTagger(ptagger->newProjects, *uSet, users);
+        delete ptagger;
 
 
 //        cout << "\n\n\n" << endl;
@@ -281,6 +304,7 @@ public:
 
 //        cout << "uset union" << endl;
         uSet->union_(utagger->newUsers);
+        delete utagger;
 //        cout << "    after stage " << stage << ":" << endl;
 //        cout << "        tagged projects: " << pSet->size() << endl;
 //        cout << "        tagged users: " << uSet->size() << endl;
@@ -316,7 +340,7 @@ public:
                 cout << " elements from node " << i << endl;
                 SetUpdater* upd = new SetUpdater(set);
                 delta->map(upd);
-                //delete delta;
+                delete delta;
             }
             cout << "    storing " << set.size() << " merged elements" << endl;
             SetWriter* writer = new SetWriter(set);
@@ -327,7 +351,7 @@ public:
             h->c("-0");
             Key* k = new Key(h->get());
 //            cout << "k name ------- " << k->name->c_str() << endl;
-            //delete DataFrame::fromVisitor(&k, &kv, "I", writer);
+            DataFrame::fromVisitor(k, kv, "I", writer);
 //            cout << "calling fromVisitor" << endl;
 
 //            cout << "\n\n\n" << endl;
@@ -336,7 +360,7 @@ public:
 //            }
 //            cout << "\n\n\n" << endl;
 
-            DataFrame::fromVisitor(k, kv, "I", writer);
+            //DataFrame::fromVisitor(k, kv, "I", writer);
 //            cout << "FROM VISITOR FINISHED" << endl;
 //
 //            cout << "\n\n\n" << endl;
@@ -353,16 +377,17 @@ public:
         } else {
             cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter* writer = new SetWriter(set);
-            Key k(StrBuff(name).c(stage).c("-").c(idx_).get());
-//            delete DataFrame::fromVisitor(&k, &kv, "I", writer);
+            Key* k = new Key(StrBuff(name).c(stage).c("-").c(idx_).get());
             DataFrame::fromVisitor(k, kv, "I", writer);
+            //DataFrame::fromVisitor(k, kv, "I", writer);
             Key mK(StrBuff(name).c(stage).c("-0").get());
             DataFrame* merged = dynamic_cast<DataFrame*>(kv->get(mK));
             cout << "    receiving " << merged->get_num_rows() << " merged elements" << endl;
             SetUpdater* upd = new SetUpdater(set);
             merged->map(upd);
+            delete merged;
             return nullptr;
-            //delete merged;
+
         }
     }
 }; // Linus

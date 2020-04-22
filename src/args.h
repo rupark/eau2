@@ -21,6 +21,12 @@ public:
 
     Args() {}
 
+    ~Args() {
+//        delete[] file;
+//        delete[] master_ip;
+//        delete[] app;
+    }
+
     void parse(int argc, char **argv) {
         for (int i = 1; i < argc; i++) {
             char *a = argv[i++];

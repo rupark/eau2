@@ -98,7 +98,7 @@ public:
     }
 
     ~Map() {
-        //delete[] items_;
+        delete[] items_;
     }
 
     /** True if the key is in the map. */

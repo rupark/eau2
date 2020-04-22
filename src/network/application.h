@@ -21,10 +21,14 @@ public:
         this->net = net;
     }
 
+    ~Application() {
+        cout << "in app des" << endl;
+        delete kv;
+    }
+
     Application(size_t idx) {
         kv = new KVStore();
         this->idx_ = idx;
-
     }
 
     /** Returns the index of this node **/

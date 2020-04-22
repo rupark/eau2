@@ -42,6 +42,9 @@ public:
         this->target_ = target;
     }
 
+    ~Ack() {
+    }
+
     //Deserializing from a char*
     Ack(char *buffer) {
         char **args = new char *[1000];
@@ -75,6 +78,10 @@ public:
 class Status : public Message {
 public:
     DataFrame *msg_; // owned
+
+    ~Status() {
+        delete msg_;
+    }
 
     Status(int sender, int target, DataFrame *msg) {
         this->kind_ = MsgKind::Status;
@@ -194,6 +201,8 @@ public:
     sockaddr_in client;
     size_t port;
 
+    ~Register() {}
+
     Register(unsigned idx, size_t port, sockaddr_in ip_) {
         this->kind_ = MsgKind::Register;
         this->sender_ = idx;
@@ -256,6 +265,14 @@ public:
     size_t nodes;
     size_t *ports;  // owned
     String **addresses;  // owned; strings owned
+
+    ~Directory() {
+        delete[] ports;
+        for (int i = 0; i < nodes; i++) {
+            delete addresses[i];
+        }
+        delete[] addresses;
+    }
 
     Directory(size_t *ports, String **addresses, size_t nodes) {
         this->kind_ = MsgKind::Directory;

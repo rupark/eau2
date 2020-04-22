@@ -26,13 +26,14 @@
 #include "reader.h"
 #include "writer.h"
 #include "reader.h"
+#include "array.h"
 
 using namespace std;
 
 /** Represents a set of data */
 class DataFrame : public Object {
 public:
-    Schema* schema; // Cannot be changed
+    Schema *schema; // Cannot be changed
     Column **columns;
 
     /** Create a data frame with the same columns as the given df but with no rows or rownmaes */
@@ -41,13 +42,17 @@ public:
         int nrow = df.get_num_rows();
         schema = df.get_schema();
         columns = df.columns;
+
     }
 
     //TODO
     ~DataFrame() {
+        cout << "in df destructor" << endl;
         for (int i = 0; i < this->schema->get_num_cols(); i++) {
             delete columns[i];
         }
+        delete[] columns;
+        delete schema;
     }
 
     /** Create a data frame from a schema-> All columns are created empty. */
@@ -179,7 +184,7 @@ public:
 
     /** Returns the dataframe's schema-> Modifying the schema after a dataframe
       * has been created in undefined. */
-    Schema* get_schema() {
+    Schema *get_schema() {
         return schema;
     }
 
@@ -216,12 +221,12 @@ public:
         return columns[col]->as_string()->get(row);
     }
 
-    Row* get_row(size_t i) {
+    Row *get_row(size_t i) {
         if (i < 0 || i >= this->get_num_rows()) {
             return nullptr;
         }
-        Row* build_row = new Row(this->schema);
-        this->fill_row(i,*build_row);
+        Row *build_row = new Row(this->schema);
+        this->fill_row(i, *build_row);
         build_row->printRow();
         return build_row;
     }
@@ -256,10 +261,10 @@ public:
                     row.set(i, columns[i]->as_float()->get(idx));
                     break;
                 case 'B':
-                    row.set(i, (bool)*columns[i]->as_bool()->get(idx));
+                    row.set(i, (bool) *columns[i]->as_bool()->get(idx));
                     break;
                 case 'I':
-                    row.set(i, (int)*columns[i]->as_int()->get(idx));
+                    row.set(i, (int) *columns[i]->as_int()->get(idx));
                     break;
                 case 'S':
                     row.set(i, columns[i]->as_string()->get(idx));
@@ -312,29 +317,32 @@ public:
     size_t get_num_cols() {
         return schema->get_num_cols();
     }
-    
+
     /** Visits the rows in order on THIS node */
-    void map(Reader* r) {
+    void map(Reader *r) {
+        cout << "in map" << endl;
         int completed = 0;
-        
+
         for (size_t i = 0; i < this->get_num_rows(); i++) {
             Row *row = new Row(this->schema);
-            this->fill_row(i,*row);
+            this->fill_row(i, *row);
             completed++;
             r->visit(*row);
+            delete row;
         }
-        
+
     }
 
     /** Visits the rows in order on THIS node */
-    void map(Writer* r) {
+    void map(Writer *r) {
         int completed = 0;
 
         for (size_t i = 0; i < this->get_num_rows(); i++) {
             Row *row = new Row(this->schema);
-            this->fill_row(i,*row);
+            this->fill_row(i, *row);
             completed++;
             r->visit(*row);
+            delete row;
         }
 
     }
@@ -366,31 +374,38 @@ public:
      * Contructs a DataFrame from the given array of doubles and associates the given Key with the DataFrame in the given KVStore
      */
     static DataFrame *fromArray(Key *key, KVStore *kv, size_t sz, double *vals) {
-        DataFrame *df = new DataFrame(*new Schema("F"));
+        Schema *s = new Schema("F");
+        DataFrame *df = new DataFrame(*s);
+        delete s;
         for (int i = 0; i < sz; i++) {
             df->columns[0]->push_back((float) vals[i]);
         }
         kv->put(key, df);
+        delete vals;
         return df;
     }
+
+    /** Idea: have put take in non-pointers
 
     /**
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
-    static DataFrame *fromVisitor(Key key, KVStore* kv, char *schema, Writer* w) {
-//        cout << "in fromVisitor" << endl;
-        DataFrame *df = new DataFrame(*new Schema(schema));
-//        cout << "made df" << endl;
+    static DataFrame *fromVisitor(Key *key, KVStore *kv, char *schema, Writer *w) {
+        cout << "in fromVisitor" << endl;
+        Schema *s = new Schema(schema);
+        DataFrame *df = new DataFrame(*s);
         while (!w->done()) {
-            Row *r = new Row(new Schema(schema));
+            Row *r = new Row(s);
             w->visit(*r);
             df->add_row(*r);
+            delete r;
         }
-        
-        kv->put(key.clone(), df);
+        delete s;
+        cout << "done visiting" << endl;
+        kv->put(key, df);
         return df;
     }
-    
+
     /** Returns a section of this DataFrame as a new DataFrame **/
     DataFrame *chunk(size_t chunk_select) {
 
@@ -404,11 +419,12 @@ public:
                 Row *r = new Row(this->schema);
                 this->fill_row(i, *r);
                 df->add_row(*r);
+                delete r;
             }
         }
         return df;
     }
-    
+
     /**
      * Returns the double at the given column and row in this DataFrame
      */
@@ -421,10 +437,12 @@ public:
      */
     static DataFrame *fromScalarInt(Key *key, KVStore *kv, size_t scalar) {
 //        cout << "Creating df " << endl;
-        DataFrame *df = new DataFrame(*new Schema("I"));
+        Schema *s = new Schema("I");
+        DataFrame *df = new DataFrame(*s);
+        delete s;
 //        cout << "pushing back" << endl;
         df->columns[0]->push_back((int) scalar);
-        if (df->get_num_rows() < df->columns[0]->size()){
+        if (df->get_num_rows() < df->columns[0]->size()) {
             df->schema->nrow = df->columns[0]->size();
         }
 //        cout << "putting in kv store: " << key->name->c_str()  << "size of df" << df->get_num_rows() << endl;
@@ -469,13 +487,13 @@ public:
     /**
      * Adds chunk dataframe passed in to this dataframe
      */
-     DataFrame* append_chunk(DataFrame* df) {
-         for (size_t r = 0; r < df->get_num_rows(); r++) {
-             this->add_row(*df->get_row(r));
-         }
+    DataFrame *append_chunk(DataFrame *df) {
+        for (size_t r = 0; r < df->get_num_rows(); r++) {
+            this->add_row(*df->get_row(r));
+        }
 
-         return this;
-     }
+        return this;
+    }
 
 };
 
@@ -487,31 +505,33 @@ public:
  ************************************************************************/
 class Set {
 public:
-    bool* vals_;  // owned; data
+    bool *vals_;  // owned; data
     size_t size_; // number of elements
 
     /** Creates a set of the same size as the dataframe. */
-    Set(DataFrame* df) : Set(df->get_num_rows()) {}
+    Set(DataFrame *df) : Set(df->get_num_rows()) {}
 
     /** Creates a set of the given size. */
     Set(size_t sz) {
         vals_ = new bool[sz];
         size_ = sz;
         cout << "creating set" << endl;
-        for(size_t i = 0; i < size_; i++) {
+        for (size_t i = 0; i < size_; i++) {
             vals_[i] = false;
         }
     }
 
-    ~Set() { //delete[] vals_;
-        }
+    ~Set() {
+        cout << "in set des" << endl;
+        delete[] vals_;
+    }
 
     /** Add idx to the set. If idx is out of bound, ignore it.  Out of bound
      *  values can occur if there are references to pids or uids in commits
      *  that did not appear in projects or users.
      */
     void set(size_t idx) {
-        if (idx >= size_ ) return; // ignoring out of bound writes
+        if (idx >= size_) return; // ignoring out of bound writes
         vals_[idx] = true;
     }
 
@@ -524,7 +544,7 @@ public:
     size_t size() { return size_; }
 
     /** Performs set union in place. */
-    void union_(Set& from) {
+    void union_(Set &from) {
         for (size_t i = 0; i < from.size_; i++)
             if (from.test(i))
                 set(i);
@@ -536,12 +556,12 @@ public:
  * dataframe. The data contains all the values in the set. The dataframe has
  * at least one integer column.
  ****************************************************************************/
-class SetWriter: public Writer {
+class SetWriter : public Writer {
 public:
-    Set& set_; // set to read from
+    Set &set_; // set to read from
     int i_ = 0;  // position in set
 
-    SetWriter(Set& set) : set_(set){
+    SetWriter(Set &set) : set_(set) {
     }
 
     /** Skip over false values and stop when the entire set has been seen */
@@ -550,7 +570,7 @@ public:
         return i_ == set_.size_;
     }
 
-    virtual void visit(Row & row) override { row.set(0, i_++); }
+    virtual void visit(Row &row) override { row.set(0, i_++); }
 };
 
 
@@ -560,14 +580,17 @@ public:
  ******************************************************************************/
 class SetUpdater : public Reader {
 public:
-    Set& set_; // set to update
+    Set &set_; // set to update
 
-    SetUpdater(Set& set): set_(set) {}
+    SetUpdater(Set &set) : set_(set) {}
 
     /** Assume a row with at least one column of type I. Assumes that there
      * are no missing. Reads the value and sets the corresponding position.
      * The return value is irrelevant here. */
-    bool visit(Row & row) { set_.set(row.get_int(0));  return false; }
+    bool visit(Row &row) {
+        set_.set(row.get_int(0));
+        return false;
+    }
 
 };
 
@@ -584,17 +607,17 @@ public:
  *************************************************************************/
 class ProjectsTagger : public Reader {
 public:
-    Set& uSet; // set of collaborator
-    Set& pSet; // set of projects of collaborators
+    Set &uSet; // set of collaborator
+    Set &pSet; // set of projects of collaborators
     Set newProjects;  // newly tagged collaborator projects
 
-    ProjectsTagger(Set& uSet, Set& pSet, DataFrame* proj):
+    ProjectsTagger(Set &uSet, Set &pSet, DataFrame *proj) :
             uSet(uSet), pSet(pSet), newProjects(proj) {}
 
     /** The data frame must have at least two integer columns. The newProject
      * set keeps track of projects that were newly tagged (they will have to
      * be communicated to other nodes). */
-    bool visit(Row & row) override {
+    bool visit(Row &row) override {
         int pid = row.get_int(0);
         int uid = row.get_int(1);
         if (uSet.test(uid)) {
