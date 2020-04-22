@@ -286,7 +286,8 @@ public:
 //        cout << "\n\n\n" << endl;
 
         //delete kv;
-        this->kv = merge(ptagger->newProjects, "projects-", stage);
+        //this->kv = merge(ptagger->newProjects, "projects-", stage);
+        merge(ptagger->newProjects, "projects-", stage);
 //        cout << "merged" <<endl;
 
 //        cout << "\n\n\n" << endl;
@@ -344,7 +345,7 @@ public:
 //        }
 //        cout << "\n\n\n" << endl;
 //        cout << "STARTING MERGE" << endl;
-        this->kv = merge(utagger->newUsers, "users-", stage + 1);
+        merge(utagger->newUsers, "users-", stage + 1);
 //        cout << "MERGE FINISHED" << endl;
 
 //        cout << "\n\n\n" << endl;
@@ -427,7 +428,7 @@ public:
 //                cout << "KV Store Key " << m << ": " << &kv->keys[m]->name->cstr_ << endl;
 //            }
 //            cout << "\n\n\n" << endl;
-            return kv;
+            //return kv;
 
             //           cout << "kv->keys[1] NULL?" << (kv->keys[1]  == nullptr) << endl;
 //            if (kv->keys[1]  != nullptr) {
@@ -445,7 +446,7 @@ public:
             SetUpdater *upd = new SetUpdater(set);
             merged->map(upd);
             delete merged;
-            return nullptr;
+            //return nullptr;
 
         }
     }
