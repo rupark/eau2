@@ -33,3 +33,6 @@ build:
 
 valgrind:
 	valgrind --leak-check=full ./linus -index 0 -node 1 -port 8080 -masterip "127.0.0.4" -app "linus"
+
+
+
