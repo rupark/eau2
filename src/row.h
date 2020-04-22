@@ -51,7 +51,6 @@ public:
                     break;
             }
         }
-        delete scm;
     }
 
     ~Row() {

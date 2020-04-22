@@ -45,6 +45,10 @@ public:
         _str = str;
     }
 
+    ~StrSlice() {
+        delete[] _str;
+    }
+
     /**
      * @return The length of this slice
      */
