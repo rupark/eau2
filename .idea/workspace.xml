@@ -67,27 +67,6 @@
       <workItem from="1587140412787" duration="12921000" />
       <workItem from="1587227716818" duration="10832000" />
     </task>
-    <task id="LOCAL-00179" summary="THIS VERSION DOESNT SEGFAULT">
-      <created>1587566887619</created>
-      <option name="number" value="00179" />
-      <option name="presentableId" value="LOCAL-00179" />
-      <option name="project" value="LOCAL" />
-      <updated>1587566887619</updated>
-    </task>
-    <task id="LOCAL-00180" summary="THIS VERSION DOESNT SEGFAULT">
-      <created>1587566971674</created>
-      <option name="number" value="00180" />
-      <option name="presentableId" value="LOCAL-00180" />
-      <option name="project" value="LOCAL" />
-      <updated>1587566971674</updated>
-    </task>
-    <task id="LOCAL-00181" summary="THIS VERSION DOESNT SEGFAULT">
-      <created>1587567084041</created>
-      <option name="number" value="00181" />
-      <option name="presentableId" value="LOCAL-00181" />
-      <option name="project" value="LOCAL" />
-      <updated>1587567084041</updated>
-    </task>
     <task id="LOCAL-00182" summary="THIS VERSION DOESNT SEGFAULT">
       <created>1587567335782</created>
       <option name="number" value="00182" />
@@ -410,7 +389,28 @@
       <option name="project" value="LOCAL" />
       <updated>1587582303581</updated>
     </task>
-    <option name="localTasksCounter" value="228" />
+    <task id="LOCAL-00228" summary="400 blocks of mem leak, segfault after end of exec">
+      <created>1587582681340</created>
+      <option name="number" value="00228" />
+      <option name="presentableId" value="LOCAL-00228" />
+      <option name="project" value="LOCAL" />
+      <updated>1587582681340</updated>
+    </task>
+    <task id="LOCAL-00229" summary="400 blocks of mem leak, segfault after end of exec">
+      <created>1587582710881</created>
+      <option name="number" value="00229" />
+      <option name="presentableId" value="LOCAL-00229" />
+      <option name="project" value="LOCAL" />
+      <updated>1587582710881</updated>
+    </task>
+    <task id="LOCAL-00230" summary="400 blocks of mem leak, segfault after end of exec">
+      <created>1587582730871</created>
+      <option name="number" value="00230" />
+      <option name="presentableId" value="LOCAL-00230" />
+      <option name="project" value="LOCAL" />
+      <updated>1587582730871</updated>
+    </task>
+    <option name="localTasksCounter" value="231" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -424,10 +424,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="400 blocks of mem leak, segfault after end of exec" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587582710810">
+    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587582957977">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1587582710810" />
+    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1587582957977" />
     <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586820289069" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.830@0.23.1440.830" timestamp="1587492452941" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.832@0.23.1440.832" timestamp="1587568622602" />
@@ -447,10 +447,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="483" y="130" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1586820663598" />
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1587582712326">
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1587582732287">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1587582712326" />
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1587582732287" />
     <state x="362" y="147" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586820747812" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1587227722830">
       <screen x="0" y="0" width="1536" height="824" />

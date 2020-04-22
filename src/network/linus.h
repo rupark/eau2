@@ -263,6 +263,8 @@ public:
                 selectedNode = ++selectedNode == arg.num_nodes ? selectedNode = 0 : selectedNode++;
             }
 
+            delete num_chunks;
+
             cout << "sent chunks" << endl;
         } else {
             //Calculating the number of chunks and figuring out how many go to this node
@@ -281,7 +283,6 @@ public:
                 chunkSoFar->append_chunk(ipd->msg_);
             }
         }
-
 
         /** all nodes  **/
         Set delta(users);
@@ -318,8 +319,8 @@ public:
         delete utagger;
 
         cout << "    after stage " << stage << ":" << endl;
-        cout << "        tagged projects: " << pSet->size() << endl;
-        cout << "        tagged users: " << uSet->size() << endl;
+        cout << "        tagged projects: " << pSet->num_true() << endl;
+        cout << "        tagged users: " << uSet->num_true() << endl;
     }
 
     /** Gather updates to the given set from all the nodes in the systems.

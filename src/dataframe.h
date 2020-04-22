@@ -455,6 +455,7 @@ public:
         for (size_t r = 0; r < df->get_num_rows(); r++) {
             this->add_row(*df->get_row(r));
         }
+        delete df;
 
         return this;
     }
