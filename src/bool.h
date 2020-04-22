@@ -26,7 +26,9 @@ public:
      * @param  N/A
      * @return N/A
      */
-    virtual ~Bool() {}
+    virtual ~Bool() {
+
+    }
 
     /**
      * equals - compares this and other for equality
