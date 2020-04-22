@@ -28,12 +28,12 @@ public:
     }
 
     ~KVStore() {
-        for (int i = 0; i < size; i++) {
-            delete keys[i];
-            delete dfs[i];
-        }
-        delete[] keys;
-        delete[] dfs;
+//        for (int i = 0; i < size; i++) {
+//            delete keys[i];
+//            delete dfs[i];
+//        }
+//        delete[] keys;
+//        delete[] dfs;
     };
 
     /**
