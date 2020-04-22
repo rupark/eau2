@@ -250,6 +250,7 @@ public:
             // Split into chunks and send iteratively to nodes
             int selectedNode = 0;
 
+            cout << num_chunks << endl;
             for (size_t j = 0; j < num_chunks; j++) {
                 DataFrame *cur_chunk = newUsers->chunk(j);
                 // if server's turn, keep chunks of DataFrame.
@@ -263,7 +264,10 @@ public:
                     this->net.send_m(chunkMsg);
                 }
                 // increment selected node circularly between nodes
-                selectedNode = ++selectedNode == arg.num_nodes ? selectedNode = 0 : selectedNode++;
+                if (selectedNode == arg.num_nodes) {
+                    selectedNode = 0;
+                }
+               // selectedNode = ++selectedNode == arg.num_nodes ? selectedNode = 0 : selectedNode++;
             }
 
             delete newUsers;
