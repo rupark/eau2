@@ -38,27 +38,17 @@ public:
     Linus(size_t idx, NetworkIP &net) : Application(idx, net) {}
 
     ~Linus() {
-        cout << "in linus des" << endl;
-        cout << "3" << endl;
         delete projects;
-        cout << "4" << endl;
         delete users;
-        cout << "5" << endl;
         delete commits;
-        cout << "6" << endl;
         delete uSet;
-        cout << "7" << endl;
         delete pSet;
-        cout << "8" << endl;
-        //delete kv;
-        //delete net;
     }
 
     /** Compute DEGREES of Linus.  */
     void run_() override {
         readInput();
         cout << "READING INPUT" << endl;
-
         for (size_t i = 0; i < DEGREES; i++) step(i);
     }
 
@@ -71,34 +61,19 @@ public:
     }
 
     DataFrame *readDataFrameFromFile(const char *filep) {
-        cout << "in from file: " << filep << endl;
         FILE *file = fopen(filep, "rb");
         FILE *file_dup = fopen(filep, "rb");
-        cout << "fopen file null?: " << (file == nullptr) << endl;
         size_t file_size = get_file_size(file_dup);
-        cout << "size of file calced " << file_size << endl;
-        cout << "file opened" << endl;
 
-
-        ///////////////////////////////////////
         SorParser *parser = new SorParser(file, (size_t) 0, (size_t) file_size, (size_t) file_size);
-        cout << "parser created" << endl;
         parser->guessSchema();
-        cout << "schema guessed" << endl;
         try {
             parser->parseFile();
         } catch (const std::exception &e) {
             cout << "PARSE FILE: " << e.what() << endl;
         }
 
-        ///////////////////////////////////////
         fclose(file);
-        //  fclose(file_dup);
-
-        // delete[] file;
-        //delete[] file_dup;
-        cout << "file parsed" << endl;
-//        DataFrame* d = new DataFrame(parser->getColumnSet(), parser->_num_columns);
         DataFrame *d = parser->parsed_df;
         cout << "data frame created of SIZE " << d->get_num_rows() << endl;
         delete parser;
@@ -117,38 +92,26 @@ public:
         Key *uK = new Key("usrs");
         Key *cK = new Key("comts");
         if (this_node() == 0) {
-            // We never put these dfs in the store???
-            cout << "Reading..." << endl;
-//            commits = DataFrame::fromFile(COMM, cK, kv);
             commits = readDataFrameFromFile(COMM);
             cout << "    " << commits->get_num_rows() << " commits" << endl;
-//            projects = DataFrame::fromFile(PROJ, pK, kv);
             projects = readDataFrameFromFile(PROJ);
             cout << "    " << projects->get_num_rows() << " projects" << endl;
-//            users = DataFrame::fromFile(USER, uK, kv);
             users = readDataFrameFromFile(USER);
             cout << "    " << users->get_num_rows() << " users" << endl;
             // This dataframe contains the id of Linus.
-            //delete
             Key *key = new Key("users-0-0");
             fromScalarInt(key, kv, LINUS);
         } else {
             cout << "Reading..." << endl;
-//            commits = DataFrame::fromFile(COMM, cK, kv);
             commits = readDataFrameFromFile(COMM);
             cout << "    " << commits->get_num_rows() << " commits" << endl;
-//            projects = DataFrame::fromFile(PROJ, pK, kv);
             projects = readDataFrameFromFile(PROJ);
             cout << "    " << projects->get_num_rows() << " projects" << endl;
-//            users = DataFrame::fromFile(USER, uK, kv);
             users = readDataFrameFromFile(USER);
             cout << "    " << users->get_num_rows() << " users" << endl;
         }
-        cout << "making sets" << endl;
         uSet = new Set(users);
-        cout << "made a set" << endl;
         pSet = new Set(projects);
-        cout << "done making sets" << endl;
     }
 
     /**
@@ -163,7 +126,6 @@ public:
         }
         kv->put(key, df);
         delete vals;
-        //delete df;
     }
 
     /** Idea: have put take in non-pointers
@@ -172,7 +134,6 @@ public:
      * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
      */
     static DataFrame *fromVisitor(Key *key, KVStore *kv, char *schema, Writer *w) {
-        cout << "in fromVisitor" << endl;
         Schema *s = new Schema(schema);
         DataFrame *df = new DataFrame(*s);
         while (!w->done()) {
@@ -182,7 +143,6 @@ public:
             delete r;
         }
         delete s;
-        cout << "done visiting" << endl;
         kv->put(key, df);
         return df;
     }
@@ -191,19 +151,14 @@ public:
      * Contructs a DataFrame from the size_t and associates the given Key with the DataFrame in the given KVStore
      */
     static void *fromScalarInt(Key *key, KVStore *kv, size_t scalar) {
-//        cout << "Creating df " << endl;
         Schema *s = new Schema("I");
         DataFrame *df = new DataFrame(*s);
         delete s;
-//        cout << "pushing back" << endl;
         df->columns[0]->push_back((int) scalar);
         if (df->get_num_rows() < df->columns[0]->size()) {
             df->schema->nrow = df->columns[0]->size();
         }
-//        cout << "putting in kv store: " << key->name->c_str()  << "size of df" << df->get_num_rows() << endl;
         kv->put(key, df);
-//        cout << "done in fromScalarInt" << endl;
-        //delete df;
     }
 
     /** Performs a step of the linus calculation. It operates over the three
@@ -226,7 +181,6 @@ public:
             cout << "newusers size: " << newUsers->get_num_rows() << endl;
 
             //number of chunks
-            cout << arg.rows_per_chunk << endl;
             int num_chunks = 1 + ((newUsers->get_num_rows() - 1) / arg.rows_per_chunk);
             if (num_chunks < 0) {
                 num_chunks = 1;
@@ -250,7 +204,6 @@ public:
                 DataFrame *node_calc = new DataFrame(*new Schema("I"));
                 node_calc->columns[0]->push_back(num_received);
                 Status *chunkMsg = new Status(0, k, node_calc);
-                cout << "Server sending chunk" << endl;
                 this->net.send_m(chunkMsg);
             }
 
@@ -267,14 +220,12 @@ public:
                 // if server's turn, keep chunks of DataFrame.
                 if (round2 == 0) {
                     // append chunks as received
-                    cout << "append" << endl;
                     chunkSoFar->append_chunk(cur_chunk);
                     round2++;
                     if (round2 == arg.num_nodes) {
                         round2 = 0;
                     }
                 } else {
-                    cout << "in client" << endl;
                     // Sending to Clients
                     Status *chunkMsg = new Status(0, round2, cur_chunk);
                     this->net.send_m(chunkMsg);
@@ -283,8 +234,6 @@ public:
                         round2 = 0;
                     }
                 }
-                // increment selected node circularly between nodes//break;
-                // selectedNode = ++selectedNode == arg.num_nodes ? selectedNode = 0 : selectedNode++;
             }
 
             delete newUsers;
@@ -311,17 +260,12 @@ public:
 
         /** all nodes  **/
         Set delta(users);
-        cout << "set delta" << endl;
         SetUpdater *upd = new SetUpdater(delta);
-        cout << "mapping" << endl;
         chunkSoFar->map(upd); // all of the new users are copied to delta.
-        cout << "mapped chunksofar" << endl;
         delete upd;
         delete chunkSoFar;
         ProjectsTagger *ptagger = new ProjectsTagger(delta, *pSet, projects);
-        cout << "ptagger" << endl;
         commits->map(ptagger); // marking all projects touched by delta
-        cout << "mapped commits" << endl;
 
         /** nodes send back commits, server merges projects **/
         merge(ptagger->newProjects, "projects-", stage);
@@ -330,16 +274,13 @@ public:
         pSet->union_(ptagger->newProjects);
 
         /** server **/
-        cout << "union done" << endl;
         UsersTagger *utagger = new UsersTagger(ptagger->newProjects, *uSet, users);
         delete ptagger;
 
-        cout << "utagger done" << endl;
         commits->map(utagger);
         cout << "second merge" << endl;
         /** nodes send users and server merges **/
         merge(utagger->newUsers, "users-", stage + 1);
-        cout << "last union" << endl;
         uSet->union_(utagger->newUsers);
         delete utagger;
 

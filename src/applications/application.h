@@ -11,7 +11,7 @@
  */
 class Application {
 public:
-    KVStore* kv;
+    KVStore *kv;
     size_t idx_;
     NetworkIP net;
 

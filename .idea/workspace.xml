@@ -7,43 +7,10 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c52458d-a10f-4bfb-93ed-2dc326a69b41" name="Default Changelist" comment="">
+    <list default="true" id="6c52458d-a10f-4bfb-93ed-2dc326a69b41" name="Default Changelist" comment="400 blocks of mem leak, segfault after end of exec">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SImap.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/SImap.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/array.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/array.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bool.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/wrappers/bool.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/boolcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/column/boolcol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/column.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/column/column.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/column_prov.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/CS4500NE/column_prov.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dataframe.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataframe/dataframe.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fielder.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/fielder.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/float.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/wrappers/float.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/floatcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/column/floatcol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/intcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/column/intcol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/integer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/wrappers/integer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/key.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/key/key.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kvstore.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/key/kvstore.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/network/application.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/application.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/network/demo.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/demo.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/network/linus.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/linus.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/network/network.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/network.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/network/serial.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/serial.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/network/thread.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/network/thread.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/network/wordcount.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/wordcount.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parser.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/CS4500NE/parser.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/reader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/row.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataframe/row.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rower.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/rower.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/schema.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataframe/schema.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/string.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/wrappers/string.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stringcol.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/column/stringcol.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/writer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/writer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/m1/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m1/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/m1/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m1/test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/m2/main2.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m2/main2.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/m3/client2.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m3/client2.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/m3/serializedf.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m3/serializedf.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/m4/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/m4/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/application.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/application.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/applications/linus.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/linus.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,13 +71,6 @@
       <workItem from="1587139828276" duration="561000" />
       <workItem from="1587140412787" duration="12921000" />
       <workItem from="1587227716818" duration="10832000" />
-    </task>
-    <task id="LOCAL-00213" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587570935554</created>
-      <option name="number" value="00213" />
-      <option name="presentableId" value="LOCAL-00213" />
-      <option name="project" value="LOCAL" />
-      <updated>1587570935554</updated>
     </task>
     <task id="LOCAL-00214" summary="400 blocks of mem leak, segfault after end of exec">
       <created>1587570974443</created>
@@ -448,7 +408,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587597436478</updated>
     </task>
-    <option name="localTasksCounter" value="262" />
+    <task id="LOCAL-00262" summary="400 blocks of mem leak, segfault after end of exec">
+      <created>1587598031519</created>
+      <option name="number" value="00262" />
+      <option name="presentableId" value="LOCAL-00262" />
+      <option name="project" value="LOCAL" />
+      <updated>1587598031519</updated>
+    </task>
+    <option name="localTasksCounter" value="263" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -462,12 +429,12 @@
     <option name="LAST_COMMIT_MESSAGE" value="400 blocks of mem leak, segfault after end of exec" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587597996091">
+    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587598275419">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
     <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1587597436325" />
     <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586820289069" />
-    <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.830@0.23.1440.830" timestamp="1587597996091" />
+    <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.830@0.23.1440.830" timestamp="1587598275419" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.832@0.23.1440.832" timestamp="1587568622602" />
     <state x="149" y="72" key="DiffContextDialog" timestamp="1586820171771">
       <screen x="0" y="0" width="1536" height="824" />
@@ -485,11 +452,12 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="483" y="130" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1586820663598" />
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1587597437311">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="339" y="171" key="Vcs.Push.Dialog.v2" timestamp="1587598034377">
+      <screen x="0" y="23" width="1440" height="830" />
     </state>
     <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1587597437311" />
     <state x="362" y="147" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586820747812" />
+    <state x="339" y="171" key="Vcs.Push.Dialog.v2/0.23.1440.830@0.23.1440.830" timestamp="1587598034377" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1587227722830">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
