@@ -6,7 +6,7 @@
 #include "../../src/network/network.h"
 #include "../../src/network/thread.h"
 #include "../../src/network/application.h"
-//#include "../../src/network/wordcount.h"
+#include "../../src/network/wordcount.h"
 #include <iostream>
 #include <stdio.h>
 #include "../../src/parser.h"
@@ -33,15 +33,15 @@ NetworkIP *initialize() {
     }
     return res;
 }
-
-Application *pick(size_t i, NetworkIP &net) {
-    if (strcmp(arg.app, "wc") == 0) {
-//        return new WordCount(i, net);
-        return nullptr;
-    } else if (strcmp(arg.app, "linus") == 0){
-        return new Linus(i, net);
-    }
-}
+//
+//Application *pick(size_t i, NetworkIP &net) {
+//    if (strcmp(arg.app, "wc") == 0) {
+////        return new WordCount(i, net);
+//        return nullptr;
+//    } else if (strcmp(arg.app, "linus") == 0) {
+//        return new Linus(i, net);
+//    }
+//}
 
 int main(int argc, char *argv[]) {
     arg.parse(argc, argv);
@@ -49,15 +49,23 @@ int main(int argc, char *argv[]) {
     NetworkIP *network = initialize();
     assert(arg.num_nodes != 0 && "cannot have empty cloud");
 //    try {
+    if (strcmp(arg.app, "wc") == 0) {
+        WordCount *app = new WordCount(network->index(), *network);
+        cout << "CHOSEN APP: " << arg.app << endl;
+        app->run_();
+        cout << "Finished Running App" << endl;
+        delete app;
+    } else {
         Linus *app = new Linus(network->index(), *network);
         cout << "CHOSEN APP: " << arg.app << endl;
         app->run_();
         cout << "Finished Running App" << endl;
         delete app;
-        //delete network;
+    }
+    //delete network;
 //    } catch (std::exception const &e) {
 //        cout << "error: " << e.what() << endl;
 //    }
-   // delete network;
+    // delete network;
 }
 

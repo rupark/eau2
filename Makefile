@@ -27,9 +27,6 @@ runls:
 runlc:
 	./eau2 -index 1 -file data/100k.txt -node 2 -port 8080 -masterip "127.0.0.4" -app "wc" -rowsperchunk 100 -masterport 8080
 
-runlc:
-      	./eau2 -index 1 -file data/100k.txt -node 2 -port 8080 -masterip "127.0.0.4" -app "wc" -rowsperchunk 100 -masterport 8081
-
 build:
 	g++ -std=c++11 -c tests/m4/main.cpp -o main.o
 	g++ -std=c++11 src/network/wordcount.h main.o -o eau2
