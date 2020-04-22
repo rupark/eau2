@@ -172,7 +172,7 @@ public:
         DataFrame df(*s);
         //delete s;
 //        cout << "pushing back" << endl;
-        df->columns[0]->push_back((int) scalar);
+        df.columns[0]->push_back((int) scalar);
         if (df.get_num_rows() < df.columns[0]->size()) {
             df.schema->nrow = df.columns[0]->size();
         }
@@ -193,7 +193,7 @@ public:
         DataFrame df(*s);
         //delete s;
         for (int i = 0; i < sz; i++) {
-            df->columns[0]->push_back((float) vals[i]);
+            df.columns[0]->push_back((float) vals[i]);
         }
         kv->put(*key, df);
         //delete key;
