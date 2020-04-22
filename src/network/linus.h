@@ -305,6 +305,7 @@ public:
                 cout << "client received" << endl;
 
                 chunkSoFar->append_chunk(ipd->msg_);
+                cout << "done appending" << endl;
             }
         }
 
