@@ -30,7 +30,7 @@ public:
     ~KVStore() {
         cout << "in kv des" << endl;
         cout << this->size << endl;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < 7; i++) {
             if (keys[i] != nullptr) {
                 delete keys[i];
             }
