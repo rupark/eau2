@@ -34,14 +34,14 @@ public:
                 delete keys[i];
         }
         cout << "done w keys" << endl;
-        for (int i = 0; i < size; i++) {
-            if (dfs[i] != nullptr) {
-                delete dfs[i];
-            }
-        }
+//        for (int i = 0; i < size; i++) {
+//            if (dfs[i] != nullptr) {
+//                delete dfs[i];
+//            }
+//        }
         cout << "done with ind" << endl;
         delete[] keys;
-        delete[] dfs;
+//        delete[] dfs;
     };
 
     /**
