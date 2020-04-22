@@ -35,7 +35,7 @@ public:
     ~FloatColumn() {
         for (int i = 0; i < size_; i++) {
             if (vals_[i] != nullptr) {
-                delete vals_[i];
+                delete[] vals_[i];
             }
         }
         delete vals_;
