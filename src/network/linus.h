@@ -410,7 +410,7 @@ public:
             h->c(stage);
             h->c("-0");
             String* str = h->get();
-            Key *k = new Key(s);
+            Key *k = new Key(str);
             delete h;
             delete str;
 //            cout << "k name ------- " << k->name->c_str() << endl;
