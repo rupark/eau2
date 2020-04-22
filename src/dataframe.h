@@ -517,7 +517,7 @@ public:
     size_t num_true() {
         size_t size = 0;
         for (size_t i = 0; i < size_; i++) {
-            if (vals_[i] = true) {
+            if (vals_[i] == true) {
                 size++;
             }
         }
