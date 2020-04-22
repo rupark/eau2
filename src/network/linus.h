@@ -219,7 +219,8 @@ public:
         s->c("users-");
         s->c(stage);
         s->c("-0");
-        Key *uK = new Key(s->get());
+        String* t = s->get();
+        Key *uK = new Key(t);
         delete s;
 //        cout << "made key: " << uK->name->c_str() << endl;
         // A df with all the users added on the previous round
