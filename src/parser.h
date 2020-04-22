@@ -85,6 +85,7 @@ public:
      */
     virtual char *toCString() {
         size_t length = _end - _start;
+        delete[] sliceCopy;
         char *sliceCopy = new char[length + 1];
         memcpy(sliceCopy, getChars(), length);
         sliceCopy[length] = '\0';
