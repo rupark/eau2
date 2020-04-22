@@ -368,16 +368,11 @@ public:
             cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter *writer = new SetWriter(set);
             Key *k = new Key(StrBuff(name).c(stage).c("-").c(idx_).get());
-            fromVisitor(k, kv, "I", writer);
-            //DataFrame::fromVisitor(k, kv, "I", writer);
-            Key mK(StrBuff(name).c(stage).c("-0").get());
-            DataFrame *merged = dynamic_cast<DataFrame *>(kv->get(mK));
-            cout << "    receiving " << merged->get_num_rows() << " merged elements" << endl;
-            SetUpdater *upd = new SetUpdater(set);
-            merged->map(upd);
-            delete merged;
-            //return nullptr;
-
+            Key k(StrBuff(name).c(stage).c("-").c(idx_).get());
+//            delete DataFrame::fromVisitor(&k, &kv, "I", writer);
+            DataFrame *toSend = DataFrame::fromVisitor(k, kv, "I", writer);
+            Status *nodeToServer = new Status(idx_, 0, toSend);
+            this->net.send_m(nodeToServer);
         }
     }
 }; // Linus
