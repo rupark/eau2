@@ -263,7 +263,7 @@ public:
                 selectedNode = ++selectedNode == arg.num_nodes ? selectedNode = 0 : selectedNode++;
             }
 
-            delete num_chunks;
+            delete newUsers;
 
             cout << "sent chunks" << endl;
         } else {
