@@ -63,31 +63,31 @@ public:
             char type = this->schema->col_type(i);
             switch (type) {
                 case 'F':
-                    if (columns[i] != nullptr) {
-                        cout << "1" << endl;
-                        delete columns[i];
-                    }
+//                    if (columns[i] != nullptr) {
+//                        cout << "1" << endl;
+//                        delete columns[i];
+//                    }
                     columns[i] = new FloatColumn();
                     break;
                 case 'B':
-                    if (columns[i] != nullptr) {
-                        cout << "2" << endl;
-                        delete columns[i];
-                    }
+//                    if (columns[i] != nullptr) {
+//                        cout << "2" << endl;
+//                        delete columns[i];
+//                    }
                     columns[i] = new BoolColumn();
                     break;
                 case 'I':
-                    if (columns[i] != nullptr) {
-                        cout << "3" << endl;
-                        delete columns[i];
-                    }
+//                    if (columns[i] != nullptr) {
+//                        cout << "3" << endl;
+//                        delete columns[i];
+//                    }
                     columns[i] = new IntColumn();
                     break;
                 case 'S':
-                    if (columns[i] != nullptr) {
-                        cout << "4" << endl;
-                        delete columns[i];
-                    }
+//                    if (columns[i] != nullptr) {
+//                        cout << "4" << endl;
+//                        delete columns[i];
+//                    }
                     columns[i] = new StringColumn();
                     break;
             }
