@@ -458,8 +458,11 @@ public:
         cout << "in append chunk " << df->get_num_rows() << endl;
         for (size_t r = 0; r < df->get_num_rows(); r++) {
             Row* r2 = df->get_row(r);
+            cout << "made row" << endl;
             this->add_row(*r2);
+            cout << "add" << endl;
             delete r2;
+            cout << "dek" << endl;
         }
         cout << "done appending" << endl;
         delete df;
