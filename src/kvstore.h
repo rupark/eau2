@@ -30,13 +30,12 @@ public:
     ~KVStore() {
         cout << "in kv des" << endl;
         cout << this->size << endl;
-        for (int i = 0; i < 7; i++) {
-            if (keys[i] != nullptr) {
+        for (int i = 0; i < size; i++) {
                 delete keys[i];
-            }
-            if (dfs[i] != nullptr) {
-                delete dfs[i];
-            }
+        }
+        cout << "done w keys" << endl;
+        for (int i = 0; i < size; i++) {
+            delete dfs[i];
         }
         cout << "done with ind" << endl;
         delete[] keys;
