@@ -148,16 +148,16 @@ public:
     static void fromVisitor(Key *key, KVStore *kv, char *schema, Writer *w) {
         cout << "in fromVisitor" << endl;
         Schema *s = new Schema(schema);
-        DataFrame *df = new DataFrame(*s);
+        DataFrame df(*s);
         while (!w->done()) {
             Row *r = new Row(s);
             w->visit(*r);
-            df->add_row(*r);
+            df.add_row(*r);
             delete r;
         }
         //delete s;
         cout << "done visiting" << endl;
-        kv->put(*key, *df);
+        kv->put(*key, df);
         //delete key;
         //delete df;
         //return df;
@@ -169,15 +169,15 @@ public:
     static void *fromScalarInt(Key *key, KVStore *kv, size_t scalar) {
 //        cout << "Creating df " << endl;
         Schema *s = new Schema("I");
-        DataFrame *df = new DataFrame(*s);
+        DataFrame df(*s);
         //delete s;
 //        cout << "pushing back" << endl;
         df->columns[0]->push_back((int) scalar);
-        if (df->get_num_rows() < df->columns[0]->size()) {
-            df->schema->nrow = df->columns[0]->size();
+        if (df.get_num_rows() < df.columns[0]->size()) {
+            df.schema->nrow = df.columns[0]->size();
         }
 //        cout << "putting in kv store: " << key->name->c_str()  << "size of df" << df->get_num_rows() << endl;
-        kv->put(*key, *df);
+        kv->put(*key, df);
         //delete key;
         //delete df;
 //        cout << "done in fromScalarInt" << endl;
@@ -190,12 +190,12 @@ public:
      */
     static void *fromArray(Key *key, KVStore *kv, size_t sz, double *vals) {
         Schema *s = new Schema("F");
-        DataFrame *df = new DataFrame(*s);
+        DataFrame df(*s);
         //delete s;
         for (int i = 0; i < sz; i++) {
             df->columns[0]->push_back((float) vals[i]);
         }
-        kv->put(*key, *df);
+        kv->put(*key, df);
         //delete key;
         //delete df;
         delete vals;
