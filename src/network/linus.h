@@ -155,7 +155,7 @@ public:
             df->add_row(*r);
             delete r;
         }
-        delete s;
+        //delete s;
         cout << "done visiting" << endl;
         kv->put(*key, *df);
         //delete key;
@@ -170,7 +170,7 @@ public:
 //        cout << "Creating df " << endl;
         Schema *s = new Schema("I");
         DataFrame *df = new DataFrame(*s);
-        delete s;
+        //delete s;
 //        cout << "pushing back" << endl;
         df->columns[0]->push_back((int) scalar);
         if (df->get_num_rows() < df->columns[0]->size()) {
@@ -191,7 +191,7 @@ public:
     static void *fromArray(Key *key, KVStore *kv, size_t sz, double *vals) {
         Schema *s = new Schema("F");
         DataFrame *df = new DataFrame(*s);
-        delete s;
+        //delete s;
         for (int i = 0; i < sz; i++) {
             df->columns[0]->push_back((float) vals[i]);
         }
