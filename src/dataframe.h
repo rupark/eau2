@@ -243,6 +243,7 @@ public:
         Row *build_row = new Row(this->schema);
         //delete build_row;
 
+        delete build_row;
         this->fill_row(i, *build_row);
         build_row->printRow();
         return build_row;
