@@ -90,7 +90,8 @@ public:
         }
 
         ///////////////////////////////////////
-
+        fclose(file);
+        fclose(file_dup);
 
         delete[] file;
         //delete[] file_dup;
