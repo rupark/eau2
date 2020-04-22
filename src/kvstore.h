@@ -24,7 +24,7 @@ public:
 
     KVStore() {
         this->size = 0;
-        this->keys = new Key [500];
+        this->keys = new Key[500];
         this->dfs = new DataFrame *[500];
     }
 
