@@ -17,8 +17,8 @@ using namespace std;
  */
 class KVStore {
 public:
-    Key *keys;
-    DataFrame *dfs;
+    Key[] keys;
+    DataFrame[] dfs;
     int size;
 
     KVStore() {
