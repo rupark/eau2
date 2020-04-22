@@ -221,6 +221,9 @@ public:
             //number of chunks
             cout << arg.rows_per_chunk << endl;
             int num_chunks = 1 + ((newUsers->get_num_rows() - 1) / arg.rows_per_chunk);
+            if (num_chunks < 0) {
+                num_chunks = 1;
+            }
             cout << num_chunks << endl;
 
             cout << "sending num chunks" << endl;
