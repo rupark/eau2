@@ -40,24 +40,21 @@ public:
     /**
      * Adds the given Key and DataFrame to this KVStore
      */
-    void put(Key key, DataFrame *df) {
+    void put(Key *key, DataFrame *df) {
 //        if (key->name->equals(new String("users-1-0"))) {
 ////            cout << "??????????????????????????????????????????????????????????????????????????" << endl;
 //        }
 
-        cout << key.name->cstr_ << endl;
+        cout << key->name->cstr_ << endl;
         assert(df != nullptr && "Putting Dataframe Null Pointer!");
-        cout << "size: " << size << "new key: " << key.name->c_str() << endl;
-        for (int i = 0; i < size; i++) {
+        cout << "size: " << size << "new key: " << key->name->c_str() << endl;
+        for (int i = 0; i < "")
             cout << this->keys[i]->name->cstr_ << endl;
-        }
-
-        cout << "h" << endl;
 
         // check if key is already there
         for (size_t k = 0; k < size; k++) {
             // if found already, replace
-            if (key.equals(keys[k])) {
+            if (this->keys[k]->equals(key)) {
 //                cout << "put key already found: " << keys[k]->name->c_str() << " at " << k << endl;
                 this->dfs[k] = df;
 //                cout << "DF Set new size = " << size << endl;
@@ -68,10 +65,8 @@ public:
         cout << " we put" << endl;
 
         // if new key add and increment size
-        this->keys[size] = &key;
+        this->keys[size] = key;
         this->dfs[size] = df;
-
-        cout << keys[size]->name->cstr_ << endl;
 
 //        cout << "dfs[0]- " << dfs[0] << endl;
 
