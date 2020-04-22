@@ -142,6 +142,60 @@ public:
         cout << "done making sets" << endl;
     }
 
+    /**
+ * Contructs a DataFrame of the given schema from the given FileReader and puts it in the KVStore at the given Key
+ */
+    static DataFrame *fromVisitor(Key *key, KVStore *kv, char *schema, Writer *w) {
+        cout << "in fromVisitor" << endl;
+        Schema *s = new Schema(schema);
+        DataFrame *df = new DataFrame(*s);
+        while (!w->done()) {
+            Row *r = new Row(s);
+            w->visit(*r);
+            df->add_row(*r);
+            delete r;
+        }
+        delete s;
+        cout << "done visiting" << endl;
+        kv->put(key, df);
+        return df;
+    }
+
+    /**
+ * Contructs a DataFrame from the size_t and associates the given Key with the DataFrame in the given KVStore
+ */
+    static DataFrame *fromScalarInt(Key *key, KVStore *kv, size_t scalar) {
+//        cout << "Creating df " << endl;
+        Schema *s = new Schema("I");
+        DataFrame *df = new DataFrame(*s);
+        delete s;
+//        cout << "pushing back" << endl;
+        df->columns[0]->push_back((int) scalar);
+        if (df->get_num_rows() < df->columns[0]->size()) {
+            df->schema->nrow = df->columns[0]->size();
+        }
+//        cout << "putting in kv store: " << key->name->c_str()  << "size of df" << df->get_num_rows() << endl;
+        kv->put(key, df);
+//        cout << "done in fromScalarInt" << endl;
+        return df;
+    }
+
+
+    /**
+     * Contructs a DataFrame from the given array of doubles and associates the given Key with the DataFrame in the given KVStore
+     */
+    static DataFrame *fromArray(Key *key, KVStore *kv, size_t sz, double *vals) {
+        Schema *s = new Schema("F");
+        DataFrame *df = new DataFrame(*s);
+        delete s;
+        for (int i = 0; i < sz; i++) {
+            df->columns[0]->push_back((float) vals[i]);
+        }
+        kv->put(key, df);
+        delete vals;
+        return df;
+    }
+
     /** Performs a step of the linus calculation. It operates over the three
      *  datafrrames (projects, users, commits), the sets of tagged users and
      *  projects, and the users added in the previous round. */
@@ -391,3 +445,5 @@ public:
         }
     }
 }; // Linus
+
+
