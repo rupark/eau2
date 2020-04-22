@@ -393,7 +393,7 @@ public:
     static DataFrame *fromVisitor(Key key, KVStore *kv, char *schema, Writer *w) {
         cout << "in fromVisitor" << endl;
         Schema *s = new Schema(schema);
-        DataFrame df(*s);
+        DataFrame* df = new DataFrame(*s);
         while (!w->done()) {
             Row r (s);
             w->visit(r);
@@ -402,7 +402,8 @@ public:
         delete s;
         cout << "done visiting" << endl;
         kv->put(key, &df);
-        //delete df;
+
+        delete df;
         //return df;
     }
 
