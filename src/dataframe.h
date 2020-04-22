@@ -21,7 +21,6 @@
 #include "rower.h"
 #include <iostream>
 #include <thread>
-#include "kvstore.h"
 #include "reader.h"
 #include "writer.h"
 #include "reader.h"
