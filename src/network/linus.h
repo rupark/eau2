@@ -248,7 +248,7 @@ public:
             // Split into chunks and send iteratively to nodes
             int selectedNode = 0;
 
-            for (size_t j = 0; j < num_chunks; j++) {
+            for (size_t j = 1; j < num_chunks; j++) {
                 DataFrame *cur_chunk = newUsers->chunk(j);
                 // if server's turn, keep chunks of DataFrame.
                 if (selectedNode == 0) {
