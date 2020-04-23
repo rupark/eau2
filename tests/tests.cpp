@@ -2,12 +2,12 @@
 //
 #include <assert.h>
 #include <stdio.h>
-#include "../src/dataframe/*"
+#include "../src/dataframe"
 #include "../src/CS4500NE/parser.h"
-#include "../src/network/serial.h"
+//#include "../src/network/serial.h"
 #include "../src/dataframe/schema.h"
-#include "../src/column/*"
-#include "../src/network/*"
+#include "../src/column"
+#include "../src/network"
 
 char* cwc_strdup(const char* src) {
     char* result = new char[strlen(src) + 1];
