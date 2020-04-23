@@ -21,6 +21,8 @@
 #include "../src/wrappers/bool.h"
 #include "../src/wrappers/float.h"
 
+#include <string.h>
+
 char* cwc_strdup(const char* src) {
     char* result = new char[strlen(src) + 1];
     strcpy(result, src);
@@ -148,7 +150,7 @@ void test_serialization() {
     cout << s2->sender_ << endl;
     cout << s2->target_ << endl;
     cout << s2->id_ << endl;
-    for (int i = 0; i < s2->msg_->ncol; i++) {
+    for (int i = 0; i < s2->msg_->get_num_cols(); i++) {
         for (int j = 0; j < s2->msg_->columns[i]->size(); j++) {
             switch (s2->msg_->columns[i]->get_type()) {
                 case 'F':
@@ -169,17 +171,6 @@ void test_serialization() {
 }
 
 void serial2() {
-    Status* s = new Status(0, 1, new String("hello"));
-    Status* f = new Status(s->serialize()->cstr_);
-    if (strcmp(s->serialize()->cstr_,f->serialize()->cstr_) == 0) {
-        cout << "Status OK" << endl;
-    }
-
-    Register* r = new Register(0, 1, 8080, new String("127.0.0.1"));
-    Register* e = new Register(r->serialize()->cstr_);
-    if (strcmp(r->serialize()->cstr_,e->serialize()->cstr_) == 0) {
-        cout << "Register OK" << endl;
-    }
 
     Ack* a = new Ack(0, 1);
     Ack* g = new Ack(a->serialize()->cstr_);
@@ -195,7 +186,7 @@ void serial2() {
     add[0] = new String("127.0.0.1");
     add[1] = new String("127.0.0.2");
     add[2] = new String("127.0.0.3");
-    Directory* d = new Directory(0, 1, 3, ports, add);
+    Directory* d = new Directory(ports, add, 2);
     Directory* c = new Directory(d->serialize()->cstr_);
     if (strcmp(d->serialize()->cstr_,c->serialize()->cstr_) == 0) {
         cout << "Directory OK" << endl;
@@ -207,15 +198,15 @@ void testDf() {
     DataFrame* dataFrame = new DataFrame(*s);
     assert(dataFrame->get_num_rows() == 0);
     assert(dataFrame->get_num_cols() == 4);
-    assert(dataFrame->columns[0]->get_type() == "I");
-    assert(dataFrame->columns[3]->get_type() == "F");
+    assert(strcmp(dataFrame->columns[3]->get_type(), "I") == 0);
+    assert(strcmp(dataFrame->columns[3]->get_type(), "F") == 0);
 
     Row* r = new Row(s);
     r->set(0, (int)1);
     r->set(1, (bool)1);
     r->set(2, new String("hi"));
     r->set(3, (float)1.0);
-    dataFrame->add_row(*r)
+    dataFrame->add_row(*r);
     assert(dataFrame->get_num_rows() == 1);
 
     IntColumn* i = new IntColumn();
@@ -224,7 +215,7 @@ void testDf() {
     dataFrame->add_column(i);
     assert(dataFrame->get_num_cols() == 5);
 
-    DataFrame* d2 = new DataFrame();
+    DataFrame* d2 = new DataFrame(*s);
     d2->add_row(*r);
     d2->add_row(*r);
     d2->add_row(*r);
