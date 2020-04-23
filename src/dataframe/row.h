@@ -22,16 +22,16 @@
 #include "schema.h"
 #include "../fielder.h"
 #include "iostream"
-#include <vector>
 
 class Row : public Object {
 public:
-    vector<Object *> elements;
+    Object **elements;
     size_t size;
     size_t index;
 
     /** Build a row following a schema. */
     Row(Schema *scm) {
+        this->elements = new Object *[10];
         index = 0;
         size = scm->get_num_cols();
         for (size_t i = 0; i < scm->get_num_cols(); i++) {
@@ -54,10 +54,10 @@ public:
     }
 
     ~Row() {
-        for (int i = 0; i < elements.size(); i++) {
+        for (int i = 0; i < size; i++) {
             delete elements[i];
         }
-        //delete[] elements;
+        delete[] elements;
     }
 
     /** Setters: set the given column with the given value. Setting a column with
