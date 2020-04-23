@@ -198,9 +198,6 @@ void testDf() {
     DataFrame* dataFrame = new DataFrame(*s);
     assert(dataFrame->get_num_rows() == 0);
     assert(dataFrame->get_num_cols() == 4);
-    assert(strcmp(dataFrame->columns[3]->get_type(), "I") == 0);
-    assert(strcmp(dataFrame->columns[3]->get_type(), "F") == 0);
-
     Row* r = new Row(s);
     r->set(0, (int)1);
     r->set(1, (bool)1);
