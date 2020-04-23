@@ -31,7 +31,7 @@ public:
 
     ~KVStore() {
         cout << "in kv des" << endl;
-        cout << this->size << endl;
+        cout << this->keys.size() << endl;
         for (int i = 0; i < keys.size(); i++) {
                 delete keys[i];
         }
@@ -50,7 +50,7 @@ public:
      * Adds the given Key and DataFrame to this KVStore
      */
     void put(Key *key, DataFrame *df) {
-        cout << "size of kv: " << size << "new key: " << key->name->c_str() << endl;
+        cout << "size of kv: " << keys.size() << "new key: " << key->name->c_str() << endl;
 
         // check if key is already there
         for (size_t k = 0; k < keys.size(); k++) {
