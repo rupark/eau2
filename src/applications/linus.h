@@ -88,9 +88,6 @@ public:
      *  'tagged' users. At this point the dataframe consists of only
      *  Linus. **/
     void readInput() {
-        Key *pK = new Key("projs");
-        Key *uK = new Key("usrs");
-        Key *cK = new Key("comts");
         if (this_node() == 0) {
             commits = readDataFrameFromFile(COMM);
             cout << "    " << commits->get_num_rows() << " commits" << endl;
