@@ -210,17 +210,17 @@ void testDf() {
     d2->add_row(*r);
     d2->add_row(*r);
 
-    Row* rf = new Row(*s);
+    Row* rf = new Row(s);
     r->set(0, (int)2);
     r->set(1, (bool)0);
     r->set(2, new String("no"));
     r->set(3, (float)2.0);
 
-    assert(dataFrame->columns[0]->as_int()->get(0) == 1);
-    assert(dataFrame->columns[3]->as_float()->get(0) == 1.0);
+    assert(*dataFrame->columns[0]->as_int()->get(0) == 1);
+    assert(*dataFrame->columns[3]->as_float()->get(0) == 1.0);
     d2->fill_row(0, rf);
-    assert(dataFrame->columns[0]->as_int()->get(0) == 2);
-    assert(dataFrame->columns[3]->as_float()->get(0) == 2.0);
+    assert(*dataFrame->columns[0]->as_int()->get(0) == 2);
+    assert(*dataFrame->columns[3]->as_float()->get(0) == 2.0);
 
     //d2->append_chunk(dataFrame);
 
