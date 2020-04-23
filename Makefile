@@ -1,5 +1,5 @@
 clean:
-	rm *.o client server client2 *.out wordcount linus *.h.gch src/*.h.gch src/network/*.h.gch wordcountC wordcountS eau2
+	rm *.o client server client2 *.out wordcount linus *.h.gch src/*.h.gch src/network/*.h.gch wordcountC wordcountS eau2 test
 
 buildl:
 	g++ -std=c++11 -c tests/m4/main.cpp -o main.o
@@ -33,6 +33,11 @@ build:
 
 valgrind:
 	valgrind --leak-check=full ./linus -index 0 -node 1 -port 8080 -masterip "127.0.0.4" -app "linus"
+
+test:
+    g++ -std=c++11 -c tests/tests.cpp -o main.o
+    g++ -std=c++11 main.o -o test
+    ./test
 
 
 

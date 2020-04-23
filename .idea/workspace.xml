@@ -9,10 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6c52458d-a10f-4bfb-93ed-2dc326a69b41" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/imgs/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/report/imgs/2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/report.md" beforeDir="false" afterPath="$PROJECT_DIR$/report/report.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/applications/application.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/applications/application.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/key/key.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/key/key.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,146 +69,6 @@
       <workItem from="1587139828276" duration="561000" />
       <workItem from="1587140412787" duration="12921000" />
       <workItem from="1587227716818" duration="10832000" />
-    </task>
-    <task id="LOCAL-00220" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587574487897</created>
-      <option name="number" value="00220" />
-      <option name="presentableId" value="LOCAL-00220" />
-      <option name="project" value="LOCAL" />
-      <updated>1587574487898</updated>
-    </task>
-    <task id="LOCAL-00221" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587574598580</created>
-      <option name="number" value="00221" />
-      <option name="presentableId" value="LOCAL-00221" />
-      <option name="project" value="LOCAL" />
-      <updated>1587574598581</updated>
-    </task>
-    <task id="LOCAL-00222" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587574629458</created>
-      <option name="number" value="00222" />
-      <option name="presentableId" value="LOCAL-00222" />
-      <option name="project" value="LOCAL" />
-      <updated>1587574629458</updated>
-    </task>
-    <task id="LOCAL-00223" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587575157681</created>
-      <option name="number" value="00223" />
-      <option name="presentableId" value="LOCAL-00223" />
-      <option name="project" value="LOCAL" />
-      <updated>1587575157681</updated>
-    </task>
-    <task id="LOCAL-00224" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587581602959</created>
-      <option name="number" value="00224" />
-      <option name="presentableId" value="LOCAL-00224" />
-      <option name="project" value="LOCAL" />
-      <updated>1587581602959</updated>
-    </task>
-    <task id="LOCAL-00225" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587582209965</created>
-      <option name="number" value="00225" />
-      <option name="presentableId" value="LOCAL-00225" />
-      <option name="project" value="LOCAL" />
-      <updated>1587582209965</updated>
-    </task>
-    <task id="LOCAL-00226" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587582242586</created>
-      <option name="number" value="00226" />
-      <option name="presentableId" value="LOCAL-00226" />
-      <option name="project" value="LOCAL" />
-      <updated>1587582242586</updated>
-    </task>
-    <task id="LOCAL-00227" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587582303581</created>
-      <option name="number" value="00227" />
-      <option name="presentableId" value="LOCAL-00227" />
-      <option name="project" value="LOCAL" />
-      <updated>1587582303581</updated>
-    </task>
-    <task id="LOCAL-00228" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587582681340</created>
-      <option name="number" value="00228" />
-      <option name="presentableId" value="LOCAL-00228" />
-      <option name="project" value="LOCAL" />
-      <updated>1587582681340</updated>
-    </task>
-    <task id="LOCAL-00229" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587582710881</created>
-      <option name="number" value="00229" />
-      <option name="presentableId" value="LOCAL-00229" />
-      <option name="project" value="LOCAL" />
-      <updated>1587582710881</updated>
-    </task>
-    <task id="LOCAL-00230" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587582730871</created>
-      <option name="number" value="00230" />
-      <option name="presentableId" value="LOCAL-00230" />
-      <option name="project" value="LOCAL" />
-      <updated>1587582730871</updated>
-    </task>
-    <task id="LOCAL-00231" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587582986454</created>
-      <option name="number" value="00231" />
-      <option name="presentableId" value="LOCAL-00231" />
-      <option name="project" value="LOCAL" />
-      <updated>1587582986454</updated>
-    </task>
-    <task id="LOCAL-00232" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587583010695</created>
-      <option name="number" value="00232" />
-      <option name="presentableId" value="LOCAL-00232" />
-      <option name="project" value="LOCAL" />
-      <updated>1587583010695</updated>
-    </task>
-    <task id="LOCAL-00233" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587583291479</created>
-      <option name="number" value="00233" />
-      <option name="presentableId" value="LOCAL-00233" />
-      <option name="project" value="LOCAL" />
-      <updated>1587583291479</updated>
-    </task>
-    <task id="LOCAL-00234" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587583352923</created>
-      <option name="number" value="00234" />
-      <option name="presentableId" value="LOCAL-00234" />
-      <option name="project" value="LOCAL" />
-      <updated>1587583352923</updated>
-    </task>
-    <task id="LOCAL-00235" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587583381324</created>
-      <option name="number" value="00235" />
-      <option name="presentableId" value="LOCAL-00235" />
-      <option name="project" value="LOCAL" />
-      <updated>1587583381324</updated>
-    </task>
-    <task id="LOCAL-00236" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587583814658</created>
-      <option name="number" value="00236" />
-      <option name="presentableId" value="LOCAL-00236" />
-      <option name="project" value="LOCAL" />
-      <updated>1587583814658</updated>
-    </task>
-    <task id="LOCAL-00237" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587583980011</created>
-      <option name="number" value="00237" />
-      <option name="presentableId" value="LOCAL-00237" />
-      <option name="project" value="LOCAL" />
-      <updated>1587583980011</updated>
-    </task>
-    <task id="LOCAL-00238" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587584029624</created>
-      <option name="number" value="00238" />
-      <option name="presentableId" value="LOCAL-00238" />
-      <option name="project" value="LOCAL" />
-      <updated>1587584029624</updated>
-    </task>
-    <task id="LOCAL-00239" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587584112667</created>
-      <option name="number" value="00239" />
-      <option name="presentableId" value="LOCAL-00239" />
-      <option name="project" value="LOCAL" />
-      <updated>1587584112667</updated>
     </task>
     <task id="LOCAL-00240" summary="400 blocks of mem leak, segfault after end of exec">
       <created>1587584440329</created>
@@ -417,7 +273,147 @@
       <option name="project" value="LOCAL" />
       <updated>1587599450935</updated>
     </task>
-    <option name="localTasksCounter" value="269" />
+    <task id="LOCAL-00269" summary="Report">
+      <created>1587602200761</created>
+      <option name="number" value="00269" />
+      <option name="presentableId" value="LOCAL-00269" />
+      <option name="project" value="LOCAL" />
+      <updated>1587602200761</updated>
+    </task>
+    <task id="LOCAL-00270" summary="Report">
+      <created>1587604125369</created>
+      <option name="number" value="00270" />
+      <option name="presentableId" value="LOCAL-00270" />
+      <option name="project" value="LOCAL" />
+      <updated>1587604125369</updated>
+    </task>
+    <task id="LOCAL-00271" summary="Report">
+      <created>1587604239511</created>
+      <option name="number" value="00271" />
+      <option name="presentableId" value="LOCAL-00271" />
+      <option name="project" value="LOCAL" />
+      <updated>1587604239511</updated>
+    </task>
+    <task id="LOCAL-00272" summary="Report">
+      <created>1587604391915</created>
+      <option name="number" value="00272" />
+      <option name="presentableId" value="LOCAL-00272" />
+      <option name="project" value="LOCAL" />
+      <updated>1587604391915</updated>
+    </task>
+    <task id="LOCAL-00273" summary="Report">
+      <created>1587604433629</created>
+      <option name="number" value="00273" />
+      <option name="presentableId" value="LOCAL-00273" />
+      <option name="project" value="LOCAL" />
+      <updated>1587604433629</updated>
+    </task>
+    <task id="LOCAL-00274" summary="Report">
+      <created>1587604714820</created>
+      <option name="number" value="00274" />
+      <option name="presentableId" value="LOCAL-00274" />
+      <option name="project" value="LOCAL" />
+      <updated>1587604714820</updated>
+    </task>
+    <task id="LOCAL-00275" summary="Report">
+      <created>1587604741637</created>
+      <option name="number" value="00275" />
+      <option name="presentableId" value="LOCAL-00275" />
+      <option name="project" value="LOCAL" />
+      <updated>1587604741637</updated>
+    </task>
+    <task id="LOCAL-00276" summary="Report">
+      <created>1587604975466</created>
+      <option name="number" value="00276" />
+      <option name="presentableId" value="LOCAL-00276" />
+      <option name="project" value="LOCAL" />
+      <updated>1587604975466</updated>
+    </task>
+    <task id="LOCAL-00277" summary="Report">
+      <created>1587605055519</created>
+      <option name="number" value="00277" />
+      <option name="presentableId" value="LOCAL-00277" />
+      <option name="project" value="LOCAL" />
+      <updated>1587605055519</updated>
+    </task>
+    <task id="LOCAL-00278" summary="Report">
+      <created>1587605177799</created>
+      <option name="number" value="00278" />
+      <option name="presentableId" value="LOCAL-00278" />
+      <option name="project" value="LOCAL" />
+      <updated>1587605177799</updated>
+    </task>
+    <task id="LOCAL-00279" summary="Report">
+      <created>1587605482961</created>
+      <option name="number" value="00279" />
+      <option name="presentableId" value="LOCAL-00279" />
+      <option name="project" value="LOCAL" />
+      <updated>1587605482961</updated>
+    </task>
+    <task id="LOCAL-00280" summary="Report">
+      <created>1587605520370</created>
+      <option name="number" value="00280" />
+      <option name="presentableId" value="LOCAL-00280" />
+      <option name="project" value="LOCAL" />
+      <updated>1587605520370</updated>
+    </task>
+    <task id="LOCAL-00281" summary="Report">
+      <created>1587605560323</created>
+      <option name="number" value="00281" />
+      <option name="presentableId" value="LOCAL-00281" />
+      <option name="project" value="LOCAL" />
+      <updated>1587605560323</updated>
+    </task>
+    <task id="LOCAL-00282" summary="Report">
+      <created>1587605661328</created>
+      <option name="number" value="00282" />
+      <option name="presentableId" value="LOCAL-00282" />
+      <option name="project" value="LOCAL" />
+      <updated>1587605661328</updated>
+    </task>
+    <task id="LOCAL-00283" summary="Report">
+      <created>1587606294129</created>
+      <option name="number" value="00283" />
+      <option name="presentableId" value="LOCAL-00283" />
+      <option name="project" value="LOCAL" />
+      <updated>1587606294129</updated>
+    </task>
+    <task id="LOCAL-00284" summary="Report">
+      <created>1587606353606</created>
+      <option name="number" value="00284" />
+      <option name="presentableId" value="LOCAL-00284" />
+      <option name="project" value="LOCAL" />
+      <updated>1587606353606</updated>
+    </task>
+    <task id="LOCAL-00285" summary="Report">
+      <created>1587606379183</created>
+      <option name="number" value="00285" />
+      <option name="presentableId" value="LOCAL-00285" />
+      <option name="project" value="LOCAL" />
+      <updated>1587606379183</updated>
+    </task>
+    <task id="LOCAL-00286" summary="Report">
+      <created>1587606422674</created>
+      <option name="number" value="00286" />
+      <option name="presentableId" value="LOCAL-00286" />
+      <option name="project" value="LOCAL" />
+      <updated>1587606422674</updated>
+    </task>
+    <task id="LOCAL-00287" summary="Report">
+      <created>1587606536720</created>
+      <option name="number" value="00287" />
+      <option name="presentableId" value="LOCAL-00287" />
+      <option name="project" value="LOCAL" />
+      <updated>1587606536721</updated>
+    </task>
+    <task id="LOCAL-00288" summary="tests">
+      <created>1587606752727</created>
+      <option name="number" value="00288" />
+      <option name="presentableId" value="LOCAL-00288" />
+      <option name="project" value="LOCAL" />
+      <updated>1587606752727</updated>
+    </task>
+    <option name="localTasksCounter" value="289" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -428,19 +424,25 @@
     <MESSAGE value="updates" />
     <MESSAGE value="THIS VERSION DOESNT SEGFAULT" />
     <MESSAGE value="400 blocks of mem leak, segfault after end of exec" />
-    <option name="LAST_COMMIT_MESSAGE" value="400 blocks of mem leak, segfault after end of exec" />
+    <MESSAGE value="Report" />
+    <MESSAGE value="tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="tests" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="446" y="260" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587602804705">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="446" y="260" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1587602804705" />
     <state x="458" y="193" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587601773762">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
     <state x="458" y="193" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.830@0.23.1440.830" timestamp="1587601773762" />
-    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587599450831">
-      <screen x="0" y="23" width="1440" height="830" />
+    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587606752648">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1587597436325" />
+    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1587606752648" />
     <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586820289069" />
-    <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.830@0.23.1440.830" timestamp="1587599450831" />
+    <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.830@0.23.1440.830" timestamp="1587602200676" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.832@0.23.1440.832" timestamp="1587568622602" />
     <state x="149" y="72" key="DiffContextDialog" timestamp="1586820171771">
       <screen x="0" y="0" width="1536" height="824" />
@@ -458,12 +460,12 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="483" y="130" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1586820663598" />
-    <state x="339" y="171" key="Vcs.Push.Dialog.v2" timestamp="1587599452567">
-      <screen x="0" y="23" width="1440" height="830" />
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1587606755476">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1587597437311" />
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1587606755476" />
     <state x="362" y="147" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586820747812" />
-    <state x="339" y="171" key="Vcs.Push.Dialog.v2/0.23.1440.830@0.23.1440.830" timestamp="1587599452567" />
+    <state x="339" y="171" key="Vcs.Push.Dialog.v2/0.23.1440.830@0.23.1440.830" timestamp="1587602203071" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1587227722830">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
