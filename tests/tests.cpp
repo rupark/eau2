@@ -219,6 +219,7 @@ void testDf() {
     assert(*dataFrame->columns[0]->as_int()->get(0) == 1);
     assert(*dataFrame->columns[3]->as_float()->get(0) == 1.0);
     d2->fill_row(0, *rf);
+    cout << *dataFrame->columns[0]->as_int()->get(0) << endl;
     assert(*dataFrame->columns[0]->as_int()->get(0) == 2);
     assert(*dataFrame->columns[3]->as_float()->get(0) == 2.0);
 
