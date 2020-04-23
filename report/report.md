@@ -129,15 +129,9 @@ server->server_init(0, 8080);
 WordCount* wc = new WordCount(0, server);
 //Calling WordCount's run method which executes its functionality
 wc.run();
+
+//Creating a Linius Application on server (index of servers is 0)
+Linus* l = new Linus(0, server);
+//Calling Linus's run method which executes its functionality
+l.run();
 ```
-## Open questions ##
-* How can we better manage our memory?
-* How can we make our program more efficient?
-## Status ##
-| Milestone Number | Status  | Objective  |
-|:---:|:---:|:---|
-| 1 | ✓ | Be able to build a DataFrame from a SoR file |
-| 2 | ✓ | Implement get, put, and getAndWait on a single-node Key Value Store system |
-| 3 | ✓  | Distribute the key value store; be able to run with multiple KV stores, and thus multiple instances of the application |
-| 4 | ✓ | Incorporate the network layer
-| 5 | .5 | Complete any missing bits in our implementation and write the distributed application "7 degrees of Linus"
