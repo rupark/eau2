@@ -177,9 +177,12 @@ void serial2() {
     Directory* d = new Directory(ports, add, 2);
     Directory* c = new Directory(d->serialize()->cstr_);
     assert(strcmp(d->serialize()->cstr_,c->serialize()->cstr_) == 0);
+
+    cout << "done" << endl;
 }
 
 void testDf() {
+    cout << "df" << endl;
     Schema* s = new Schema("IBSF");
     DataFrame* dataFrame = new DataFrame(*s);
     assert(dataFrame->get_num_rows() == 0);
@@ -209,7 +212,6 @@ void testDf() {
 int main(int argc, char* argv[]) {
     (void)argc;
     (void)argv;
-    printf("Running internal tests\n");
     printf("Running parser tests: ");
     test_stringColumn();
     test_intColumn();
