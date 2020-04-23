@@ -20,6 +20,7 @@ class FloatColumn;
 #include "stringcol.h"
 #include "intcol.h"
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
