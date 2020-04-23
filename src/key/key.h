@@ -43,7 +43,6 @@ public:
     }
 
     ~Key() {
-        cout << "in key destructor" << endl;
         if (name != nullptr) {
             delete name;
         }

@@ -22,7 +22,6 @@ public:
     }
 
     ~Application() {
-        cout << "in app des" << endl;
         delete kv;
     }
 
