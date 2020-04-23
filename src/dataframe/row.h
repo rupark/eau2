@@ -27,13 +27,13 @@
 class Row : public Object {
 public:
     vector<Object *> elements;
- //   size_t size;
+    size_t size;
     size_t index;
 
     /** Build a row following a schema. */
     Row(Schema *scm) {
         index = 0;
-        //size = scm->get_num_cols();
+        size = scm->get_num_cols();
         for (size_t i = 0; i < scm->get_num_cols(); i++) {
             char type = scm->types->at(i);
             switch (type) {
