@@ -12,6 +12,7 @@ public:
     char *file = nullptr;
     bool pseudo = false;
     size_t num_nodes = 0;
+    size_t subset = 0;
     size_t rows_per_chunk = 10 * 1000; // how many rows per chunk
     size_t index = 0; //which node is this
     size_t port = 0; // client port
@@ -35,6 +36,8 @@ public:
 
             if (strcmp(a, "-file") == 0) {
                 file = n;
+            } else if (strcmp(a, "-subset") == 0) {
+                subset = (strcmp(n, "true") == 0);
             } else if (strcmp(a, "-pseudo") == 0) {
                 pseudo = (strcmp(n, "true") == 0);
             } else if (strcmp(a, "-node") == 0) {
