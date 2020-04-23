@@ -2,12 +2,24 @@
 //
 #include <assert.h>
 #include <stdio.h>
-#include "../src/dataframe"
-#include "../src/CS4500NE/parser.h"
-//#include "../src/network/serial.h"
+#include "../src/dataframe/dataframe.h"
+#include "../src/dataframe/row.h"
 #include "../src/dataframe/schema.h"
-#include "../src/column"
-#include "../src/network"
+
+#include "../src/CS4500NE/parser.h"
+
+#include "../src/column/column.h"
+#include "../src/column/boolcol.h"
+#include "../src/column/floatcol.h.h"
+#include "../src/column/intcol.h.h"
+#include "../src/column/stringcol.h.h"
+
+#include "../src/network/serial.h"
+
+#include "../src/wrappers/integer.h"
+#include "../src/wrappers/string.h"
+#include "../src/wrappers/bool.h"
+#include "../src/wrappers/float.h"
 
 char* cwc_strdup(const char* src) {
     char* result = new char[strlen(src) + 1];
