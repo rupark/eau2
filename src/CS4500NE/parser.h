@@ -647,6 +647,7 @@ public:
         Schema *s = new Schema(convertedSchema);
         this->parsed_df = new DataFrame(*s);
         delete s;
+        delete[] convertedSchema;
         ////////////////////////////////////////////
     }
 
@@ -695,6 +696,7 @@ public:
             // scan fields scans row by row and fills in the blanks with "append missings"
             size_t scanned_fields = _scanLine(line, ParserMode::PARSE_FILE);
             for (size_t i = scanned_fields; i < _num_columns; i++) {
+                this->parsed_df->columns[i]->appendMissing();
                 this->parsed_df->columns[i]->appendMissing();
             }
             delete[] line;

@@ -32,7 +32,7 @@ build:
 	g++ -std=c++11 src/network/wordcount.h main.o -o eau2
 
 valgrind:
-	valgrind --leak-check=full ./linus -index 0 -node 1 -port 8080 -masterip "127.0.0.4" -app "linus"
+	valgrind --leak-check=full --show-leak-kinds=all ./linus -index 0 -node 1 -port 8080 -masterip "127.0.0.4" -app "linus"
 
 test:
 	g++ -std=c++11 -c tests/tests.cpp -o main.o
