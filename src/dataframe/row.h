@@ -63,7 +63,7 @@ public:
     /** Setters: set the given column with the given value. Setting a column with
       * a value of the wrong type is undefined. */
     void set(size_t col, int val) {
-        if (col < elements.size() && col >= 0) {
+        if (col < size && col >= 0) {
             if (elements[col] != nullptr) {
                 delete elements[col];
             }
@@ -74,7 +74,7 @@ public:
     }
 
     void set(size_t col, float val) {
-        if (col < elements.size() && col >= 0) {
+        if (col < size && col >= 0) {
             if (elements[col] != nullptr) {
                 delete elements[col];
             }
@@ -85,7 +85,7 @@ public:
     }
 
     void set(size_t col, bool val) {
-        if (col < elements.size() && col >= 0) {
+        if (col < size && col >= 0) {
             if (elements[col] != nullptr) {
                 delete elements[col];
             }
@@ -97,7 +97,7 @@ public:
 
     /** The string is external. */
     void set(size_t col, String *val) {
-        if (col < elements.size() && col >= 0) {
+        if (col < size && col >= 0) {
             if (elements[col] != nullptr) {
                 delete elements[col];
             }
@@ -141,7 +141,7 @@ public:
 
     /** Number of fields in the row. */
     size_t width() {
-        return elements.size();
+        return size;
     }
 
     /** Type of the field at the given position. An idx >= width is  undefined. */
@@ -182,7 +182,7 @@ public:
 
     /** Prints this Row **/
     void printRow() {
-        for (int i = 0; i < this->elements.size(); i++) {
+        for (int i = 0; i < this->size; i++) {
             char type = col_type(i);
             switch (type) {
                 case 'F':
