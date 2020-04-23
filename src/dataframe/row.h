@@ -22,18 +22,18 @@
 #include "schema.h"
 #include "../fielder.h"
 #include "iostream"
+#include <vector>
 
 class Row : public Object {
 public:
-    Object **elements;
-    size_t size;
+    vector<Object *> elements;
+ //   size_t size;
     size_t index;
 
     /** Build a row following a schema. */
     Row(Schema *scm) {
-        this->elements = new Object *[10];
         index = 0;
-        size = scm->get_num_cols();
+        //size = scm->get_num_cols();
         for (size_t i = 0; i < scm->get_num_cols(); i++) {
             char type = scm->types->at(i);
             switch (type) {
@@ -54,16 +54,16 @@ public:
     }
 
     ~Row() {
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < elements.size(); i++) {
             delete elements[i];
         }
-        delete[] elements;
+        //delete[] elements;
     }
 
     /** Setters: set the given column with the given value. Setting a column with
       * a value of the wrong type is undefined. */
     void set(size_t col, int val) {
-        if (col < size && col >= 0) {
+        if (col < elements.size() && col >= 0) {
             if (elements[col] != nullptr) {
                 delete elements[col];
             }
@@ -74,7 +74,7 @@ public:
     }
 
     void set(size_t col, float val) {
-        if (col < size && col >= 0) {
+        if (col < elements.size() && col >= 0) {
             if (elements[col] != nullptr) {
                 delete elements[col];
             }
@@ -85,7 +85,7 @@ public:
     }
 
     void set(size_t col, bool val) {
-        if (col < size && col >= 0) {
+        if (col < elements.size() && col >= 0) {
             if (elements[col] != nullptr) {
                 delete elements[col];
             }
@@ -97,7 +97,7 @@ public:
 
     /** The string is external. */
     void set(size_t col, String *val) {
-        if (col < size && col >= 0) {
+        if (col < elements.size() && col >= 0) {
             if (elements[col] != nullptr) {
                 delete elements[col];
             }
@@ -141,7 +141,7 @@ public:
 
     /** Number of fields in the row. */
     size_t width() {
-        return size;
+        return elements.size();
     }
 
     /** Type of the field at the given position. An idx >= width is  undefined. */
@@ -182,7 +182,7 @@ public:
 
     /** Prints this Row **/
     void printRow() {
-        for (int i = 0; i < this->size; i++) {
+        for (int i = 0; i < this->elements.size(); i++) {
             char type = col_type(i);
             switch (type) {
                 case 'F':
