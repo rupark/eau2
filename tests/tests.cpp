@@ -8,6 +8,9 @@
 
 #include "../src/CS4500NE/parser.h"
 
+#include "../src/key/kvstore.h"
+#include "../src/key/key.h"
+
 #include "../src/column/column.h"
 #include "../src/column/boolcol.h"
 #include "../src/column/floatcol.h"
@@ -183,50 +186,41 @@ void serial2() {
 
 void testDf() {
     Schema* s = new Schema("IBSF");
-    cout << "1" << endl;
     DataFrame* dataFrame = new DataFrame(*s);
-    cout << "2" << endl;
     assert(dataFrame->get_num_rows() == 0);
-    cout << "3" << endl;
     assert(dataFrame->get_num_cols() == 4);
-    cout << "4" << endl;
     Row* r = new Row(s);
-    cout << "5" << endl;
     r->set(0, (int)1);
-    cout << "6" << endl;
     r->set(1, (bool)1);
-    cout << "7" << endl;
     r->set(2, new String("hi"));
-    cout << "8" << endl;
     r->set(3, (float)1.0);
-    cout << "9" << endl;
     dataFrame->add_row(*r);
-    cout << "10" << endl;
     assert(dataFrame->get_num_rows() == 1);
-    cout << "11" << endl;
 
     IntColumn* i = new IntColumn();
-    cout << "12" << endl;
     i->push_back(1);
-    cout << "13" << endl;
     assert(i->size() == 1);
-    cout << "14" << endl;
     dataFrame->add_column(i);
-    cout << "15" << endl;
     assert(dataFrame->get_num_cols() == 5);
-    cout << "16" << endl;
 
     DataFrame* d2 = new DataFrame(*s);
-    cout << "17" << endl;
     d2->add_row(*r);
-    cout << "18" << endl;
     d2->add_row(*r);
-    cout << "19" << endl;
     d2->add_row(*r);
-    cout << "199" << endl;
-    dataFrame->append_chunk(d2);
-    cout << "1" << endl;
-    assert(dataFrame->get_num_rows() == 4);
+}
+
+void testKV() {
+    size_t SZ = 1000*1000;
+    double* vals = new double[SZ];
+    double sum = 0;
+    for (size_t i = 0; i < SZ; ++i) sum += vals[i] = i;
+    Key key("triv",0);
+    KVStore* kv = new KVStore();
+    DataFrame* df = Linus::fromArray(&key, kv, SZ, vals);
+    assert(df->get_double(0,1) == 1);
+    DataFrame* df2 = kv.get(key);
+    for (size_t i = 0; i < SZ; ++i) sum -= df2->get_double(0,i);
+    assert(sum==0);
 }
 
 int main(int argc, char* argv[]) {
@@ -247,7 +241,7 @@ int main(int argc, char* argv[]) {
     testDf();
     printf("PASS\n");
     printf("Running KV Tests:");
-    //
+    testKV();
     printf("PASS\n");
     printf("TESTING COMPLETE\n");
     return 0;
