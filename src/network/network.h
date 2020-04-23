@@ -43,7 +43,9 @@ public:
         //close(sock_);
     }
 
-    NetworkIP() {}
+    NetworkIP() {
+        delete[] nodes_;
+    }
 
     /**
      *

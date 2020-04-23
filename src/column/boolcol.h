@@ -40,7 +40,7 @@ public:
      * Append missing bool is default 0.
      */
     void appendMissing() {
-        vals_.push_back(false);
+        vals_.push_back(new Bool(false));
     }
 
     /**
