@@ -208,7 +208,7 @@ public:
 
     /** Compute word counts on the local node and build a data frame. */
     void local_count() {
-        DataFrame *words = kv->get(in);
+        DataFrame *words = kv->get(new Key("data"));
         SIMap map;
         Adder *add = new Adder(map);
         words->map(add);
