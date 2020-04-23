@@ -216,9 +216,9 @@ void testKV() {
     double* vals = new double[SZ];
     double sum = 0;
     for (size_t i = 0; i < SZ; ++i) sum += vals[i] = i;
-    Key key("triv",0);
+    Key* key = new Key("triv",0);
     KVStore* kv = new KVStore();
-    Linus::fromArray(&key, kv, SZ, vals);
+    Linus::fromArray(key, kv, SZ, vals);
     DataFrame* df2 = kv->get(key);
     for (size_t i = 0; i < SZ; ++i) sum -= df2->get_double(0,i);
     assert(sum==0);
