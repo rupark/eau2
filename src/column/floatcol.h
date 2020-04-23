@@ -41,7 +41,7 @@ public:
     * Append missing bool is default 0.
     */
     void appendMissing() {
-        vals_.push_back((float)0);
+        vals_.push_back(new Float(0));
     }
 
     /**

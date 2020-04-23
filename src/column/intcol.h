@@ -92,7 +92,7 @@ public:
      * Returns the size of this IntColumn
      */
     size_t size() {
-        return size_;
+        return vals_.size();
     }
 
     /**

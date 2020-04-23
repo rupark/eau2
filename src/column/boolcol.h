@@ -89,7 +89,7 @@ public:
      * Returns the size of this BoolColumn
      */
     size_t size() {
-        return vals_.size()
+        return vals_.size();
     }
 
     /**

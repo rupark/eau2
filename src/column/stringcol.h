@@ -97,7 +97,7 @@ public:
      * Returns the size of this StringColumn
      */
     size_t size() {
-        return vals_.size_();
+        return vals_.size();
     }
 
     /**
