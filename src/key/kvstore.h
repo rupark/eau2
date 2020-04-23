@@ -66,7 +66,7 @@ public:
         this->dfs.push_back(df);
 
        // size++;
-        cout << "put done new size: " << size << endl;
+        cout << "put done new size: " << keys.size() << endl;
     }
 
     /**
