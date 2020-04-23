@@ -18,8 +18,11 @@ runwcc:
 runwcc2:
 	./wordcount -index 2 -file data/100k.txt -node 3 -port 8080 -masterip "127.0.0.4" -app "wc" -rowsperchunk 10 -masterport 8080
 
+runl_subset: buildl
+	./linus -index 0 -file data/WCData.txt -node 1 -port 8080 -masterip "127.0.0.4" -app "linus" -rowsperchunk 10000 -subset true
+
 runl: buildl
-	./linus -index 0 -file data/WCData.txt -node 1 -port 8080 -masterip "127.0.0.4" -app "linus" -rowsperchunk 10000
+	./linus -index 0 -file data/WCData.txt -node 1 -port 8080 -masterip "127.0.0.4" -app "linus" -rowsperchunk 10000 -subset false
 
 runls:
 	./eau2 -index 0 -file data/100k.txt -node 2 -port 8080 -masterip "127.0.0.4" -app "wc" -rowsperchunk 100 -masterport 8080
@@ -32,7 +35,7 @@ build:
 	g++ -std=c++11 src/network/wordcount.h main.o -o eau2
 
 valgrind:
-	valgrind --leak-check=full --show-leak-kinds=all ./linus -index 0 -node 1 -port 8080 -masterip "127.0.0.4" -app "linus"
+	valgrind --leak-check=full --show-leak-kinds=all ./linus -index 0 -node 1 -port 8080 -masterip "127.0.0.4" -app "linus" -subset true
 
 test:
 	g++ -std=c++11 -c tests/tests.cpp -o main.o
