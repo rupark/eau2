@@ -42,7 +42,7 @@ public:
     * Append missing bool is default 0.
     */
     void appendMissing() {
-        vals_.push_back((int)0);
+        vals_.push_back(new Integer((int)0));
     }
 
 

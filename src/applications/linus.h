@@ -56,17 +56,20 @@ public:
     {
         fseek(p_file, 0, SEEK_END);
         size_t size = ftell(p_file);
-        fclose(p_file);
         return size;
     }
 
     DataFrame *readDataFrameFromFile(const char *filep) {
+
         FILE *file = fopen(filep, "rb");
         FILE *file_dup = fopen(filep, "rb");
         size_t file_size = get_file_size(file_dup);
 
         SorParser *parser = new SorParser(file, (size_t) 0, (size_t) file_size, (size_t) file_size);
         parser->guessSchema();
+
+        cout << "reading" << endl;
+
         try {
             parser->parseFile();
         } catch (const std::exception &e) {

@@ -53,5 +53,6 @@ int main(int argc, char *argv[]) {
         cout << "Finished Running App" << endl;
         delete app;
     }
+    delete network;
 }
 
