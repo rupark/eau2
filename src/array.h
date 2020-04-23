@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "string.h"
+#include "wrappers/string.h"
 
 // Size must be positive
 // 0 starting index

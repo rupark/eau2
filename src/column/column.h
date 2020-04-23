@@ -15,8 +15,8 @@ class IntColumn;
 
 #pragma once
 
-#include "object.h"
-#include "string.h"
+#include "../object.h"
+#include "../wrappers/string.h"
 
 class Column : public Object {
 public:

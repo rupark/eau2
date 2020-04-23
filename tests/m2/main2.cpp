@@ -4,9 +4,9 @@
 #include <stdlib.h>
 
 #include <iostream>
-#include "../../src/dataframe.h"
-#include "../../src/key.h"
-#include "../../src/kvstore.h"
+#include "../../src/dataframe/dataframe.h"
+#include "../../src/key/key.h"
+#include "../../src/key/kvstore.h"
 
 using namespace std;
 

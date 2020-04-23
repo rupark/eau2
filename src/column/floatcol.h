@@ -1,4 +1,4 @@
-class StringColumn;
+class IntColumn;
 
 class BoolColumn;
 
@@ -6,44 +6,47 @@ class FloatColumn;
 
 #pragma once
 
-#include "column.h"
+#include "intcol.h"
 #include "boolcol.h"
-#include "floatcol.h"
 #include "stringcol.h"
-#include "string.h"
-#include "iostream"
-#include "integer.h"
+#include "../wrappers/string.h"
+#include "column.h"
+#include "../wrappers/float.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 /**
- * Represent a Column of Integer
+ * Represent a Column of Float
  */
-class IntColumn : public Column {
+class FloatColumn : public Column {
 public:
-    Integer **vals_;
+    Float **vals_;
     size_t size_;
     size_t capacity_;
 
-    IntColumn() {
+    FloatColumn() {
         size_ = 0;
         capacity_ = 200 * 1000 * 1000;
-        vals_ = new Integer *[capacity_];
+        vals_ = new Float *[capacity_];
     }
 
-    ~IntColumn() {
-        delete[] vals_;
+    ~FloatColumn() {
+        for (int i = 0; i < size_; i++) {
+            if (vals_[i] != nullptr) {
+                delete vals_[i];
+            }
+        }
+        delete vals_;
     }
-
 
     /**
     * Append missing bool is default 0.
     */
     void appendMissing() {
-        push_back((int)0);
+        push_back((float)0);
     }
-
 
     /**
      * Returns this if it is a StringColumn
@@ -58,7 +61,7 @@ public:
      * @return
      */
     IntColumn *as_int() {
-        return this;
+        return nullptr;
     }
 
     /**
@@ -74,11 +77,11 @@ public:
      * @return
      */
     FloatColumn *as_float() {
-        return nullptr;
+        return this;
     }
 
-    /** Returns the int at idx; undefined on invalid idx.*/
-    int *get(size_t idx) {
+    /** Returns the float at idx; undefined on invalid idx.*/
+    float *get(size_t idx) {
         if (idx >= 0 && idx <= this->size()) {
             return &vals_[idx]->val;
         } else {
@@ -87,9 +90,9 @@ public:
     }
 
     /** Out of bound idx is undefined. */
-    void set(size_t idx, int *val) {
+    void set(size_t idx, float *val) {
         if (idx >= 0 && idx <= this->size()) {
-            vals_[idx] = new Integer(*val);
+            vals_[idx] = new Float(*val);
             size_++;
         } else {
             exit(1);
@@ -97,7 +100,7 @@ public:
     }
 
     /**
-     * Returns the size of this IntColumn
+     * Returns the size of this FloatColumn
      */
     size_t size() {
         return size_;
@@ -107,8 +110,7 @@ public:
      * Adds the given int to this if it is a IntColumn
      */
     virtual void push_back(int val) {
-        this->vals_[size_] = new Integer(val);
-        size_++;
+        exit(1);
     }
 
     /**
@@ -118,11 +120,13 @@ public:
         exit(1);
     }
 
+
     /**
      * Adds the given float to this if it is a FloatColumn
      */
     virtual void push_back(float val) {
-        exit(1);
+        vals_[size_] = new Float(val);
+        size_++;
     }
 
     /**
@@ -130,22 +134,27 @@ public:
      */
     virtual void push_back(String *val) {
         // if passing nullptr from <MISSING> in sor then save to array as nullptr calls this method.
-        exit(1);
+        if (val == nullptr) {
+            this->vals_[size_] = nullptr;
+            size_++;
+        } else {
+            exit(1);
+        }
     }
 
     /** Return the type of this column as a char: 'S', 'B', 'I' and 'F'. */
     virtual char get_type() {
-        return 'I';
+        return 'F';
     }
 
-    /** Serializes this intcol **/
+    /** Serializes this FloatColumn **/
     virtual String *serialize() {
         StrBuff *s = new StrBuff();
-        s->c("I}");
+        s->c("F}");
 
         for (int i = 0; i < this->size_; i++) {
             char str[256] = ""; /* In fact not necessary as snprintf() adds the 0-terminator. */
-            snprintf(str, sizeof str, "%d}", this->vals_[i]->val);
+            snprintf(str, sizeof str, "%f}", this->vals_[i]->val);
             s->c(str);
         }
 

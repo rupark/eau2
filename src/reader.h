@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "row.h"
+#include "dataframe/row.h"
 #include "SImap.h"
 
 class Reader {
@@ -25,8 +25,6 @@ public:
 
     /** Reads from the given Row and adds elements to map **/
     bool visit(Row &r) override {
-
-        r.printRow();
 
         if (r.size == 1) {
             String *word = r.get_string(0);

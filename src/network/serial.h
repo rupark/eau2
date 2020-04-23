@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../string.h"
+#include "../wrappers/string.h"
 #include "../object.h"
 #include <stdio.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "../dataframe.h"
+#include "../dataframe/dataframe.h"
 
 #include <iostream>
 

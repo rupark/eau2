@@ -9,18 +9,18 @@
 
 #pragma once
 
-#include "float.h"
-#include "bool.h"
-#include "integer.h"
-#include "intcol.h"
-#include "boolcol.h"
-#include "floatcol.h"
-#include "stringcol.h"
-#include "object.h"
-#include "string.h"
-#include "column.h"
+#include "../wrappers/float.h"
+#include "../wrappers/bool.h"
+#include "../wrappers/integer.h"
+#include "../column/intcol.h"
+#include "../column/boolcol.h"
+#include "../column/floatcol.h"
+#include "../column/stringcol.h"
+#include "../object.h"
+#include "../wrappers/string.h"
+#include "../column/column.h"
 #include "schema.h"
-#include "fielder.h"
+#include "../fielder.h"
 #include "iostream"
 
 class Row : public Object {
@@ -30,7 +30,7 @@ public:
     size_t index;
 
     /** Build a row following a schema. */
-    Row(Schema* scm) {
+    Row(Schema *scm) {
         this->elements = new Object *[10];
         index = 0;
         size = scm->get_num_cols();
@@ -64,6 +64,9 @@ public:
       * a value of the wrong type is undefined. */
     void set(size_t col, int val) {
         if (col < size && col >= 0) {
+            if (elements[col] != nullptr) {
+                delete elements[col];
+            }
             elements[col] = new Integer(val);
         } else {
             exit(1);
@@ -72,6 +75,9 @@ public:
 
     void set(size_t col, float val) {
         if (col < size && col >= 0) {
+            if (elements[col] != nullptr) {
+                delete elements[col];
+            }
             elements[col] = new Float(val);
         } else {
             exit(1);
@@ -80,6 +86,9 @@ public:
 
     void set(size_t col, bool val) {
         if (col < size && col >= 0) {
+            if (elements[col] != nullptr) {
+                delete elements[col];
+            }
             elements[col] = new Bool(val);
         } else {
             exit(1);
@@ -89,6 +98,9 @@ public:
     /** The string is external. */
     void set(size_t col, String *val) {
         if (col < size && col >= 0) {
+            if (elements[col] != nullptr) {
+                delete elements[col];
+            }
             elements[col] = val;
         } else {
             exit(1);

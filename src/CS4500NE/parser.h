@@ -5,9 +5,9 @@
 #include <stdlib.h>
 
 #include "column_prov.h"
-#include "string.h"
-#include "schema.h"
-#include "dataframe.h"
+#include "../wrappers/string.h"
+#include "../dataframe/schema.h"
+#include "../dataframe/dataframe.h"
 
 /**
  *
@@ -350,14 +350,12 @@ public:
 
     /** LineReader we're using */
     LineReader *_reader;
-    /** ColumnSet for data we will ultimately parse */
-//    Provider::ColumnSet *_columns;
     /** Array of guesses for the types of each column in the schema */
     Provider::ColumnType *_typeGuesses;
     /** The number of columns we have detected */
     size_t _num_columns;
     /** Dataframe containing all the columns  */
-    DataFrame* parsed_df;
+    DataFrame *parsed_df;
 
     /**
      * Creates a new SorParser with the given parameters.
@@ -368,7 +366,6 @@ public:
      */
     SorParser(FILE *file, size_t file_start, size_t file_end, size_t file_size) : Object() {
         _reader = new LineReader(file, file_start, file_end, file_size);
-//        _columns = nullptr;
         _typeGuesses = nullptr;
         _num_columns = 0;
     }
@@ -381,7 +378,6 @@ public:
         if (_typeGuesses != nullptr) {
             delete[] _typeGuesses;
         }
-        //delete parsed_df;
     }
 
     /**
@@ -394,35 +390,31 @@ public:
     virtual void _appendField(StrSlice slice, size_t field_num, Provider::ColumnSet *columns) {
         slice.trim(SPACE);
 
-        //Provider::BaseColumn *column = columns->getColumn(field_num);
-
         // working column for dataframe...
-        Column* column1 = parsed_df->columns[field_num];
+        Column *column1 = parsed_df->columns[field_num];
 
         if (slice.getLength() == 0) {
-            //column->appendMissing();
             column1->appendMissing();
             return;
         }
 
         switch (column1->get_type()) {
-            case 'S':
+            case 'S': {
                 slice.trim(STRING_QUOTE);
                 assert(slice.getLength() <= MAX_STRING);
-//                dynamic_cast<Provider::StringColumn *>(column)->append(slice.toCString());
-                dynamic_cast<StringColumn*>(column1)->push_back(new String(slice.toCString()));
+                char *toCString = slice.toCString();
+                dynamic_cast<StringColumn *>(column1)->push_back(new String(toCString));
+                delete toCString;
                 break;
+            }
             case 'I':
-//                dynamic_cast<Provider::IntegerColumn *>(column)->append(slice.toInt());
-                dynamic_cast<IntColumn*>(column1)->push_back(slice.toInt());
+                dynamic_cast<IntColumn *>(column1)->push_back(slice.toInt());
                 break;
             case 'F':
-//                dynamic_cast<Provider::FloatColumn *>(column)->append(slice.toFloat());
-                dynamic_cast<FloatColumn*>(column1)->push_back(slice.toFloat());
+                dynamic_cast<FloatColumn *>(column1)->push_back(slice.toFloat());
                 break;
             case 'B':
-//                dynamic_cast<Provider::BoolColumn *>(column)->append(slice.toInt() == 1);
-                dynamic_cast<BoolColumn*>(column1)->push_back(slice.toInt() == 1);
+                dynamic_cast<BoolColumn *>(column1)->push_back(slice.toInt() == 1);
                 break;
             default:
                 assert(false);
@@ -439,35 +431,31 @@ public:
     virtual void _appendField(StrSlice slice, size_t field_num) {
         slice.trim(SPACE);
 
-        //Provider::BaseColumn *column = columns->getColumn(field_num);
-
         // working column for dataframe...
-        Column* column1 = parsed_df->columns[field_num];
+        Column *column1 = parsed_df->columns[field_num];
 
         if (slice.getLength() == 0) {
-            //column->appendMissing();
             column1->appendMissing();
             return;
         }
 
         switch (column1->get_type()) {
-            case 'S':
+            case 'S': {
                 slice.trim(STRING_QUOTE);
                 assert(slice.getLength() <= MAX_STRING);
-//                dynamic_cast<Provider::StringColumn *>(column)->append(slice.toCString());
-                dynamic_cast<StringColumn*>(column1)->push_back(new String(slice.toCString()));
+                char *toCString = slice.toCString();
+                dynamic_cast<StringColumn *>(column1)->push_back(new String(toCString));
+                delete toCString;
                 break;
+            }
             case 'I':
-//                dynamic_cast<Provider::IntegerColumn *>(column)->append(slice.toInt());
-                dynamic_cast<IntColumn*>(column1)->push_back(slice.toInt());
+                dynamic_cast<IntColumn *>(column1)->push_back(slice.toInt());
                 break;
             case 'F':
-//                dynamic_cast<Provider::FloatColumn *>(column)->append(slice.toFloat());
-                dynamic_cast<FloatColumn*>(column1)->push_back(slice.toFloat());
+                dynamic_cast<FloatColumn *>(column1)->push_back(slice.toFloat());
                 break;
             case 'B':
-//                dynamic_cast<Provider::BoolColumn *>(column)->append(slice.toInt() == 1);
-                dynamic_cast<BoolColumn*>(column1)->push_back(slice.toInt() == 1);
+                dynamic_cast<BoolColumn *>(column1)->push_back(slice.toInt() == 1);
                 break;
             default:
                 assert(false);
@@ -558,7 +546,6 @@ public:
                     if (mode == ParserMode::DETECT_SCHEMA) {
                         _guessFieldType(StrSlice(line, this_field_start + 1, i), num_fields);
                     } else if (mode == ParserMode::PARSE_FILE) {
-//                        _appendField(StrSlice(line, this_field_start + 1, i), num_fields, columns);
                         _appendField(StrSlice(line, this_field_start + 1, i), num_fields);
                     }
                     in_field = false;
@@ -601,7 +588,6 @@ public:
                     if (mode == ParserMode::DETECT_SCHEMA) {
                         _guessFieldType(StrSlice(line, this_field_start + 1, i), num_fields);
                     } else if (mode == ParserMode::PARSE_FILE) {
-//                        _appendField(StrSlice(line, this_field_start + 1, i), num_fields, columns);
                         _appendField(StrSlice(line, this_field_start + 1, i), num_fields);
                     }
                     in_field = false;
@@ -618,7 +604,6 @@ public:
      * Must be called first, before parseFile or getColumnSet. Can only be called once.
      */
     virtual void guessSchema() {
-//        assert(_columns == nullptr);
         assert(_typeGuesses == nullptr);
         // Detect the row with the most fields in the first 500 lines
         size_t max_columns = 0;
@@ -637,7 +622,6 @@ public:
 
         // Guess the type for each column
         _reader->reset();
-//        _columns = new Provider::ColumnSet(max_columns);
         _typeGuesses = new Provider::ColumnType[max_columns];
         _num_columns = max_columns;
         for (size_t i = 0; i < _num_columns; i++) {
@@ -653,24 +637,16 @@ public:
             delete[] next_line;
         }
 
-
-//        for (size_t i = 0; i < _num_columns; i++) {
-//            if (_typeGuesses[i] == Provider::ColumnType::UNKNOWN) {
-//                // Assume bool for anything we still don't have a guess for as per spec
-//                _typeGuesses[i] = Provider::ColumnType::BOOL;
-//            }
-//            _columns->initializeColumn(i, _typeGuesses[i]);
-//        }
-
-
         ////////////////////////////////////////////
         /**    DataFrame only created once schema has been guessed. This method must be called before parsing     */
-        char* convertedSchema = new char[_num_columns+1];
+        char *convertedSchema = new char[_num_columns + 1];
         for (size_t j = 0; j < _num_columns; j++) {
             convertedSchema[j] = getCharFromProvColType(_typeGuesses[j]);
         }
         convertedSchema[_num_columns] = '\0';
-        this->parsed_df = new DataFrame(*new Schema(convertedSchema));
+        Schema *s = new Schema(convertedSchema);
+        this->parsed_df = new DataFrame(*s);
+        delete s;
         ////////////////////////////////////////////
     }
 
@@ -691,13 +667,11 @@ public:
     }
 
 
-
     /**
      * Parses all the data in the file (between the start index and length).
      * guessSchema() must be called before this functions. Can only be called once.
      */
     virtual void parseFile() {
-        //assert(_columns != nullptr);
 
         // ensures that guess schema is called first
         assert(parsed_df != nullptr);
@@ -710,7 +684,7 @@ public:
             line = _reader->readLine();
             lines_read++;
             // solely to show progress of reading file
-            if ( lines_read > 9900000 && lines_read % 10000000 == 0) {
+            if (lines_read > 9900000 && lines_read % 10000000 == 0) {
                 cout << "lines read: " << lines_read << endl;
             }
 
@@ -720,29 +694,17 @@ public:
 
             // scan fields scans row by row and fills in the blanks with "append missings"
             size_t scanned_fields = _scanLine(line, ParserMode::PARSE_FILE);
-//            size_t scanned_fields = _scanLine(line, ParserMode::PARSE_FILE, _columns);
             for (size_t i = scanned_fields; i < _num_columns; i++) {
-//                _columns->getColumn(i)->appendMissing();
                 this->parsed_df->columns[i]->appendMissing();
             }
             delete[] line;
         }
     }
-//
-//    /**
-//     * Gets the in-memory representation for the sor data.
-//     * guessSchema() and parseFile() must be called before this function.
-//     */
-//    virtual Provider::ColumnSet *getColumnSet() {
-//        assert(_columns != nullptr);
-//
-//        return _columns;
-//    }
 
     /**
     * Gets the parsed Dataframe from this.
     */
-    virtual DataFrame* getParsedDataFrame() {
+    virtual DataFrame *getParsedDataFrame() {
         assert(parsed_df != nullptr);
         return parsed_df;
     }

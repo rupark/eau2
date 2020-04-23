@@ -2,31 +2,31 @@
 #pragma once
 
 #include <stdio.h>
-#include "object.h"
+#include "../object.h"
 #include <iostream>
 
 using namespace std;
 
-/** Base Integer wrapper class. Represents the basis for all Integers. */
-class Integer : public Object {
+/* Base Bool wrapper class. Represents the basis for all Bools. */
+class Bool : public Object {
 public:
-    int val;
+    bool val;
 
     /**
-     * Integer constructor
-     * @param  int value
+     * Bool constructor
+     * @param  bool value of this
      * @return N/A
      */
-    Integer(int value) {
+    Bool(bool value) {
         val = value;
     }
 
     /**
-     * Integer destructor
+     * Bool destructor
      * @param  N/A
      * @return N/A
      */
-    virtual ~Integer() {
+    virtual ~Bool() {
 
     }
 
@@ -40,7 +40,7 @@ public:
         if (other == nullptr) {
             return false;
         }
-        Integer *s = dynamic_cast<Integer *>(other);
+        Bool *s = dynamic_cast<Bool *>(other);
         if (s == nullptr) {
             return false;
         }
@@ -49,15 +49,14 @@ public:
         } else {
             return false;
         }
-
     }
 
     /**
-     * getValue - returns this Integer as an int
+     * getValue - returns this Bool as an bool
      *
-     * @return int value of this
+     * @return bool value of this
      */
-    int getValue() {
+    bool getValue() {
         return val;
     }
 
@@ -68,9 +67,9 @@ public:
      * @return size_t hash value
      */
     virtual size_t hash() {
-        return val;
+
     }
 
-    /** Prints this Int **/
+    /** Prints this Bool **/
     void print() override { cout << this->val << endl; }
 };

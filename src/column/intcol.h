@@ -1,46 +1,53 @@
 class StringColumn;
 
-class IntColumn;
+class BoolColumn;
 
 class FloatColumn;
 
 #pragma once
 
 #include "column.h"
-#include "intcol.h"
+#include "boolcol.h"
 #include "floatcol.h"
 #include "stringcol.h"
-#include "string.h"
-#include "bool.h"
+#include "../wrappers/string.h"
+#include "iostream"
+#include "../wrappers/integer.h"
 #include <iostream>
 
 using namespace std;
 
 /**
- * Represent a Column of Bool
+ * Represent a Column of Integer
  */
-class BoolColumn : public Column {
+class IntColumn : public Column {
 public:
-    Bool **vals_;
+    Integer **vals_;
     size_t size_;
     size_t capacity_;
 
-    BoolColumn() {
+    IntColumn() {
         size_ = 0;
         capacity_ = 200 * 1000 * 1000;
-        vals_ = new Bool *[capacity_];
+        vals_ = new Integer *[capacity_];
     }
 
-    ~BoolColumn() {
+    ~IntColumn() {
+        for (int i = 0; i < size(); i++) {
+            if (vals_[i] != nullptr) {
+                delete vals_[i];
+            }
+        }
         delete[] vals_;
     }
 
     /**
-     * Append missing bool is default 0.
-     */
+    * Append missing bool is default 0.
+    */
     void appendMissing() {
-        push_back(false);
+        push_back((int)0);
     }
+
 
     /**
      * Returns this if it is a StringColumn
@@ -55,7 +62,7 @@ public:
      * @return
      */
     IntColumn *as_int() {
-        return nullptr;
+        return this;
     }
 
     /**
@@ -63,7 +70,7 @@ public:
      * @return
      */
     BoolColumn *as_bool() {
-        return this;
+        return nullptr;
     }
 
     /**
@@ -74,8 +81,8 @@ public:
         return nullptr;
     }
 
-    /** Returns the Bool at idx; undefined on invalid idx.*/
-    bool *get(size_t idx) {
+    /** Returns the int at idx; undefined on invalid idx.*/
+    int *get(size_t idx) {
         if (idx >= 0 && idx <= this->size()) {
             return &vals_[idx]->val;
         } else {
@@ -84,9 +91,9 @@ public:
     }
 
     /** Out of bound idx is undefined. */
-    void set(size_t idx, bool *val) {
+    void set(size_t idx, int *val) {
         if (idx >= 0 && idx <= this->size()) {
-            vals_[idx] = new Bool(*val);
+            vals_[idx] = new Integer(*val);
             size_++;
         } else {
             exit(1);
@@ -94,7 +101,7 @@ public:
     }
 
     /**
-     * Returns the size of this BoolColumn
+     * Returns the size of this IntColumn
      */
     size_t size() {
         return size_;
@@ -104,15 +111,15 @@ public:
      * Adds the given int to this if it is a IntColumn
      */
     virtual void push_back(int val) {
-        exit(1);
+        this->vals_[size_] = new Integer(val);
+        size_++;
     }
 
     /**
      * Adds the given bool to this if it is a BoolColumn
      */
     virtual void push_back(bool val) {
-        vals_[size_] = new Bool(val);
-        size_++;
+        exit(1);
     }
 
     /**
@@ -127,23 +134,18 @@ public:
      */
     virtual void push_back(String *val) {
         // if passing nullptr from <MISSING> in sor then save to array as nullptr calls this method.
-        if (val == nullptr) {
-            this->vals_[size_] = nullptr;
-            size_++;
-        } else {
-            exit(1);
-        }
+        exit(1);
     }
 
     /** Return the type of this column as a char: 'S', 'B', 'I' and 'F'. */
     virtual char get_type() {
-        return 'B';
+        return 'I';
     }
 
-    /** Serializes this BoolCol **/
+    /** Serializes this intcol **/
     virtual String *serialize() {
         StrBuff *s = new StrBuff();
-        s->c("B}");
+        s->c("I}");
 
         for (int i = 0; i < this->size_; i++) {
             char str[256] = ""; /* In fact not necessary as snprintf() adds the 0-terminator. */

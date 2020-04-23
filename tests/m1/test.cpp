@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include "../../src/parser.h"
+#include "../../src/CS4500NE/parser.h"
 
 char* cwc_strdup(const char* src) {
     char* result = new char[strlen(src) + 1];

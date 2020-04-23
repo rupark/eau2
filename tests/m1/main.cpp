@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../../src/parser.h"
-#include "../../src/dataframe.h"
+#include "../../src/CS4500NE/parser.h"
+#include "../../src/dataframe/dataframe.h"
 #include <iostream>
 using namespace std;
 

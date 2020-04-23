@@ -11,7 +11,7 @@
 
 #include "object.h"
 #include "array.h"
-#include "string.h"
+#include "wrappers/string.h"
 
 class Num : public Object {
 public:

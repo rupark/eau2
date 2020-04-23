@@ -14,7 +14,7 @@ class FloatColumn;
 
 #include "column.h"
 #include <cstdarg>
-#include "string.h"
+#include "../wrappers/string.h"
 #include "boolcol.h"
 #include "floatcol.h"
 #include "stringcol.h"
@@ -39,6 +39,11 @@ public:
     }
 
     ~StringColumn() {
+        for (int i = 0; i < size(); i++) {
+            if (vals_[i] != nullptr) {
+                delete vals_[i];
+            }
+        }
         delete[] vals_;
     }
 
@@ -49,7 +54,6 @@ public:
             vals_[i] = new String(va_arg(args, char * ));
         }
     }
-
 
     /**
     * Append missing bool is default 0.
@@ -159,6 +163,8 @@ public:
         }
 
         s->c("!");
-        return s->get();
+        String* st = s->get();
+        delete s;
+        return st;
     }
 };

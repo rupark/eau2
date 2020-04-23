@@ -3,9 +3,9 @@
 
 #include <assert.h>
 #include <stdio.h>
-#include <string.h>
+#include "../wrappers/string.h"
 
-#include "object.h"
+#include "../object.h"
 
 /**
  *

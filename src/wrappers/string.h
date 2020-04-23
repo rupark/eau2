@@ -3,7 +3,7 @@
 #include <cstring>
 #include <string>
 #include <cassert>
-#include "object.h"
+#include "../object.h"
 #include <iostream>
 
 using namespace std;
@@ -53,7 +53,6 @@ public:
 
     /** Return the raw char*. The result should not be modified or freed. */
     char *c_str() {
-//        cout << "in string str" << endl;
         return cstr_;
     }
 

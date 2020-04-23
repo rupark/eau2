@@ -7,7 +7,7 @@
 #include <sstream>
 #include <atomic>
 #include "../object.h"
-#include "../string.h"
+#include "../wrappers/string.h"
 
 
 /** A Thread wraps the thread operations in the standard library.

@@ -2,7 +2,7 @@
 #pragma once
 
 #include <stdio.h>
-#include "object.h"
+#include "../object.h"
 #include <iostream>
 
 using namespace std;

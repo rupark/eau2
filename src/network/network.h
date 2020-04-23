@@ -9,7 +9,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "serial.h"
-#include "../string.h"
+#include "../wrappers/string.h"
 #include <iostream>
 #include "../args.h"
 
@@ -123,9 +123,9 @@ public:
             }
         }
 
-        delete[] nodes_;
+        //delete[] nodes_;
         nodes_ = nodes;
-        delete ipd;
+        //delete ipd;
     }
 
     /** Create a socket and bind it. */

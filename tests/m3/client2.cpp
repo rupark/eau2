@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include <fstream>
 #include "../../src/network/network.h"
-#include "../../src/string.h"
+#include "../../src/wrappers/string.h"
 using namespace std;
 //Client side
 int main(int argc, char *argv[])
