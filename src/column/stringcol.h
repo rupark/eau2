@@ -20,6 +20,7 @@ class FloatColumn;
 #include "stringcol.h"
 #include "intcol.h"
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -28,14 +29,9 @@ using namespace std;
  */
 class StringColumn : public Column {
 public:
-    String **vals_;
-    size_t size_;
-    size_t capacity_;
+    vector<String*> vals_;
 
     StringColumn() {
-        size_ = 0;
-        capacity_ = 200 * 1000 * 1000;
-        vals_ = new String *[capacity_];
     }
 
     ~StringColumn() {
@@ -44,22 +40,14 @@ public:
                 delete vals_[i];
             }
         }
-        delete[] vals_;
-    }
-
-    StringColumn(int n, ...) {
-        va_list args;
-        va_start(args, n);
-        for (size_t i = 0; i < n; i++) {
-            vals_[i] = new String(va_arg(args, char * ));
-        }
+       // delete[] vals_;
     }
 
     /**
     * Append missing bool is default 0.
     */
     void appendMissing() {
-        this->push_back(new String(""));
+        vals_.push_back(new String(""));
     }
 
     /**
@@ -102,19 +90,14 @@ public:
 
     /** Out of bound idx is undefined. */
     void set(size_t idx, String *val) {
-        if (idx >= 0 && idx <= this->size()) {
             vals_[idx] = val;
-            size_++;
-        } else {
-            exit(1);
-        }
     }
 
     /**
      * Returns the size of this StringColumn
      */
     size_t size() {
-        return size_;
+        return vals_.size();
     }
 
     /**
@@ -142,8 +125,7 @@ public:
      * Adds the given String to this if it is a StringColumn
      */
     virtual void push_back(String *val) {
-        vals_[size_] = val;
-        size_++;
+        vals_.push_back(val);
     }
 
     /** Return the type of this column as a char: 'S', 'B', 'I' and 'F'. */
@@ -156,7 +138,7 @@ public:
         StrBuff *s = new StrBuff();
         s->c("S}");
 
-        for (int i = 0; i < this->size_; i++) {
+        for (int i = 0; i < this->vals_.size(); i++) {
             char str[256] = ""; /* In fact not necessary as snprintf() adds the 0-terminator. */
             snprintf(str, sizeof str, "%s}", this->vals_[i]->c_str());
             s->c(str);
