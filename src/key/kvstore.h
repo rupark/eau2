@@ -17,31 +17,33 @@ using namespace std;
  */
 class KVStore {
 public:
-    Key **keys;
-    DataFrame **dfs;
-    int size;
+    vector<Key*> keys;
+    vector<DataFrame*> dfs;
+//    Key **keys;
+//    DataFrame **dfs;
+//    int size;
 
     KVStore() {
-        this->size = 0;
-        this->keys = new Key *[500];
-        this->dfs = new DataFrame *[500];
+//        this->size = 0;
+//        this->keys = new Key *[500];
+//        this->dfs = new DataFrame *[500];
     }
 
     ~KVStore() {
         cout << "in kv des" << endl;
         cout << this->size << endl;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < keys.size(); i++) {
                 delete keys[i];
         }
         cout << "done w keys" << endl;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < dfs.size(); i++) {
             if (dfs[i] != nullptr) {
                 delete dfs[i];
             }
         }
         cout << "done with ind" << endl;
-        delete[] keys;
-        delete[] dfs;
+//        delete[] keys;
+//        delete[] dfs;
     };
 
     /**
@@ -51,7 +53,7 @@ public:
         cout << "size of kv: " << size << "new key: " << key->name->c_str() << endl;
 
         // check if key is already there
-        for (size_t k = 0; k < size; k++) {
+        for (size_t k = 0; k < keys.size(); k++) {
             // if found already, replace
             if (this->keys[k]->equals(key)) {
                 this->dfs[k] = df;
@@ -63,7 +65,7 @@ public:
         this->keys[size] = key;
         this->dfs[size] = df;
 
-        size++;
+       // size++;
         cout << "put done new size: " << size << endl;
     }
 
@@ -71,7 +73,7 @@ public:
      * Returns the DataFrame associated in this KVStore with the given Key
      */
     DataFrame *get(Key key) {
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < keys.size(); i++) {
             if (key.equals(keys[i])) {
                 return dfs[i];
             }
