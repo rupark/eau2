@@ -7,7 +7,10 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c52458d-a10f-4bfb-93ed-2dc326a69b41" name="Default Changelist" comment="tests" />
+    <list default="true" id="6c52458d-a10f-4bfb-93ed-2dc326a69b41" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/key/kvstore.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/key/kvstore.h" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,20 +70,6 @@
       <workItem from="1587139828276" duration="561000" />
       <workItem from="1587140412787" duration="12921000" />
       <workItem from="1587227716818" duration="10832000" />
-    </task>
-    <task id="LOCAL-00247" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587585172278</created>
-      <option name="number" value="00247" />
-      <option name="presentableId" value="LOCAL-00247" />
-      <option name="project" value="LOCAL" />
-      <updated>1587585172278</updated>
-    </task>
-    <task id="LOCAL-00248" summary="400 blocks of mem leak, segfault after end of exec">
-      <created>1587585592425</created>
-      <option name="number" value="00248" />
-      <option name="presentableId" value="LOCAL-00248" />
-      <option name="project" value="LOCAL" />
-      <updated>1587585592426</updated>
     </task>
     <task id="LOCAL-00249" summary="400 blocks of mem leak, segfault after end of exec">
       <created>1587585796216</created>
@@ -411,7 +400,21 @@
       <option name="project" value="LOCAL" />
       <updated>1587612697128</updated>
     </task>
-    <option name="localTasksCounter" value="296" />
+    <task id="LOCAL-00296" summary="tests">
+      <created>1587615443932</created>
+      <option name="number" value="00296" />
+      <option name="presentableId" value="LOCAL-00296" />
+      <option name="project" value="LOCAL" />
+      <updated>1587615443932</updated>
+    </task>
+    <task id="LOCAL-00297" summary="tests">
+      <created>1587615526995</created>
+      <option name="number" value="00297" />
+      <option name="presentableId" value="LOCAL-00297" />
+      <option name="project" value="LOCAL" />
+      <updated>1587615526995</updated>
+    </task>
+    <option name="localTasksCounter" value="298" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,10 +438,10 @@
       <screen x="0" y="23" width="1440" height="830" />
     </state>
     <state x="458" y="193" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.830@0.23.1440.830" timestamp="1587601773762" />
-    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587615443854">
+    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2" timestamp="1587615526912">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1587615443854" />
+    <state x="368" y="23" width="833" height="824" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1587615526912" />
     <state x="393" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586820289069" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.830@0.23.1440.830" timestamp="1587602200676" />
     <state x="368" y="23" key="CommitChangelistDialog2/0.23.1440.832@0.23.1440.832" timestamp="1587568622602" />
@@ -458,10 +461,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="483" y="130" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1586820663598" />
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1587615446521">
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2" timestamp="1587615528361">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1587615446521" />
+    <state x="339" y="161" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1587615528361" />
     <state x="362" y="147" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586820747812" />
     <state x="339" y="171" key="Vcs.Push.Dialog.v2/0.23.1440.830@0.23.1440.830" timestamp="1587602203071" />
     <state x="467" y="239" key="com.intellij.ide.util.TipDialog" timestamp="1587227722830">

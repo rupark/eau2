@@ -62,8 +62,8 @@ public:
         }
 
         // if new key add and increment size
-        this->keys[size] = key;
-        this->dfs[size] = df;
+        this->keys.push_back(key);
+        this->dfs.push_back(df);
 
        // size++;
         cout << "put done new size: " << size << endl;
