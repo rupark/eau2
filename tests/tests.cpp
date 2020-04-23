@@ -10,9 +10,9 @@
 
 #include "../src/column/column.h"
 #include "../src/column/boolcol.h"
-#include "../src/column/floatcol.h.h"
-#include "../src/column/intcol.h.h"
-#include "../src/column/stringcol.h.h"
+#include "../src/column/floatcol.h"
+#include "../src/column/intcol.h"
+#include "../src/column/stringcol.h"
 
 #include "../src/network/serial.h"
 
