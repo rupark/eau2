@@ -74,6 +74,8 @@ public:
         }
 
         fclose(file);
+        fclose(file_dup);
+
         DataFrame *d = parser->parsed_df;
         cout << "data frame created of SIZE " << d->get_num_rows() << endl;
         delete parser;
@@ -161,7 +163,9 @@ public:
      *  projects, and the users added in the previous round. */
     void step(int stage) {
         cout << "\n\n\nStage " << stage << endl;
-        DataFrame *chunkSoFar = new DataFrame(*new Schema("I"));
+        Schema* chunk_schema = new Schema("I");
+        DataFrame *chunkSoFar = new DataFrame(*chunk_schema);
+        delete chunk_schema;
 
         /** in this section we chunk up newusers and send them to the nodes **/
         if (idx_ == 0) {
@@ -170,9 +174,10 @@ public:
             s->c(stage);
             s->c("-0");
             String *t = s->get();
-            Key *uK = new Key(t);
+            Key *uK = new Key(t); // TODO Delete?
             delete s;
             DataFrame *newUsers = kv->get(*uK);
+
             cout << "newusers size: " << newUsers->get_num_rows() << endl;
 
             //number of chunks
@@ -195,10 +200,13 @@ public:
                         selectedNode = 0;
                     }
                 }
-                DataFrame *node_calc = new DataFrame(*new Schema("I"));
+                Schema* node_calc_schema = new Schema("I");
+                DataFrame *node_calc = new DataFrame(*node_calc_schema);
+                delete node_calc_schema;
                 node_calc->columns[0]->push_back(num_received);
                 Status *chunkMsg = new Status(0, k, node_calc);
                 this->net.send_m(chunkMsg);
+                delete chunkMsg;
             }
 
             cout << "sent num chunks" << endl;
@@ -221,6 +229,7 @@ public:
                     // Sending to Clients
                     Status *chunkMsg = new Status(0, round2, cur_chunk);
                     this->net.send_m(chunkMsg);
+                    delete chunkMsg;
                     round2++;
                     if (round2 == arg.num_nodes) {
                         round2 = 0;
@@ -229,7 +238,6 @@ public:
             }
 
             delete newUsers;
-
             cout << "sent chunks" << endl;
         } else {
             //Calculating the number of chunks and figuring out how many go to this node
@@ -300,6 +308,7 @@ public:
                 cout << " elements from node " << i << endl;
                 SetUpdater *upd = new SetUpdater(set);
                 delta->map(upd);
+                delete msg;
                 delete delta;
             }
             cout << "    storing " << set.size() << " merged elements" << endl;
@@ -312,13 +321,16 @@ public:
             Key *k = new Key(str);
             delete h;
             fromVisitor(k, kv, "I", writer);
+            delete writer;
         } else {
             cout << "    sending " << set.size() << " elements to master node" << endl;
             SetWriter *writer = new SetWriter(set);
             Key *k = new Key(StrBuff(name).c(stage).c("-").c(idx_).get());
             DataFrame *toSend = fromVisitor(k, kv, "I", writer);
+            delete writer;
             Status *nodeToServer = new Status(idx_, 0, toSend);
             this->net.send_m(nodeToServer);
+            delete nodeToServer;
         }
     }
 }; // Linus
