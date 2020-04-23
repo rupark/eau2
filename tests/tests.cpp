@@ -24,6 +24,8 @@
 #include "../src/wrappers/bool.h"
 #include "../src/wrappers/float.h"
 
+#include "../src/applications/linus.h"
+
 #include <string.h>
 
 char* cwc_strdup(const char* src) {
