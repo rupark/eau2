@@ -29,7 +29,7 @@ public:
     }
 
     ~FloatColumn() {
-        for (int i = 0; i < size_; i++) {
+        for (int i = 0; i < vals_.size(); i++) {
             if (vals_[i] != nullptr) {
                 delete vals_[i];
             }
